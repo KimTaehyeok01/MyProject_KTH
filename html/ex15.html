@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이미지 출력 : img태그</title>
+    <!-- 이미지파일 종류 : png, jpg, jpeg, webp, gif, bmp -->
+    <!-- png : 무손실압축, 6-70% 주로 모바일에서 사용, 작은 아이콘이미지 등에 사용  -->
+    <!-- jpg : 손실압축, 50%, 큰 이미지(배경)를 압축할 때, 주로 PC에서 사용  -->
+    <!-- jpeg : 손실압축, 예전포맷이나 요즘은 사용하지 않음. -->
+    <!-- webp : 무손실압축, 최신 포맷, 점점 사용이 늘어감. -->
+    <!-- gif : 손실압축, 저용량(256컬러), 애니메이션 gif, 움직이는 이미지 용도 -->
+    <!-- bmp : 원본파일, 압축없음, 용량 크다, RGBA(Red 1B, Green 1B, Blue 1B, Alpha 1B) -->
+    <!--                                           2^8=256 0~255 색의 농도  -->
+    <!-- svg : 벡터형식 파일, 확대/축소 손실이 없음. 만들때(일러) 어려움이 있다. -->
+    <!-- 이미지 다운로드 하기 : 최대 이미지 무료 사이트 - 픽사베이 -->
+  </head>
+  <body>
+    <!-- src속성 :이미지 파일 이름(경로) -->
+    <!-- alt속성 : 이미지의 의미를 알려주거나, 대체하는 문구 -->
+    <img src="image/sea.jpg" alt="바다 이미지" width="500" height="500" />
+    <img
+      src="image/venezia.jpg"
+      alt="베네치아 이미지"
+      width="500"
+      height="500"
+    />
+
+    <!-- 하이퍼링크에 download="파일경로"를 넣으면 이미지 다운 가능 -->
+    <a href="#" download="image/sea.jpg"><button>다운로드 이미지</button></a>
+
+    <!-- 더미 이미지 : 아직 이미지가 준비되어 있지 않았을 때, 레이아웃 잡을 때 -->
+    <img src="https://www.dummyimage.com/500x500" alt="더미이미지" />
+  </body>
+</html>
