@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>테이블의 셀 병합</title>
+    <!-- 칸수 조절 속성 -->
+    <!-- colpan속성 : 가로 칸수 조정 -->
+    <!-- rowpan속성 : 세로 칸수 조정-->
+  </head>
+  <body>
+    <table border="1px">
+      <tr>
+        <th colspan="2">제목셀1</th>
+        <th>제목셀2</th>
+      </tr>
+
+      <tr>
+        <td>셀데이터1</td>
+        <td rowspan="2">셀데이터2</td>
+        <td>셀데이터3</td>
+      </tr>
+
+      <tr>
+        <td>셀데이터1</td>
+        <td>셀데이터2</td>
+      </tr>
+    </table>
+  </body>
+</html>
