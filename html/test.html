@@ -6,6 +6,38 @@
     <title>Document</title>
   </head>
   <body>
-    <img src="image/kkk.jpg" alt="바다 이미지" width="500" height="500" />
+    <h1>회원가입을 환영합니다.</h1>
+    <form>
+      <fieldset>
+        <legend>사용자 정보</legend>
+        <ul>
+          <li>
+            <label for="uid">아이디<input type="text" id="uid" /></label>
+          </li>
+
+          <li>
+            <label for="uemail">이메일<input type="text" id="uemail" /></label>
+          </li>
+
+          <li>
+            <label for="upw1">비밀번호<input type="text" id="upw1" /></label>
+          </li>
+
+          <li>
+            <label for="upw2"
+              >비밀번호 확인<input type="text" id="upw2"
+            /></label>
+          </li>
+        </ul>
+      </fieldset>
+
+      <fieldset>
+        <legend>이벤트와 새로운 소식</legend>
+        <input type="radio" name="mailing" id="mailing_y" value="mailing_yes" />
+        <label for="mailing_y">메일 수신</label>
+        <input type="radio" name="mailing" id="mailing_n" value="mailing_no" />
+        <label for="mailing_n">메일 거부</label>
+      </fieldset>
+    </form>
   </body>
 </html>
