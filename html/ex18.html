@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>입력 태그의 종류 1번</title>
+  </head>
+  <body>
+    <form action="">
+      <!-- label태그 : 입력 태그의 제목을 정해줌. -->
+      <!-- for : label에 연결된 입력 태그 지정 -->
+      <label for="name">이름</label>
+      <!-- id속성 : html 문서 안에서 유일한 구분자(변수이름) -> 입력 태그의 이름
+       ex) <label for="">xx</label> 에서 xx가 id속성 값-->
+      <input
+        type="text"
+        name="이름"
+        id="name"
+        placeholder="이름을 입력하세요."
+      /><br />
+      <label for="password">비밀번호</label>
+      <input
+        type="text"
+        name="비밀번호"
+        id="password"
+        placeholder="비밀번호를 입력하시오."
+      />
+      <br />
+      <!-- placeholder : 힌트 문구(input 박스 안에 들어가는 이름)
+       ex)아이디 칸 회색 아이디 텍스트 -->
+      <label for="address">주소</label>
+      <input type="text" id="address" placeholder="주소를 입력하세요." />
+      <br />
+      <!-- submit : 서버로 전송하는 기능 -->
+      <!-- value : 입력 태그의 실제값(화면에 보여지는 글귀) -->
+      <input type="submit" value="로그인" /><br />
+
+      <!-- button태그(입력) -->
+      <!-- onclick : 예약어(누르면 어떤 활동이 일어난다.) -->
+      <!-- onclick, "alert('버튼클릭')" 기능 집가서 확인하기 -->
+      <!-- "alert('버튼클릭');" 는 자바스크립트 문법임 -->
+      <input type="button" value="버튼" onclick="alert('버튼클릭!');" />
+
+      <!-- submit 버튼 vs button 버튼 -->
+      <!-- submit : 서버에 제출(전송)되는 버튼 -->
+      <!-- button : 클릭 효과만 있다. -->
+    </form>
+  </body>
+</html>
