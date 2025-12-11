@@ -3,7 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>입력태그 : form태그</title>
+    <!-- 로그인, 회원가입 페이지에 주로 사용 -->
+    <!-- 프론트엔드(웹브라우저)에서 서버(백엔드)로 정보 전송 방법 -->
+    <!-- 1. form태그 -->
+    <!-- 2. javasrcipt -->
   </head>
-  <body></body>
+  <body>
+    <!-- action속성 : 서버 주소 넣는 곳 -->
+    <form action="https://www.naver.com"></form>
+    <!-- localhost : 내 pc를(내 pc주소) 의미하는 예약어 -->
+    <!-- 8080 : port이름 - 프로그램 구분자 -->
+    <!-- method : 통신 방식(get/post) -->
+    <form action="localhost:8080" method="get">
+      <!-- input태그 : 사용자의 입력을 받는 태그 -->
+      <!-- type속성 : text 형식의 입력을 받음. -->
+      <!-- span속성(인라인) : 한칸 , div속성(block) : 한 줄 -->
+      <!-- type 속성 종류에 따라 기능이 달라짐
+        ex) password: 비밀번호 가려짐, file : 파일 업로드, submit : form안에 정보를 전송 -->
+      아이디:<input type="id" /> <br />
+      비밀번호:<input type="password" /><br />
+      파일업로드:<input type="file" /><br />
+      제출하기: <input type="submit" value="전송" />
+      <button type="submit">로그인</button>
+    </form>
+  </body>
 </html>
