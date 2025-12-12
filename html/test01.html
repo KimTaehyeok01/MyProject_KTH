@@ -1,67 +1,56 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .btn {
+        background: none;
+        border: none;
+      }
+    </style>
   </head>
   <body>
-    <form action="">
+    <form action="localhost:8080">
       <fieldset>
         <legend>사용자 정보 입력</legend>
-        <table>
-          <tr>
-            <td><label for="user_name">이름</label></td>
-            <td><input type="text" name="humanname" id="user_name" /></td>
-          </tr>
-          <tr>
-            <td><label for="userid">아이디</label></td>
-            <td><input type="text" name="id" id="userid" /></td>
-          </tr>
-          <tr>
-            <td><label for="userpw">비밀번호</label></td>
-            <td><input type="password" name="pw" id="userpw" /></td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <button type="submit">로그인</button>
-              <input type="button" value="로그인" onclick="alert('버튼클릭')" />
-            </td>
-          </tr>
-        </table>
-      </fieldset>
-
-      <fieldset>
-        <legend>이메일 수신 여부</legend>
-        <label for="mailing_y">
-          <input type="radio" name="mailing" id="mailing_y" value="yes" />수신
+        <label for="u_name"
+          >이름
+          <input type="text" name="username" id="u_name" />
         </label>
-        <label for="mailing_n">
-          <input type="radio" name="mailing" id="mailing_n" value="no" />수신
-          거부
+        <br />
+        <label for="u_id">
+          아이디<input type="text" name="userid" id="u_id" />
         </label>
+        <br />
+        <label for="u_pw">
+          비밀번호<input
+            type="password"
+            name="userpassword"
+            id="u_pw"
+            placeholder=""
+          />
+        </label>
+        <input type="submit" value="로그인" />
+        <input type="button" value="로그인" />
       </fieldset>
 
-      <fieldset>
-        <legend>선물용</legend>
-        <label><input type="checkbox" value="s_3" />선물용 박스3kg</label>
-        <input type="number" min="1" max="5" /> (최대 5개)<br />
-        <label><input type="checkbox" value="s_5" />선물용 박스5kg</label>
-        <input type="number" min="1" max="3" /> (최대 3개)
-      </fieldset>
+      <input type="checkbox" value="address" />서울<br />
+      <input type="checkbox" value="address" />서울<br />
+      <input type="checkbox" value="address" />서울<br />
 
-      <input
-        type="range"
-        min="1"
-        max="100"
-        step="1"
-        oninput="document.getElementById('select-value').innerText=this.value"
-      />
-      <span id="select-value">50</span><br />
-
-      <input type="date" />
-      <input type="month" />
-      <input type="week" />
+      <input type="radio" id="male" name="gender" />남자<br />
+      <input type="radio" id="female" name="gender" />여자<br />
+      <hr />
+      <input type="image" src="image/start.png" alt="시작버튼" />
+      <button class="btn"><input type="image" src="image/start.png" /></button>
+      <hr />
+      <select name="나이" id="age">
+        <option value="h_age">20</option>
+        <option value="h_age">30</option>
+        <option value="h_age">40</option>
+      </select>
     </form>
   </body>
 </html>
