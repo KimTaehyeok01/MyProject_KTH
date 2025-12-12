@@ -3,7 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>입력 태그 - 색상, 날짜, 시간 입력</title>
   </head>
-  <body></body>
+  <body>
+    <!-- 색상 선택자(Color Picker) -->
+    <!-- value속성 : 선택(입력)된 값 -->
+    <input type="color" value="#00FF00" /><br />
+    <input type="color" value="#FF0000" /><br />
+
+    <!-- 날짜 선택자(Date Picker) -->
+    <input type="date" value="0001-01-01" />
+    <br />
+    <!-- 날짜 and 시간 선택자 -->
+    <!-- datetime보단 datetime-local을 쓰는 것이 더 좋다.
+      datetime은 웹 호환 문제 -->
+    <!-- 쓰는 방식은 2020-03-02에서 바로 다음 T(Time)를 붙이고 12:00을 작성
+       ex) 2020-03-02T12:00 -->
+    <input type="datetime-local" value="2020-03-02T12:00" />
+    <br />
+    <!-- 이메일 입력(type은 text랑 동일하나 문법 체크가 됨.) -->
+    <!-- hong@gmail.com(0) hong.gmail@com(x) -->
+    <input type="email" />
+
+    <!-- 문법체크가 되는 이메일과 버튼 ex -->
+
+    <form action="">
+      <label for="email">
+        <input type="email" placeholder="이메일을 입력하세요." />
+        <input type="submit" id="email" value="로그인" />
+      </label>
+    </form>
+    <!-- /ex -->
+
+    <br />
+
+    <!-- 달(month)입력 -->
+    <input type="month" value="2020-02" />
+    <br />
+
+    <!-- 숫자(number)입력 -->
+    <!-- step은 숫자를 몇 씩 올릴 것이냐 정하는 것 -->
+    <input type="number" value="1" step="2" />
+    <br />
+    <input type="number" min="1" max="100" />
+    <br />
+
+    <!-- range -->
+    <!-- ex) 유튜브 음량조절 바 -->
+    <input type="range" value="50" step="5" min="0" max="100" />
+    <br />
+    <!-- 많은 양의 텍스트 입력((적은 양 텍스트 type=text)) -->
+    <!-- 쉽게 말에 웹에서 보이는 글귀를 적는 창 -->
+    <!-- cols(가로), rows(세로) 크기 조정 가능 -->
+    <!-- value속성이 없고, 태그 안에 값을 넣는다. -->
+    <textarea cols="80" rows="7">집에 가고 싶다.</textarea>
+  </body>
 </html>
