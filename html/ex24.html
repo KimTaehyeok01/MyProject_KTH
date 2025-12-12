@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 폼 - 연습문제6</title>
+  </head>
+  <body>
+    <fieldset>
+      <legend><h1>회원가입 폼</h1></legend>
+
+      <form action="">
+        <table>
+          <tr>
+            <td><label for="uName">이름:</label></td>
+            <td>
+              <input
+                type="text"
+                name="name"
+                id="uName"
+                placeholder="이름을 입력하세요."
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td><label for="upw">비밀번호:</label></td>
+            <td>
+              <input
+                type="password"
+                name="password"
+                id="upw"
+                placeholder="비번을 입력하세요."
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td><label for="uPhone">핸드폰:</label></td>
+            <td>
+              <input
+                type="number"
+                name="phonN"
+                id="uPhone"
+                placeholder="휴대폰 번호를 입력하세요."
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td><label for="uEmail">이메일:</label></td>
+            <td>
+              <input
+                type="email"
+                name="email"
+                id="uEmail"
+                placeholder="이메일을 입력하세요."
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>성별:</td>
+            <td>
+              <input type="radio" name="gender" id="male" />
+              <label for="male">남성</label>
+              <input type="radio" name="gender" id="female" />
+              <label for="female">여성</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td>취미:</td>
+            <td>
+              <input type="checkbox" name="habit" id="walking" />
+              <label for="walking">걷기</label>
+              <input type="checkbox" name="habit" id="running" />
+              <label for="running">달리기</label>
+              <input type="checkbox" name="habit" id="biking" />
+              <label for="biking">자전거타기</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td>사는곳:</td>
+            <td>
+              <select name="address" id="address">
+                <option value="seoul">서울</option>
+                <option value="gyeonggi">경기</option>
+                <option value="incheon">인천</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="1" style="text-align: center">
+              <button type="submit">회원가입</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </fieldset>
+  </body>
+</html>
