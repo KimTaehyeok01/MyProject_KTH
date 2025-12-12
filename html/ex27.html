@@ -29,6 +29,7 @@
     <!-- |      Footer     | -->
     <!-- ----------------- -->
     <style>
+      /* CTRL + / : 주석문 단축키 */
       header {
         border: 1px solid red;
       }
@@ -38,17 +39,30 @@
       main {
         border: 1px solid black;
       }
-      section {
-        border: 1px solid palevioletred;
-      }
       aside {
         border: 1px solid skyblue;
+        /* block속성을 inline속성으로 바꾸기 */
+        /* 1. display속성을 inlien속성으로 변경 */
+        /* 2. float속성으로 left, right값 사용하기 */
+        /* float : inline속성으로 변경하고, 왼쪽으로 배치 */
+        float: left;
+        /* width : main(부모태그)태그의 가용 너비(body)의 15%을 차지 */
+        width: 15%;
+      }
+      section {
+        border: 1px solid purple;
+        /* float : inline속성으로 변경하고, 오른쪽으로로 배치 */
+        float: right;
+        /* width : main(부모태그)태그의 가용 너비(body)의 15%을 차지 */
+        width: 80%;
       }
       article {
         border: 1px solid rebeccapurple;
       }
       footer {
         border: 1px solid hotpink;
+        /* clear : float속성을 초기화, both : left, right 둘 다 */
+        clear: both;
       }
     </style>
   </head>
@@ -110,3 +124,69 @@
     </footer>
   </body>
 </html>
+
+<!-- <style>
+      /* CTRL + / : 주석문 단축키 */
+      header {
+        border: 1px solid red;
+      }
+      nav {
+        border: 1px solid blue;
+      }
+      main {
+        border: 1px solid black;
+      }
+      aside {
+        border: 1px solid skyblue;
+        /* block속성을 inline속성으로 바꾸기 */
+        /* 1. display속성을 inlien속성으로 변경 */
+        /* 2. float속성으로 left, right값 사용하기 */
+        float: left;
+        width: 15%;
+      }
+      section {
+        border: 1px solid purple;
+        float: right;
+        width: 80%;
+      }
+      article {
+        border: 1px solid rebeccapurple;
+      }
+      footer {
+        border: 1px solid hotpink;
+        clear: both;
+      }
+    </style> -->
+
+<style>
+  /* CTRL + / : 주석문 단축키 */
+  header {
+    border: 1px solid red;
+  }
+  nav {
+    border: 1px solid blue;
+  }
+  main {
+    border: 1px solid black;
+  }
+  aside {
+    border: 1px solid skyblue;
+    /* block속성을 inline속성으로 바꾸기 */
+    /* 1. display속성을 inlien속성으로 변경 */
+    /* 2. float속성으로 left, right값 사용하기 */
+    float: left;
+    width: 15%;
+  }
+  section {
+    border: 1px solid purple;
+    float: right;
+    width: 80%;
+  }
+  article {
+    border: 1px solid rebeccapurple;
+  }
+  footer {
+    border: 1px solid hotpink;
+    clear: both;
+  }
+</style>
