@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공간분할태그 - div, span</title>
+    <!-- div : block속성 -->
+    <!-- span : inline속성 -->
+    <!-- div와 span은 다른 태그를 감싸는 태그(정보 없음) -->
+    <!-- 택배 포장박스와 같음, 구역임. -->
+    <!-- layout의 배치를 위해 사용함. -->
+
+    <!-- --------------------  -->
+    <!-- |        DIV         |  -->
+    <!-- --------------------  -->
+    <!-- | SPAN | SPAN | SPAN |  -->
+    <!-- --------------------  -->
+
+    <!-- <style>
+      * {
+        border: 1px solid red;
+      }
+    </style> -->
+
+    <style>
+      div,
+      span {
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div>더미문구입니다.</div>
+    <div>더미문구입니다.</div>
+    <div>더미문구입니다.</div>
+    <span>더미문구</span><span>더미문구</span>
+    <span>더미문구</span>
+  </body>
+</html>
