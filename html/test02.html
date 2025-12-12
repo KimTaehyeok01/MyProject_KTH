@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>지원서</title>
+  </head>
+  <body>
+    <h1 align="center">프론트앤드 지원서</h1>
+    <p align="center">
+      HTML, CSS, 자바스크립트의 기술을 이해하고 실무 경험이 있는 분을 찾습니다.
+    </p>
+    <hr />
+
+    <form action="localhost:8080">
+      <table>
+        <p><b>개인정보</b></p>
+        <tr>
+          <td><label for="uName">이름</label></td>
+          <td>
+            <input
+              type="text"
+              name="username"
+              id="uName"
+              placeholder="곻백 없이 입력하세요."
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td><label for="uPhNum">연락처</label></td>
+          <td><input type="number" name="userphonenumber" id="uPhNum" /></td>
+        </tr>
+      </table>
+      <br />
+
+      <p><b>지운분야</b></p>
+
+      <label for="webC"></label>
+      <input type="radio" name="web" id="webC" />웹 퍼블리싱
+      <br />
+
+      <label for="webapp"></label>
+      <input type="radio" name="webapp" id="webappC" />웹 애플리케이션 개발
+      <br />
+
+      <label for="webC"></label>
+      <input type="radio" name="web" id="webC" />개발 환경 개선
+      <br />
+
+      <p><b>지원 동기</b></p>
+
+      <textarea
+        cols="70"
+        rows="6"
+        maxlength="600"
+        placeholder="지원 동기를 간단하게 써주세요."
+      ></textarea>
+      <br />
+
+      <button type="submit">접수하기</button>
+      <button type="reset">다시쓰기</button>
+    </form>
+  </body>
+</html>
