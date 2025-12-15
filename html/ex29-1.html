@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ex115.html -->
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 단일 영상포맷 지원 -->
+    <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+
+    <!-- 다중 영상포맷 지원 -->
+    <video controls>
+      <source
+        src="https://www.w3schools.com/html/mov_bbb.webm"
+        type="video/webm"
+      />
+      <source
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        type="video/mp4"
+      />
+      브라우저가 video 태그를 지원하지 않을 때 화면에 표시됩니다!
+    </video>
+
+    <audio src="https://www.w3schools.com/html/mov_bbb.ogg" controls></audio>
+
+    <audio controls>
+      <source
+        src="https://www.w3schools.com/html/mov_bbb.mp3"
+        type="audio/mpeg"
+      />
+      <source
+        src="https://www.w3schools.com/html/mov_bbb.ogg"
+        type="audio/ogg"
+      />
+
+      이 문장은 여러분의 브라우저가 audio 태그를 지원하지 않을 때 화면에
+      표시됩니다!
+    </audio>
+  </body>
+</html>
