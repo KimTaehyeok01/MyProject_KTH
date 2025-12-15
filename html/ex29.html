@@ -43,26 +43,32 @@
   </head>
   <body>
     <h1>meta 태그</h1>
-    <p>
-      meta 태그는 HTML 문서의 메타데이터(데이터에 대한 데이터)를 정의하는 데
-      사용됩니다. 메타데이터는 문서에 대한 정보를 제공하며, 브라우저나 검색
-      엔진이 문서를 이해하는 데 도움을 줍니다.
-    </p>
-    <h2>주요 속성</h2>
-    <ul>
-      <li>
-        charset: 문서의 문자 인코딩을 지정합니다. 예: &lt;meta charset="UTF-8"
-        /&gt;
-      </li>
-      <li>
-        name과 content: 문서의 설명, 키워드, 작성자 등을 정의합니다. 예:
-        &lt;meta name="description" content="This is a sample webpage." /&gt;
-      </li>
-      <li>
-        viewport: 반응형 웹 디자인을 위해 뷰포트 설정을 지정합니다. 예: &lt;meta
-        name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-      </li>
-    </ul>
-    <h2>사용 예시</h2>
+
+    <!-- 통신함 -->
+    <input type="submit" value="예약" />
+    <!-- 통신안함  -->
+    <input type="button" value="취소" />
+    <!-- 통신함 -->
+    <button>예약</button>
+    <button type="submit">예약</button>
+    <!-- 통신안함 -->
+    <button type="button">취소</button>
+    <br />
+
+    <!-- 단일 영상포맷 지원 -->
+    <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+
+    <!-- 다중 영상포맷 지원 -->
+    <video controls>
+      <source
+        src="https://www.w3schools.com/html/mov_bbb.webm"
+        type="video/webm"
+      />
+      <source
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        type="video/mp4"
+      />
+      브라우저가 video 태그를 지원하지 않을 때 화면에 표시됩니다!
+    </video>
   </body>
 </html>
