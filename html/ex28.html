@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>시맨틱태그 - inline-block 사용</title>
+
+    <style>
+      body {
+        /* margin : html 요소 간의 간격 */
+        margin: 0;
+        /* padding : 테두리 선과 내용(content) 간의 간격 */
+        padding: 0;
+        /* 테두리선 : 선의 두께 실선 색상 */
+        border: solid 2px red;
+      }
+
+      header {
+        border: solid 1px red;
+      }
+
+      nav {
+        border: solid 1px blue;
+      }
+
+      main {
+        border: solid 1px darkblue;
+      }
+
+      aside {
+        /* display에는 3가지 속성이 있음 
+
+		block : 한 줄 차지(줄 바꿈 됨) - 복잡한 레이아웃이나 큰 구역
+		inline : 내용만큼만 차지(줄 바꿈이 안됨) - 간단한 글자나 이미지
+		inline-block : inline 속성처럼 줄 바꿈이 안되지만, block속성처럼 너비(width), 높이(height) 조절 가능 */
+        display: inline-block;
+        border: solid 1px orange;
+        /* width(넓이) 너비 : 28% 자신이 차지할 수 있는 공간의 28% */
+        width: 28%;
+      }
+
+      section {
+        display: inline-block;
+        border: solid 1px sienna;
+        width: 70%;
+      }
+
+      article {
+        border: solid 1px purple;
+      }
+
+      footer {
+        border: solid 1px green;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>헤더 영역</h1>
+      <hr />
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#">메뉴1</a></li>
+        <li><a href="#">메뉴2</a></li>
+        <li><a href="#">메뉴3</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <aside>
+        <ul>
+          <li><a href="#">사이드 메뉴1</a></li>
+          <li><a href="#">사이드 메뉴2</a></li>
+          <li><a href="#">사이드 메뉴3</a></li>
+        </ul>
+      </aside>
+
+      <section>
+        <article>
+          <h3>내용1</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
+            dolor. Quo sit, perferendis quas obcaecati debitis magni neque
+            fugiat placeat repudiandae officia, tenetur harum ut recusandae
+            eligendi. Quos, quia eligendi.
+          </p>
+        </article>
+
+        <article>
+          <h3>내용2</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
+            quam voluptatem eaque ad quae, praesentium iure, dolor aliquam sequi
+            assumenda porro odio similique architecto expedita. Odit doloribus
+            itaque eum ad!
+          </p>
+        </article>
+
+        <article>
+          <h3>내용3</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
+            ipsum dolores minima voluptas exercitationem at enim distinctio
+            itaque maiores ab? Aliquam laborum minus voluptatum deserunt, nobis
+            facilis culpa necessitatibus libero?
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <hr />
+    <footer>
+      <!-- addrres태그 : 주소 정보를 담는 시맨틱태그(i처럼 글자가 약간 기울어지게 나타남) -->
+      <address>회사 주소 및 전화번호</address>
+      <p>회사 주소 및 전화번호</p>
+    </footer>
+  </body>
+</html>
