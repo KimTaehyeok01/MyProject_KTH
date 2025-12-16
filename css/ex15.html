@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <!-- ex15.html -->
-    <title>CSS 연습문제</title>
+    <title>CSS 연습문제4</title>
     <!-- 1. 아이템1에 마우스 hover시 글자색 red로 -->
     <!-- 2. 아이템2에 마우스 click시 글자색 blue로 -->
     <!-- 3. 입력1에 포커스가 되면 배경색을 green으로 -->
@@ -19,14 +19,10 @@
       li + input:focus {
         background-color: green;
       }
-
       li:nth-child(1) {
         color: brown;
       }
-      li:nth-child(2) {
-        background-color: aqua;
-      }
-      li:nth-child(4) {
+      li:nth-child(2n) {
         background-color: aqua;
       }
     </style>
