@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>선택자 - id 선택자, class 선택자</title>
+    <!-- id : 문서의 유일한 태그로 지정(id값이 유일 해야함. ex-> 주민번호) -->
+    <!-- class : 문서 안에 여러개를 묶어서 지정(ex -> 1학년, 경기도) -->
+
+    <!-- id를 지정할 때는 # -->
+    <!-- class를 지정할 때는 . -->
+    <style>
+      #header1 {
+        color: red;
+      }
+
+      #header2 {
+        color: blue;
+      }
+
+      .design {
+        color: seagreen;
+      }
+
+      .tag1 {
+        color: red;
+        background-color: cadetblue;
+      }
+
+      .tag2 {
+        color: fuchsia;
+        background-color: deepskyblue;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="header1">제목태그 h1</h1>
+    <h1 id="header2">제목태그 h1</h1>
+
+    <p class="tag1">문단태그 p</p>
+
+    <a class="tag2" href="">앵커태그 a</a>
+  </body>
+</html>
