@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>하위선택자, 직계(첫 째)선택자</title>
+    <!-- 상속관계 : 태그 안에 태그가 들어감 -->
+    <!-- 후손 : 상속관계에서 아래의 모든 태그 -->
+    <!-- 직계 : 상속관계에서 바로 아래의 한 개(첫 번째) 태그 -->
+
+    <style>
+      /* 하위선택자는 공백문자를 사용 */
+      #header h1 {
+        color: saddlebrown;
+      }
+
+      #header h2 {
+        color: springgreen;
+      }
+
+      /* ----------------------------------------------- */
+
+      #header > h1 {
+        /* 자식선택자 : > 사용 */
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <h1>제목태그1</h1>
+      <div>
+        <h1>제목태그2</h1>
+        <h2>제목태그3</h2>
+        <h3>제목태그4</h3>
+      </div>
+    </div>
+  </body>
+</html>
