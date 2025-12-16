@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css 적용하는 방법 3가지</title>
+
+    <!-- 외부 스타일 시트 (External Style Sheet) -->
+    <!-- link태그 : 외부파일(css, js)을 import할 때 쓰임. -->
+    <!-- rel : 외부파일의 형식 -->
+    <!-- href : 외부파일의 경로 -->
+    <link rel="stylesheet" href="mycss.css" />
+
+    <style>
+      /* css안의 주석문 */
+      /* h1 : h1태그를 선택 */
+      /* {} : css 속성을 넣을 때 블럭(영역) */
+      /* 클론(:) : 속성과 값의 구분자 */
+      /* 세미콜론(;) : 속성 1개의 선언 구분자 */
+
+      h1 {
+        color: orange;
+      }
+      .internal-style {
+        /* 내부 스타일 시트, .internal-style은 클래스 선택자*/
+        color: green;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS 적용하는 방법 3가지</h1>
+    <p>웹 페이지에 CSS를 적용하는 세 가지 주요 방법이 있습니다:</p>
+    <h2>1. 인라인 스타일 (Inline Style)-기본</h2>
+    <p>
+      HTML 요소의 <code>style</code> 속성을 사용하여 직접 스타일을 지정하는
+      방법입니다. 태그 안에 style태그를 넣어서 스타일링.
+    </p>
+    <p style="color: red; font-weight: bold">
+      이 문장은 인라인 스타일로 빨간색과 굵은 글씨로 표시됩니다.
+    </p>
+
+    <h2>2. 내부 스타일 시트 (Internal Style Sheet)-인스턴스</h2>
+    <p>
+      HTML 문서의 <code>&lt;head&gt;</code> 섹션 내에
+      <code>&lt;style&gt;</code> 태그를 사용하여 스타일을 정의하는 방법입니다.
+    </p>
+
+    <p class="internal-style">
+      이 문장은 내부 스타일 시트로 녹색과 20픽셀 크기로 표시됩니다.
+    </p>
+
+    <h2>3. 외부 스타일 시트 (External Style Sheet)-대용량</h2>
+    <p>
+      별도의 CSS 파일을 만들어 HTML 문서에 링크하는 방법입니다. 이 방법은 여러
+      페이지에서 동일한 스타일을 재사용할 수 있어 효율적입니다.
+    </p>
+    <p>
+      <code>&lt;link rel="stylesheet" href="styles.css" &gt;</code> 라고 선언.
+    </p>
+    <p class="external-style">이 문장은 외부 스타일 시트로 스타일링됩니다.</p>
+
+    <hr />
+    <h3>연습장</h3>
+
+    <p style="color: blueviolet">텍스트 태그 p입니다.</p>
+    <h3>제목 태그 h3입니다.</h3>
+  </body>
+</html>
