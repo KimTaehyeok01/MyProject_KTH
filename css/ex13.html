@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상태선택자</title>
+    <!-- 상태 : 포커스(입력대기상태), 비활성화, 체크됨, 선택됨 -->
+    <!-- 포커스 : 입략대기상태 -->
+    <!-- active랑 focus랑 차이는 active는 누르고 있는 동안만 유지되고 다시 원래대로 돌아오지만,
+      focus는 유지됨. -->
+    <!-- 비활성화 : 입력불가상태 -->
+    <!-- 체크됨 : checked 체크박스 -->
+    <!-- 선택됨 : selected 선택박스, 라디오버튼 -->
+
+    <style>
+      /* 활성화 상태 */
+      input:enabled {
+        background-color: red;
+      }
+
+      /* 비활성화 상태 */
+      input:disabled {
+        background-color: darkcyan;
+      }
+
+      /* 포커스 상태 */
+      input:focus {
+        background-color: purple;
+      }
+
+      /* 체크된 상태 */
+      input:checked {
+        /* outline : 체크박스 테두리를 둘러싸는 선 */
+        /* 이 코드는 체크박스가 클릭되면 2px만큼 선으로 빨간색으로 둘러싸란 의미. */
+        outline: 2px solid red;
+      }
+      /* select 포커스 상태 */
+      select:focus {
+        background-color: yellow;
+      }
+
+      /* option 선택된 상태 */
+      option:checked {
+        background-color: violet;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>활성화 상태</h1>
+    <input type="text" />
+    <h1>비활성화 상태</h1>
+    <input type="text" disabled />
+
+    <h1>체크박스</h1>
+    <input type="checkbox" />
+
+    <h1>체크박스</h1>
+    <input type="checkbox" />
+
+    <h1>선택됨</h1>
+    <select>
+      <option>사과</option>
+      <option selected>감귤</option>
+    </select>
+  </body>
+</html>
