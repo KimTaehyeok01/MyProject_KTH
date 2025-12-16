@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <!-- 이거 복습 -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>태그 선택자와 id, class선택자 연결</title>
+    <style>
+      h1.select {
+        background-color: cyan;
+        color: red;
+      }
+
+      li#item {
+        color: blue;
+      }
+
+      .select {
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="select">제목태그 H1</h1>
+    <h1>제목태그 H1</h1>
+    <ul>
+      <li class="select">아이템1</li>
+      <li id="item">아이템2</li>
+      <li class="select">아이템3</li>
+      <!-- id값과 다르게 class는 여러 개의 값이 들어갈 수 있다. -->
+      <li class="select item">아이템4</li>
+    </ul>
+  </body>
+</html>
