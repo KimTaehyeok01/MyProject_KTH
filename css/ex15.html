@@ -16,13 +16,17 @@
       li:nth-child(2):active {
         color: blue;
       }
-      li + input:focus {
+      li:nth-child(5) + input:focus {
+        /* li + input:focus 이것도 됨. */
         background-color: green;
       }
       li:nth-child(1) {
         color: brown;
       }
       li:nth-child(2n) {
+        /* li:nth-child(even)도 가능 */
+        /*  even : 짝수 */
+        /* odd : 홀수  */
         background-color: aqua;
       }
     </style>
