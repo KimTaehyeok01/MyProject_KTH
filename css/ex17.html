@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상속관계에서 n번째 선택자 - nth-of-type선택자</title>
+
+    <style>
+      div p:nth-of-type(1) {
+        color: red;
+      }
+      div p:first-of-type {
+        background-color: rgba(48, 10, 221, 0.243);
+      }
+      div p:last-of-type {
+        background-color: rgba(20, 20, 176, 0.685);
+      }
+      div div {
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div>DIV 아이템</div>
+      <p>p아이템 1</p>
+      <p>p아이템 2</p>
+      <p>p아이템 3</p>
+    </div>
+  </body>
+</html>
