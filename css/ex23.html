@@ -3,35 +3,155 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>배경이미지 조정</title>
+    <title>배경이미지 완벽 정리</title>
     <style>
+      /* [1] 박스 디자인 (화면 영역 잡기) 
+           배경 이미지가 보일 '틀'을 만드는 과정입니다.
+        */
       div {
+        /* 박스의 테두리를 빨간색으로 두껍게 칠해서 영역을 눈으로 확인합니다. */
         border: 5px solid red;
+
+        /* 박스의 가로 너비를 1500px로 설정합니다. */
         width: 1500px;
+
+        /* 박스의 세로 높이를 1500px로 설정합니다. */
         height: 1500px;
 
-        /* body {
-        background: url("/image/cat.png") no-repeat top center/cover;
-      } */
+        /* =======================================================
+               [2] 배경 이미지 핵심 설정 (로그인 화면 추천 세팅)
+               여기서부터가 진짜 배경 설정입니다. 순서대로 읽어보세요.
+               ======================================================= 
+            */
+
+        /* 1단계: 어떤 그림을 쓸 것인가? */
+        /* 배경으로 사용할 이미지 파일의 경로를 적어줍니다. */
         background-image: url("/image/cat.png");
+
+        /* 2단계: 반복할 것인가? */
+        /* 기본값은 바둑판처럼 계속 반복(repeat)입니다. */
+        /* 사진이 하나만 딱 나오게 하려면 'no-repeat'을 씁니다. */
         background-repeat: no-repeat;
-        /* contain : 이미지의 width, height 중에 큰 것에 맞춤. (흰 여백이 생길 수 있는 게 단점) */
-        /* cover   :                            작은 것에 맞춤. (이미지가 잘릴 수 있는 게 단점.) */
-        /* background-size: contain; */
-        /* 이미지의 위치 설치
-                               x    y
-        background-position: 10px 20px;
-        /* top left right bottom */
-        /* 가로 : left center light */
-        /* 세로 : top center bottom */
-        /* background-position: center top;  */
-        /* background-position: bottom center; */
+
+        /* 3단계: 어디에 둘 것인가? (위치) */
+        /* center를 쓰면 가로/세로 모두 정가운데에 이미지를 놓습니다. */
+        /* 100px 80px 처럼 숫자를 쓰면 화면 크기가 바뀔 때 치우쳐 보일 수 있어 비추천합니다. */
         background-position: center;
-        /* background-size: contain; */
+
+        /* 4단계: 얼마나 크게 보여줄 것인가? (크기) */
+        /* cover : 빈 공간(여백)이 생기지 않도록 이미지를 확대해서 박스를 꽉 채웁니다. */
+        /* (단점: 이미지의 가장자리가 박스 밖으로 넘쳐서 조금 잘릴 수 있습니다.) */
+        /* 로그인 배경처럼 꽉 차 보여야 할 때는 무조건 이 속성을 추천합니다. */
+        background-size: cover;
       }
     </style>
+
+    <!DOCTYPE html>
+    <html lang="ko">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>배경 위치 다양한 예제</title>
+        <style>
+          div {
+            border: 5px solid red;
+            width: 800px;
+            height: 600px;
+
+            background-image: url("/image/cat.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            /* =======================================================
+               [배경 위치(position) 경우의 수 총정리]
+               원하는 줄의 주석 기호(앞뒤의 / * * /)를 지우고 테스트해보세요!
+               ======================================================= */
+
+            /* -------------------------------------------------------
+               CASE 1: [단어]로 지정하기 (제일 쉬움)
+               가로: left, center, right
+               세로: top, center, bottom
+               ------------------------------------------------------- */
+
+            /* 1-1. 오른쪽 위 */
+            background-position: right top;
+
+            /* 1-2. 정가운데 (제일 많이 씀!) */
+            background-position: center center;
+
+            /* 1-3. 아래쪽 왼쪽 */
+            background-position: left bottom;
+
+            /* -------------------------------------------------------
+               CASE 2: [픽셀(px)]로 정밀하게 밀어내기
+               기준점: 박스의 왼쪽 위(0, 0)
+               ------------------------------------------------------- */
+
+            /* 2-1. 오른쪽으로 100px, 아래로 200px 이동 */
+            background-position: 100px 200px;
+
+            /* 2-2. (마이너스 사용) 왼쪽으로 숨기기, 위쪽으로 숨기기 */
+            /* 이미지가 박스 밖으로 삐져나가서 잘린 것처럼 보입니다. */
+            background-position: -50px -50px;
+
+            /* -------------------------------------------------------
+               CASE 3: [% 퍼센트] 사용하기 (반응형에 좋음)
+               0% = 시작점, 50% = 가운데, 100% = 끝점
+               ------------------------------------------------------- */
+
+            /* 3-1. 가로 20%, 세로 30% 위치 (질문하신 내용과 유사) */
+            /* 설명: 박스 너비의 20% 지점에 이미지의 20% 지점을 맞춤 */
+            background-position: 20% 30%;
+
+            /* 3-2. 가로 100%, 세로 100% (완전 오른쪽 아래 끝) */
+            background-position: 100% 100%;
+
+            /* -------------------------------------------------------
+               CASE 4: [혼합 사용] (px과 % 섞어 쓰기)
+               질문하신 '20% 30'은 단위가 없어서 에러가 납니다.
+               아래처럼 뒤에 px를 붙여주면 작동합니다.
+               ------------------------------------------------------- */
+
+            /* 4-1. 가로는 20% 위치, 세로는 30px만큼 아래로 내림 */
+            background-position: 20% 30px;
+
+            /* 4-2. 가로는 오른쪽 끝(right), 세로는 50px만큼 내림 */
+            background-position: right 50px;
+
+            /* 4-3. 가로는 100px만큼 밈, 세로는 정가운데(center) */
+            background-position: 100px center;
+
+            /* =======================================================
+               [기본 원리] background-position: 가로(x) 세로(y);
+               ======================================================= */
+
+            /* 1. 픽셀(px) 사용 - "고정된 위치로 밀어라" */
+            /* 가로로 100px 밀고, 세로로 200px 내려라 */
+            /* 창 크기를 늘려도 이미지는 그 자리에 그대로 있습니다. */
+            /* background-position: 100px 200px; */
+
+            /* 2. 퍼센트(%) 사용 - "비율에 맞춰라" */
+            /* 가로 50%(정가운데), 세로 50%(정가운데) */
+            /* 창 크기가 변하면 이미지도 비율에 맞춰 같이 움직입니다. */
+            /* background-position: 50% 50%; */
+
+            /* 3. 키워드(단어) 사용 - "쉬운 단축키" */
+            /* right(오른쪽 끝), bottom(맨 아래) */
+            /* background-position: right bottom; */
+
+            /* 4. [질문하신 내용] 혼합 사용 */
+            /* "가로는 비율(%)로 잡고, 세로는 고정(px)하고 싶을 때" */
+
+            /* 가로: 전체 너비의 20% 지점에 둠 (반응형) */
+            /* 세로: 위에서 딱 30px만큼만 내림 (고정) */
+            /* ★주의: 숫자 30만 쓰면 안 되고, 반드시 단위(px)를 써야 함! */
+            background-position: 20% 30px;
+          }
+        </style>
+      </head>
+      <body>
+        <div></div>
+      </body>
+    </html>
   </head>
-  <body>
-    <div></div>
-  </body>
 </html>
