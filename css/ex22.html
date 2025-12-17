@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>배경이미지 입히기</title>
+    <style>
+      body {
+        /* 배경이미지 설정 */
+        background-image: url("winter1.png");
+        /* repeat: 반복, no-repeat : 반복x -> 배경이미지 반복 제거 코드 */
+        background-repeat: no-repeat;
+        /* cover : 배경영역을 완전히 덮는다.(전체화면) */
+        /*         이미지 해상도를 유지해줌, 대신 잘림현상이 나타날 수 있음. */
+        /* contain : 이미지가 전체 다 보이도록 한다. */
+        /*           이미지 자체는 잘 보일 수 있으나, 화면 여백이 생길 수 있다. */
+        /* contain보다 cover를 더 많이 사용함. */
+        background-size: cover;
+      }
+      body {
+        /* css 한줄 표현 : 이미지 반복 위치 크기 */
+        background: url("winter1.png") no-repeat top center/ cover;
+        /* css 한줄 표현 ex)  border: 1px solid red; */
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 태그>태그{글자}*n -->
+    <div>
+      <p>문단태그입니다.</p>
+      <p>문단태그입니다.</p>
+      <p>문단태그입니다.</p>
+      <p>문단태그입니다.</p>
+      <p>문단태그입니다.</p>
+    </div>
+  </body>
+</html>
