@@ -4,12 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>배치하기 - display속성</title>
-    <!--  -->
+    <!-- display : none -> 화면에 보이지 않게 하는 것. -->
+    <!-- display : block -> 한 줄 차지, 줄 바꿈됨. -->
+    <!-- display : inline -> 한 칸 차지, 줄 바꿈안됨. 가로/세로 자기 공간 확보 불가. -->
+    <!-- display : inline-block -> inline속성이면서 가로/세로 공간을 확보 가능. -->
+
     <style>
-      div {
+      body * {
+        border: 1px solid red;
+      }
+      #div1 {
         display: none;
+      }
+      #span2 {
+        width: 200px;
+        height: 200px;
+        /* inline이면서 자기공간을 확보하려면 inline-block */
+        display: inline-block;
       }
     </style>
   </head>
-  <body></body>
+  <body>
+    <div id="div1">div는 block속성이다.</div>
+    <span id="span1">span은 inline속성이다.</span>
+    <span id="span2">span은 inline속성이다.</span>
+    <span id="span3">span은 inline속성이다.</span>
+  </body>
 </html>
