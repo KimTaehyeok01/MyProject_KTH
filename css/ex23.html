@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        border: 5px solid red;
+        width: 1500px;
+        height: 1500px;
+
+        /* body {
+        background: url("/image/cat.png") no-repeat top center/cover;
+      } */
+        background-image: url("/image/cat.png");
+        background-repeat: no-repeat;
+        /* contain : 이미지의 width, height 중에 큰 것에 맞춤. (흰 여백이 생길 수 있는 게 단점) */
+        /* cover   :                            작은 것에 맞춤. (이미지가 잘릴 수 있는 게 단점.) */
+        /* background-size: contain; */
+        /* 이미지의 위치 설치
+                               x    y
+        background-position: 10px 20px;
+        /* top left right bottom */
+        /* 가로 : left center light */
+        /* 세로 : top center bottom */
+        /* background-position: center top;  */
+        /* background-position: bottom center; */
+        background-position: center;
+        /* background-size: contain; */
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
