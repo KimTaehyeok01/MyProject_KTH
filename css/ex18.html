@@ -2,41 +2,37 @@
 <html lang="en">
   <head>
     <!-- ex18.html -->
-    <title>CSS연습문제</title>
-    <!-- 1. 아이템1에 마우스 hover시 글자색 red로 -->
-    <!-- 2. 아이템2에 마우스 click시 글자색 blue로 -->
-    <!-- 3. 입력1에 포커스가 되면 배경색을 green으로 -->
-    <!-- 4. nth-child를 이용하여, 아이템1의 색상을 brown로 -->
-    <!-- 5. 짝수번째 아이템의 배경색을 aqua로 -->
+    <title>CSS연습문제5</title>
+    <!--  nth-of-type 적용 -->
+    <!-- 1. Text-1의 바탕색을 red로  -->
+    <!-- 2. Text-2의 글자색을 blue로  -->
+    <!-- 3. p태그의 짝수번째를 글자색을 green으로 -->
+    <!-- 4. Text-6의 바탕색을 cyan으로 -->
 
     <style>
-      ul li:first-child:hover {
-        color: red;
+      div div {
+        background-color: red;
       }
-      li:nth-child(2):active {
+      div p:nth-of-type(1) {
         color: blue;
       }
-      input:focus {
-        background-color: green;
+      p:nth-of-type(even) {
+        color: green;
       }
-      li:nth-child(1) {
-        color: brown;
-      }
-      li:nth-child(even) {
-        background-color: aqua;
+      div p:nth-of-type(5) {
+        background-color: cyan;
       }
     </style>
   </head>
   <body>
-    <ul>
-      <li>아이템1</li>
-      <li>아이템2</li>
-      <li>아이템3</li>
-      <li>아이템4</li>
-      <li>아이템5</li>
-      <input type="text" value="입력1" />
-      <input type="text" value="입력2" />
-      <input type="text" value="입력3" />
-    </ul>
+    <div>
+      <div>Text-1</div>
+      <p>Text-2</p>
+      <p>Text-3</p>
+      <p>Text-4</p>
+      <p>Text-5</p>
+      <p>Text-6</p>
+      <p>Text-7</p>
+    </div>
   </body>
 </html>
