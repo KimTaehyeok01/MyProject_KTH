@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>시맨틱태그 구조 만들기(연습문제)</title>
+    <!-- float속성 웬만하면 쓰지 않기. inline-block속성 o -->
+    <!-- FlexBox 실무에서 -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .wrapper {
+        /* 전체 콘텐츠의 너비 고정(반응형 아님) */
+        width: 1000px;
+        background-color: skyblue;
+        /* 콘텐츠를 수평 가운데로 정렬 */
+        /* 좌우여백 auto : 왼쪽과 오른쪽 공백을 균등배분 */
+        margin: 0 auto;
+      }
+      header {
+        height: 100px;
+        background-color: lightcoral;
+      }
+      nav {
+        height: 50px;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1></h1>
+      </header>
+      <nav></nav>
+      <main>
+        <aside></aside>
+        <section></section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
