@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>글자요소 정렬 : text-align, vertical-align</title>
+    <!-- text-align : 가로 방향 정렬(left, right center) -->
+    <!-- vertical-align : 세로 방향 정렬(top middle bottom) -->
+    <!-- display : inline, inline-block에서만 동작함. -->
+    <style>
+      * {
+        border: 1px solid red;
+      }
+      h3 {
+        border: 2px solid blue;
+      }
+      #box1 {
+        height: 100px;
+      }
+      /* 대부분 실무에서는 flex box를 이용하여 배치한다. */
+      h3 {
+        margin-top: 35px;
+        /* h1 태그 요소는 block속성이다. */
+        /* h1안에 있는 inline 콘텐츠를 가운데로 정렬하라. */
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1">
+      <h3>가운데로 보내주세요~</h3>
+    </div>
+  </body>
+</html>
