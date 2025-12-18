@@ -1,10 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- 복습하기 -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vertical-align 속성</title>
-    <!-- inlign, inlign-block에서 수직 정렬 -->
+    <!-- inline, inline-block에서 수직 정렬 -->
+    <!-- baseline : 기본 값, 부모 요소의 글자 밑선에 맞춤. -->
+    <!-- top: 라인박스(inline 텍스트 박스) 상단에 맞춤. -->
+    <!-- middle : 라인박스 중앙에 맞춤. -->
+    <!-- bottom : 라인박스 하단에 맞춤. -->
+
+    <style>
+      .box {
+        border: 2px solid orange;
+        margin-bottom: 10px;
+        font-size: 16px;
+        /* 한 줄(line)이 차지하는 높이(inline에서) */
+        /* 브라우저 자동 계산: font-size의 1.2~1.4배 */
+        /* vertical-align을 꼭 line-height를 써야함. */
+        line-height: 100px; /* 라인선이랑 콘텐츠 사이 간격을 떨어뜨려줌. */
+      }
+      img {
+        width: 50px;
+        height: 50px;
+      }
+      .baseline {
+        vertical-align: baseline;
+      }
+      .top {
+        vertical-align: top;
+      }
+      .middle {
+        vertical-align: middle;
+      }
+      .bottom {
+        vertical-align: bottom;
+      }
+      .text-top {
+        vertical-align: text-top;
+      }
+      .text-bottom {
+        vertical-align: text-bottom;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="box">
+      일반텍스트
+      <img src="https://placehold.co/50x50" class="baseline" /> baseline(기본값)
+    </div>
+    <div class="box">
+      일반텍스트<img src="https://placehold.co/50x50" class="top" />top
+    </div>
+    <div class="box">
+      일반텍스트<img src="https://placehold.co/50x50" class="middle" />middle
+    </div>
+    <div class="box">
+      일반텍스트<img src="https://placehold.co/50x50" class="bottom" />bottom
+    </div>
+
+    <!-- prettier-ignore -->
+    <div class="box">
+      일반텍스트<img src="https://placehold.co/50x50" class="text-top" />text-top
+    </div>
+    <!-- prettier-ignore -->
+    <div class="box">
+      일반텍스트<img src="https://placehold.co/50x50" class="text-bottom" />text-gbottom
+    </div>
+  </body>
 </html>
