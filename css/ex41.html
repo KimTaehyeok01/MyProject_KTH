@@ -1,64 +1,70 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ex41 -->
     <title>콘텐츠 초과 처리 - overflow속성</title>
     <style>
       .box {
         width: 200px;
         height: 200px;
-        margin: 20px;
         border: 1px solid #333;
+        margin: 20px;
+
+        /* Firefox */
+        scrollbar-width: none;
+
+        /* IE, Edge */
+        -ms-overflow-style: none;
       }
+      /* 스크롤바를 UI적으로 없애기 */
+      .box::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+      }
+      /* 기본값, 초과된 콘텐츠가 노출된다. */
       .visible {
-        /* 기본값, 초과된 콘텐츠가 그대로 보인다. */
         overflow: visible;
         background-color: lightblue;
       }
+      /* 초과된 콘텐츠를 숨긴다(잘린다) */
       .hidden {
-        /* 초과된 콘텐츠를 숨긴다(잘린다) */
         overflow: hidden;
         background-color: lightgreen;
       }
+      /* 스크롤이 생김 */
       .scroll {
-        /* 스크롤이 생김 */
-        /* x,y축 모두 스크롤이 생김 */
-        /* overflow:scroll; */
-
-        /* overflow-y : y축만 스크롤이 생김 */
+        /* x축, y축 모두 스크롤바가 생김 */
+        /* overflow: scroll; */
+        /* y축만 스크롤바 생기게 */
         overflow-y: scroll;
-        background-color: burlywood;
+        background-color: lightcoral;
       }
       .auto {
-        /* 콘텐츠가 초과할 때만 스크롤이 생김 */
+        /* 콘텐츠가 초과할 때만 스크롤바가 생기게 함. */
         overflow: auto;
-        background-color: azure;
+        background-color: lightpink;
       }
     </style>
   </head>
   <body>
+    <!-- (div.box>lorem)*4 -->
     <div class="box visible">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem harum
-      dolores debitis, deleniti sint fugit aliquid suscipit distinctio tempora
-      quo, repellat vel! Suscipit tempore fugit corrupti sed ex voluptates
-      commodi?
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati
+      reiciendis dicta, dignissimos velit odit hic rem. Dolorem cumque explicabo
+      quam! Dolorem sit voluptatum quasi totam ducimus distinctio maiores
+      provident laudantium.
     </div>
     <div class="box hidden">
-      Ratione, error aliquid harum ipsam possimus fugit omnis suscipit itaque
-      dolore voluptatum eaque eveniet, dicta enim quasi dignissimos, minus
-      vitae. Adipisci ex odit quam praesentium necessitatibus? Eaque nesciunt
-      quis dolor!
+      Doloribus eum minus itaque, ducimus fuga iure magnam atque omnis dolor
+      impedit quas cupiditate eius repellendus accusantium dolores odit rerum
+      quis odio error dignissimos nam consectetur sapiente? Illo, dignissimos
+      dicta.
     </div>
     <div class="box scroll">
-      Ad nemo non maiores officia nihil vero, numquam laborum ipsum quod natus
-      alias earum quia quasi enim officiis voluptate? Porro non veritatis
-      reprehenderit fugiat sint aut, velit fugit similique natus!
+      Consequatur sequi perspiciatis, illo autem veritatis accusamus, dolore
+      eius voluptatem, commodi numquam temporibus ex tempore culpa eum et ab
+      adipisci a placeat. Quibusdam sint quae assumenda ab, sequi dignissimos
+      iste.
     </div>
-    <div class="box auto">
-      Itaque, aliquam, eius error ullam alias rem voluptas temporibus nulla,
-      numquam nesciunt harum quod cupiditate. Atque earum maiores sed dolores!
-      Velit laborum unde temporibus harum ducimus dolorum, obcaecati libero eum.
-    </div>
+    <div class="box auto">Facere ut dignissimos</div>
   </body>
 </html>
