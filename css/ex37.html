@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>position속성</title>
+    <!-- 웹페이지를 만드는 과정 -->
+    <!-- 화면 레이아웃(배치) - 박스모델(Box) -->
+    <!-- 1. html 기본구조(html, head, body) -->
+    <!-- 2. 시맨틱태그(header, footer, ....) -->
+    <!-- 3. div태그에 다 넣는다. -->
+    <!-- 4. display : block, inline, inline-block -->
+    <!-- 5. flexbox 배치(정렬) -->
+    <!-- 6. text-align, vertical-align, line-height 지정 -->
+    <!-- 7. width, height 지정 -->
+    <!-- 8. overflow : hidden -> 내용물이 넘치지 않게 설정 -->
+    <!-- 9. margin, padding 조정 -->
+    <!-- 10. img object-fit : 이미지 배치 -->
+    <!-- 11. background-size : 이미지 배치 -->
+    <!-- 12. position -->
+    <!--    1) static(고정) : 기본값, 순차적으로 쌓이는 방식 -->
+    <!--    2) relative(상대적) : 상대(부모)좌표에 자신을 위치시키는 것 -->
+    <!--    3) absolute(절대적) : 절대좌표에 자신이 위치 -->
+    <!--                        : 기준 부모태그 : relative, absolute, fixed 태그여야함(static은 안됨) -->
+    <!--    4) fixed(고정) :  viewrport(웹 브라우저 화면) 기준 -->
+    <!--    5) sticky(고정) : 특정 스크롤 위치에 고정 -->
+    <!-- 13. top, bottom, left, right : 실체 xy 위치값(static에서는 적용 안됨) -->
+    <style>
+      #static-box {
+        /* 기본값, 순차적인 배치 */
+        position: static;
+        background-color: aqua;
+      }
+      #relative-box {
+        /* 상대 좌표로 자신을 위치 */
+        position: relative;
+        top: 10px;
+        left: 10px;
+        margin-bottom: 20px;
+        background-color: orange;
+      }
+      #container {
+        position: relative;
+        height: 50px;
+        left: 20px;
+        background-color: yellow;
+        border: 1px solid red;
+      }
+      #absolute-box {
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        color: white;
+        background-color: brown;
+      }
+      #fixed-box {
+        /* 웹브라우저 특정위치에 고정(float button에 주로 사용) */
+        position: fixed;
+        bottom: 10px;
+        right: 20px;
+        background-color: green;
+      }
+      #sticky-box {
+        /* 스크롤 시 화면 특정 위치에 고정 */
+        position: sticky;
+        top: 0px;
+        background-color: lightpink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="static-box">static</div>
+    <div id="relative-box">relative</div>
+    <div id="container"><div id="absolute-box">absolute</div></div>
+    <div id="fixed-box">fixed</div>
+    <div id="sticky-box">sticky(스크롤 상단에 고정됨)</div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis itaque
+      animi, reprehenderit enim accusantium nesciunt odio illo quisquam et dolor
+      temporibus commodi quibusdam ut, assumenda sequi, debitis voluptatum qui
+      ipsum. Obcaecati aut maiores expedita illo, voluptatum architecto deserunt
+      delectus magnam ipsam autem minima necessitatibus. Cupiditate repellat
+      quam odio rerum excepturi aspernatur, natus doloribus fugiat numquam
+      laudantium hic cum error officiis? Maiores porro, debitis quisquam veniam
+      quis ut voluptatem rem nobis voluptate error? Dolorum ullam laborum ex
+      officia, suscipit excepturi explicabo eius quos voluptate dicta, sint
+      pariatur reprehenderit qui libero illo. Perferendis laborum maxime, autem
+      delectus animi aliquam ipsum odit consequuntur, temporibus, minima porro
+      quia. Aspernatur vitae veniam praesentium quos, officiis in, quasi optio
+      fuga aliquam perferendis porro facere aliquid quidem? Culpa minus in
+      dolores modi nesciunt esse praesentium maxime odit distinctio ad? Magnam
+      ea incidunt quisquam deleniti eius consequatur tenetur porro omnis
+      doloremque laborum. Labore ipsum eos deserunt architecto ducimus.
+    </p>
+  </body>
+</html>
