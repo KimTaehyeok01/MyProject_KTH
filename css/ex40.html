@@ -10,6 +10,7 @@
         width: 1500px;
         height: 1500px;
         border: 2px solid red;
+        box-sizing: border-box;
       }
       .img1 {
         /* fill : 기본 값 (이미지가 컨테이너를 채운다.) */
@@ -37,9 +38,7 @@
         /* 1. 컨테이너보다 콘텐츠가 작으면 none(원래크기) */
         /* 2.             콘텐츠가 더 크면 contain */
         object-fit: scale-down;
-        /* padding-left: 10px;
-        너비 높이를 이미 지정한 컨테이너에서 만약 콘텐츠가 박스의 크기를 넘을경우 
-        안넘게 하는 방법은? */
+        padding-left: 10px;
       }
     </style>
   </head>
