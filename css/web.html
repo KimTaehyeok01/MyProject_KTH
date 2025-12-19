@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .wrapper {
+        width: auto;
+        margin: 0 auto;
+        font-size: 0;
+      }
+      header {
+        height: 110px;
+        background-color: rgb(51, 51, 127);
+      }
+      .header1 {
+        position: relative;
+        font-size: 24px;
+        color: yellowgreen;
+        top: 20px;
+        left: 30px;
+        font-family: "Times New Roman", Times, serif;
+      }
+      .header2 {
+        position: relative;
+        font-size: 14px;
+        color: white;
+        top: 20px;
+        left: 30px;
+        font-family: "Times New Roman", Times, serif;
+      }
+      nav {
+        position: relative;
+      }
+      .nav1 {
+        position: absolute;
+        width: 300px;
+        height: 30px;
+        bottom: 60px;
+        right: 10px;
+        background-color: transparent;
+        font-size: 20px;
+        text-align: center;
+        line-height: 30px;
+      }
+      .nav1 a {
+        text-decoration: none;
+        color: white;
+        margin: 5px;
+      }
+      .nav2 {
+        position: absolute;
+        width: 750px;
+        height: 40px;
+        bottom: 5px;
+        left: 400px;
+        background-color: transparent;
+        font-size: 20px;
+        text-align: center;
+        line-height: 40px;
+      }
+      .nav2 a {
+        text-decoration: none;
+        color: white;
+        margin: 30px;
+      }
+      main {
+        height: 500px;
+      }
+      section {
+        height: 500px;
+        width: 100%;
+        background-color: bisque;
+      }
+      section img {
+        width: 400px;
+        height: 400px;
+        background-color: transparent;
+      }
+      section #p1 {
+        position: absolute;
+        bottom: 500px;
+        right: 400px;
+        font-size: 30px;
+        font-family: "Times New Roman", Times, serif;
+      }
+
+      section #p2 {
+        position: absolute;
+        bottom: 470px;
+        right: 140px;
+        font-size: 20px;
+        font-family: "Times New Roman", Times, serif;
+      }
+      footer {
+        height: 100px;
+        background-color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <p class="header1">POFOL.COM</p>
+        <p class="header2">No1.글로벌솔루션선도기업</p>
+      </header>
+
+      <nav>
+        <nav class="nav1">
+          <a href="#">HOME</a>|<a href="#">NOTICE</a>|<a href="#">LOGIN</a>|<a
+            href="#"
+            >JOIN</a
+          >
+        </nav>
+
+        <nav class="nav2">
+          <a href="#">COMPANY</a><a href="#">PRODUCT</a><a href="#">CUSTOMER</a
+          ><a href="#">SERVICE</a><a href="#">RECRUIT</a>
+        </nav>
+      </nav>
+
+      <main>
+        <section>
+          <img src="" alt="earth_img" />
+          <p id="p1">세상을 움직이는 포폴리오</p>
+          <p id="p2">
+            포폴리오는 전세계의 포트폴리오 솔루션을 개발하는 벤처기업입니다.
+          </p>
+          <img src="/image/earth.png" alt="지구모양" />
+        </section>
+
+        <aside>
+          <img src="" alt="컴퓨터사진" />
+          <p>서비스 소개</p>
+          <p>
+            포트폴리오 솔루션, 보안 솔루션, 웹서버 호스팅 등의 서비스를
+            제공합니다.
+          </p>
+        </aside>
+
+        <aside>
+          <img src="" alt="cctv사진" />
+          <p>제품 소개</p>
+          <p>
+            보안 장비, CCTV 장비 및 소프트웨어 포트폴리오 솔루션을 소개합니다.
+          </p>
+        </aside>
+      </main>
+
+      <footer>
+        <p>POFOLIO.COM</p>
+        <p></p>
+      </footer>
+    </div>
+  </body>
+</html>
