@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>콘텐츠 초과 처리 - overflow속성</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        margin: 20px;
+        border: 1px solid #333;
+      }
+      .visible {
+        /* 기본값, 초과된 콘텐츠가 그대로 보인다. */
+        overflow: visible;
+        background-color: lightblue;
+      }
+      .hidden {
+        /* 초과된 콘텐츠를 숨긴다(잘린다) */
+        overflow: hidden;
+        background-color: lightgreen;
+      }
+      .scroll {
+        /* 스크롤이 생김 */
+        /* x,y축 모두 스크롤이 생김 */
+        /* overflow:scroll; */
+
+        /* overflow-y : y 축만 스크롤이 생김 */
+        overflow-y: scroll;
+        background-color: burlywood;
+      }
+      .auto {
+        /* 콘텐츠가 초과할 때만 스크롤이 생김 */
+        overflow: auto;
+        background-color: azure;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box visible">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem harum
+      dolores debitis, deleniti sint fugit aliquid suscipit distinctio tempora
+      quo, repellat vel! Suscipit tempore fugit corrupti sed ex voluptates
+      commodi?
+    </div>
+    <div class="box hidden">
+      Ratione, error aliquid harum ipsam possimus fugit omnis suscipit itaque
+      dolore voluptatum eaque eveniet, dicta enim quasi dignissimos, minus
+      vitae. Adipisci ex odit quam praesentium necessitatibus? Eaque nesciunt
+      quis dolor!
+    </div>
+    <div class="box scroll">
+      Ad nemo non maiores officia nihil vero, numquam laborum ipsum quod natus
+      alias earum quia quasi enim officiis voluptate? Porro non veritatis
+      reprehenderit fugiat sint aut, velit fugit similique natus!
+    </div>
+    <div class="box auto">
+      Itaque, aliquam, eius error ullam alias rem voluptas temporibus nulla,
+      numquam nesciunt harum quod cupiditate. Atque earum maiores sed dolores!
+      Velit laborum unde temporibus harum ducimus dolorum, obcaecati libero eum.
+    </div>
+  </body>
+</html>
