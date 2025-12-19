@@ -3,160 +3,165 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Full Width Layout</title>
     <style>
+      /* 1. 기본 초기화 */
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
-      .wrapper {
-        width: auto;
-        margin: 0 auto;
-        font-size: 0;
+
+      /* 2. 공통: 내용을 가운데로 모아주는 상자 (기존 wrapper 역할) */
+      .container {
+        width: 1200px; /* 내용은 1200px로 고정 */
+        margin: 0 auto; /* 가운데 정렬 */
+        position: relative; /* 자식들(absolute)의 기준점 */
+        height: 100%; /* 부모 높이를 따라감 */
       }
+
+      /* ===========================
+         HEADER 영역 (파란 배경 100%)
+      =========================== */
       header {
+        width: 100%; /* 화면 꽉 채움 */
         height: 110px;
-        background-color: rgb(51, 51, 127);
+        background-color: rgb(51, 51, 127); /* 배경색은 여기에! */
       }
+
       .header1 {
-        position: relative;
+        position: absolute; /* container 기준으로 배치 */
+        top: 20px;
+        left: 30px;
         font-size: 24px;
         color: yellowgreen;
-        top: 20px;
-        left: 30px;
         font-family: "Times New Roman", Times, serif;
       }
+
       .header2 {
-        position: relative;
+        position: absolute;
+        top: 60px; /* 위치 살짝 조정 */
+        left: 30px;
         font-size: 14px;
         color: white;
-        top: 20px;
-        left: 30px;
         font-family: "Times New Roman", Times, serif;
       }
-      nav {
-        position: relative;
-      }
+
+      /* 내비게이션 (헤더 안에 포함시킴) */
       .nav1 {
         position: absolute;
-        width: 300px;
-        height: 30px;
-        bottom: 60px;
-        right: 10px;
-        background-color: transparent;
-        font-size: 20px;
-        text-align: center;
-        line-height: 30px;
+        top: 20px;
+        right: 0; /* container의 오른쪽 끝에 붙임 */
+        font-size: 16px;
       }
       .nav1 a {
         text-decoration: none;
         color: white;
-        margin: 5px;
+        margin-left: 10px;
       }
+
       .nav2 {
         position: absolute;
-        width: 750px;
-        height: 40px;
-        bottom: 5px;
-        left: 400px;
-        background-color: transparent;
+        bottom: 10px;
+        right: 0; /* container의 오른쪽 끝에 붙임 */
         font-size: 20px;
-        text-align: center;
-        line-height: 40px;
       }
       .nav2 a {
         text-decoration: none;
         color: white;
-        margin: 30px;
+        margin-left: 30px;
       }
+
+      /* ===========================
+         MAIN 영역 (살구색 배경 100%)
+      =========================== */
       main {
+        width: 100%; /* 화면 꽉 채움 */
         height: 500px;
+        background-color: bisque; /* 배경색은 여기에! */
       }
+
+      /* Main 안의 Section (이미지와 글자) */
       section {
-        height: 500px;
-        width: 100%;
-        background-color: bisque;
+        height: 100%;
       }
+
       section img {
+        /* 이미지가 너무 커서 레이아웃을 덮지 않게 조절 */
+        position: absolute;
+        top: 50px;
+        left: 0;
         width: 400px;
         height: 400px;
-        background-color: transparent;
       }
+
       section #p1 {
         position: absolute;
-        bottom: 500px;
-        right: 400px;
+        top: 100px; /* 위치 조정 */
+        right: 100px; /* container 기준 오른쪽 배치 */
         font-size: 30px;
         font-family: "Times New Roman", Times, serif;
       }
 
       section #p2 {
         position: absolute;
-        bottom: 470px;
-        right: 140px;
-        font-size: 20px;
+        top: 150px;
+        right: 100px;
+        font-size: 18px;
         font-family: "Times New Roman", Times, serif;
       }
+
+      /* ===========================
+         FOOTER 영역
+      =========================== */
       footer {
+        width: 100%;
         height: 100px;
         background-color: antiquewhite;
+        border-top: 1px solid #ccc;
+      }
+
+      footer p {
+        text-align: center;
+        line-height: 100px;
       }
     </style>
   </head>
   <body>
-    <div class="wrapper">
-      <header>
+    <header>
+      <div class="container">
         <p class="header1">POFOL.COM</p>
         <p class="header2">No1.글로벌솔루션선도기업</p>
-      </header>
 
-      <nav>
         <nav class="nav1">
           <a href="#">HOME</a>|<a href="#">NOTICE</a>|<a href="#">LOGIN</a>|<a
             href="#"
             >JOIN</a
           >
         </nav>
-
         <nav class="nav2">
           <a href="#">COMPANY</a><a href="#">PRODUCT</a><a href="#">CUSTOMER</a
           ><a href="#">SERVICE</a><a href="#">RECRUIT</a>
         </nav>
-      </nav>
+      </div>
+    </header>
 
-      <main>
+    <main>
+      <div class="container">
         <section>
-          <img src="" alt="earth_img" />
+          <img src="/image/earth.png" alt="earth_img" />
           <p id="p1">세상을 움직이는 포폴리오</p>
           <p id="p2">
             포폴리오는 전세계의 포트폴리오 솔루션을 개발하는 벤처기업입니다.
           </p>
-          <img src="/image/earth.png" alt="지구모양" />
         </section>
+      </div>
+    </main>
 
-        <aside>
-          <img src="" alt="컴퓨터사진" />
-          <p>서비스 소개</p>
-          <p>
-            포트폴리오 솔루션, 보안 솔루션, 웹서버 호스팅 등의 서비스를
-            제공합니다.
-          </p>
-        </aside>
-
-        <aside>
-          <img src="" alt="cctv사진" />
-          <p>제품 소개</p>
-          <p>
-            보안 장비, CCTV 장비 및 소프트웨어 포트폴리오 솔루션을 소개합니다.
-          </p>
-        </aside>
-      </main>
-
-      <footer>
+    <footer>
+      <div class="container">
         <p>POFOLIO.COM</p>
-        <p></p>
-      </footer>
-    </div>
+      </div>
+    </footer>
   </body>
 </html>
