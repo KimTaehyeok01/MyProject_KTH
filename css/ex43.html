@@ -3,7 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>줄바꿈 - flex-wrap</title>
+    <style>
+      .container {
+        background-color: #eee;
+        border: 1px solid #222;
+        margin-bottom: 10px;
+        background: wheat;
+        display: flex;
+        width: 300px;
+      }
+      .box {
+        background-color: green;
+        margin: 5px;
+        padding: 5px 45px;
+      }
+      p {
+        text-align: center;
+        color: white;
+      }
+      .opt1 {
+        /* 기본값, 줄바꿈 안함. 빠져나감 */
+        flex-wrap: nowrap;
+      }
+      .opt2 {
+        /* 빠져나가는 콘텐츠를 아래로 줄바꿈함. */
+        flex-wrap: wrap;
+      }
+      .opt3 {
+        /* warp을 반대로 뒤집음.(아이템을 역순으로) */
+        flex-wrap: wrap-reverse;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="container opt1">
+      <div class="box">
+        <p>1</p>
+      </div>
+      <div class="box">
+        <p>2</p>
+      </div>
+      <div class="box">
+        <p>3</p>
+      </div>
+    </div>
+    <div class="container opt2">
+      <div class="box">
+        <p>1</p>
+      </div>
+      <div class="box">
+        <p>2</p>
+      </div>
+      <div class="box">
+        <p>3</p>
+      </div>
+    </div>
+    <div class="container opt3">
+      <div class="box">
+        <p>1</p>
+      </div>
+      <div class="box">
+        <p>2</p>
+      </div>
+      <div class="box">
+        <p>3</p>
+      </div>
+    </div>
+  </body>
 </html>
