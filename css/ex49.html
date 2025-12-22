@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>시맨틱 태그 레이아웃</title>
+    <style>
+      .wrapper {
+        width: 1200px;
+        margin: 50px auto;
+        border: 2px solid #000;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+      }
+
+      header {
+        width: 100%;
+        height: 60px;
+        background-color: purple;
+        line-height: 60px;
+      }
+
+      nav {
+        width: 100%;
+        height: 50px;
+        background-color: green;
+        line-height: 50px;
+      }
+
+      main {
+        display: flex;
+        width: 100%;
+        height: 300px;
+      }
+
+      section {
+        flex: 7;
+        background-color: teal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      aside {
+        flex: 3;
+        background-color: orange;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      footer {
+        width: 100%;
+        height: 60px;
+        background-color: olive;
+        line-height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>Header</header>
+      <nav>Nav</nav>
+      <main>
+        <section>Section</section>
+        <aside>Aside</aside>
+      </main>
+      <footer>Footer</footer>
+    </div>
+  </body>
+</html>
