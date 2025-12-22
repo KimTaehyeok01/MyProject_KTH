@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>레이아웃 배치를 자유롭게 - display : flex속성</title>
+    <!-- flexbox 또는 flexable box -->
+    <!-- IE(internet explorer)11부터 지원 -->
+    <!-- 참고 사이트 : https://studiomeal.com/archives/197 -->
+    <style>
+      .container {
+        background-color: #eee;
+        border: 1px solid #222;
+        margin-bottom: 10px;
+        /* 컨테이너를 flex로 변경한다. */
+        /* 아이템들이 모두 inline-block으로 바뀜 */
+        display: flex;
+      }
+      .box {
+        background-color: green;
+        margin: 5px;
+        padding: 5px 45px;
+      }
+      p {
+        color: white;
+        text-align: center;
+      }
+      .opt1 {
+        /* 주축 방향  : 왼쪽에서 오른쪽-> 기본값 */
+        flex-direction: row;
+      }
+      .opt2 {
+        flex-direction: row-reverse;
+      }
+      .opt3 {
+        flex-direction: column;
+      }
+      .opt4 {
+        flex-direction: column-reverse;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- (div.container.opt$>(div.box>p{$})*3)*4 -->
+    <div class="container opt1">
+      <div class="box">
+        <p>1</p>
+      </div>
+      <div class="box">
+        <p>2</p>
+      </div>
+      <div class="box">
+        <p>3</p>
+      </div>
+    </div>
+    <div class="container opt2">
+      <div class="box">
+        <p>1</p>
+      </div>
+      <div class="box">
+        <p>2</p>
+      </div>
+      <div class="box">
+        <p>3</p>
+      </div>
+    </div>
+    <div class="container opt3">
+      <div class="box">
+        <p>1</p>
+      </div>
+      <div class="box">
+        <p>2</p>
+      </div>
+      <div class="box">
+        <p>3</p>
+      </div>
+    </div>
+    <div class="container opt4">
+      <div class="box">
+        <p>1</p>
+      </div>
+      <div class="box">
+        <p>2</p>
+      </div>
+      <div class="box">
+        <p>3</p>
+      </div>
+    </div>
+  </body>
+</html>
