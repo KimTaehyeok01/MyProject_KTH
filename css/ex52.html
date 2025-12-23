@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>align-self</title>
+    <!-- 교차축에서만 되는 기능들 -->
+    <!-- 부모의 정렬속성을 무시하고 스스로 정렬하는 속성 -->
+    <!-- align-self: stretch; : 기본값  -->
+    <!-- align-self: flex-start; : 시작점에 배치 -->
+    <!-- align-self: flex-end; : 끝점에 배치 -->
+    <!-- align-self: center; : 중앙에 배치 -->
+    <!-- align-self: baseline; : 텍스트 베이스라인 기준으로 배치 -->
+    <!-- align-self: auto; : 기본값 부모의 정렬속성을 따름 -->
+
+    <style>
+      .container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 150px;
+        background-color: #eee;
+        border: 1px solid #000;
+        margin-bottom: 10px;
+      }
+      .item {
+        padding: 5px 45px;
+        background: green;
+        margin: 5px;
+        border: 1px solid #000;
+      }
+      p {
+        color: white;
+        text-align: center;
+      }
+
+      .box1 {
+        align-self: stretch;
+      }
+      .box2 {
+        align-self: flex-start;
+      }
+
+      .box3 {
+        align-self: flex-end;
+      }
+
+      .box4 {
+        align-self: center;
+      }
+
+      .box5 {
+        align-self: baseline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item box1">
+        <p>1</p>
+      </div>
+      <div class="item box2">
+        <p>2</p>
+      </div>
+      <div class="item box3">
+        <p>3</p>
+      </div>
+      <div class="item box4">
+        <p>4</p>
+      </div>
+      <div class="item box5">
+        <p>5</p>
+      </div>
+    </div>
+  </body>
+</html>
