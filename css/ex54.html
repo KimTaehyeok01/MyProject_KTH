@@ -25,22 +25,22 @@
         background-color: rgb(136, 219, 136);
 
         /* 기본 값 : auto */
-        flex-basis: auto;
+        /* flex-basis: auto; */
 
         /* 기본 값 : 0 - 자기 콘텐츠 크기 만큼 늘어남.*/
-        flex-grow: 0;
+        /* flex-grow: 0; */
 
         /* 1 : 늘어날 수 있는 여백(공간)의 1/sum 확보 */
-        flex-grow: 1;
+        /* flex-grow: 1; */
       }
       .item:nth-child(1) {
-        flex-grow: 1; /* 1/4 */
+        flex-basis: auto; /* 1/4 */
       }
       .item:nth-child(2) {
-        flex-grow: 2; /* 2/4 */
+        flex-grow: 1; /* 2/4 */
       }
       .item:nth-child(3) {
-        flex-grow: 1; /* 1/4 */
+        flex-basis: auto; /* 1/4 */
       }
     </style>
   </head>

@@ -1,69 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flex-shrink 확인하기</title>
+    <!-- ex55 -->
+    <title>flex-shrink 속성</title>
+    <!-- flex-shrink - 유연하기 줄이기 -->
+    <!-- 기본 값 1 : 모든 아이템이 균등하게 줄어듬 -->
+    <!-- 0 : 고정 크기(더이상 줄어들지 않는)를 확정. -->
+    <!--  : width(min-width)값으로 고정 크기를 확보한다. -->
     <style>
       .container {
-        border: 5px solid red;
-        margin: 20px;
-
-        /* [중요] 부모를 400px로 좁게 가둡니다. */
-        width: 400px;
-        height: 150px;
+        width: 90%;
+        height: auto;
+        background-color: yellow;
+        border: 10px solid black;
+        padding: 10px;
         display: flex;
-
-        /* 글자 정렬용 (무시해도 됨) */
-        align-items: center;
       }
-
-      .box {
-        height: 100px;
-        background-color: green;
-        margin: 5px; /* 박스 사이 간격 */
-
-        color: white;
-        text-align: center;
-        line-height: 100px; /* 글자 세로 정렬 */
-        font-size: 20px;
-        font-weight: bold;
-
-        /* [핵심 1] 모든 박스가 "나 200px 가지고 싶어!"라고 주장함 */
-        /* 200px * 3개 = 600px이 필요함 (근데 부모는 400px임) */
+      .item {
+        width: auto;
+        height: 100%;
+        margin: 10px;
+        border: 10px solid black;
+        padding: 10px;
+        background-color: rgb(136, 219, 136);
+      }
+      .item:nth-child(1) {
         flex-basis: 200px;
-
-        /* 헷갈리니까 grow는 끕니다 */
-        flex-grow: 0;
-      }
-
-      .box1 {
-        /* 남들처럼 줄어듦 (기본값) */
         flex-shrink: 1;
-        background-color: orange;
       }
-
-      .box2 {
-        /* [주인공] 절대 안 줄어듦! 방어력 MAX */
+      .item:nth-child(2) {
+        flex-basis: 500px;
         flex-shrink: 0;
-        background-color: green; /* 주인공 초록색 */
       }
-
-      .box3 {
-        /* 남들처럼 줄어듦 (기본값) */
+      .item:nth-child(3) {
+        flex-basis: 200px;
         flex-shrink: 1;
-        background-color: orange;
+      }
+      .container1 {
+        width: 90%;
       }
     </style>
   </head>
   <body>
-    <h2>결과를 보세요!</h2>
-    <p>부모는 400px인데, 애들은 600px을 달라고 조르는 상황입니다.</p>
-
-    <div class="container">
-      <div class="box box1">1. 쭈글</div>
-      <div class="box box2">2. 난 멀쩡해</div>
-      <div class="box box3">3. 쭈글</div>
+    <h1>flex-shrink</h1>
+    <div class="container container1">
+      <div class="item"><h3>AAA</h3></div>
+      <div class="item"><h3>BBBBBBBBBBBBBBBBBB</h3></div>
+      <div class="item"><h3>CCC</h3></div>
     </div>
   </body>
 </html>
