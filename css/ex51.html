@@ -20,6 +20,8 @@
         width: 1400px;
         height: auto;
         margin: 0 auto;
+        /* 배경색을 흰색으로 살짝 깔아보면 꽉 찬 게 더 잘 보입니다 */
+        background-color: #fff;
       }
       header {
         height: 100px;
@@ -44,19 +46,35 @@
         font-size: 20px;
         margin: 0 -30px;
       }
+
+      /* [수정 1] 부모 컨테이너 설정 */
       main {
         display: flex;
-        justify-content: center;
         height: auto;
+
+        /* 요소 사이 간격을 margin 대신 gap으로 처리 (가장 깔끔함) */
+        gap: 20px;
+
+        /* padding을 좀 줘서 벽이랑 너무 붙지 않게 함 */
+        padding: 20px;
       }
+
+      /* [수정 2] 사이드바: 크기 고정 (늘어나지도 줄어들지도 않음) */
       aside {
-        width: 300px;
+        /* width: 300px;  <-- 기존 방식 삭제 */
+
+        flex-basis: 300px; /* 내 기본 크기는 300px */
+        flex-grow: 0; /* 남는 공간 욕심 안 부림 */
+        flex-shrink: 0; /* 좁아도 절대 양보 안 함 (크기 유지) */
+
         height: 500px;
         border: 3px solid green;
         border-radius: 20px;
-        margin-right: 20px;
-        margin-top: 20px;
+
+        /* margin-right: 20px; <-- gap을 썼으니 삭제 */
+        /* margin-top: 20px;   <-- main에 padding 줬으니 삭제 */
       }
+
       aside h3 {
         font-size: 20px;
         text-align: center;
@@ -87,12 +105,23 @@
         text-align: left;
         font-size: 18px;
       }
+
+      /* [수정 3] 본문: 남는 공간 다 차지하기 (반응형 기초) */
       section {
-        width: 700px;
+        /* width: 700px; <-- 기존 방식 삭제 */
+
+        flex-basis: 0; /* 점유 공간 계산 시작점 (0부터 시작해서 다 채움) */
+        flex-grow: 1; /* 남는 공간 있으면 내가 다 먹는다! */
+        flex-shrink: 1; /* 공간 부족하면 내가 줄어들게 */
+
         height: 500px;
-        margin-top: 20px;
+        /* margin-top: 20px; <-- main padding으로 해결됨 */
         line-height: 1.5;
+
+        /* 확인용 테두리 (필요 없으면 삭제) */
+        /* border: 1px solid blue; */
       }
+
       section h2 {
         font-size: 30px;
         margin-bottom: 10px;
