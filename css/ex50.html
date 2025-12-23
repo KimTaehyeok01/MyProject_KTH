@@ -15,26 +15,26 @@
         /* 0. 일단 선언 (필수) */
         display: flex;
 
-        /* [1] 🚂 flex-direction: 배치 방향 (주축 결정) */
+        /* [1]  flex-direction: 배치 방향 (주축 결정) */
         /* ---------------------------------------------------- */
         flex-direction: row; /* (기본값) 왼쪽 -> 오른쪽 (가로) */
         flex-direction: row-reverse; /* 오른쪽 -> 왼쪽 */
         flex-direction: column; /* 위 -> 아래 (세로) */
         flex-direction: column-reverse; /* 아래 -> 위 */
 
-        /* [2] 🎁 flex-wrap: 줄바꿈 여부 */
+        /* [2]  flex-wrap: 줄바꿈 여부 */
         /* ---------------------------------------------------- */
         flex-wrap: nowrap; /* (기본값) 줄바꿈 안 함 (꾸역꾸역 한 줄에 넣음) */
         flex-wrap: wrap; /* 넘치면 다음 줄로 내림 (가장 많이 씀) */
         flex-wrap: wrap-reverse; /* 줄바꿈을 하는데 위쪽으로 쌓임 */
 
-        /* [3] ⚡ flex-flow: 1번과 2번을 한 번에 쓰기 (단축키) */
+        /* [3]  flex-flow: 1번과 2번을 한 번에 쓰기 (단축키) */
         /* ---------------------------------------------------- */
         /* 문법: flex-flow: <방향> <줄바꿈>; */
         flex-flow: row wrap; /* "가로로 배치하고, 넘치면 줄 바꿔라" (자주 씀) */
         flex-flow: column nowrap; /* "세로로 배치하고, 줄 바꾸지 마라" */
 
-        /* [4] ↔️ justify-content: 주축(가로) 정렬 */
+        /* [4] ↔ justify-content: 주축(가로) 정렬 */
         /* ---------------------------------------------------- */
         justify-content: flex-start; /* (기본값) 시작점(왼쪽) 정렬 */
         justify-content: flex-end; /* 끝점(오른쪽) 정렬 */
@@ -43,7 +43,7 @@
         justify-content: space-around; /* 아이템 둘레에 여백 균등하게 */
         justify-content: space-evenly; /* 아이템 사이와 양 끝 여백을 모두 똑같이 */
 
-        /* [5] ↕️ align-items: 교차축(세로) 정렬 - "한 줄일 때" */
+        /* [5] ↕ align-items: 교차축(세로) 정렬 - "한 줄일 때" */
         /* (조건: display: flex만 있으면 무조건 작동) */
         /* ---------------------------------------------------- */
         align-items: stretch; /* (기본값) 위아래로 쫙 늘림 */
@@ -52,7 +52,7 @@
         align-items: center; /* 수직 중앙 정렬 ★ */
         align-items: baseline; /* 글자 기준선에 맞춤 */
 
-        /* [6] 📚 align-content: 교차축(세로) 정렬 - "두 줄 이상 덩어리일 때" */
+        /* [6]  align-content: 교차축(세로) 정렬 - "두 줄 이상 덩어리일 때" */
         /* (조건: flex-wrap: wrap 상태이고, 실제로 두 줄 이상이어야 작동) */
         /* ---------------------------------------------------- */
         align-content: stretch; /* (기본값) 줄들을 쫙 펴서 배치 */
