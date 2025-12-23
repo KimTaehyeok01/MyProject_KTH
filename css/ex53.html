@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flex-basis 속성</title>
+    <!-- flex-basis란 아이템이 늘어나거나 줄어들기(x축) 전의 초기 크기 -->
+    <!-- flex-basis : auto : 기본 값, w,h 값을 ㅊ마고하거나 콘텐츠의 너비 만큼 -->
+    <!-- flex-basis : content 콘텐츠의 크기만큼 -->
+    <!-- 0 : 아이템의 초기 크기 값을 0으로 간주함. flow-grow 비율만큼 채워짐. -->
+    <!-- 단위(px, %, em) : 특성 수치로 고정된 크기로 지정. -->
+    <style>
+      .container {
+        width: 90%;
+        height: auto;
+        background: yellow;
+        border: 10px solid black;
+        padding: 10px;
+        display: flex;
+      }
+      .item {
+        width: auto;
+        height: 100%;
+        margin: 10px;
+        border: 10px solid black;
+        background: lightgreen;
+
+        /* 늘어나거나 줄어들기 전의 기준 크기 */
+        /* flex-basis: auto;
+        width: 100px; */
+
+        /* 만약와 width와 flex-basis가 둘 다 선언되면 */
+        /* 우선순위는 flex-basis가 더 높다. */
+        /* flex-basis: content;
+        width: 100px; */
+
+        /* 이것 역시 flex-basis가 우선순위 높다. */
+        /* flex-basis: 200px;
+        width: 100px; */
+
+        /* flex-grow가 정해준 비율대로 공간을 차지함. */
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>flex-basis</h1>
+    <div class="container">
+      <div class="item">
+        <h3>AAA</h3>
+      </div>
+      <div class="item">
+        <h3>BBBBBBBBBBBBBBBBBBB</h3>
+      </div>
+      <div class="item">
+        <h3>CCC</h3>
+      </div>
+    </div>
+  </body>
+</html>
