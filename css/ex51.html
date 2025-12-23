@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>강아지 블로그 만들기 - flexbox를 이용하기</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-size: 0;
+      }
+      body {
+        background-color: rgb(62, 193, 193);
+      }
+      .wrapper {
+        width: 1400px;
+        height: auto;
+        margin: 0 auto;
+      }
+      header {
+        height: 100px;
+        line-height: 100px;
+        font-size: 30px;
+        text-align: center;
+        font-family: "Times New Roman", Times, serif;
+      }
+      nav {
+        height: 50px;
+        background: #eeeeeeab;
+        border-radius: 20px;
+        margin: 0 200px;
+        line-height: 50px;
+        display: flex;
+        justify-content: space-evenly;
+      }
+      nav a {
+        font-size: 20px;
+        margin: 0 -80px;
+      }
+      main {
+        display: flex;
+        justify-content: center;
+        height: auto;
+      }
+      aside {
+        width: 300px;
+        height: 500px;
+        border: 3px solid green;
+        border-radius: 20px;
+        margin-right: 20px;
+
+        margin-top: 20px;
+      }
+      aside h3 {
+        font-size: 20px;
+        text-align: center;
+        margin-top: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      aside img {
+        width: 200px;
+        height: 200px;
+        border-radius: 20px;
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+      aside ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 200px;
+      }
+      aside ul li {
+        width: 200px;
+        text-align: left;
+        padding-left: 40px;
+      }
+      aside ul li a {
+        color: rgb(79, 39, 132);
+        text-align: left;
+        font-size: 18px;
+      }
+      section {
+        width: 700px;
+        height: 500px;
+        margin-top: 20px;
+      }
+      section h2 {
+        font-size: 30px;
+      }
+      section .p1 {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      section .p2 {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      section .p3 {
+        font-size: 16px;
+      }
+      footer {
+        background-color: #eeeeeeab;
+        border-radius: 20px;
+        height: 50px;
+        line-height: 50px;
+        margin: 0 100px;
+        margin-top: 50px;
+        margin-bottom: 110px;
+      }
+      footer p {
+        text-align: center;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>골든리트리버 - Golden Retriever</header>
+
+      <nav>
+        <a href="#">About</a>
+        <a href="#">History</a>
+        <a href="#">Information</a>
+        <a href="#">SNS</a>
+      </nav>
+
+      <main>
+        <aside>
+          <h3>Golden Retriever</h3>
+          <p><img src="/image/Golden Retriever.webp" /></p>
+          <ul>
+            <li>
+              <a
+                href="https://search.naver.com/search.naver?&query=골든리트리버 기본특성"
+                target="_blank"
+                >● 기본특성</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://search.naver.com/search.naver?&query=골든 리트리버 단점"
+                target="_blank"
+                >● 단점</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://search.naver.com/search.naver?&query=키울 시 주의점"
+                target="_blank"
+                >● 키울 시 주의점</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://search.naver.com/search.naver?&query=파생 혼종견"
+                target="_blank"
+                >● 파생 혼종견</a
+              >
+            </li>
+          </ul>
+        </aside>
+
+        <section>
+          <h2>Golden Retriever</h2>
+          <br />
+          <p class="p1">
+            개의 품종 중 하나로, 원산지는 영국의 스코틀랜드 지역이다. 비슷하게
+            생긴 래브라도 리트리버가 원형이다. 이름대로 윤기가 흐르는 크림빛
+            또는 금빛의 풍성한 털이 가장 큰 특징이며 은은하게 귀티가 흐르는
+            인상이다. 마당이 있는 집이 일반적인 미국과 영국, 또한 영국의 직할
+            속령이었던 아일랜드, 캐나다, 오스트레일리아나 뉴질랜드에서 자주 볼
+            수 있는 견종이라고 한다. 신장 51~61cm, 체중 25~40kg 정도이다.
+            대한민국 한정으로는 누렁이, 인절미[1]와 골댕이(=골든 댕댕이)라고도
+            불린다.# 영미권에서는 너겟이라고 하는 모양. 성격이 온순해서
+            '천사견'이라는 별명도 있다. 온순한 성미와 똑똑한 것으로 인해 맹인
+            안내견으로도 유명하다.
+          </p>
+          <br />
+          <p class="p2">
+            리트리버는 원래 사냥개 중에서도 총에 맞은 새를 물어오는
+            것(Retriever)을 목적으로 교배된 견종이다. 당연히 주인이 총을 쏘기
+            전에 짖거나, 난리를 피우면 새가 날아서 도망갈 테니 주인이 물어오라는
+            지시를 내릴 때까지 얌전히 명령에 복종하는 게 체질적으로 몸에 밴
+            견종이다. 다만 엄연한 대형견이자 사냥개임을 주지해야 안전사고를
+            방지할 수 있다. 자주 일어나는 일은 아니지만 마음만 먹는다면 사람을
+            해칠 수 있다. 만약 이빨을 드러내거나 그르릉거리는 적대적인 시그널을
+            보낸다면 '골든 리트리버이니까 위협만 하겠지' 같은 안일한 마음으로
+            대하지 말고 충분히 물러나야 한다.
+          </p>
+          <br />
+          <p class="p3">참조: 나무위키 - 골든리트리버</p>
+        </section>
+      </main>
+
+      <footer><p>Subscribe · About Author · Send us Email</p></footer>
+    </div>
+  </body>
+</html>
