@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가상요소 선택자 사용 예1</title>
+    <style>
+      li {
+        list-style: none;
+        display: inline-block;
+        padding: 10px;
+      }
+      li::after {
+        content: "|";
+        color: gray;
+        display: inline-block;
+        margin-left: 30px;
+      }
+      li:last-child::after {
+        content: "";
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>로그인</li>
+      <li>회원가입</li>
+      <li>마이페이지</li>
+      <li>사이트맵</li>
+    </ul>
+  </body>
+</html>
