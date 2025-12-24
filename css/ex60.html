@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <!-- 복습하기 -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,7 +29,16 @@
         z-index: 0;
       }
       .item:nth-child(2) {
-        order: 1;
+        z-index: 2;
+        /* 변형 속성 : 확대축소 비율 1.5배 */
+        transform: scale(2);
+
+        /* opacity : 1이 기본 값, 1 아래로만 투명 조절 가능, 1까지만. */
+        opacity: 0.5;
+      }
+      .item:nth-child(3) {
+        background-color: red;
+        z-index: 1;
       }
     </style>
   </head>
