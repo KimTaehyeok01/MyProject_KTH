@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가상요소 선택자</title>
+    <!-- 가상요소 : body안에 실제 태그는 없는데, 
+                   웹브라우저가 실행시 자동으로 만들어지는 요소. -->
+    <!-- before : 요소 앞에 생성 -->
+    <!-- after : 요소 뒤에 생성 -->
+    <style>
+      .before::before {
+        content: "before는 콘텐츠 앞에 생성됨.";
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="before">before 예시</p>
+    <p class="after">after 예시</p>
+    <p class="before after">before after 예시</p>
+  </body>
+</html>
