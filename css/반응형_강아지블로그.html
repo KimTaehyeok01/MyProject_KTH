@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반응형 강아지 블로그</title>
+    <style>
+      /* [기초 공사] */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        vertical-align: baseline;
+      }
+      body {
+        background-color: rgb(62, 193, 193);
+      }
+
+      /* [수정 1] 전체 틀을 유연하게 만들기 */
+      .wrapper {
+        width: 100%; /* 평소엔 물처럼 꽉 채우기 */
+        max-width: 1400px; /* 하지만 1400px 넘게 커지진 마! (브레이크) */
+        margin: 0 auto;
+        background-color: #639daf;
+      }
+
+      header {
+        height: 100px;
+        line-height: 100px;
+        font-size: 34px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Times New Roman", Times, serif;
+        font-weight: 1000;
+        text-align: center; /* 모바일에서 글자가 줄바꿈 될 때 가운데 정렬 */
+      }
+
+      nav {
+        min-height: 50px; /* 높이가 늘어날 수 있게 min-height로 변경 */
+        background: #eeeeeeab;
+        border-radius: 20px;
+        margin: 0 20px; /* 모바일에서 너무 좁지 않게 양옆 여백 줄임 */
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        /* [중요] 메뉴가 많아서 좁아지면 줄바꿈 해라 */
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+      }
+      nav a {
+        font-size: 20px;
+        color: #333;
+        font-weight: bold;
+      }
+
+      /* [수정 2] 메인 컨테이너 */
+      main {
+        display: flex;
+
+        /* [핵심] 옆으로 설 공간 부족하면 밑으로 내려가라! */
+        flex-wrap: wrap;
+
+        gap: 20px;
+        padding: 20px;
+      }
+
+      /* 사이드바 */
+      aside {
+        /* 기본 크기 300px, 남는 공간 있으면 조금씩 늘어남 */
+        flex: 1 1 300px;
+
+        border: 3px solid green;
+        border-radius: 20px;
+        padding-bottom: 20px;
+        background-color: #fff;
+      }
+
+      aside h3 {
+        font-size: 20px;
+        text-align: center;
+        margin-top: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      aside img {
+        width: 200px;
+        height: 200px;
+        border-radius: 20px;
+        display: block;
+        margin: 20px auto;
+      }
+      aside ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 15px;
+        padding: 0;
+      }
+      aside ul li {
+        width: 200px;
+        list-style: none;
+      }
+      aside ul li a {
+        color: rgb(79, 39, 132);
+        font-size: 18px;
+        display: block;
+      }
+
+      /* 본문 */
+      section {
+        /* 기본 크기 600px, 남는 공간은 내가 다 먹는다 (999) */
+        flex: 999 1 600px;
+
+        line-height: 1.6;
+      }
+
+      section h2 {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+      section p {
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      footer {
+        background-color: #eeeeeeab;
+        border-radius: 20px;
+        padding: 20px;
+        margin: 20px;
+        text-align: center;
+      }
+
+      /* =========================================
+         🚀 [수정 3] 미디어 쿼리 (반응형 마법)
+         화면이 800px보다 좁아지면 아래 코드를 실행해!
+         ========================================= */
+      @media (max-width: 800px) {
+        /* 1. 사이드바와 본문을 강제로 100%로 넓힘 (위아래 배치됨) */
+        aside,
+        section {
+          flex-basis: 100%;
+        }
+
+        /* 2. 헤더 글씨 크기 조금 줄임 */
+        header {
+          font-size: 24px;
+        }
+
+        /* 3. 메뉴바 여백 조정 */
+        nav {
+          margin: 0 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>골든리트리버 - Golden Retriever</header>
+
+      <nav>
+        <a href="#">About</a>
+        <a href="#">History</a>
+        <a href="#">Information</a>
+        <a href="#">SNS</a>
+      </nav>
+
+      <main>
+        <aside>
+          <h3>Golden Retriever</h3>
+          <p>
+            <img
+              src="https://images.unsplash.com/photo-1633722715463-d30f4f325e24?q=80&w=200&auto=format&fit=crop"
+              alt="골든리트리버"
+            />
+          </p>
+          <ul>
+            <li><a href="#">● 기본특성</a></li>
+            <li><a href="#">● 단점</a></li>
+            <li><a href="#">● 키울 시 주의점</a></li>
+            <li><a href="#">● 파생 혼종견</a></li>
+          </ul>
+        </aside>
+
+        <section>
+          <h2>Golden Retriever</h2>
+          <br />
+          <p class="p1">
+            개의 품종 중 하나로, 원산지는 영국의 스코틀랜드 지역이다. 비슷하게
+            생긴 래브라도 리트리버가 원형이다. 이름대로 윤기가 흐르는 크림빛
+            또는 금빛의 풍성한 털이 가장 큰 특징이며 은은하게 귀티가 흐르는
+            인상이다.
+          </p>
+          <br />
+          <p class="p2">
+            리트리버는 원래 사냥개 중에서도 총에 맞은 새를 물어오는
+            것(Retriever)을 목적으로 교배된 견종이다. 온순한 성미와 똑똑한
+            것으로 인해 맹인 안내견으로도 유명하다.
+          </p>
+          <br />
+          <p class="p3">참조: 나무위키 - 골든리트리버</p>
+        </section>
+      </main>
+
+      <footer><p>Subscribe · About Author</p></footer>
+    </div>
+  </body>
+</html>
