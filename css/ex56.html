@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>격자(테이블)모양 배치 - display : table</title>
+    <!-- display : table -->
+    <!-- table태그처럼 배치함. -->
+    <!-- display:table-row - tr태그처럼 동작함. -->
+    <!-- display : table-cell - td태그처럼 동작함. -->
+    <!-- display : table-heder-group - thead처럼 동작함. -->
+    <!-- display : table-row-group - tbody처럼 동작함. -->
+
+    <style>
+      .table-container {
+        /* table */
+        display: table;
+        /* 테두리선을 단선으로 만들어줌. */
+        /* separate : 기본 값, 셀마다 개별 테두리가 있음. */
+        /* collapse : 셀 경계를 무너뜨리다. 단선효과. */
+        border-collapse: collapse;
+
+        /* auto : 컨텐츠 너비만큼 너비가 정해짐. */
+        /* fixed : 똑같은 너비로 셀 너비를 맞춤. */
+        /* 단, auto와 fixed 모두 width가 먼저 지정해야지만 사용 가능. */
+        width: 300px;
+        table-layout: fixed;
+      }
+      .table-row {
+        /* tr */
+        display: table-row;
+      }
+      .table-cell {
+        /* td */
+        display: table-cell;
+        border: 1px solid black;
+        text-align: center;
+        padding: 10px;
+      }
+      .table-header {
+        /* th */
+        display: table-header-group;
+        font-weight: 900;
+        background-color: #eee;
+      }
+      .table-body {
+        /* tbody */
+        display: table-row-group;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table-container">
+      <div class="table-header">
+        <div class="table-row">
+          <div class="table-cell">이름</div>
+          <div class="table-cell">나이</div>
+          <div class="table-cell">직업</div>
+        </div>
+      </div>
+
+      <div class="table-body">
+        <div class="table-row">
+          <div class="table-cell">홍길동</div>
+          <div class="table-cell">30</div>
+          <div class="table-cell">개발자</div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-cell">김철수입니다.</div>
+          <div class="table-cell">25</div>
+          <div class="table-cell">디자이너</div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <table border="1" style="border-collapse: collapse">
+      <thead>
+        <tr>
+          <th>이름</th>
+          <th>직업</th>
+          <th>나이</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>홍길동</td>
+          <td>개발자</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td>김철수</td>
+          <td>디자이너</td>
+          <td>25</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
