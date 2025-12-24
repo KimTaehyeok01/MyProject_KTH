@@ -29,8 +29,8 @@
 
       .login_box {
         width: 500px;
-        margin-left: 80px;
-        border: 1px solid #bd9b9b;
+        margin-left: 20px;
+        border: 1px solid #dfd9d9;
         height: auto;
       }
 
@@ -56,6 +56,123 @@
       .option {
         margin-left: 20px;
       }
+      .option input[type="checkbox"] {
+        display: none;
+      }
+
+      .option label {
+        position: relative;
+        display: inline-block;
+        padding-left: 30px;
+        cursor: pointer;
+        line-height: 20px;
+        margin-bottom: 20px;
+      }
+
+      .option label::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 15px;
+        height: 15px;
+        border: 2px solid #ece2e2;
+        background-color: #ffffff;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .option input[type="checkbox"]:checked + label::before {
+        background-color: #544b4b;
+        border-color: #544b4b;
+      }
+
+      .option input[type="checkbox"]:checked + label::after {
+        content: "✓";
+        position: absolute;
+        left: 4px;
+        top: -2px;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .btn_login {
+        margin-top: 20px;
+        width: 350px;
+        height: 40px;
+        margin: 0 80px;
+        background-color: yellow;
+        border: none;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+      .btn_login:active {
+        background-color: rgb(235, 235, 20);
+      }
+      .divider {
+        font-weight: 200;
+        font-size: 14px;
+        position: relative;
+        text-align: center;
+        margin-bottom: 1cqmax;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 1px;
+        color: #000000;
+      }
+
+      .btn_qr {
+        margin-top: 20px;
+        width: 350px;
+        height: 40px;
+        margin: 0 80px;
+        background-color: #eee;
+        border: none;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 40%;
+        height: 1px;
+        background-color: #ddd;
+      }
+
+      .divider::before {
+        left: 0;
+      }
+
+      .divider::after {
+        right: 0;
+      }
+      .link {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        position: relative;
+      }
+      .link a {
+        color: rgb(195, 184, 184);
+        font-size: 14px;
+      }
+      .link a:nth-last-of-type(2) {
+        margin-left: 270px;
+      }
+      .link a::before {
+        position: absolute;
+        content: "";
+        width: 1px;
+        height: 5;
+        background-color: aqua;
+      }
     </style>
   </head>
   <body>
@@ -78,11 +195,12 @@
           </div>
 
           <div class="option">
-            <label> <input type="checkbox" /> 간편로그인 정보 저장 </label>
+            <input type="checkbox" id="save_login" />
+            <label for="save_login">간편로그인 정보 저장</label>
           </div>
 
           <button type="button" class="btn_login">로그인</button>
-          <div class="divor">또는</div>
+          <div class="divider">또는</div>
           <button type="button" class="btn_qr">QR코드 로그인</button>
 
           <div class="link">
