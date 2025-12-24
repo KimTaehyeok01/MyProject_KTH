@@ -11,8 +11,16 @@
         padding: 10px;
       }
       li::after {
+        /* 첫번 째 방법 */
         content: "|";
         color: gray;
+
+        /* 두번 째 방법 */
+        /* content: "";
+        width: 1px;
+        height: 12px;
+        border-right: 1px solid gray; */
+
         display: inline-block;
         margin-left: 30px;
       }
