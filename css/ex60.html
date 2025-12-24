@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>flex-order 아이템의 순서 정하기</title>
+    <title>z-index - 아이템의 높낮이 정하기</title>
     <style>
       .container {
         width: 90%;
@@ -24,8 +24,8 @@
         background-color: aquamarine;
       }
       .item:nth-child(1) {
-        /* order : 0이 기본 값 */
-        order: 3;
+        /* z-index : 0이 기본 값 */
+        z-index: 0;
       }
       .item:nth-child(2) {
         order: 1;
@@ -33,7 +33,7 @@
     </style>
   </head>
   <body>
-    <h1>flex order</h1>
+    <h1>z-index</h1>
     <div class="container">
       <div class="item">
         <h3>AAA</h3>
