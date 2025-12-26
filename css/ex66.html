@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>연습문제 - 다음 로그인 화면</title>
+    <title>연습문제 - 카카오 로그인 화면</title>
     <style>
       * {
         margin: 0;
@@ -19,7 +19,7 @@
         align-items: center;
       }
       .header {
-        margin-top: 80px;
+        margin-top: 50px;
       }
       .logo {
         background: url("/image/logo_kakao.png") no-repeat 0 0;
@@ -30,9 +30,9 @@
       }
 
       .login_box {
-        border: 1px solid #c5bfbf;
+        border: 1px solid #f2f0f0;
         width: 560px;
-        padding: 80px 50px;
+        padding: 80px 70px;
       }
       .login_input {
         display: flex;
@@ -76,12 +76,13 @@
         appearance: none;
         border: none;
         cursor: pointer;
-        background: url("/image/i_icon.png") no-repeat;
-        background-position: 0 0;
-        background-size: 20px auto;
+        background: url("/image/ico_comm.png") no-repeat;
+        background-position: -120px -110px;
+        background-size: 300px auto;
         width: 20px;
         height: 20px;
         margin-left: 5px;
+        margin-top: 2px;
       }
       #btn_login {
         width: 100%;
@@ -89,6 +90,10 @@
         background-color: rgb(247, 247, 4);
         border-radius: 5px;
         padding: 10px 0;
+        cursor: pointer;
+      }
+      #btn_login:active {
+        background-color: rgb(255, 230, 0);
       }
       .divider {
         display: flex;
@@ -103,7 +108,7 @@
         content: "";
         height: 1px;
         flex: 1;
-        background-color: rgb(213, 205, 205);
+        background-color: rgb(244, 241, 241);
       }
       #btn_qrlogin {
         width: 100%;
@@ -111,6 +116,10 @@
         background-color: rgb(213, 213, 202);
         border-radius: 5px;
         padding: 10px 0;
+        cursor: pointer;
+      }
+      #btn_qrlogin:active {
+        background-color: rgb(189, 189, 178);
       }
       .link {
         margin-top: 30px;
@@ -152,6 +161,12 @@
         text-decoration: none;
         position: relative;
         font-size: 14px;
+      }
+      .footer_link select {
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        color: rgb(94, 93, 93);
       }
       .footer_link a:nth-child(1)::after {
         content: "";
@@ -241,7 +256,12 @@
 
       <footer class="footer">
         <div class="footer_link">
-          <a href="#">한국어 ∨</a>
+          <select id="langauge">
+            <option value="kor">한국어</option>
+            <option value="en">영어</option>
+            <option value="ja">일본어</option>
+            <option value="ch">중국어</option>
+          </select>
           <a href="#">이용약관</a>
           <a href="#">개인정보 처리방침</a>
           <a href="#">고객센터</a>
