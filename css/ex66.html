@@ -3,52 +3,251 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>큰 이미지를 쪼개쓰기-스프라이트</title>
-    <!-- 스프라이트(통) : 이미지 여러 이미지가 한 장의 파일에 있는 것. -->
-    <!-- logo_kakao.png -->
-    <!-- ico_comm.png -->
+    <title>연습문제 - 다음 로그인 화면</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .wrapper {
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .header {
+        margin-top: 80px;
+      }
       .logo {
-        display: inline-block;
-        /*                                                 x y 값    */
         background: url("/image/logo_kakao.png") no-repeat 0 0;
-
-        /* 통 이미지 크기 */
-        background-size: 200px 160px;
-        /* 통 이미지에서 가져오는 위치 */
-        background-position: 0 0;
-
-        /* 실제 뿌려지는 이미지 */
-        width: 200px;
+        background-size: 100px 80px;
+        background-position: center;
+        width: 100px;
         height: 80px;
       }
-      .icon {
+
+      .login_box {
+        border: 1px solid #c5bfbf;
+        width: 560px;
+        padding: 80px 50px;
+      }
+      .login_input {
         display: flex;
-        background: url("/image/ico_comm.png") no-repeat 0 0;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .login_input input {
+        width: 100%;
+        border: none;
+        font-size: 18px;
+        border-bottom: 2px solid #d1cece;
+        padding: 5px 0;
+        outline: none;
+        margin-bottom: 5px;
+      }
+      .tip {
+        font-size: 12px;
+        display: none;
+      }
+      .login_input input:focus + .tip {
+        display: block;
+        color: red;
+      }
+      .option {
+        display: flex;
+        margin: 20px 0;
+        font-size: 14px;
+        color: rgb(94, 93, 93);
+      }
+      .option input[type="checkbox"] {
+        appearance: none;
+        cursor: pointer;
+        background: url("/image/ico_comm.png") no-repeat;
+        background-position: -25px 0px;
         background-size: 300px auto;
+        width: 22px;
+        height: 20px;
+        margin-right: 5px;
+      }
+      .option button {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        background: url("/image/i_icon.png") no-repeat;
         background-position: 0 0;
+        background-size: 20px auto;
         width: 20px;
         height: 20px;
+        margin-left: 5px;
       }
-
-      .icon1 {
-        display: inline-block;
-        background: url("/image/ico_comm.png") no-repeat -120px -80px;
-        background-size: 300px auto;
-        width: 20px;
-        height: 50px;
+      #btn_login {
+        width: 100%;
+        border: none;
+        background-color: rgb(247, 247, 4);
+        border-radius: 5px;
+        padding: 10px 0;
+      }
+      .divider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        padding: 15px;
+        gap: 20px;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        height: 1px;
+        flex: 1;
+        background-color: rgb(213, 205, 205);
+      }
+      #btn_qrlogin {
+        width: 100%;
+        border: none;
+        background-color: rgb(213, 213, 202);
+        border-radius: 5px;
+        padding: 10px 0;
+      }
+      .link {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .link a {
+        text-decoration: none;
+        font-size: 14px;
+        color: rgb(94, 93, 93);
+      }
+      .link a:nth-child(2) {
+        margin-left: auto;
+        position: relative;
+      }
+      .link a:nth-child(2)::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 14px;
+        background-color: rgb(187, 182, 182);
+        left: 120%;
+        top: 20%;
+      }
+      footer {
+        margin-top: 10px;
+        width: 500px;
+        padding: 20px 0;
+        text-align: center;
+      }
+      .footer_link {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .footer_link a {
+        color: rgb(94, 93, 93);
+        text-decoration: none;
+        position: relative;
+        font-size: 14px;
+      }
+      .footer_link a:nth-child(1)::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 16px;
+        background-color: rgb(236, 231, 231);
+        left: 125%;
+        top: 20%;
+      }
+      .footer_link a:nth-child(2)::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 16px;
+        background-color: rgb(236, 231, 231);
+        left: 120%;
+        top: 20%;
+      }
+      .footer_link a:nth-child(3)::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 16px;
+        background-color: rgb(236, 231, 231);
+        left: 110%;
+        top: 20%;
+      }
+      .footer_link a:nth-child(3) {
+        font-weight: bold;
+      }
+      .address {
+        margin-top: 20px;
+        font-size: 12px;
+        color: rgb(134, 130, 130);
+      }
+      .footer_link_bottom {
+        margin-top: 12px;
+      }
+      .footer_link_bottom a {
+        text-decoration: none;
+        font-size: 12px;
+        color: rgb(143, 138, 138);
       }
     </style>
   </head>
   <body>
-    <span>카카오 로고</span><br />
-    <div class="logo"></div>
-    <br />
+    <div class="wrapper">
+      <header class="header">
+        <div class="logo"></div>
+      </header>
 
-    <span>카카오 아이콘</span><br />
-    <div class="icon"></div>
+      <main class="login_box">
+        <form>
+          <div class="login_input">
+            <input
+              type="text"
+              placeholder="카카오메일 아이디, 이메일, 전화번호"
+            />
+            <div class="tip">
+              TIP 카카오메일이 있다면 메일 아이디만 입력해 보세요.
+            </div>
+            <input type="password" placeholder="비밀번호" />
+          </div>
 
-    <span>카카오 도움말</span><br />
-    <div class="icon1"></div>
+          <div class="option">
+            <span class="save_id"> </span>
+            <input type="checkbox" /><span> 간편로그인 정보 저장</span>
+
+            <span class="icon"></span>
+            <button></button>
+          </div>
+
+          <button type="button" id="btn_login">로그인</button>
+
+          <div class="divider">또는</div>
+
+          <button type="button" id="btn_qrlogin">QR코드 로그인</button>
+
+          <div class="link">
+            <a href="#">회원가입</a>
+            <a href="#">계정 찾기</a>
+            <a href="#">비밀번호 찾기</a>
+          </div>
+        </form>
+      </main>
+
+      <footer class="footer">
+        <div class="footer_link">
+          <a href="#">한국어 ∨</a>
+          <a href="#">이용약관</a>
+          <a href="#">개인정보 처리방침</a>
+          <a href="#">고객센터</a>
+        </div>
+        <div class="footer_link_bottom"><a href="">©Kakao Corp.</a></div>
+      </footer>
+    </div>
   </body>
 </html>
