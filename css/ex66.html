@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>큰 이미지를 쪼개쓰기-스프라이트</title>
+    <!-- 스프라이트(통) : 이미지 여러 이미지가 한 장의 파일에 있는 것. -->
+    <!-- logo_kakao.png -->
+    <!-- ico_comm.png -->
+    <style>
+      .logo {
+        display: inline-block;
+        /*                                                 x y 값    */
+        background: url("/image/logo_kakao.png") no-repeat 0 0;
+
+        /* 통 이미지 크기 */
+        background-size: 200px 160px;
+        /* 통 이미지에서 가져오는 위치 */
+        background-position: 0 0;
+
+        /* 실제 뿌려지는 이미지 */
+        width: 200px;
+        height: 80px;
+      }
+      .icon {
+        display: flex;
+        background: url("/image/ico_comm.png") no-repeat 0 0;
+        background-size: 300px auto;
+        background-position: 0 0;
+        width: 20px;
+        height: 20px;
+      }
+
+      .icon1 {
+        display: inline-block;
+        background: url("/image/ico_comm.png") no-repeat -120px -80px;
+        background-size: 300px auto;
+        width: 20px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <span>카카오 로고</span><br />
+    <div class="logo"></div>
+    <br />
+
+    <span>카카오 아이콘</span><br />
+    <div class="icon"></div>
+
+    <span>카카오 도움말</span><br />
+    <div class="icon1"></div>
+  </body>
+</html>
