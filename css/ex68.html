@@ -30,6 +30,11 @@
         transition-duration: 3s;
         transition-delay: 0.5s;
         transition-property: width, background-color;
+
+        /* 한줄 표현 */
+        /* transition: property duration timing-function delay 순서 */
+        /* 한줄 표현에서 property의 속성은 ,를 사용하지 않는다. */
+        transition: width background-color 3s 0.5s;
       }
       #graph:hover > .bar {
         width: 600px;

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .wrapper {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 12px;
+        font-weight: bold;
+        display: flex;
+        flex-flow: row wrap;
+      }
+      .wrapper div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .header {
+        background-color: greenyellow;
+        height: 50px;
+        flex: 1 100%;
+      }
+
+      .section1 {
+        background-color: orange;
+        height: 100px;
+        flex: 1 50%;
+      }
+      .section2 {
+        background-color: blue;
+        height: 100px;
+        flex: 1 50%;
+      }
+      .section3 {
+        background-color: pink;
+        height: 100px;
+        flex: 1 50%;
+      }
+      .section4 {
+        background-color: yellow;
+        height: 100px;
+        flex: 1 50%;
+      }
+      .ad {
+        background-color: rgb(99, 47, 255);
+        height: 50px;
+        flex: 1 50%;
+      }
+      .info {
+        background-color: rgb(126, 149, 158);
+        height: 50px;
+        flex: 1 50%;
+      }
+      .footer {
+        background-color: rgb(83, 119, 39);
+        height: 50px;
+        flex: 1 100%;
+      }
+
+      /* 태블릿 */
+      @media screen and (min-width: 768px) and (max-width: 1023px) {
+        .header {
+          flex: 1 80%;
+          order: 1;
+        }
+        .section1 {
+          flex: 1 100%;
+          order: 3;
+        }
+        .section2 {
+          flex: 1 100%;
+          order: 4;
+        }
+        .section3 {
+          flex: 1 100%;
+          order: 5;
+        }
+        .section4 {
+          flex: 1 100%;
+          order: 6;
+        }
+        .ad {
+          flex: 1 20%;
+          order: 2;
+        }
+        .info {
+          flex: 1 30%;
+          order: 7;
+        }
+        .footer {
+          flex: 1 70%;
+          order: 8;
+        }
+      }
+
+      /* 모바일 */
+      @media screen and (max-width: 767px) {
+        .header {
+          flex: 1 80%;
+          order: 1;
+        }
+        .section1 {
+          flex: 1 50%;
+          order: 2;
+        }
+        .section2 {
+          flex: 1 50%;
+          order: 3;
+        }
+        .section3 {
+          flex: 1 50%;
+          order: 4;
+        }
+        .section4 {
+          flex: 1 50%;
+          order: 5;
+        }
+        .ad {
+          flex: 1 30%;
+          order: 6;
+        }
+        .info {
+          flex: 1 70%;
+          order: 7;
+        }
+        .footer {
+          flex: 1 100%;
+          order: 8;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <p>헤더</p>
+      </div>
+
+      <div class="section1"><p>섹션1</p></div>
+      <div class="section2"><p>섹션2</p></div>
+      <div class="section3"><p>섹션3</p></div>
+      <div class="section4"><p>섹션4</p></div>
+      <div class="ad">
+        <p>광고</p>
+      </div>
+      <div class="info">
+        <p>정보</p>
+      </div>
+
+      <div class="footer">
+        <p>푸터</p>
+      </div>
+    </div>
+  </body>
+</html>
