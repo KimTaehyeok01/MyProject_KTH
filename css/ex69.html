@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>변형속성 - transform</title>
+    <!-- 크기, 각도 등이 변형되는 것 -->
+    <!-- 2차원(x y평면), 3차원(x y z평면) -->
+
+    <!-- 함수명 -->
+    <!-- rotate(각도 값) : 회전, 단위는 deg -->
+    <!-- translate(x, y) : x, y좌표로 이동 -->
+    <!-- translate(x) : x좌표만 이동 -->
+    <!-- translate(y) : y좌표만 이동 -->
+    <!-- scale(x, y) : 크기 확대/축소, 1이 기본 값, 2는 2배 확대 -->
+    <!-- scale(x) :  x축으로 확대/축소 -->
+    <!-- scale(y) : y축으로 확대/축소 -->
+    <!-- skew(x, y) : 기울이기, 단위는 deg -->
+    <!-- skew(x) : x축으로 기울이기 -->
+    <!-- skew(y) : y축으로 기울이기 -->
+    <!-- transform-origin : 앵커 값(기준 위치) -->
+
+    <style>
+      section {
+        margin: 20px;
+        width: 100px;
+        height: 100px;
+        border: 5px solid black;
+      }
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+
+        /* 회전 */
+        /* transform: rotate(45deg); */
+
+        /* transform-origin : center center이 기본 값 */
+        /* transform-origin: right bottom;
+        transform-origin: 30% 20%; */
+
+        /* 이동 */
+        /* transform: translate(30px, 50px); */
+
+        /* 회전+이동 */
+        /* transform: rotate(45deg) translate(30px); */
+
+        /* 기울이기 */
+        transform: skew(10deg);
+        transform: skewX(-20deg);
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div></div>
+    </section>
+  </body>
+</html>
