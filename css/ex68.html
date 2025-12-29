@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>트랜지션 속성들</title>
+    <!-- trasition-dlay : 변환 전 지연시간 -->
+    <!-- trasition-duration : 변환에 걸리는 시간 -->
+    <!-- trasition-property : 대상 속성 -->
+    <!-- trasition-timing-function : 보간 타입 -->
+
+    <!-- 보간 : interpolation(시간의 간격을 매꾼다.) -->
+    <!-- 시간 대비 변화량을 의미함. -->
+    <!-- 보간 타입 : linear(선형), ease(기본 값), ease-in, ease-out, ease-in-out -->
+    <!-- https://lionbum.tistory.com/187 -->
+    <!-- https://cruiseweb.tistory.com/entry/CSS-TransitionCRUISEWEB -->
+
+    <style>
+      #graph {
+        width: 610px;
+        border: 3px solid black;
+      }
+      .bar {
+        width: 10px;
+        height: 50px;
+        background-color: orange;
+        margin: 5px;
+
+        /* 트렌지션 속성 */
+        transition-duration: 3s;
+        transition-delay: 0.5s;
+        transition-property: width, background-color;
+      }
+      #graph:hover > .bar {
+        width: 600px;
+        background-color: red;
+      }
+      .bar:nth-child(1) {
+        transition-timing-function: linear;
+      }
+      .bar:nth-child(2) {
+        transition-timing-function: ease;
+      }
+      .bar:nth-child(3) {
+        transition-timing-function: ease-in;
+      }
+      .bar:nth-child(4) {
+        transition-timing-function: ease-out;
+      }
+      .bar:nth-child(5) {
+        transition-timing-function: ease-in-out;
+      }
+      .bar:nth-child(6) {
+        /* 베지어곡선 bezier-curve */
+        /* 베지어 - 수학자 이름, 2점으로 곡선을 정의하는 유명한 함수 */
+        /* cubic-bezier.com */
+        transition-timing-function: cubic-bezier(0.93, -0.76, 0.04, 2.24);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="graph">
+      <div class="bar"><h2>linear</h2></div>
+      <div class="bar"><h2>ease</h2></div>
+      <div class="bar"><h2>ease-in</h2></div>
+      <div class="bar"><h2>ease-out</h2></div>
+      <div class="bar"><h2>ease-in-out</h2></div>
+      <div class="bar"><h2>bezier</h2></div>
+    </div>
+  </body>
+</html>
