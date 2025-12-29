@@ -31,22 +31,43 @@
       .header {
         background-color: greenyellow;
         height: 100px;
-        width: 100px;
+
+        /* 기본 값 auto, w,h참조 -> 콘텐츠너비 */
+        flex-basis: auto;
+
+        /* 기본 값 0, 콘텐츠너비, 1 1/n차지 */
+        flex-grow: 1;
+
+        /* 기본 값 1, 1 1/n차지 */
+        flex-shrink: 1;
+
+        /* 한줄표현 */
+        /* flex: grow shrink basis */
+        flex: 1 1 auto;
+
+        flex: 1; /* flex : 1 1 0% 라는 의미. */
+        flex: 1 20%; /* flex : 1 1 20% 라는 의미. */
       }
       .ad {
         background-color: rgb(99, 47, 255);
         height: 100px;
-        width: 100px;
+        flex-basis: auto;
+        flex-grow: 1;
+        flex-shrink: 1;
       }
       .info {
         background-color: rgb(126, 149, 158);
         height: 100px;
-        width: 100px;
+        flex-basis: auto;
+        flex-grow: 1;
+        flex-shrink: 1;
       }
       .footer {
         background-color: rgb(83, 119, 39);
         height: 100px;
-        width: 100px;
+        flex-basis: auto;
+        flex-grow: 1;
+        flex-shrink: 1;
       }
       /* 태블릿 해상도 */
       /* 모바일 해상도 */
