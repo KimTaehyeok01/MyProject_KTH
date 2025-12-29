@@ -3,7 +3,115 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>반응형 웹과 flex 연결</title>
+
+    <style>
+      /* pc해상도 */
+      .wrapper {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 12px;
+        font-weight: bold;
+        /* display: inline-block으로 바꾼다. */
+        /* 기본 값들 */
+        /* 주축방향 : row */
+        /* 교차축방향 : column */
+        /* 줄바꿈 : nowrap */
+        /* 주축정렬 : flex-start */
+        /* 교차축정렬 : stretch */
+        display: flex;
+        flex-flow: row wrap;
+      }
+      .wrapper div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .header {
+        background-color: greenyellow;
+        height: 100px;
+        flex: 1 100%;
+      }
+      .ad {
+        background-color: rgb(99, 47, 255);
+        height: 100px;
+        flex: 1 30%;
+      }
+      .info {
+        background-color: rgb(126, 149, 158);
+        height: 100px;
+        flex: 1 70%;
+      }
+      .footer {
+        background-color: rgb(83, 119, 39);
+        height: 100px;
+        flex: 1 100%;
+      }
+      /* 태블릿 해상도 */
+      @media screen and (min-width: 768px) and (max-width: 959px) {
+        .header {
+          flex: 1 100%;
+          order: 1;
+          height: 400px;
+        }
+        .ad {
+          flex: 1 50%;
+          order: 3;
+        }
+        .info {
+          flex: 1 50%;
+          order: 2;
+        }
+        .footer {
+          flex: 1 100%;
+          order: 4;
+        }
+      }
+      /* 모바일 해상도 */
+      @media screen and (max-width: 767px) {
+        .header {
+          flex: 1 20%;
+          order: 0;
+        }
+        .ad {
+          flex: 1 80%;
+          /* 안보이게 하는 방법 2가지 */
+          /* 원래 있던 영역을 유지하면서 안보임 */
+          /* visibility: hidden; */
+          /* 원래 있던 영역도 없어지면서 안보임 */
+
+          /* display none은 display flex가 우선순위라 .wrapper .ad를 하지 않는 이상 사라지지 않음. */
+          display: none;
+        }
+        .info {
+          flex: 1 50%;
+        }
+        .footer {
+          flex: 1 50%;
+        }
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <!-- 전체 웹을 감싸는 div -->
+    <div class="wrapper">
+      <!-- 시맨틱태그를 통한 웹페이지 구성 -->
+      <div class="header">
+        <p>헤더</p>
+      </div>
+
+      <div class="ad">
+        <p>광고</p>
+      </div>
+
+      <div class="info">
+        <p>정보</p>
+      </div>
+
+      <div class="footer">
+        <p>푸터</p>
+      </div>
+    </div>
+  </body>
 </html>
