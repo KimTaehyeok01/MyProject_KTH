@@ -33,25 +33,30 @@
         height: 100px;
 
         /* flex 3가지 속성 기본값 */
-        /* flex-grow: 0 */
-        /* flex-shrink: 1 */
-        /* flex-basis: auto */
-
-        /* 기본 값 auto, w,h참조 -> 콘텐츠너비 */
-        flex-basis: auto;
-
-        /* 기본 값 0, 콘텐츠너비, 1 1/n차지 */
+        /* 
         flex-grow: 1;
+        flex-shrink: 1; 
+        flex-basis: auto;
+        */
 
-        /* 기본 값 1, 1 1/n차지 */
-        flex-shrink: 1;
+        /* flex 한줄표현 */
+        /*    grow shrink basis  */
+        flex: 0 1 auto;
 
-        /* 한줄표현 */
-        /* flex: grow shrink basis 순서 */
-        flex: 1 1 auto;
+        /* 1개 표현 */
+        /*    1 1 0%  균등배분*/
+        /*    flex-grow가 1이라는 뜻 */
+        flex: 1;
+        /*    1 1 200px */
+        flex: 200px;
 
-        flex: 1; /* flex : 1 1 0% 라는 의미. */
-        flex: 1 20%; /* flex : 1 1 20% 라는 의미. */
+        /* 2개 표현 */
+        /*    1 2 0% */
+        flex: 1 2;
+        /*    1 1 200px */
+        flex: 1 200px;
+        /*    1 1 20% */
+        flex: 1 20%;
       }
       .ad {
         background-color: rgb(99, 47, 255);
