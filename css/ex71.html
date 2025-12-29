@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반응형 웹과 flex 연결</title>
+
+    <style>
+      /* pc해상도 */
+      .wrapper {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 12px;
+        font-weight: bold;
+        /* display: inline-block으로 바꾼다. */
+        /* 기본 값들 */
+        /* 주축방향 : row */
+        /* 교차축방향 : column */
+        /* 줄바꿈 : nowrap */
+        /* 주축정렬 : flex-start */
+        /* 교차축정렬 : stretch */
+        display: flex;
+        flex-flow: row wrap;
+      }
+      .wrapper div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .header {
+        background-color: greenyellow;
+        height: 100px;
+        width: 100px;
+      }
+      .ad {
+        background-color: rgb(99, 47, 255);
+        height: 100px;
+        width: 100px;
+      }
+      .info {
+        background-color: rgb(126, 149, 158);
+        height: 100px;
+        width: 100px;
+      }
+      .footer {
+        background-color: rgb(83, 119, 39);
+        height: 100px;
+        width: 100px;
+      }
+      /* 태블릿 해상도 */
+      /* 모바일 해상도 */
+    </style>
+  </head>
+  <body>
+    <!-- 전체 웹을 감싸는 div -->
+    <div class="wrapper">
+      <!-- 시맨틱태그를 통한 웹페이지 구성 -->
+      <div class="header">
+        <p>헤더</p>
+      </div>
+
+      <div class="ad">
+        <p>광고</p>
+      </div>
+
+      <div class="info">
+        <p>정보</p>
+      </div>
+
+      <div class="footer">
+        <p>푸터</p>
+      </div>
+    </div>
+  </body>
+</html>
