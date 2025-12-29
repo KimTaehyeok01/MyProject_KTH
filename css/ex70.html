@@ -39,10 +39,24 @@
         }
       }
 
-      /* 모바일 해상도 */
+      /* 모바일 해상도(기본 세로모드) */
       @media screen and (max-width: 767px) {
         body {
           background-color: lightgreen;
+        }
+      }
+
+      /* 모바일 해상도 - 세로모드 (orientation: portrait). portrait: 세로 */
+      @media screen and (max-width: 767px) and (orientation: portrait) {
+        body {
+          background-color: sandybrown;
+        }
+      }
+
+      /* 모바일 해상도 - 가로모드 (orientation: landscape). 가로: landscape */
+      @media screen and (max-width: 767px) and (orientation: landscape) {
+        body {
+          background-color: dodgerblue;
         }
       }
     </style>
