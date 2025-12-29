@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반응형웹 - 미디어 쿼리 속성</title>
+    <!-- 반응형 웹이란? -->
+    <!-- ex) 카페 디자인센터 - 반응형 웹사이트 -->
+    <!-- : 화면너비에 따라서 반응하는 동적인 웹 -->
+    <!-- : 화면높이 - 세로 스크롤로 대응가능 -->
+
+    <!-- 해상도에 대응하는 방법 -->
+    <!-- 1. pc용만 만든다. 화면너비 가로 1024px 이상 고정 -->
+    <!-- 2. mobile용만 만든다. 화면너비 가로 768px 이하 고정 -->
+    <!-- 3. 반응형 웹으로 만든다. 모바일/태블릿/pc 대응. 화면너비 가로 767px 이하 -->
+
+    <!-- 1. pc와 모바일을 별도로 제작 -->
+    <!-- 예) 네이버(www.naver.com, m.naver.com) -->
+    <!-- 2. 반응형으로 제작 -->
+    <!-- 예) 카페24 디자인센터, 아임웹, 크리에이트링크 -->
+
+    <!-- 반응형 웹을 만드는 방법 -->
+    <!-- 미디어 쿼리 속성 : @media -->
+    <!-- 미디어 타입 : screen(화면), print(인쇄용) -->
+    <!-- 조건 : min-width, max-width, min-height, max-height -->
+
+    <style>
+      /* pc 해상도 */
+      @media screen and (min-width: 960px) {
+        body {
+          background-color: plum;
+        }
+      }
+
+      /* 태블릿 해상도 */
+      @media screen and (min-width: 768px) and (max-width: 1023px) {
+        body {
+          background-color: lightblue;
+        }
+      }
+
+      /* 모바일 해상도 */
+      @media screen and (max-width: 767px) {
+        body {
+          background-color: lightgreen;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>제목태그 H1</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis, sunt
+      iste nihil impedit itaque quos hic modi qui pariatur ex, ut culpa
+      quibusdam dicta eum magnam ipsum odit quas exercitationem.
+    </p>
+    <p>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, quod.
+      Ducimus exercitationem molestiae placeat quo, dolorem quis id accusamus
+      reiciendis similique consectetur, deleniti perferendis? Harum impedit
+      omnis sunt a et.
+    </p>
+  </body>
+</html>
