@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    .gnb-center {
+      position: relative;
+      width: 100%;
+      background-color: #9c9898;
+      margin: 0 auto;
+    }
+
+    .gnb-center-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 100px;
+      list-style: none;
+    }
+    .gnb-center-nav > li.gnb-center-nav-item {
+      position: static;
+    }
+    .gnb-center-nav .dropdown {
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    .gnb-center-nav-item {
+      position: relative;
+      display: flex;
+    }
+    .gnb-center-nav-item a {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .gnb-center-nav-item a:hover {
+      background-color: #cfcdcd;
+      border-radius: 20px;
+    }
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      background-color: #6081b3;
+      display: none;
+      z-index: 1000;
+    }
+    .dropdown li {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .dropdown a {
+      display: inline-block;
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .dropdown a:hover {
+      text-decoration: underline;
+    }
+
+    .gnb-center-nav-item:hover .dropdown {
+      display: block;
+      /* width: 100%; */
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="gnb-center">
+      <ul class="gnb-center-nav">
+        <li class="gnb-center-nav-item">
+          <a href="#">영화</a>
+
+          <ul class="dropdown">
+            <li><a href="#">전체영화</a></li>
+          </ul>
+        </li>
+
+        <li class="gnb-center-nav-item">
+          <a href="#">예매</a>
+
+          <ul class="dropdown">
+            <li><a href="#">빠른예매</a></li>
+            <li><a href="#">상영시간표</a></li>
+            <li><a href="#">더 부티크 프라이빗 예매</a></li>
+          </ul>
+        </li>
+
+        <li class="gnb-center-nav-item">
+          <a href="#">극장</a>
+          <ul class="dropdown">
+            <li><a href="#">전체극장</a></li>
+            <li><a href="#">특별관</a></li>
+          </ul>
+        </li>
+
+        <li class="gnb-center-nav-item">
+          <a href="#">이벤트</a>
+
+          <ul class="dropdown">
+            <li><a href="#">진행중 이벤트</a></li>
+            <li><a href="#">지난 이벤트</a></li>
+            <li><a href="#">당첨자 발표</a></li>
+          </ul>
+        </li>
+
+        <li class="gnb-center-nav-item">
+          <a href="#">스토어</a>
+        </li>
+
+        <li class="gnb-center-nav-item">
+          <a href="#">혜택</a>
+          <ul class="dropdown">
+            <li><a href="#">메가박스 멤버쉽</a></li>
+            <li><a href="#">제휴</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -72,6 +72,12 @@ header {
   gap: 20px;
 }
 
+.gnb-center {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .gnb-center-nav {
   display: flex;
   justify-content: center;
@@ -79,6 +85,16 @@ header {
   gap: 100px;
   list-style: none;
 }
+
+.gnb-center-nav > li.gnb-center-nav-item {
+  position: static;
+}
+.gnb-center-nav .dropdown {
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
 .gnb-center-nav-item {
   position: relative;
   display: flex;
@@ -88,7 +104,6 @@ header {
   font-weight: bold;
 }
 .gnb-center-nav-item a:hover {
-  background-color: #cfcdcd;
   border-radius: 20px;
 }
 .dropdown {
@@ -103,7 +118,9 @@ header {
   z-index: 1000;
 }
 .dropdown li {
-  width: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 .dropdown a {
   display: inline-block;
