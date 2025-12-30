@@ -71,8 +71,14 @@ header {
   gap: 20px;
 }
 
-.gnb-center {
+/* .gnb-center {
   display: flex;
+  gap: 100px;
+} */
+.gnb-center-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 100px;
 }
 
@@ -80,6 +86,17 @@ header {
   font-size: 18px;
   font-weight: bold;
 }
+/* .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #444;
+  display: none;
+  z-index: 1000;
+} */
 
 .gnb-right button,
 .gnb-left button {
