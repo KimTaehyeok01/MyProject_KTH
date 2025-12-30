@@ -157,6 +157,9 @@ main {
   border-bottom: 1px solid #503396;
   margin-bottom: 40px;
   padding: 0;
+  position: sticky;
+  z-index: 100;
+  top: 40px;
 }
 
 .movie-tab li {
@@ -165,6 +168,7 @@ main {
   padding: 15px 0;
   border-right: 1px solid #ccc;
   cursor: pointer;
+  background-color: #efebeb;
 }
 
 .movie-tab li.active {
@@ -172,7 +176,10 @@ main {
   color: white;
   border-color: #503396;
 }
-
+.movie-tab li:active {
+  background-color: #503396;
+  color: white;
+}
 .movie-searchbar {
   margin-bottom: 20px;
   display: flex;
@@ -371,13 +378,17 @@ footer {
   display: flex;
   justify-content: flex-end;
   margin-top: -20px;
+  margin-right: 30px;
 }
 .cinema-search .cinema-searchbar {
-  padding: 5px 40px;
+  padding: 5px 10px;
   background-color: transparent;
   border: 1px solid #484848;
   border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid #cfcaca;
 }
+
 .footer-bottom {
   display: flex;
   flex-direction: row;
@@ -389,6 +400,10 @@ footer {
   margin-left: 10px;
   font-weight: 500;
 }
+.footer-info-text:hover {
+  text-decoration: underline;
+}
 .sns-img {
   margin-left: 20px;
+  cursor: pointer;
 }
