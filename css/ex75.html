@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ex75 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hover Overlay Effect</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f4f4f4;
+      }
+      .container {
+        /* 자식태그가 absolute이기 때문에 */
+        position: relative;
+        width: 300px;
+        height: 200px;
+      }
+      .image {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* 검정색의 반투명 */
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* 완전투명 */
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .container:hover .overlay {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="/image/winter1.png" class="image" />
+      <div class="overlay">눈 덮인 설경입니다!</div>
+    </div>
+  </body>
+</html>
