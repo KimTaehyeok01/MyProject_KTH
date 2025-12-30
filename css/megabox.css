@@ -100,7 +100,7 @@ header {
 }
 .dropdown {
   position: absolute;
-  top: 100%;
+  top: 150%;
   left: 0;
   list-style: none;
   margin: 0;
@@ -127,8 +127,7 @@ header {
 }
 
 .gnb-center-nav-item:hover .dropdown {
-  display: block;
-  /* width: 100%; */
+  display: flex;
 }
 .gnb-left button {
   margin-left: 10px;
