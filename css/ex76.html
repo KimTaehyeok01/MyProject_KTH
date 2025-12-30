@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MEGABOX Clone</title>
+    <title>MEGABOX-WEB</title>
     <link rel="stylesheet" href="megabox.css" />
   </head>
   <body>
     <header>
+      <!-- 헤더 왼쪽 상단 메뉴 -->
       <div class="top-inner">
         <div class="header-top">
           <div class="header-top-left">
@@ -16,6 +17,7 @@
             <a href="#">고객센터</a>
           </div>
 
+          <!-- 메가박스 로고 -->
           <h1 class="logo">
             <img
               src="	https://img.megabox.co.kr/static/pc/images/common/ci/logo_new2.png"
@@ -23,6 +25,7 @@
             />
           </h1>
 
+          <!-- 헤더 오른쪽 상단 메뉴 -->
           <div class="header-top-right">
             <a href="#">로그인</a>
             <a href="#">회원가입</a>
@@ -30,6 +33,7 @@
           </div>
         </div>
 
+        <!-- 헤더 왼쪽 하단 메뉴, 검색버튼 -->
         <nav class="header-bottom">
           <div class="gnb-left">
             <button type="button">
@@ -55,10 +59,12 @@
             <a href="#">혜택</a>
           </div> -->
 
+          <!-- 헤더 중앙 하단 메뉴 버튼 -->
           <div class="gnb-center">
             <ul class="gnb-center-nav">
               <li class="gnb-center-nav-item">
                 <a href="#">영화</a>
+
                 <ul class="dropdown">
                   <li><a href="#">전체영화</a></li>
                 </ul>
@@ -94,6 +100,10 @@
 
               <li class="gnb-center-nav-item">
                 <a href="#">스토어</a>
+              </li>
+
+              <li class="gnb-center-nav-item">
+                <a href="#">혜택</a>
                 <ul class="dropdown">
                   <li><a href="#">메가박스 멤버쉽</a></li>
                   <li><a href="#">제휴</a></li>
@@ -102,6 +112,7 @@
             </ul>
           </div>
 
+          <!-- 헤더 오른쪽 하단 일정, 내페이지 버튼 -->
           <div class="gnb-right">
             <button type="button">
               <img
@@ -119,6 +130,7 @@
         </nav>
       </div>
     </header>
+
     <div class="movie-order">
       <div class="movie-navi-order">
         <img
@@ -141,6 +153,7 @@
 
     <main>
       <div class="inner">
+        <!-- 중앙 전체영화 페이지 & 영화 종류 메뉴 -->
         <h2 class="page-title">전체영화</h2>
 
         <ul class="movie-tab">
@@ -160,6 +173,7 @@
           <input type="text" id="movie-searchbar" placeholder="영화명 검색" />
         </div>
 
+        <!-- 메인 : 영화 리스트 및 예약 -->
         <div class="movie-list">
           <div class="movie-card">
             <div class="poster-area">
@@ -170,7 +184,9 @@
               />
               <div class="overlay">
                 <div class="explanation">아바타입니다.</div>
-                <div class="Reviews">관람평 7.2</div>
+                <div class="Reviews">
+                  관람평 <b style="color: skyblue">7.2</b>
+                </div>
               </div>
             </div>
 
@@ -196,8 +212,10 @@
                 alt="영화"
               />
               <div class="overlay">
-                <div class="explanation">아바타입니다.</div>
-                <div class="Reviews">관람평 7.2</div>
+                <div class="explanation">주토피아입니다.</div>
+                <div class="Reviews">
+                  관람평 <b style="color: skyblue">7.2</b>
+                </div>
               </div>
             </div>
 
@@ -223,8 +241,10 @@
                 alt="영화"
               />
               <div class="overlay">
-                <div class="explanation">아바타입니다.</div>
-                <div class="Reviews">관람평 7.2</div>
+                <div class="explanation">만약에 우리입니다.</div>
+                <div class="Reviews">
+                  관람평 <b style="color: skyblue">7.2</b>
+                </div>
               </div>
             </div>
 
@@ -250,8 +270,12 @@
                 alt="영화"
               />
               <div class="overlay">
-                <div class="explanation">아바타입니다.</div>
-                <div class="Reviews">관람평 7.2</div>
+                <div class="explanation" style="text-align: center">
+                  오늘밤, 세계에서 이 사랑이 사라진다 해도입니다.
+                </div>
+                <div class="Reviews">
+                  관람평 <b style="color: skyblue">7.2</b>
+                </div>
               </div>
             </div>
 
@@ -279,8 +303,10 @@
                 alt="영화"
               />
               <div class="overlay">
-                <div class="explanation">아바타입니다.</div>
-                <div class="Reviews">관람평 7.2</div>
+                <div class="explanation">누벨바그입니다.</div>
+                <div class="Reviews">
+                  관람평 <b style="color: skyblue">7.2</b>
+                </div>
               </div>
             </div>
 
@@ -306,8 +332,12 @@
                 alt="영화"
               />
               <div class="overlay">
-                <div class="explanation">아바타입니다.</div>
-                <div class="Reviews">관람평 7.2</div>
+                <div class="explanation" style="text-align: center">
+                  톰과 제리 : 황금나침반 대소동입니다.
+                </div>
+                <div class="Reviews">
+                  관람평 <b style="color: skyblue">7.2</b>
+                </div>
               </div>
             </div>
 
@@ -329,17 +359,19 @@
             <div class="poster-area">
               <span class="rank">7</span>
               <img
-                src="	https://img.megabox.co.kr/SharedImg/2025/12/23/zJqlVMrN3C4d5PfCwPJGTiX1JLCxf1o4_420.jpg"
+                src="		https://img.megabox.co.kr/SharedImg/2025/11/25/v344HrDrKIU3iFAbZWMwLssegzKFKdZ7_420.jpg"
                 alt="영화"
               />
               <div class="overlay">
-                <div class="explanation">아바타입니다.</div>
-                <div class="Reviews">관람평 7.2</div>
+                <div class="explanation">신의악단입니다.</div>
+                <div class="Reviews">
+                  관람평 <b style="color: skyblue">7.2</b>
+                </div>
               </div>
             </div>
 
             <div class="info-area">
-              <div class="movie-name">누벨바그</div>
+              <div class="movie-name">신의악단</div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
             </div>
 
@@ -356,17 +388,19 @@
             <div class="poster-area">
               <span class="rank">8</span>
               <img
-                src="	https://img.megabox.co.kr/SharedImg/2025/12/23/zJqlVMrN3C4d5PfCwPJGTiX1JLCxf1o4_420.jpg"
+                src="	https://img.megabox.co.kr/SharedImg/2025/12/03/xpyJM8dD5sBjVofJ2gqwUh4docg5vbsJ_420.jpg"
                 alt="영화"
               />
               <div class="overlay">
-                <div class="explanation">아바타입니다.</div>
-                <div class="Reviews">관람평 7.2</div>
+                <div class="explanation">화양연화 특별판입니다.</div>
+                <div class="Reviews">
+                  관람평 <b style="color: skyblue">7.2</b>
+                </div>
               </div>
             </div>
 
             <div class="info-area">
-              <div class="movie-name">누벨바그</div>
+              <div class="movie-name">화양연화 특별판</div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
             </div>
 
@@ -389,5 +423,66 @@
         </button>
       </div>
     </main>
+
+    <footer>
+      <div class="footer-wrap">
+        <div class="footer-info">
+          <div class="footer-info-text"><a href="#">회사소개</a></div>
+          <div class="footer-info-text"><a href="#">인재채용</a></div>
+          <div class="footer-info-text"><a href="#">사회공원</a></div>
+          <div class="footer-info-text">
+            <a href="#">제휴/광고/부대사업문의</a>
+          </div>
+          <div class="footer-info-text"><a href="#">이용약관</a></div>
+          <div class="footer-info-text">
+            <a href="#"><b>위치기반서비스 이용약관</b></a>
+          </div>
+          <div class="footer-info-text">
+            <a href="#"><b>개인정보 처리방침</b></a>
+          </div>
+          <div class="footer-info-text"><a href="#">윤리경영</a></div>
+        </div>
+
+        <div class="cinema-search">
+          <button type="button" class="cinema-searchbar">극장찾기</button>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-logo">
+            <img
+              src="https://img.megabox.co.kr/static/pc/images/common/ci/logo-opacity_new2.png"
+              alt="메가박스 로고"
+            />
+          </div>
+
+          <div class="address-info">
+            서울특별시 강남구 테헤란로 87길 22 도심공항터미널 건물 408호 ARS
+            1544-0070 대표이메일 m.dreamcenter@partner.megabox.co.kr 대표자명
+            홍정인, 남용석 · 개인정보보호책임자 김수현 · 사업자등록번호
+            211-86-59478 · 통신판매업신고번호 2025-서울강남-00722 COPYRIGHT ©
+            MegaboxJoongAng, Inc. All rights reserved
+          </div>
+
+          <div class="sns-img">
+            <img
+              src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-youtubeN.png"
+              alt="유튜브"
+            />
+            <img
+              src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-instagramN.png"
+              alt="인스타"
+            />
+            <img
+              src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-facebookN.png"
+              alt="페이스북"
+            />
+            <img
+              src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-twitterN.png"
+              alt="트위터"
+            />
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
