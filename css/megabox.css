@@ -75,7 +75,6 @@ header {
 .gnb-center {
   position: relative;
   width: 100%;
-  margin: 0 auto;
 }
 
 .gnb-center-nav {
@@ -85,16 +84,9 @@ header {
   gap: 100px;
   list-style: none;
 }
-
 .gnb-center-nav > li.gnb-center-nav-item {
   position: static;
 }
-.gnb-center-nav .dropdown {
-  left: 0;
-  right: 0;
-  width: 100%;
-}
-
 .gnb-center-nav-item {
   position: relative;
   display: flex;
@@ -116,6 +108,7 @@ header {
   background-color: #6081b3;
   display: none;
   z-index: 1000;
+  width: 100%;
 }
 .dropdown li {
   display: flex;
@@ -317,8 +310,14 @@ main {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
-
+.movie-name img {
+  width: 30px;
+  height: 30px;
+}
 .movie-rate {
   font-size: 14px;
   color: #666;
