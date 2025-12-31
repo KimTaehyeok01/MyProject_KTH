@@ -182,7 +182,6 @@ main {
 .movie-tab {
   display: flex;
   border: 1px solid #ccc;
-  border-bottom: 1px solid #503396;
   margin-bottom: 40px;
   padding: 0;
   position: sticky;
@@ -195,15 +194,16 @@ main {
   flex: 1;
   text-align: center;
   padding: 15px 0;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #f9f9f9;
   cursor: pointer;
-  background-color: #efebeb;
+  background-color: white;
+  border-bottom: 1px solid #503396;
+  opacity: 0.8;
 }
 
 .movie-tab li.active {
-  background-color: #503396;
-  color: white;
-  border-color: #503396;
+  border: 1px solid #503396;
+  border-bottom: 1px solid #f9f9f9;
 }
 .movie-tab li:active {
   background-color: #503396;
