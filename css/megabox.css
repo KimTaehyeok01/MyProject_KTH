@@ -431,7 +431,8 @@ main {
   margin-top: 2px;
 }
 .more-btn:hover {
-  outline-style: solid;
+  /* outline-style: solid; */
+  border: 1px solid #b9afaf;
 }
 
 footer {
