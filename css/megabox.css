@@ -304,6 +304,10 @@ main {
 .poster-area:hover .overlay {
   opacity: 1;
 }
+.Reviews {
+  font-size: 18px;
+  font-weight: bold;
+}
 
 .info-area {
   margin-bottom: 10px;
@@ -339,8 +343,8 @@ main {
   display: flex;
   gap: 5px;
 }
-
-.btn-heart {
+/* 첫 번째 영화 버튼(dolby cinema포함) */
+.btn-heart1 {
   width: 30%;
   padding: 8px 0;
   border: 1px solid #ccc;
@@ -349,8 +353,50 @@ main {
   color: #444;
   transition: all;
 }
+.btn-heart1:active {
+  width: 40%;
+  background-color: #ccc;
+}
+.btn-book1 {
+  width: 40%;
+  padding: 8px 0;
+  border: none;
+  background-color: #503396;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  transition: all;
+}
+.btn-book1:active {
+  width: 50%;
+  background-color: #6c5991;
+}
+.btn-dolby1 {
+  width: 40%;
+  padding: 8px 0;
+  border: none;
+  background-color: #503396;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+.btn-dolby1:active {
+  width: 50%;
+  background-color: #6c5991;
+}
+/* 첫 번째 영화 버튼(dolby cinema포함) */
+
+.btn-heart {
+  width: 30%;
+  padding: 10px 0;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #444;
+  transition: all;
+}
 .btn-heart:active {
-  width: 31%;
+  width: 40%;
   background-color: #ccc;
 }
 .btn-book {
@@ -364,17 +410,8 @@ main {
   transition: all;
 }
 .btn-book:active {
-  width: 71%;
-  background-color: #000000;
-}
-.btn-dolby {
-  width: 100%;
-  padding: 8px 0;
-  border: none;
-  background-color: #222;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
+  width: 80%;
+  background-color: #6c5991;
 }
 .more-btn {
   width: 100%;
