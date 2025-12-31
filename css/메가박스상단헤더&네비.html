@@ -16,7 +16,9 @@
         margin: 0;
         font-family: NanumBarunGothic, Dotum, "돋음", sans-serif;
       }
-
+      body * {
+        /* border: 1px solid blue; */
+      }
       /* 최상단 메뉴 */
       .links {
         display: flex;
@@ -37,17 +39,161 @@
       }
       /* 주메뉴 */
       header {
+        padding: 0px 50px;
+        padding-top: 10px;
+        border-bottom: 1px solid #4f3395;
         display: flex;
         gap: 45px;
         justify-content: space-between;
+        /* 드롭다운 메뉴에서 absolute이기 때문에 */
+        position: relative;
       }
       .header-wrap {
         display: flex;
+        /* 최대너비가 1100px이면서 최대치 100% */
+        width: 100%;
         max-width: 1100px;
         margin: 0 auto;
         gap: 75px;
       }
+      .header-container {
+        display: flex;
+        flex-direction: column;
+        /*   grow 1 shrink 1 basis 0(auto) */
+        flex: 1;
+        gap: 15px;
+      }
+      .menus {
+        display: flex;
+        justify-content: space-between;
+      }
+      .menus-icons {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .icon {
+        width: 36px;
+        height: 36px;
+        background-repeat: no-repeat;
+        /* 가로세로방향 중앙에 배치 */
+        background-position: 50%;
+      }
+      .hamburger {
+        background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-sitemap.png");
+      }
+      .search {
+        background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-search.png");
+      }
+
+      /* ?? */
+      .menus a {
+        display: block;
+        width: 30px;
+        height: 30px;
+      }
+      .menus button {
+        padding: 15px 0;
+        cursor: pointer;
+        border: none;
+        /* 투명 테두리선을 그린다. */
+        /* 커서 올리면 위치가 이동되기에 */
+        border-bottom: 3px solid transparent;
+        background-color: transparent;
+        font-size: 18px;
+      }
+      .menus button:hover {
+        border-bottom: 3px solid #339ed2;
+      }
+
+      #logo {
+        width: 140px;
+        object-fit: contain;
+      }
+
+      /* 드롭다운 메뉴 */
+      .nav-toolbar {
+        /* visibility를 사용한다. */
+        visibility: hidden;
+
+        position: absolute;
+        left: 0;
+        bottom: -40px;
+        width: 100%;
+        height: 40px;
+        background-color: #339ed2;
+        z-index: 3;
+
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 0 50px;
+      }
+
+      .nav-toolbar a {
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+        width: fit-content;
+        height: auto;
+      }
+
+      /* 형제 선택자 : 같은 레벨의 뒤에 있는 요소 선택 */
+      .menu-movie:hover ~ .toolbar-movie,
+      .toolbar-movie:hover {
+        visibility: visible;
+      }
+
+      .menu-reservation:hover ~ .toolbar-reservation,
+      .toolbar-reservation:hover {
+        visibility: visible;
+      }
+
+      .menu-event:hover ~ .toolbar-event,
+      .toolbar-event:hover {
+        visibility: visible;
+      }
+
+      .menu-benefit:hover ~ .toolbar-benefit,
+      .toolbar-benefit:hover {
+        visibility: visible;
+      }
+
+      .calendar {
+        background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-schedule.png");
+      }
+      .mypage {
+        background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-mymega.png");
+      }
+
       /* Nav 카테고리 */
+      nav {
+        background-color: #f8f8fa;
+        padding: 10px 50px;
+        display: flex;
+        align-items: center;
+      }
+      .nav-wrap {
+        width: 100%;
+        max-width: 1100px;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+      }
+      nav a {
+        margin: 0 5px;
+      }
+      nav div {
+        width: 20px;
+        height: 20px;
+      }
+      .home {
+        background-image: url("https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-home.png");
+      }
+      .arrow-right {
+        background-image: url("https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-arr.png");
+      }
     </style>
   </head>
   <body>

@@ -5,170 +5,190 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
-  font-family: "Malgun Gothic", sans-serif;
-  color: #222;
+  margin: 0;
+  font-family: NanumBarunGothic, Dotum, "돋음", sans-serif;
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
+.links {
+  display: flex;
+  gap: 15px;
 }
-button {
-  cursor: pointer;
-  font-family: inherit;
-}
-ul,
-li {
+ul li {
   list-style: none;
 }
-.top-inner,
+.links a,
+nav a {
+  text-decoration: none;
+  color: black;
+}
+.links a:hover,
+nav a:hover {
+  text-decoration: underline;
+  text-decoration-color: #4f3395;
+}
+.links-right {
+  justify-content: flex-end;
+}
+
+header {
+  padding: 0px 50px;
+  padding-top: 10px;
+  border-bottom: 1px solid #4f3395;
+  display: flex;
+  gap: 45px;
+  justify-content: space-between;
+  position: relative;
+}
 .inner {
   width: 1100px;
   margin: 0 auto;
 }
-
-header {
-  background-color: #fff;
-  border-bottom: 1px solid #000000;
-}
-
-.header-top {
+.header-wrap {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-}
 
-.header-top-left a,
-.header-top-right a {
-  color: #666;
-  font-size: 13px;
-  margin: 0 10px;
+  width: 1100px;
+  margin: 0 auto;
+  gap: 75px;
 }
-.header-top-left a:hover,
-.header-top-right a:hover {
-  text-decoration: underline;
-}
-
-.logo {
-  font-size: 28px;
-  font-weight: 900;
-  color: #351f66;
-  margin-top: 20px;
-  margin-right: 50px;
-  cursor: pointer;
-}
-
-.header-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-}
-
-.gnb-left,
-.gnb-right {
-  display: flex;
-  gap: 20px;
-}
-
-.gnb-center {
-  position: relative;
-  width: 850px;
-}
-
-/* 외부 ul태그 */
-.gnb-center-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 100px;
-  list-style: none;
-}
-
-/* 외부 li태그 */
-.gnb-center-nav-item {
-  /* position: static; */
-  display: flex;
-  height: 50px;
-  align-items: center;
-}
-.gnb-center-nav > li.gnb-center-nav-item {
-  position: static;
-}
-.gnb-center-nav-item a {
-  font-size: 18px;
-  font-weight: bold;
-}
-.gnb-center-nav-item a:hover {
-  border-radius: 20px;
-}
-.dropdown {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  width: 100%;
-  background-color: #339ed2;
-  display: none;
-  z-index: 1000;
-  padding: 0;
-  margin: 0;
-}
-.dropdown li {
+.header-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  flex: 1;
+  gap: 15px;
 }
-.dropdown a {
+.menus {
+  display: flex;
+  justify-content: space-between;
+}
+.menus-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+.hamburger {
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-sitemap.png");
+}
+.search {
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-search.png");
+}
+
+/* ?? */
+.menus a {
   display: block;
-  padding: 10px 15px;
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
+  width: 30px;
+  height: 30px;
 }
-.dropdown a:hover {
-  text-decoration: underline;
-}
-
-.gnb-center-nav-item:hover .dropdown {
-  display: flex;
-}
-.gnb-left button {
-  margin-left: 10px;
-}
-.gnb-right button {
-  margin-right: 10px;
-}
-
-.gnb-right button,
-.gnb-left button {
+.menus button {
+  padding: 15px 0;
+  cursor: pointer;
   border: none;
-  background: transparent;
-  font-size: 16px;
+  /* 투명 테두리선을 그린다. */
+  /* 커서 올리면 위치가 이동되기에 */
+  border-bottom: 3px solid transparent;
+  background-color: transparent;
+  font-size: 18px;
 }
-.movie-order {
+.menus button:hover {
+  border-bottom: 3px solid #339ed2;
+}
+
+#logo {
+  width: 140px;
+  object-fit: contain;
+}
+
+/* 드롭다운 메뉴 */
+.nav-toolbar {
+  /* visibility를 사용한다. */
+  visibility: hidden;
+
+  position: absolute;
+  left: 0;
+  bottom: -40px;
   width: 100%;
-  background-color: #f7f7f7;
+  height: 40px;
+  background-color: #339ed2;
+  z-index: 3;
+
   display: flex;
-  padding: 10px 0;
-  gap: 4px;
+  align-items: center;
+  gap: 15px;
+  padding: 0 50px;
+}
+
+.nav-toolbar a {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  width: fit-content;
+  height: auto;
+}
+
+/* 형제 선택자 : 같은 레벨의 뒤에 있는 요소 선택 */
+.menu-movie:hover ~ .toolbar-movie,
+.toolbar-movie:hover {
+  visibility: visible;
+}
+
+.menu-reservation:hover ~ .toolbar-reservation,
+.toolbar-reservation:hover {
+  visibility: visible;
+}
+
+.menu-event:hover ~ .toolbar-event,
+.toolbar-event:hover {
+  visibility: visible;
+}
+
+.menu-benefit:hover ~ .toolbar-benefit,
+.toolbar-benefit:hover {
+  visibility: visible;
+}
+
+.calendar {
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-schedule.png");
+}
+.mypage {
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/ico/ico-mymega.png");
+}
+
+/* Nav 카테고리 */
+nav {
+  background-color: #f8f8fa;
+  padding: 10px 50px;
+  display: flex;
+  align-items: center;
   position: sticky;
-  top: 0;
   z-index: 100;
+  top: 0;
 }
-.movie-navi-order {
-  margin-left: 170px;
+.nav-wrap {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
 }
-
-.movie-navi-order a {
-  font-size: 14px;
+nav a {
+  margin: 0 5px;
 }
-.movie-navi-order a:hover {
-  text-decoration: underline;
+nav div {
+  width: 20px;
+  height: 20px;
 }
-
+.home {
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-home.png");
+}
+.arrow-right {
+  background-image: url("https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-arr.png");
+}
 main {
   padding: 40px 0;
 }

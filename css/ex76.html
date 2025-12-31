@@ -6,141 +6,81 @@
     <title>MEGABOX-WEB</title>
     <link rel="stylesheet" href="megabox.css" />
   </head>
+
   <body>
     <header>
-      <!-- 헤더 왼쪽 상단 메뉴 -->
-      <div class="top-inner">
-        <div class="header-top">
-          <div class="header-top-left">
+      <div class="header-wrap">
+        <div class="header-container">
+          <div class="links links-left">
             <a href="#">VIP LOUNGE</a>
-            <a href="#">멤버십</a>
+            <a href="#">멤버쉽</a>
             <a href="#">고객센터</a>
           </div>
-
-          <!-- 메가박스 로고 -->
-          <h1 class="logo">
-            <img
-              src="https://img.megabox.co.kr/static/pc/images/common/ci/logo_new2.png"
-              alt=""
-            />
-          </h1>
-
-          <!-- 헤더 오른쪽 상단 메뉴 -->
-          <div class="header-top-right">
+          <div class="menus">
+            <div class="menus-icons">
+              <a href="#" class="icon hamburger"></a>
+              <a href="#" class="icon search"></a>
+            </div>
+            <button class="menu-movie">영화</button>
+            <div class="nav-toolbar toolbar-movie">
+              <a href="#">전체영화</a>
+            </div>
+            <button class="menu-reservation">예매</button>
+            <div class="nav-toolbar toolbar-reservation">
+              <!-- #을 하면 페이지 최상단으로 이동 -->
+              <!-- #을 안하면 페이지 새로고침 됨. -->
+              <a href="#">빠른예매</a>
+              <a href="#">상영시간표</a>
+              <a href="#">더 부티크 프라이빗 예매</a>
+            </div>
+            <button class="menu-cinema">극장</button>
+            <div class="nav-toolbar toolbar-ciname">
+              <a href="#">전체극장</a>
+              <a href="#">특별관</a>
+            </div>
+          </div>
+        </div>
+        <img
+          src="https://img.megabox.co.kr/static/pc/images/common/ci/logo_new2.png"
+          alt="logo"
+          id="logo"
+        />
+        <div class="header-container">
+          <div class="links links-right">
             <a href="#">로그인</a>
             <a href="#">회원가입</a>
             <a href="#">빠른예매</a>
           </div>
+          <div class="menus">
+            <button class="menu-event">이벤트</button>
+            <div class="nav-toolbar toolbar-event">
+              <a href="#">진행중 이벤트</a>
+              <a href="#">지난 이벤트</a>
+              <a href="#">당첨자 발표</a>
+            </div>
+            <button class="menu-store">스토어</button>
+            <button class="menu-benefit">혜택</button>
+            <div class="nav-toolbar toolbar-benefit">
+              <a href="#">메가박스 멤버쉽</a>
+              <a href="#">제휴/할인</a>
+            </div>
+            <div class="menus-icons">
+              <a href="#" class="icon calendar"></a>
+              <a href="#" class="icon mypage"></a>
+            </div>
+          </div>
         </div>
-
-        <!-- 헤더 왼쪽 하단 메뉴, 검색버튼 -->
-        <nav class="header-bottom">
-          <div class="gnb-left">
-            <button type="button">
-              <img
-                src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-sitemap.png"
-                alt="메뉴"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-search.png"
-                alt="검색"
-              />
-            </button>
-          </div>
-
-          <!-- 헤더 중앙 하단 메뉴 버튼 -->
-          <div class="gnb-center">
-            <ul class="gnb-center-nav">
-              <li class="gnb-center-nav-item">
-                <a href="#">영화</a>
-
-                <ul class="dropdown">
-                  <li><a href="#">전체영화</a></li>
-                </ul>
-              </li>
-
-              <li class="gnb-center-nav-item">
-                <a href="#">예매</a>
-
-                <ul class="dropdown">
-                  <li><a href="#">빠른예매</a></li>
-                  <li><a href="#">상영시간표</a></li>
-                  <li><a href="#">더 부티크 프라이빗 예매</a></li>
-                </ul>
-              </li>
-
-              <li class="gnb-center-nav-item">
-                <a href="#">극장</a>
-                <ul class="dropdown">
-                  <li><a href="#">전체극장</a></li>
-                  <li><a href="#">특별관</a></li>
-                </ul>
-              </li>
-
-              <li class="gnb-center-nav-item">
-                <a href="#">이벤트</a>
-
-                <ul class="dropdown">
-                  <li><a href="#">진행중 이벤트</a></li>
-                  <li><a href="#">지난 이벤트</a></li>
-                  <li><a href="#">당첨자 발표</a></li>
-                </ul>
-              </li>
-
-              <li class="gnb-center-nav-item">
-                <a href="#">스토어</a>
-              </li>
-
-              <li class="gnb-center-nav-item">
-                <a href="#">혜택</a>
-                <ul class="dropdown">
-                  <li><a href="#">메가박스 멤버쉽</a></li>
-                  <li><a href="#">제휴</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
-          <!-- 헤더 오른쪽 하단 일정, 내페이지 버튼 -->
-          <div class="gnb-right">
-            <button type="button">
-              <img
-                src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-schedule.png"
-                alt="calender"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-mymega.png"
-                alt="MyPage"
-              />
-            </button>
-          </div>
-        </nav>
       </div>
     </header>
-
-    <div class="movie-order">
-      <div class="movie-navi-order">
-        <img
-          class="home-icon"
-          src="https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-home.png"
-          alt="홈 아이콘"
-        />
-        <img
-          src="https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-arr.png"
-          alt="arrow-right"
-        />
-        <a href="#">영화</a>
-        <img
-          src="https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-arr.png"
-          alt="arrow-right"
-        />
-        <a href="#">전체 영화</a>
+    <nav>
+      <div class="nav-wrap">
+        <div class="icon home"></div>
+        <div class="icon arrow-right"></div>
+        <a href="https://www.megabox.co.kr/movie">영화</a>
+        <div class="icon arrow-right"></div>
+        <a href="https://www.megabox.co.kr/movie">전체영화</a>
       </div>
-    </div>
+    </nav>
 
     <main>
       <div class="inner">
