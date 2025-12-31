@@ -90,8 +90,10 @@ header {
   position: static;
 }
 .gnb-center-nav-item {
-  position: relative;
+  position: static;
   display: flex;
+  height: 50px;
+  align-items: center;
 }
 .gnb-center-nav-item a {
   font-size: 18px;
@@ -102,15 +104,14 @@ header {
 }
 .dropdown {
   position: absolute;
-  top: 100%;
+  top: 50px;
   left: 0;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  width: 100%;
   background-color: #7898c8;
   display: none;
   z-index: 1000;
-  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 .dropdown li {
   display: flex;
