@@ -129,6 +129,7 @@
         align-items: center;
         gap: 15px;
         padding: 0 50px;
+        justify-content: center;
       }
 
       .nav-toolbar a {
@@ -138,7 +139,9 @@
         width: fit-content;
         height: auto;
       }
-
+      .nav-toolbar a:hover {
+        text-decoration: underline;
+      }
       .menu-movie:hover ~ .toolbar-movie,
       .toolbar-movie:hover {
         visibility: visible;
@@ -148,7 +151,10 @@
       .toolbar-reservation:hover {
         visibility: visible;
       }
-
+      .menu-cinema:hover ~ .toolbar-cinema,
+      .toolbar-cinema:hover {
+        visibility: visible;
+      }
       .menu-event:hover ~ .toolbar-event,
       .toolbar-event:hover {
         visibility: visible;
@@ -552,7 +558,7 @@
               <a href="#">더 부티크 프라이빗 예매</a>
             </div>
             <button class="menu-cinema">극장</button>
-            <div class="nav-toolbar toolbar-ciname">
+            <div class="nav-toolbar toolbar-cinema">
               <a href="#">전체극장</a>
               <a href="#">특별관</a>
             </div>
