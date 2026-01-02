@@ -255,6 +255,13 @@ main {
   border: none;
   cursor: pointer;
 }
+.movie-searchbar .toggle:active {
+  background: url("/image/btn-on-air.png") no-repeat 0 -25px;
+  background-size: 30px 45px;
+  width: 33px;
+  height: 20px;
+  border: none;
+}
 #movie-searchbar {
   margin-left: auto;
   border: none;
