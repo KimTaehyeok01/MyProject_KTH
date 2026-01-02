@@ -206,7 +206,7 @@ main {
 
 .movie-tab {
   display: flex;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   margin-bottom: 40px;
   padding: 0;
   position: sticky;
@@ -219,7 +219,8 @@ main {
   flex: 1;
   text-align: center;
   padding: 15px 0;
-  border-right: 1px solid #f9f9f9;
+  border-right: 1px solid #e6e3e3;
+  border-top: 1px solid #e6e3e3;
   cursor: pointer;
   background-color: white;
   border-bottom: 1px solid #503396;
@@ -228,11 +229,10 @@ main {
 
 .movie-tab li.active {
   border: 1px solid #503396;
-  border-bottom: 1px solid #f9f9f9;
+  border-bottom: none;
 }
 .movie-tab li:active {
-  background-color: #503396;
-  color: white;
+  background-color: #7f60c9;
 }
 .movie-searchbar {
   margin-bottom: 20px;
