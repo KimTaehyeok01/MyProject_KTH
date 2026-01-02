@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MEGABOX-WEB</title>
+    <title>MEGABOX-WEB (Responsive)</title>
     <style>
       /* ex76.html */
 
@@ -57,8 +57,7 @@
       header {
         padding: 0px 50px;
         padding-top: 10px;
-        /* border-bottom: 1px solid #4f3395; */
-        border-bottom: 1px solid var(--main-color); /* [개선] 변수 적용 */
+        border-bottom: 1px solid var(--main-color);
         display: flex;
         gap: 45px;
         justify-content: space-between;
@@ -118,8 +117,7 @@
         font-weight: bold;
       }
       .menus button:hover {
-        /* border-bottom: 3px solid #339ed2; */
-        border-bottom: 3px solid var(--point-color); /* [개선] 변수 적용 */
+        border-bottom: 3px solid var(--point-color);
       }
 
       #logo {
@@ -135,8 +133,7 @@
         bottom: -40px;
         width: 100%;
         height: 40px;
-        /* background-color: #339ed2; */
-        background-color: var(--point-color); /* [개선] 변수 적용 */
+        background-color: var(--point-color);
         z-index: 200;
         display: flex;
         align-items: center;
@@ -156,7 +153,7 @@
         text-decoration: underline;
       }
 
-      /* [개선] 중복되는 호버 로직을 콤마로 묶어 코드량 감소 (기능 동일) */
+      /* [개선] 중복되는 호버 로직 통합 */
       .menu-movie:hover ~ .toolbar-movie,
       .toolbar-movie:hover,
       .menu-reservation:hover ~ .toolbar-reservation,
@@ -179,8 +176,7 @@
 
       /* Nav 카테고리 */
       nav {
-        /* background-color: #f8f8fa; */
-        background-color: var(--gray-bg); /* [개선] 변수 적용 */
+        background-color: var(--gray-bg);
         padding: 10px 50px;
         display: flex;
         align-items: center;
@@ -204,7 +200,6 @@
       }
       .home {
         background-image: url("https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-home.png");
-        /* [개선] 배경 이미지 반복 방지 */
         background-repeat: no-repeat;
         background-position: center;
       }
@@ -224,15 +219,14 @@
 
       .movie-tab {
         display: flex;
-        /* border: 1px solid #ccc; */
         border: 1px solid var(--border-color);
         margin-bottom: 40px;
         padding: 0;
         position: sticky;
-        z-index: 100;
+        z-index: 90; /* z-index 조정 */
         top: 40px;
         border-radius: 5px;
-        background-color: white; /* [개선] sticky 시 배경 투명 방지 */
+        background-color: white;
       }
 
       .movie-tab li {
@@ -242,21 +236,17 @@
         border-right: 1px solid #f9f9f9;
         cursor: pointer;
         background-color: white;
-        /* border-bottom: 1px solid #503396; */
         border-bottom: 1px solid var(--main-color);
         opacity: 0.8;
       }
 
       .movie-tab li.active {
-        /* border: 1px solid #503396; */
         border: 1px solid var(--main-color);
         border-bottom: 1px solid #f9f9f9;
-        /* [개선] opacity 초기화 추가 */
         opacity: 1;
         font-weight: bold;
       }
       .movie-tab li:active {
-        /* background-color: #503396; */
         background-color: var(--main-color);
         color: white;
       }
@@ -328,7 +318,6 @@
         position: absolute;
         top: 0;
         left: 0;
-        /* background-color: #503396; */
         background-color: var(--main-color);
         color: white;
         width: 30px;
@@ -407,16 +396,15 @@
         display: flex;
         gap: 5px;
       }
-      /* 첫 번째 영화 버튼(dolby cinema포함) */
+      /* 첫 번째 영화 버튼 */
       .btn-heart1 {
         width: 30%;
         padding: 8px 0;
-        /* border: 1px solid #ccc; */
         border: 1px solid var(--border-color);
         background-color: #fff;
         border-radius: 5px;
         color: #444;
-        transition: all 0.3s; /* [개선] 부드러운 전환 효과 추가 */
+        transition: all 0.3s;
         cursor: pointer;
       }
       .btn-heart1:active {
@@ -426,7 +414,6 @@
         width: 40%;
         padding: 8px 0;
         border: none;
-        /* background-color: #503396; */
         background-color: var(--main-color);
         border-radius: 5px;
         color: white;
@@ -451,8 +438,8 @@
       .btn-dolby1:active {
         background-color: #6c5991;
       }
-      /* 첫 번째 영화 버튼(dolby cinema포함) */
 
+      /* 기본 버튼 */
       .btn-heart {
         width: 30%;
         padding: 10px 0;
@@ -482,7 +469,6 @@
       }
       .more-btn {
         width: 100%;
-        /* height: 20px; -> [개선] padding이 있으므로 height 고정값 제거하여 콘텐츠에 맞춤 */
         background-color: #ffffff;
         margin-top: 30px;
         padding: 20px 0;
@@ -497,12 +483,10 @@
         margin-top: 2px;
       }
       .more-btn:hover {
-        /* outline-style: solid; */
         border: 1px solid #b9afaf;
       }
 
       footer {
-        /* background-color: #f8f8fa; */
         background-color: var(--gray-bg);
         margin-top: 50px;
       }
@@ -548,7 +532,7 @@
         width: 750px;
         margin-left: 10px;
         font-weight: 200;
-        line-height: 1.5; /* [개선] 가독성을 위해 줄간격 추가 */
+        line-height: 1.5;
       }
       .footer-info-text:hover {
         text-decoration: underline;
@@ -556,6 +540,117 @@
       .sns-img {
         margin-left: 20px;
         cursor: pointer;
+      }
+
+      /* 1. 기본 레이아웃 유동화 (1140px 이하) */
+      @media screen and (max-width: 1140px) {
+        .inner,
+        .header-wrap,
+        .nav-wrap,
+        .footer-wrap {
+          width: 100%;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        header {
+          padding: 10px 20px; /* 좌우 여백 축소 */
+        }
+        nav {
+          padding: 10px 20px;
+        }
+
+        .address-info {
+          width: auto;
+          flex: 1;
+        }
+      }
+
+      /* 2. 태블릿 및 좁은 PC (960px 이하) */
+      @media screen and (max-width: 960px) {
+        /* 헤더 구조 변경 */
+        .header-wrap {
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .links {
+          display: none; /* 상단 작은 링크 숨김 */
+        }
+
+        .header-container {
+          width: 100%;
+        }
+
+        .menus {
+          width: 100%;
+          justify-content: space-around;
+        }
+
+        /* 영화 리스트 정렬 */
+        .movie-list {
+          justify-content: center;
+          gap: 20px;
+        }
+
+        /* 검색창 줄바꿈 */
+        .movie-searchbar {
+          flex-wrap: wrap;
+        }
+        #movie-searchbar {
+          margin-left: 0;
+          width: 100%;
+          margin-top: 10px;
+        }
+      }
+
+      /* 3. 모바일 (600px 이하) */
+      @media screen and (max-width: 600px) {
+        /* 영화 탭 가로 스크롤 */
+        .movie-tab {
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+        .movie-tab li {
+          min-width: 80px;
+          padding: 10px 5px;
+        }
+
+        /* 푸터 세로 정렬 */
+        .footer-bottom {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .address-info {
+          width: 100%;
+          margin: 20px 0;
+          margin-left: 0;
+          word-break: keep-all;
+        }
+        .cinema-search {
+          justify-content: center;
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
+        .sns-img {
+          margin-left: 0;
+        }
+        .footer-info {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        /* 영화 카드 반응형 (화면 꽉 차게) */
+        .movie-card {
+          width: 100%;
+          max-width: 320px;
+        }
+        .poster-area {
+          height: auto;
+          aspect-ratio: 230 / 330;
+        }
       }
     </style>
   </head>
