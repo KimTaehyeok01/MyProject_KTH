@@ -391,7 +391,6 @@ main {
   cursor: pointer;
 }
 .btn-heart1:active {
-  width: 40%;
   background-color: #ccc;
 }
 .btn-book1 {
@@ -406,7 +405,6 @@ main {
   cursor: pointer;
 }
 .btn-book1:active {
-  width: 50%;
   background-color: #6c5991;
 }
 .btn-dolby1 {
@@ -421,7 +419,6 @@ main {
   transition: all 0.3s;
 }
 .btn-dolby1:active {
-  width: 50%;
   background-color: #6c5991;
 }
 /* 첫 번째 영화 버튼(dolby cinema포함) */
@@ -437,7 +434,6 @@ main {
   cursor: pointer;
 }
 .btn-heart:active {
-  width: 40%;
   background-color: #ccc;
 }
 .btn-book {
@@ -452,7 +448,6 @@ main {
   cursor: pointer;
 }
 .btn-book:active {
-  width: 80%;
   background-color: #6c5991;
 }
 .more-btn {
@@ -472,7 +467,6 @@ main {
   margin-top: 2px;
 }
 .more-btn:hover {
-  /* outline-style: solid; */
   border: 1px solid #b9afaf;
 }
 
