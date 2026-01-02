@@ -387,7 +387,7 @@ main {
   background-color: #fff;
   border-radius: 5px;
   color: #444;
-  transition: all;
+  transition: all 0.3s;
   cursor: pointer;
 }
 .btn-heart1:active {
@@ -402,7 +402,7 @@ main {
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  transition: all;
+  transition: all 0.3s;
   cursor: pointer;
 }
 .btn-book1:active {
@@ -418,6 +418,7 @@ main {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.3s;
 }
 .btn-dolby1:active {
   width: 50%;
@@ -432,7 +433,7 @@ main {
   background-color: #fff;
   border-radius: 5px;
   color: #444;
-  transition: all;
+  transition: all 0.3s;
   cursor: pointer;
 }
 .btn-heart:active {
@@ -447,7 +448,7 @@ main {
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  transition: all;
+  transition: all 0.3s;
   cursor: pointer;
 }
 .btn-book:active {
