@@ -7,6 +7,16 @@
     <style>
       /* ex76.html */
 
+      /* [개선] CSS 변수 선언: 색상 코드를 한 곳에서 관리하여 유지보수성 향상 */
+      :root {
+        --main-color: #503396;
+        --main-color-dark: #351f66;
+        --point-color: #339ed2;
+        --text-color: #222;
+        --gray-bg: #f8f8fa;
+        --border-color: #ccc;
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -47,7 +57,8 @@
       header {
         padding: 0px 50px;
         padding-top: 10px;
-        border-bottom: 1px solid #4f3395;
+        /* border-bottom: 1px solid #4f3395; */
+        border-bottom: 1px solid var(--main-color); /* [개선] 변수 적용 */
         display: flex;
         gap: 45px;
         justify-content: space-between;
@@ -107,7 +118,8 @@
         font-weight: bold;
       }
       .menus button:hover {
-        border-bottom: 3px solid #339ed2;
+        /* border-bottom: 3px solid #339ed2; */
+        border-bottom: 3px solid var(--point-color); /* [개선] 변수 적용 */
       }
 
       #logo {
@@ -123,7 +135,8 @@
         bottom: -40px;
         width: 100%;
         height: 40px;
-        background-color: #339ed2;
+        /* background-color: #339ed2; */
+        background-color: var(--point-color); /* [개선] 변수 적용 */
         z-index: 200;
         display: flex;
         align-items: center;
@@ -142,24 +155,16 @@
       .nav-toolbar a:hover {
         text-decoration: underline;
       }
+
+      /* [개선] 중복되는 호버 로직을 콤마로 묶어 코드량 감소 (기능 동일) */
       .menu-movie:hover ~ .toolbar-movie,
-      .toolbar-movie:hover {
-        visibility: visible;
-      }
-
+      .toolbar-movie:hover,
       .menu-reservation:hover ~ .toolbar-reservation,
-      .toolbar-reservation:hover {
-        visibility: visible;
-      }
+      .toolbar-reservation:hover,
       .menu-cinema:hover ~ .toolbar-cinema,
-      .toolbar-cinema:hover {
-        visibility: visible;
-      }
+      .toolbar-cinema:hover,
       .menu-event:hover ~ .toolbar-event,
-      .toolbar-event:hover {
-        visibility: visible;
-      }
-
+      .toolbar-event:hover,
       .menu-benefit:hover ~ .toolbar-benefit,
       .toolbar-benefit:hover {
         visibility: visible;
@@ -174,7 +179,8 @@
 
       /* Nav 카테고리 */
       nav {
-        background-color: #f8f8fa;
+        /* background-color: #f8f8fa; */
+        background-color: var(--gray-bg); /* [개선] 변수 적용 */
         padding: 10px 50px;
         display: flex;
         align-items: center;
@@ -198,9 +204,14 @@
       }
       .home {
         background-image: url("https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-home.png");
+        /* [개선] 배경 이미지 반복 방지 */
+        background-repeat: no-repeat;
+        background-position: center;
       }
       .arrow-right {
         background-image: url("https://img.megabox.co.kr/static/pc/images/common/bg/bg-location-arr.png");
+        background-repeat: no-repeat;
+        background-position: center;
       }
       main {
         padding: 40px 0;
@@ -213,13 +224,15 @@
 
       .movie-tab {
         display: flex;
-        border: 1px solid #ccc;
+        /* border: 1px solid #ccc; */
+        border: 1px solid var(--border-color);
         margin-bottom: 40px;
         padding: 0;
         position: sticky;
         z-index: 100;
         top: 40px;
         border-radius: 5px;
+        background-color: white; /* [개선] sticky 시 배경 투명 방지 */
       }
 
       .movie-tab li {
@@ -229,16 +242,22 @@
         border-right: 1px solid #f9f9f9;
         cursor: pointer;
         background-color: white;
-        border-bottom: 1px solid #503396;
+        /* border-bottom: 1px solid #503396; */
+        border-bottom: 1px solid var(--main-color);
         opacity: 0.8;
       }
 
       .movie-tab li.active {
-        border: 1px solid #503396;
+        /* border: 1px solid #503396; */
+        border: 1px solid var(--main-color);
         border-bottom: 1px solid #f9f9f9;
+        /* [개선] opacity 초기화 추가 */
+        opacity: 1;
+        font-weight: bold;
       }
       .movie-tab li:active {
-        background-color: #503396;
+        /* background-color: #503396; */
+        background-color: var(--main-color);
         color: white;
       }
       .movie-searchbar {
@@ -261,6 +280,13 @@
         height: 20px;
         border: none;
         cursor: pointer;
+      }
+      .movie-searchbar .toggle:active {
+        background: url("/image/btn-on-air.png") no-repeat 0 -25px;
+        background-size: 30px 45px;
+        width: 33px;
+        height: 20px;
+        border: none;
       }
       #movie-searchbar {
         margin-left: auto;
@@ -302,7 +328,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: #503396;
+        /* background-color: #503396; */
+        background-color: var(--main-color);
         color: white;
         width: 30px;
         height: 30px;
@@ -384,44 +411,44 @@
       .btn-heart1 {
         width: 30%;
         padding: 8px 0;
-        border: 1px solid #ccc;
+        /* border: 1px solid #ccc; */
+        border: 1px solid var(--border-color);
         background-color: #fff;
         border-radius: 5px;
         color: #444;
-        transition: all;
+        transition: all 0.3s; /* [개선] 부드러운 전환 효과 추가 */
         cursor: pointer;
       }
       .btn-heart1:active {
-        width: 40%;
         background-color: #ccc;
       }
       .btn-book1 {
         width: 40%;
         padding: 8px 0;
         border: none;
-        background-color: #503396;
+        /* background-color: #503396; */
+        background-color: var(--main-color);
         border-radius: 5px;
         color: white;
         font-weight: bold;
-        transition: all;
+        transition: all 0.3s;
         cursor: pointer;
       }
       .btn-book1:active {
-        width: 50%;
         background-color: #6c5991;
       }
       .btn-dolby1 {
         width: 40%;
         padding: 8px 0;
         border: none;
-        background-color: #503396;
+        background-color: var(--main-color);
         border-radius: 5px;
         color: white;
         font-weight: bold;
         cursor: pointer;
+        transition: all 0.3s;
       }
       .btn-dolby1:active {
-        width: 50%;
         background-color: #6c5991;
       }
       /* 첫 번째 영화 버튼(dolby cinema포함) */
@@ -429,35 +456,33 @@
       .btn-heart {
         width: 30%;
         padding: 10px 0;
-        border: 1px solid #ccc;
+        border: 1px solid var(--border-color);
         background-color: #fff;
         border-radius: 5px;
         color: #444;
-        transition: all;
+        transition: all 0.3s;
         cursor: pointer;
       }
       .btn-heart:active {
-        width: 40%;
         background-color: #ccc;
       }
       .btn-book {
         width: 70%;
         padding: 8px 0;
         border: none;
-        background-color: #503396;
+        background-color: var(--main-color);
         border-radius: 5px;
         color: white;
         font-weight: bold;
-        transition: all;
+        transition: all 0.3s;
         cursor: pointer;
       }
       .btn-book:active {
-        width: 80%;
         background-color: #6c5991;
       }
       .more-btn {
         width: 100%;
-        height: 20px;
+        /* height: 20px; -> [개선] padding이 있으므로 height 고정값 제거하여 콘텐츠에 맞춤 */
         background-color: #ffffff;
         margin-top: 30px;
         padding: 20px 0;
@@ -477,7 +502,8 @@
       }
 
       footer {
-        background-color: #f8f8fa;
+        /* background-color: #f8f8fa; */
+        background-color: var(--gray-bg);
         margin-top: 50px;
       }
       .footer-wrap {
@@ -522,6 +548,7 @@
         width: 750px;
         margin-left: 10px;
         font-weight: 200;
+        line-height: 1.5; /* [개선] 가독성을 위해 줄간격 추가 */
       }
       .footer-info-text:hover {
         text-decoration: underline;
@@ -544,8 +571,8 @@
           </div>
           <div class="menus">
             <div class="menus-icons">
-              <a href="#" class="icon hamburger"></a>
-              <a href="#" class="icon search"></a>
+              <a href="#" class="icon hamburger" aria-label="사이트맵"></a>
+              <a href="#" class="icon search" aria-label="검색"></a>
             </div>
             <button class="menu-movie">영화</button>
             <div class="nav-toolbar toolbar-movie">
@@ -566,7 +593,7 @@
         </div>
         <img
           src="https://img.megabox.co.kr/static/pc/images/common/ci/logo_new2.png"
-          alt="logo"
+          alt="MEGABOX"
           id="logo"
         />
         <div class="header-container">
@@ -589,8 +616,8 @@
               <a href="#">제휴/할인</a>
             </div>
             <div class="menus-icons">
-              <a href="#" class="icon calendar"></a>
-              <a href="#" class="icon mypage"></a>
+              <a href="#" class="icon calendar" aria-label="상영시간표"></a>
+              <a href="#" class="icon mypage" aria-label="마이페이지"></a>
             </div>
           </div>
         </div>
@@ -599,8 +626,7 @@
     <nav>
       <div class="nav-wrap">
         <div class="icon home"></div>
-        <div class="https://www.megabox.co.kr/"></div>
-        <a href="https://www.megabox.co.kr/movie">영화</a>
+        <a href="#">영화</a>
         <div class="icon arrow-right"></div>
         <a href="#">전체영화</a>
       </div>
@@ -608,8 +634,6 @@
 
     <main>
       <div class="inner">
-        <!-- 중앙 전체영화 페이지 & 영화 종류 메뉴 -->
-
         <h2 class="page-title">전체영화</h2>
 
         <ul class="movie-tab">
@@ -621,7 +645,7 @@
         </ul>
 
         <div class="movie-searchbar">
-          <button class="toggle"></button>
+          <button class="toggle" aria-label="개봉작만 보기 토글"></button>
           <span class="movie-releases"> 개봉작만</span>
           <span class="New-releases-result"
             ><b>60</b>개의 영화가 검색되었습니다.</span
@@ -629,14 +653,13 @@
           <input type="text" id="movie-searchbar" placeholder="영화명 검색" />
         </div>
 
-        <!-- 메인 : 영화 리스트 및 예약 -->
         <div class="movie-list">
           <div class="movie-card">
             <div class="poster-area">
               <span class="rank">1</span>
               <img
                 src="https://image.tmdb.org/t/p/w500/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg"
-                alt="아바타"
+                alt="아바타: 불과 재 포스터"
               />
               <div class="overlay">
                 <div class="explanation">아바타입니다.</div>
@@ -650,7 +673,7 @@
               <div class="movie-name">
                 <img
                   src="https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png"
-                  alt=""
+                  alt="전체관람가"
                 />아바타: 불과 재
               </div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
@@ -662,8 +685,8 @@
                 <button type="button" class="btn-book1">예매</button>
                 <button type="button" class="btn-dolby1">
                   <img
-                    src="	https://www.megabox.co.kr/static/pc/images/common/btn/mov_list_db_btn.png"
-                    alt=""
+                    src=" https://www.megabox.co.kr/static/pc/images/common/btn/mov_list_db_btn.png"
+                    alt="Dolby Cinema"
                   />
                 </button>
               </div>
@@ -675,7 +698,7 @@
               <span class="rank">2</span>
               <img
                 src="https://img.megabox.co.kr/SharedImg/2025/11/27/YiSbqEf6OvFcDoLoQCipDojOHqMCwKG4_420.jpg"
-                alt="영화"
+                alt="주토피아2 포스터"
               />
               <div class="overlay">
                 <div class="explanation">주토피아2입니다.</div>
@@ -689,7 +712,7 @@
               <div class="movie-name">
                 <img
                   src="https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png"
-                  alt=""
+                  alt="전체관람가"
                 />주토피아2
               </div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
@@ -708,7 +731,7 @@
               <span class="rank">3</span>
               <img
                 src="https://img.megabox.co.kr/SharedImg/2025/12/04/W6p1b8p719ZRz5LvVdBwWEOJqQZGYIyH_420.jpg"
-                alt="영화"
+                alt="만약에 우리 포스터"
               />
               <div class="overlay">
                 <div class="explanation">만약에 우리입니다.</div>
@@ -722,7 +745,7 @@
               <div class="movie-name">
                 <img
                   src="https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png"
-                  alt=""
+                  alt="전체관람가"
                 />만약에 우리
               </div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
@@ -741,7 +764,7 @@
               <span class="rank">4</span>
               <img
                 src="https://img.megabox.co.kr/SharedImg/2025/12/10/KABXf7NuhY8cxBSSjoIYnTFpsBAfErBI_420.jpg"
-                alt="영화"
+                alt="오늘밤, 세계에서 이 사랑이 사라진다 해도 포스터"
               />
               <div class="overlay">
                 <div class="explanation" style="text-align: center">
@@ -757,7 +780,7 @@
               <div class="movie-name">
                 <img
                   src="https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png"
-                  alt=""
+                  alt="전체관람가"
                 />오늘밤, 세계에서 이 사랑이 사라진다 해도
               </div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
@@ -776,7 +799,7 @@
               <span class="rank">5</span>
               <img
                 src="https://img.megabox.co.kr/SharedImg/2025/12/23/zJqlVMrN3C4d5PfCwPJGTiX1JLCxf1o4_420.jpg"
-                alt="영화"
+                alt="누벨바그 포스터"
               />
               <div class="overlay">
                 <div class="explanation">누벨바그입니다.</div>
@@ -790,7 +813,7 @@
               <div class="movie-name">
                 <img
                   src="https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png"
-                  alt=""
+                  alt="전체관람가"
                 />누벨바그
               </div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
@@ -809,7 +832,7 @@
               <span class="rank">6</span>
               <img
                 src="https://img.megabox.co.kr/SharedImg/2025/11/20/QrLgK75zTzO9bZehTlQLDRViW115sr1i_420.jpg"
-                alt="영화"
+                alt="톰과 제리 포스터"
               />
               <div class="overlay">
                 <div class="explanation" style="text-align: center">
@@ -825,7 +848,7 @@
               <div class="movie-name">
                 <img
                   src="https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png"
-                  alt=""
+                  alt="전체관람가"
                 />톰과 제리 : 황금나침반 대소동
               </div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
@@ -844,7 +867,7 @@
               <span class="rank">7</span>
               <img
                 src="https://img.megabox.co.kr/SharedImg/2025/11/25/v344HrDrKIU3iFAbZWMwLssegzKFKdZ7_420.jpg"
-                alt="영화"
+                alt="신의악단 포스터"
               />
               <div class="overlay">
                 <div class="explanation">신의악단입니다.</div>
@@ -858,7 +881,7 @@
               <div class="movie-name">
                 <img
                   src="https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png"
-                  alt=""
+                  alt="전체관람가"
                 />신의악단
               </div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
@@ -876,8 +899,8 @@
             <div class="poster-area">
               <span class="rank">8</span>
               <img
-                src="	https://img.megabox.co.kr/SharedImg/2025/12/03/xpyJM8dD5sBjVofJ2gqwUh4docg5vbsJ_420.jpg"
-                alt="영화"
+                src=" https://img.megabox.co.kr/SharedImg/2025/12/03/xpyJM8dD5sBjVofJ2gqwUh4docg5vbsJ_420.jpg"
+                alt="화양연화 특별판 포스터"
               />
               <div class="overlay">
                 <div class="explanation">화양연화 특별판입니다.</div>
@@ -891,7 +914,7 @@
               <div class="movie-name">
                 <img
                   src="https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png"
-                  alt=""
+                  alt="전체관람가"
                 />화양연화 특별판
               </div>
               <div class="movie-rate">예매율 10.5% | 개봉일 2025.12.29</div>
@@ -909,7 +932,7 @@
         <button class="more-btn">
           더보기
           <img
-            src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-btn-more-arr.png"
+            src=" https://img.megabox.co.kr/static/pc/images/common/ico/ico-btn-more-arr.png"
             alt=""
           />
         </button>
@@ -921,7 +944,7 @@
         <div class="footer-info">
           <div class="footer-info-text"><a href="#">회사소개</a></div>
           <div class="footer-info-text"><a href="#">인재채용</a></div>
-          <div class="footer-info-text"><a href="#">사회공원</a></div>
+          <div class="footer-info-text"><a href="#">사회공헌</a></div>
           <div class="footer-info-text">
             <a href="#">제휴/광고/부대사업문의</a>
           </div>
@@ -937,7 +960,7 @@
 
         <div class="cinema-search">
           <button type="button" class="cinema-searchbar">
-            <img src="/image/btn-search-input.png" alt="" />극장찾기
+            <img src="/image/btn-search-input.png" alt="검색 아이콘" />극장찾기
           </button>
         </div>
 
@@ -959,19 +982,19 @@
 
           <div class="sns-img">
             <img
-              src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-youtubeN.png"
+              src=" https://img.megabox.co.kr/static/pc/images/common/ico/ico-youtubeN.png"
               alt="유튜브"
             />
             <img
-              src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-instagramN.png"
+              src=" https://img.megabox.co.kr/static/pc/images/common/ico/ico-instagramN.png"
               alt="인스타"
             />
             <img
-              src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-facebookN.png"
+              src=" https://img.megabox.co.kr/static/pc/images/common/ico/ico-facebookN.png"
               alt="페이스북"
             />
             <img
-              src="	https://img.megabox.co.kr/static/pc/images/common/ico/ico-twitterN.png"
+              src=" https://img.megabox.co.kr/static/pc/images/common/ico/ico-twitterN.png"
               alt="트위터"
             />
           </div>
