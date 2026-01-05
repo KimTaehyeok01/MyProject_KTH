@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자바스크립트 개요</title>
+    <!-- ex01 -->
+    <!-- JavaScript : 공식명칭은 ECMA Script -->
+    <!-- 만든 사람 : 넷스케이프 브랜든 아이크라는 사람이 만듦
+                     썬마이크로 시스템즈와 협력해서 만든 언어 -->
+    <!-- Java와 JavaScript와는 전혀 다른 언어  -->
+    <!-- ES6(ECMA Script 6)에서 언어적으로 완성됨. -->
+    <!-- 특징 : 웹브라우저에서 지원하는 유일한 언어 : 과거 Basic언어 -->
+    <!--      : 구글에서 JS V8 엔진을 향상시키고, 오픈 소스로 배포 -->
+    <!-- Node.js : 플랫폼 독립 자바스크립트 런타임(실행) 프로그램 -->
+
+    <!-- js를 구동시키는 두 가지 방법 -->
+    <!-- 1. html안에서 동작 - 주체 : 웹 -->
+    <!--   역할 : 동적인 웹을 구현 -->
+    <!-- 2 .js파일도 단독으로 실행가능 - 주체 : node.js -->
+    <!--   역할 : 프론트엔드(ui프레임워크 - react.js, vue.js, svelte.js) -->
+    <!--   역할 : 벡엔드(서버 - express, next.js, nest.js) -->
+
+    <!-- html안에서 js 선언하는 3가지 방법 -->
+    <script>
+      // 1. 인라인 스크립트 : html 태그 안에서 js 작성 - onclick, href, onmouseover 속성으로 가능.
+      //   <h1 onclick="alert('hello world!')">Hello JavaScript</h1>;
+
+      // 2. 내부 스크립트 : html 문서 안에 <script> 태그(head/body) 안에 js 작성
+      //   console.log("Hello JavaScript");
+
+      // 3. 외부 스크립트 : js 파일을 만들어서 html 문서와 연결 -import/link 이용하면 가능.
+      // <script src="js/ex01.js">
+
+      // alert() : 알림창 함수
+      alert("Hello JavaScript");
+    </script>
+  </head>
+  <body>
+    <h1>제어대상</h1>
+
+    <!-- 인라인 스크립트 -->
+    <button onclick="alert('클림됨');">클릭하세요</button>
+
+    <!-- 내부 스크립트는 body태그 마지막에 js를 정의하는게 좋다. -->
+
+    <script>
+      alert("알림창입니다.");
+    </script>
+  </body>
+</html>
