@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>변수와 상수</title>
+    <script>
+      // 변수(variable) : 값을 저장하는 공간(var, let)
+      // 상수(constant) : 한 번 값이 저장되면 변경할 수 없는 저장공간(const)
+
+      // 예약어(keyword)
+      // var : 변수 선언, 재선언, 재할당 가능(사용 지양)
+      // let : 변수 선언, 재할당 가능, 재선언 불가
+      // const : 상수 선언, 재선언 및 재할당 불가
+
+      //   var name; // 변수 선언
+      // var name; //재선언 가능
+      //   let a;
+      let a; //재선언 불가능
+      //   const PI = 3.14;
+      const PI = 3.14; //재선언 불가능
+      //   PI = 3.11; //재할당 불가능
+      console.log(PI);
+
+      // 변수 선언 : let 키워드 사용
+      // 변수 길이는 64비트(8바이트)이다.
+      let age; // age라는 이름의 변수를 선언
+      age = 26; // age 변수에 26이라는 값을 저장(할당)
+      let name = "홍길동"; // 선언과 동시에 값 할당 가능
+      name = "김태혁"; // 변수는 나중에 값 변경 가능
+
+      // 하드코딩 : 코드 안에 직접 값을 쓰는 것
+      let sum = 10; //리터럴(하드코딩 값)
+
+      console.log("나이:", age);
+      console.log("이름:", name);
+      console.log("합계:", sum);
+
+      age = 25; // 변수는 나중에 값 변경 가능
+      console.log("변경된 나이:", age);
+
+      // 상수 선언 : const 키워드 사용
+      const BIRTH_YEAR = 2001; // BIRTH_YEAR라는 이름의 상수를 선언하고 값 할당
+
+      console.log("출생년도:", BIRTH_YEAR);
+
+      // BIRTH_YEAR = 1995; // 오류! 상수는 값 변경 불가
+    </script>
+  </head>
+  <body></body>
+</html>
