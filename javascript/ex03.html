@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS를 출력하는 방법 - 2</title>
+    <script>
+      // console.log : console창에 출력하는 방법(개발자가 제일 선호!)
+      // console은 브라우저가 제공하는 객체. 페이지 자체가 아니라 개발자 도구 콘솔창에 나옴.
+      // document랑은 다름. document는 html문서 페이지 자체에 출력.
+      console.log("Hello JS!");
+      console.log("Hello JS! 1");
+      console.log("Hello JS! 2");
+      console.log("Hello JS! 3");
+      console.log("Hello JS! 4");
+      console.log("Hello JS! 5");
+
+      // 에러가 난 상황을 재현해보자.
+      //   console.log("abcde);
+
+      // console.log() : 기본 로그 출력
+      // console.info() : 정보성 로그 출력
+      // console.wran() : 오류 로그 - 무시해도 되는 오류(warn : warning의 약자)
+      // console.error() : 오류로그 - 심각한 오류
+      console.info("정보성 로그");
+      console.warn("오류 로그(무시)");
+      console.error("오류 로그(심각)");
+    </script>
+  </head>
+  <body></body>
+</html>
