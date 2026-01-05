@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>연산자</title>
+    <script>
+      // 연산자 구분
+      // 1. 단항연산자: 피연산자가 1개인 연산자
+      // 2. 이항연산자: 피연산자가 2개인 연산자
+      // 3. 삼항연산자: 피연산자가 3개인 연산자
+
+      // 연산자 우선순위
+      // 단항 > 이항 > 삼항 > 대입(=)
+
+      // 1. 단항연산자 : +, -, ++, --
+      // 2. 산술연산자 : +, -, *, /, %
+      // 3. 할당연산자(복합대입연산자) : =, +=, -=, *=, /=, %=
+      // 4. 비교연산자 : ==, ===, !=, !==, >, <, >=, <=
+      // 5. 논리연산자 : &&, ||, !
+
+      // 단항연산자 예시
+      let i = 10;
+      i++;
+      console.log(i);
+      i--;
+      console.log(i);
+
+      // i++ , ++i
+      i = 10;
+      console.log(i++ + 10); //출력후에 다음 줄(연산)으로 넘어가면서 +1
+      console.log(i);
+      console.log(++i + 10); //먼저 +1이 되고 다음 줄(연산)으로 넘어감
+      console.log(i);
+    </script>
+  </head>
+  <body></body>
+</html>
