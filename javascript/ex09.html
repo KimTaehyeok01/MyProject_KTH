@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>형 변한 - data type conversion</title>
+    <script>
+      // number -> string    String()함수
+      let num1 = 456;
+      console.log(typeof num1);
+      let str1 = String(num1);
+      console.log(typeof str1);
+
+      // string -> number    Number()함수, 예전에 쓰던것: parseInt(), parseFloat()
+      let str2 = "123";
+      console.log(typeof str2);
+      const num2 = Number(str2);
+      console.log(typeof num2);
+
+      let s1 = 3.14;
+      let s2 = parseInt(s1);
+      console.log(s2);
+
+      // 주의할 점 - 0123456789 +- 외의 문자를 넣으면 오류.
+      console.log(Number("집에가고싶다")); // NaN : none a Number의 약자.
+
+      // 0으로 나누면 오류
+      console.log(10 / 0); // Infinity
+
+      // undefined에 연산을 할때
+      console.log(undefined + 2); // NaN
+
+      // 비추천하는 행변환 문법
+      console.log("123" * 1 + 2);
+      console.log(+"123" + 2);
+    </script>
+  </head>
+  <body></body>
+</html>
