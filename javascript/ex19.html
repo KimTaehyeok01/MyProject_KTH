@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대입연산자</title>
+    <script>
+      function myfunc() {
+        return 20;
+      }
+      // 대입연산자 : = 오른쪽 항의 값을 왼쪽으로 대입
+      // 복합대입연산자 : +=, -=, *=, /=, %=
+      let num1 = 10;
+      let num2 = num1;
+      let num3 = myfunc();
+      console.log(num1, num2, num3);
+
+      //prettier-ignore
+      let num4 = num5 = num6 =30;
+      console.log(num4, num5, num6);
+
+      // 복합대입연산자
+      let num10 = 10;
+      num10 += 2; // num10 = num10 + 2;
+      num10 -= 2; // num10 = num10 - 2;
+      num10 *= 2; // num10 = num10 * 2;
+      num10 /= 2; // num10 = num10 / 2;
+      num10 %= 2; // num10 = num10 % 2;
+      console.log(num10);
+
+      //3개가 같은 표현
+      num10++;
+      num10 += 1;
+      num10 = num10 + 1;
+    </script>
+  </head>
+  <body></body>
+</html>
