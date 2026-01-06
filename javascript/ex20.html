@@ -4,6 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>삼항연산자</title>
+    <script>
+      // 삼항연산자
+      // 형식(패턴)
+      // let C = 조건식(절) ? A값 : B값
+      // 조건식이 TRUE면 A값을 C에 대입함.
+      // 조건식이 TRUE면 B값을 C에 대입함.
+      // 조건식(절) : 비교(논리) 연산자로 이루어진 간단한 코드
+
+      let num = 10 < 20 ? 10 : 20;
+      console.log(num);
+
+      //if문으로 쓰면
+      if (10 < 20) {
+        num = 10;
+      } else num = 20;
+      console.log(num);
+
+      // 연습문제
+      // 1. prompt로 1~100사이의 정수를 입력받고,
+      //   그 숫자가 50보다 크면, "50초과."
+      //   50이거나 작으면, "50이하입니다."
+      let sum = Number(prompt("정수 입력"));
+      let result = sum > 50 ? "50초과" : "50이하입니다";
+      console.log(result);
+    </script>
   </head>
   <body></body>
 </html>
