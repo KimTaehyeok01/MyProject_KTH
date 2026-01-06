@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ex21 -->
+    <title>조건문</title>
+    <script>
+      //조건문 : 조건식에 따라서 선택적인 수행하는 하는 문장.
+      //형식
+      // if ( 조건식 ) {
+      //   조건식이 True일때 실행되는 수행문.
+      // }
+
+      //조건문의 종류 : if문(7할), switch case문(3할)
+      let myVar = 20;
+      if (myVar == 20) {
+        console.log("myVar는 20입니다.");
+        document.write("<h3>myVar는 20입니다.</h3>");
+      }
+      // 연습문제
+      ////1. myNum 변수를 선언하고 30으로 초기화 한 후에
+      //   document.write로 출력하시오. h3태그 담아서 출력.
+      //2. myNum이 30보다 크면, "30보다 큽니다.",
+      //   같거나 작으면 "30보다 작거나 같습니다."라고 출력하시오.
+      //3. 현재 시간을 시스템으로 부터 읽어서, 오전이면 "오전입니다". 오후면 "오후입니다."
+
+      //1.
+      let myNum = 30;
+      if (myNum == 30) {
+        document.write("<h3>30입니다.</h3>");
+      }
+
+      //2.
+      if (myNum > 30) {
+        document.write("30보다 큽니다.");
+      } else if (myNum <= 30) {
+        document.write("30보다 작거나 같습니다.");
+      }
+
+      //2. prompt로 1~100사이의 정수를 한개 입력받고,
+      //   짝수이면, "짝수입니다.", 홀수이면 "홀수입니다."로 출력하시오.
+      let sum = Number(prompt("1~100사이의 정수"));
+      if (sum % 2 == 0) {
+        document.write("짝수입니다");
+      } else document.write("홀수입니다");
+
+      //3.
+      const now = new Date();
+      let time = new Date().getHours();
+      if (time < 12) {
+        document.write("오전입니다.");
+      } else {
+        document.write("오후입니다.");
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
