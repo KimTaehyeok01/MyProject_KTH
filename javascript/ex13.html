@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>단항연산자</title>
+    <script>
+      // 단항연산자 ++ -- -> 한 줄에 한번에 사용할 것.
+      // 음수연산자 -
+      // 논리반전 연산자 !
+      let bool = true;
+      console.log(!bool);
+      console.log(!!bool);
+
+      // Falsey값 : 자바스크립트에서 false로 인식하는 값.
+      // 1. false
+      // 2 . 0, -0
+      // 3. 0n(BinInt - 가변길이 정수 - 큰 수를 담을 때 사용)
+      // "" 빈문자열
+      // NULL : 값이 없음을 명시적으로 정의하는 것.
+      // undefined : 선언만 하고 값이 없는 것.(ex-> 변수 초기값)
+      // NaN : Not a Number
+      console.log(!false);
+      console.log(!0);
+      console.log(!"");
+
+      console.log(Number.isFinite(10 / 0)); // 유한대의 값인가?
+      console.log(Number.isNaN(0 / 0)); // NaN인가?
+    </script>
+  </head>
+  <body></body>
+</html>
