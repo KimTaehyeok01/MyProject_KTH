@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>랜덤값 발생하기</title>
+    <script>
+      // Random 수(임의의 수, 난수) 발생시키는 함수 Math.random()
+      // 뽑기, 주사위, 확률, 무작위 등에 사용.
+      console.log(Math.random());
+      //Math.random() 함수는 0~1사이의 랜덤값을 발생시킨다.(0.0 ~ 0.9999999999999999)
+      console.log(Math.floor(Math.random() * 10));
+      // Math.floor : 소수점 이하를 버리는 함수
+      // Math.ceil : 소수점 이하를 올리는 함수
+      //Math.round : 소수점 이하를 반올림하는 함수
+
+      // 랜덤값 발생하기
+      // 랜덤값 발생하는 방법
+      // 1. Math.random() : 0~1사이의 랜덤값 발생
+      // 2. Math.floor(Math.random() * 10) : 0~9사이의 랜덤값 발생
+      // 3. Math.ceil(Math.random() * 10) : 1~10사이의 랜덤값 발생
+      // 4. Math.round(Math.random() * 10) : 0~10사이의 랜덤값 발생
+
+      let random = Math.floor(Math.random() * 6) + 1;
+      console.log(random);
+
+      // 연습문제
+      // 1. 10부터 20사이의 랜덤 정수 하나를 발생시키고
+      //    그 출력하고, 짝수이면 "짝수", 홀수이면 "홀수"
+      // 2. 주사위를 1개 던져서, 1~3이 나오면 "작은 수", 4~6이 나오면 "큰 수" 라고 출력하시오.
+
+      let ranDom = Math.floor(Math.random() * 11) + 10;
+      if (ranDom % 2 == 0) {
+        console.log("짝수");
+      } else console.log("홀수");
+
+      let RanDom = Math.floor(Math.random() * 6) + 1;
+      if (RanDom < 4) {
+        console.log("작은 수");
+      } else console.log("큰 수");
+    </script>
+  </head>
+  <body></body>
+</html>
