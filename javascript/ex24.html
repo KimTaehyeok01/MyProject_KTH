@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ex24 -->
+    <title>연습문제</title>
+    <script>
+      // 랜덤공식
+      //Math.floor(Math.random() * (max - min + 1)) + min
+      //예) 주사위 1~6
+      Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+
+      //문제1
+      //1~10 사이의 랜덤 정수 2개를 발생시키고,
+      //첫번째 랜덤 정수는 십의 자리수로,
+      //두번째 랜덤 정수는 일의 자릿수로 하여 만들어진 수를 출력하시오.
+
+      let first = Math.ceil(Math.random() * 10);
+      let second = Math.ceil(Math.random() * 10);
+      let result = first * 10 + second;
+      console.log("랜덤 정수 : " + result);
+
+      //문제2
+      //변수 score에 랜덤 정수(0~100) 를 저장한다.
+      //점수가 60점 이상이면 "합격", 아니면 "불합격"을 출력하시오.
+      //   let score = Math.floor(Math.random() * 100) + 1;
+      let score = Math.ceil(Math.random() * 100);
+      if (score >= 60) {
+        console.log("합격");
+      } else console.log("불합격");
+      //문제3
+      //오늘 기상예보는 비가 올 확률이 70%라고 한다.
+      //확률 70%로 기상변수를 발생시켜, 비가오면 "비 와요~",
+      //비가 안오면 "비가 안와요~"라고 출력하시오.
+      //*확률 70%를 만드는 법
+      //1~100까지의 랜덤수를 발생시켜, 70이하이면 70%안에 들어간 것임.
+      //   let weather = Math.floor(Math.random() * 100) + 1;
+      let weather = Math.ceil(Math.random() * 100);
+      if (weather <= 70) {
+        console.log("비 와요~");
+      } else console.log("비가 안와요~");
+    </script>
+  </head>
+  <body></body>
+</html>
