@@ -15,7 +15,7 @@
 
       let rand = Math.floor(Math.random() * 101);
 
-      switch (rand) {
+      switch (true) {
         case rand >= 90:
           console.log("A등급");
           break;
@@ -36,6 +36,27 @@
           break;
       }
 
+      switch (Math.floor(rand / 10)) {
+        case 10:
+        case 9:
+          console.log("A등급");
+          break;
+        case 8:
+          console.log("B등급");
+          break;
+
+        case 7:
+          console.log("C등급");
+          break;
+
+        case 6:
+          console.log("D등급");
+          break;
+
+        default:
+          console.log("F등급");
+          break;
+      }
       console.log("영어 점수는 " + rand + " 점입니다.");
     </script>
   </head>
