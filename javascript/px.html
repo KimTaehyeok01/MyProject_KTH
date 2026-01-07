@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js문법 연습문제</title>
+    <script>
+      //1번.
+      //   alert("Javascript");
+
+      //2번.
+      //   let str1 = "Hi";
+      //   let str2 = "ECMA Script";
+      //   alert(str1 + " " + str2);
+
+      //3번.
+      //   console.log("자바스크립트!");
+
+      //4번.
+      //   document.write("+----+----+----------+ <br>");
+      //   document.writeln("|학번|이름 | 국어점수 |<br>");
+      //   document.write(" +---+-----+----------+<br>");
+      //   document.write(" |010| 길동|     80   | <br>");
+      //   document.write("+---+-----+----------+<br>");
+
+      //5번.
+      //   let name = prompt("이름:");
+      //   console.log("안녕하세요. 저는", name + "입니다.");
+
+      //6번.
+      //   let math_score = prompt("수학점수");
+      //   console.log(`수학점수는 ${math_score}입니다.`);
+
+      //7번.
+      //   let num1 = Number(prompt("정수"));
+      //   let num2 = Number(prompt("정수"));
+      //   let num3 = Number(prompt("정수"));
+
+      //   console.log("총합", num1 + num2 + num3);
+
+      //8번.
+      //   let age = 26;
+      //   let name = "김태혁";
+      //   console.log(`이름은 ${name}, 나이는 ${age}`);
+
+      //9번.
+      /*
+      자바스크립트의 데이터 타입에 대해서 공백을 채우시오.
+      1. 숫자를 담는 데이터 타입 : (    number       )
+      2. 문자열을 담는 데이터 타입:(     string       )
+      3. 논리값을 담는 데이터 타입:(     boolean       )
+      4. 선언 또는 초기화 되지 않는 데이터의 타입: (     undefined      )
+      5. 객체타입(배열 또는 key-value객체):(      object             )
+      6. 함수타입:(         function           )
+      */
+
+      //10번.
+      //   let num = prompt("숫자");
+      //   num = Number(num) * 2;
+      //   console.log("값", num);
+
+      //11번. prompt로 입력받은 숫자의 백의 자릿수,십의 자릿수와 일의 자릿수를 출력하시오.
+      // 예) "123" => 백의 자릿수 1, 십의 자릿수 2, 일의 자릿수 3
+      //힌트: Math.floor함수 : 소숫점 버림함수를 이용하시오.
+      // 예) Math.floor( 1.23 ) => 1
+
+      //   let num = Number(prompt("숫자"));
+      //   let num1 = Math.floor(num / 100) % 10;
+      //   let num2 = Math.floor((num % 100) / 10);
+      //   let num3 = Math.floor(num % 10);
+
+      //   console.log(`백의 자리수 ${num1}`);
+      //   console.log(`십의 자리수 ${num2}`);
+      //   console.log(`일의 자리수 ${num3}`);
+
+      //   let score1 = Number(prompt("점수"));
+      //   let score2 = Number(prompt("점수"));
+      //   let score3 = Number(prompt("점수"));
+
+      //   let avg_score = Math.floor((score1 + score2 + score3) / 3);
+      //   console.log("평균점수", avg_score);
+
+      //13번.
+      //   let num1 = Number(prompt("숫자"));
+      //   let num2 = Number(prompt("숫자"));
+      //   console.log(Math.floor(num2 / num1));
+      //   console.log(num2 % num1);
+
+      //14번.
+      //   let num1 = Number(prompt("숫자"));
+      //   let num2 = Number(prompt("숫자"));
+      //   let result = Math.pow(num1, num2);
+      //   console.log(result);
+
+      //15번.
+      //   let r = Number(prompt("반지름"));
+      //   const PI = 3.14;
+      //   let area = r * r * PI;
+      //   console.log("원의 넓이", area);
+
+      //16번.
+      //   console.log(20 > 30);
+      //   console.log(20 <= 30);
+
+      //17번.
+      //   console.log(10 < 20 && 10 > 5);
+      //   console.log(123 % 10 == 3);
+      //   console.log(5 > 1 || 5 < 10);
+
+      //18번.
+      //   let rand = Math.floor(Math.random() * 10) + 1;
+      //   if (rand % 3 == 0) {
+      //     console.log("짝");
+      //   } else console.log(rand);
+
+      //19번.
+      //   let num = Number(prompt());
+      //   if (num == 1) {
+      //     console.log("수성");
+      //   }
+      //   if (num == 2) {
+      //     console.log("금성");
+      //   }
+      //   if (num == 3) {
+      //     console.log("지구");
+      //   }
+      //   if (num == 4) {
+      //     console.log("화성");
+      //   }
+      //   if (num == 5) {
+      //     console.log("목성");
+      //   }
+      //   if (num == 6) {
+      //     console.log("토성");
+      //   }
+      //   if (num == 7) {
+      //     console.log("천왕성");
+      //   }
+      //   if (num == 8) {
+      //     console.log("해왕성");
+      //   }
+
+      //20번.
+      //   let height = Number(prompt("키"));
+      //   if (height > 150) {
+      //     console.log("YES");
+      //   } else console.log("NO");
+
+      //21번.
+      /*
+      1)  i / 6 == 0
+      2)  i % 6 == 0
+      3)  i & 6 == 0
+      4)  i | 6 == 0
+      5)  i // 6 == 0
+      정답: 2
+       */
+      //22번.
+      //   const PI = 3.14;
+      //   console.log(parseInt(PI));
+      //   let num = Number(prompt("실수")); //입력: 1.234
+      //   console.log(parseInt(num));
+
+      //23번.
+      //   let name = "mary";
+      //   let user_name = name.toUpperCase();
+      //   console.log(user_name);
+
+      //   let planet = prompt("행성");
+      //   switch (planet) {
+      //     case "수성":
+      //       console.log("Mercury");
+      //       break;
+      //     case "금성":
+      //       console.log("Venus");
+      //       break;
+      //     case "지구":
+      //       console.log("Earth");
+      //       break;
+      //     case "화성":
+      //       console.log("Mars");
+      //       break;
+      //     case "목성":
+      //       console.log("Jupiter");
+      //       break;
+      //     case "토성":
+      //       console.log("Saturn");
+      //       break;
+      //     case "천왕성":
+      //       console.log("Uranus");
+      //       break;
+      //     case "해왕성":
+      //       console.log("Neptune");
+      //       break;
+      //     default:
+      //       console.log("행성 이름이 아닙니다.");
+      //       break;
+      //   }
+
+      //25번.
+      //   let num1 = Number(prompt("숫자"));
+      //   let num2 = Number(prompt("숫자"));
+      //   console.log(Math.abs(num1 - num2));
+
+      //26번.
+      //   let sum = 0;
+      //   let n = Number(prompt("숫자"));
+      //   for (let i = 1; i <= n; i++) {
+      //     sum += i;
+      //   }
+      //   console.log(`1부터 ${n}까지의 총합은 ${sum}`);
+    </script>
+  </head>
+  <body></body>
+</html>
