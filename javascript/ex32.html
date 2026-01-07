@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>for문 연습문제</title>
+    <script>
+      // 문제1
+      // 1. 영희가 징검다리 게임을 하고 있다.
+      //    1부터 100까지 번호가 쓰여진 돌을 건너는데,
+      //    끝자리가 3으로 끝나는 돌만 건너 뛴다.
+      //    그러면, 영희는 몇번 돌을 밟게 되나?
+      //    그리고 밟은 돌의 숫자의 총합은?
+      let sum = 0;
+      let count = 0;
+      for (let i = 1; i <= 100; i++) {
+        if (i % 10 != 3) {
+          sum += i;
+          count++;
+        }
+      }
+      console.log(`영희는 ${count}의 번의 돌을 밟는다.`);
+      console.log(`밟은 돌의 숫자의 총합 ${sum}`);
+
+      // 문제2
+      // 주사위 1개를 10번 던져서 나온 수의 총합을 구하시오.
+      // 그리고 짝수가 나온 총 횟수를 구하시오.
+      let dice_sum = 0; //총합
+      let even_count = 0; //횟수
+      for (let i = 1; i <= 10; i++) {
+        let dice = Math.floor(Math.random() * 6) + 1;
+        dice_sum += dice;
+        if (dice % 2 == 0) {
+          even_count++;
+        }
+      }
+      console.log("총합", dice_sum);
+      console.log("횟수", even_count);
+    </script>
+  </head>
+  <body></body>
+</html>
