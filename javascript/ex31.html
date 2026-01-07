@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반복문과 조건문의 결합</title>
+    <script>
+      // 반복문 안에서 조건문 사용하기
+      //   for (let i = 1; i <= 100; i++) {
+      //     if (i % 2 == 0 || i % 3 == 0) {
+      //       console.log("반복변수:", i);
+      //     }
+      //   }
+
+      // 총합 구하기(sum)
+      // 1. 반복문 전에 총합을 저장할 sum변수를 초기화한다.
+      let sum = 0;
+      // 2. 반복문 안에서 sum = sum + n을 사용한다. sum+=
+
+      //   for (let i = 1; i <= 10; i++) {
+      //     sum += i; // sum = sum + i
+      //   }
+      //   // 3. 반복문 종료 후에 sum을 출력한다.
+      //   console.log(sum);
+
+      // 카운트 세기(0부터 1씩 증가)
+      let count = 0;
+      for (let i = 1; i <= 100; i++) {
+        // 끝자리가 4로 끝나는 수의 개수는 몇개일까?
+        if (i % 10 == 4) {
+          count++;
+          console.log(i);
+        }
+      }
+      console.log("count의 개수:", count);
+
+      // 문자열 보간 - 문자열과 변수를 조합하는 것
+      // 백틱(Accent)문자 사용
+      console.log(`카운트 : ${count}`);
+      //console.log("count의 개수:", count); 이건 +를 사용해서 따로 씀. 그러나 위에 것은 같이 씀.
+    </script>
+  </head>
+  <body></body>
+</html>
