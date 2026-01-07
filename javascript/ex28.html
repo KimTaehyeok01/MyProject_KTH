@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>switch문의 변칙적 사용</title>
+    <script>
+      // switch문의 변칙적 사용
+      // break문을 생략하면, 아래 case문과 함께 적용된다.
+      // fall-through(break생략)라고 함.
+      let day = "토";
+      switch (day) {
+        case "토":
+        case "일":
+          console.log("주말");
+          break;
+        default:
+          console.log("평일");
+          break;
+      }
+
+      // 연습문제
+      // 랜덤으로 달(month)을 생성하고, 12,1,2이면 "겨울"
+      // 3,4,5이면 "봄"
+      // 6,7,8이면 "여름"
+      // 9,10,11이면 "가을"
+
+      let season = Math.floor(Math.random() * 12) + 1;
+      console.log(season + "월입니다.");
+      switch (season) {
+        case 12:
+        case 1:
+        case 2:
+          // 이런식으로도 쓸 수 있음. case (12,1,2):
+          console.log("겨울");
+          break;
+        case 3:
+        case 4:
+        case 5:
+          console.log("봄");
+          break;
+        case 6:
+        case 7:
+        case 8:
+          console.log("여름");
+          break;
+        case 9:
+        case 10:
+        case 11:
+          console.log("가을");
+          break;
+        default:
+          console.log("정상적이지 않습니다.");
+          break;
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
