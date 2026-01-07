@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>조건문 - switch case문</title>
+    <script>
+      // 조건문 - switch case문
+      // 형식
+      // switch(변수){ // 변수는 number, string, boolean 타입 가능. c언어 같은 경우는 정수형만 가능
+      //    case 값1 :
+      //    변수 === 값1 같을 때 수행하는 수행문;
+      //    break;
+      //    case 값2 :
+      //    변수 === 값2 같을 때 수행하는 수행문;
+      //    break;
+      //    default :
+      //    그 외에 경우에 수행하는 수행문;
+      //    break;
+      //  }
+
+      // break문 : switch문을 종료하고 끝으로(다음 문장) 나간다.
+      // continue문 : 반복문에서만 사용 가능, 해당 반복문의 처음으로 돌아간다.
+
+      let myNum = 10;
+      switch (myNum) {
+        case 10:
+          console.log("10");
+          break;
+        case 20:
+          console.log("20");
+          break;
+        default:
+          console.log("그건 내가 원하는 값이 아냐.");
+          break;
+      }
+      // 위 아래가 같은 기능을 하는 코드임.
+      if (myNum == 10) {
+        console.log("10");
+      } else if (myNum == 20) {
+        console.log("20");
+      } else console.log("그건 내가 원하는 값이 아냐.");
+
+      // 문자열 변수로 switch case문 사용
+      let seasom = "봄";
+      //   let seasom = prompt("계절입력");
+      switch ("봄") {
+        case "봄":
+          console.log("봄입니다.");
+          break;
+        case "여름":
+          console.log("여름입니다.");
+          break;
+        case "가을":
+          console.log("가을입니다.");
+          break;
+        case "겨울":
+          console.log("겨울입니다.");
+          break;
+        default:
+          console.log("계절이 없습니다.");
+          break;
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
