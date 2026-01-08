@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>최대최소 연습문제</title>
+    <script>
+      // 문제1
+      // 철수와 영희가 주사위 게임을 하고 있다.
+      // 철수가 주사위를 5번 던져서 가장 큰 수를 얻고,
+      // 영희가 철수처럼 주사위를 5번 던져서 가장 큰 수를 얻어서,
+      // 철수와 영희의 가장 큰 수를 출력하고, 승자를 출력하라.
+
+      let male_score = 0;
+      let female_score = 0;
+      for (let i = 1; i <= 5; i++) {
+        let dice = Math.floor(Math.random() * 6) + 1;
+        if (dice > male_score) {
+          male_score = dice;
+        }
+      }
+      for (let i = 1; i <= 5; i++) {
+        let dice = Math.floor(Math.random() * 6) + 1;
+        if (dice > female_score) {
+          female_score = dice;
+        }
+      }
+      console.log("철수의 가장 큰 수:", male_score);
+      console.log("철수의 가장 큰 수:", female_score);
+      if (male_score > female_score) {
+        console.log("철수 승!");
+      } else console.log("영희 승!");
+      console.log("-----------------------");
+
+      // 철수가 주사위를 5번 던져서, 가장 큰 수를 십의 자릿수로,
+      // 가장 작은 수를 일의 자릿수로 만든다.
+      // 영희도 같은 방법으로 십의 자릿수+일의 자릿수를 만든다.
+      // 두 수를 비교하여 승자를 출력하시오.
+      let male_score_max = 0;
+      let male_score_min = 10;
+      let female_score_max = 0;
+      let female_score_min = 10;
+
+      for (let i = 1; i <= 5; i++) {
+        let dice = Math.floor(Math.random() * 6) + 1;
+        if (dice > male_score_max) {
+          male_score_max = dice;
+        }
+        if (dice < male_score_min) {
+          male_score_min = dice;
+        }
+      }
+      console.log("철수:", male_score_max * 10 + male_score_min);
+
+      for (let i = 1; i <= 5; i++) {
+        let dice = Math.floor(Math.random() * 6) + 1;
+        if (dice > female_score_max) {
+          female_score_max = dice;
+        }
+        if (dice < female_score_min) {
+          female_score_min = dice;
+        }
+      }
+      console.log("영희:", female_score_max * 10 + female_score_min);
+      let male_result = male_score_max * 10 + male_score_min;
+      let female_result = female_score_max * 10 + female_score_min;
+
+      if (male_result > female_result) {
+        console.log("철수 승!");
+      } else if (male_result == female_result) {
+        console.log("무승부");
+      } else console.log("영희 승!");
+    </script>
+  </head>
+  <body></body>
+</html>
