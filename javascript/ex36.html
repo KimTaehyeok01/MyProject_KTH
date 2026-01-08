@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>연습문제</title>
+    <script>
+      // 문제1.
+      // 철수가 징검다리 놀이를 하고 있다.
+      // 돌 위에는 1부터 100까지의 숫자가 쓰여있고,
+      // 숫자에 3이 들어가 있으면 건너 뛰고,
+      // 돌 위의 숫자가 70이상이면 놀이를 종료하라.
+      // 철수가 밟은 돌 위의 숫자와 총합과 밟은 횟수를 출력하시오.
+
+      let sum = 0;
+      let count = 0;
+      for (let i = 1; i < 100; i++) {
+        if (i % 10 == 3 || Math.floor(i / 10) == 3) {
+          console.log(`건너뜀: ${i}`);
+          continue;
+        }
+        sum += i;
+        count++;
+        if (i >= 70) {
+          console.log(`총합: ${sum}, 밟은 횟수:${count}`);
+          break;
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
