@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반복문의 중단, 우회</title>
+    <script>
+      // break문 : 반복문을 중단하고, 반복문의 끝에서 시작
+      // continue문 : 회당 코드를 중단하고, 증감문으로 가서 시작
+      //   for (let i = 0; i < 10; i++) {
+      //     console.log(i);
+      //     if (i > 5) {
+      //       break;
+      //     }
+      //   }
+
+      //   for (let i = 0; i < 10; i++) {
+      //     if (i % 2 == 0) {
+      //       continue; // 2의 배수이면 다시 위로 올라감(회차 중단)
+      //     }
+      //     console.log(i);
+      //   }
+
+      // 연습문제
+      // 문제1.
+      // 랜덤 수 1부터 100사이의 값을 1000번 뽑는다.
+      // 그 랜덤 수가 50보다 크면, 그 수를 출력하고 중단한다.
+      // 출력 예) 랜덤수는 60
+
+      for (let i = 1; i <= 1000; i++) {
+        let rand = Math.floor(Math.random() * 100) + 1;
+        if (rand > 50) {
+          console.log("랜덤수는", rand, "회차는", i);
+          break;
+        }
+      }
+
+      // 문제2.
+      // 랜덤 수 1~100사이의 값을 1000번을 뽑는다.
+      // 그 랜덤 수의 총합을 구하고, 총합이 500을 넘어가면 중단한다.
+      // 몇 회차인지와 총합을 구하시오.
+      // 출력 예) 5회차, 508
+
+      let total_score = 0;
+      for (let i = 1; i <= 1000; i++) {
+        let rand1 = Math.floor(Math.random() * 100) + 1;
+        total_score += rand1;
+        if (total_score > 500) {
+          console.log(`${i}회차, 총합: ${total_score}`);
+          break;
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
