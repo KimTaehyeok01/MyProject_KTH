@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이중 반복문</title>
+    <script>
+      // 이중반복문 : 반복문 안에 반복문이 들어가는 문법.
+      //   for (let i = 0; i < 5; i++) {
+      //     console.log(`i: ${i}`);
+      //     for (let j = 0; j < 5; j++) {
+      //       console.log(` j: ${j}`);
+      //     }
+      //   }
+
+      // 구구단 출력하기
+      //   for (let i = 2; i <= 9; i++) {
+      //     console.log(`${i}단`);
+      //     for (let j = 1; j <= 9; j++) {
+      //       console.log(i + " * " + j + " = " + i * j);
+      //     }
+      //   }
+
+      // 시간을 분단위로 출력하기
+      //   for (let i = 1; i <= 24; i++) {
+      //     console.log(`${i}시`);
+      //     for (let j = 1; j <= 60; j++) {
+      //       console.log(i + " : " + j + " = " + i + "시" + j + "분");
+      //     }
+      //   }
+
+      // 이중 반복문에서 break, continue 사용하기
+      //반복문을 구분하기 위해서 레이블을 쓴다.(loop)
+      loop1: for (let i = 2; i <= 9; i++) {
+        console.log(`${i}단`);
+        loop2: for (let j = 1; j <= 9; j++) {
+          console.log(i + " * " + j + " = " + i * j);
+          if (j > 5) {
+            continue loop1;
+          }
+          if (j > 3) {
+            break loop2;
+          }
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
