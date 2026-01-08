@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이중반복문 연습문제</title>
+    <script>
+      // 별찍기
+      // 문제1.
+      // 아래와 같이 콘솔을 출력하시오.
+      // *****
+      // *****
+      // *****
+      // *****
+      // *****
+      //   for (let i = 1; i <= 5; i++) {
+      //     let star = "";
+      //     for (let j = 1; j <= 5; j++) {
+      //       star += "*";
+      //       document.write("*");
+      //     }
+      //     console.log(star);
+      //     document.write("<br>");
+      //   }
+
+      //문제2.
+      /*
+          *
+          **
+          ***
+          ****
+          *****
+
+          */
+      //   for (let i = 1; i <= 5; i++) {
+      //     let star = "";
+      //     for (let j = 1; j <= i; j++) {
+      //       star += "*";
+      //     }
+      //     console.log(star);
+      //   }
+
+      //문제3.
+      /*
+          *****
+          ****
+          ***
+          **
+          *
+
+          */
+
+      //   console.log("===================");
+      //   for (let i = 5; i >= 1; i--) {
+      //     let star = "";
+      //     for (let j = 1; j <= i; j++) {
+      //       star += "*";
+      //     }
+      //     console.log(star);
+      //   }
+
+      //문제4
+      //let N = 5;  N에 따라서 정사각형의 너비/높이가 정해진다.
+      //  5x5짜리 정사각형을 그린다.
+      //*****
+      //*   *
+      //*   *
+      //*   *
+      //*****
+
+      let N = 5;
+      for (let i = 1; i <= N; i++) {
+        let star = "";
+        for (let j = 1; j <= N; j++) {
+          if (i == 1 || i == N) {
+            star += "*";
+          } else {
+            if (j == 1 || j == N) {
+              star += "*";
+            } else {
+              star += " ";
+            }
+          }
+        }
+        console.log(star);
+      }
+
+      console.log("-----------------------");
+
+      //문제5
+      //let N = 5;  N에 따라서 Z자의 너비/높이가 정해진다.
+      //*****
+      //   *
+      //  *
+      // *
+      //*****
+      let N1 = 5;
+      for (let i = 1; i <= N1; i++) {
+        let star = "";
+        for (let j = 1; j <= N1; j++) {
+          if (i == 1 || i == N1) {
+            star += "*";
+          } else {
+            if (j == N1 - i + 1) {
+              star += "*";
+            } else {
+              star += " ";
+            }
+          }
+        }
+        console.log(star);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
