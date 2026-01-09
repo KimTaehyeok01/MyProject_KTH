@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>약수와 소수 판별</title>
+    <script>
+      // 약수(divisor) : 정수를 나눴을 때 나눠서 나머지가 0이 되어 딱 떨어지는 수.
+      // 소수(prime number) : 1과 자기 자신만을 가지는 수.
+
+      // 문제1
+      // 숫자 12의 약수를 모두 구하시오.
+
+      for (let i = 1; i <= 12; i++) {
+        if (12 % i == 0) {
+          console.log(`12의 약수: i`);
+        }
+      }
+      console.log("------------------");
+
+      // 문제 2
+      // 숫자 7이 소수인지 판별하시오.
+      let count = 0;
+      for (let j = 1; j <= 10; j++) {
+        if (j % 7 == 0) {
+          console.log("7은 소수");
+          count++;
+        }
+        //7이 소수인가 아닌가 판별
+        if (count == 2) {
+          console.log(`${j}는 소수`);
+        } else {
+          console.log(`${j}는 소수가 아님`);
+        }
+      }
+      console.log("------------------");
+      // 문제3 - 소수 판별
+      // 1부터 100사이의 정수 중에서
+      // 소수인 숫자만 고르시오.
+      for (let i = 1; i <= 100; i++) {
+        let prime_n = true;
+        if (i == 1) {
+          prime_n = false;
+        } else {
+          for (let j = 2; j <= Math.sqrt(i); j++) {
+            if (i % j == 0) {
+              prime_n = false;
+              break;
+            }
+          }
+        }
+        if (prime_n) {
+          console.log(i);
+        }
+      }
+
+      // 문제 4
+      // 투수가 무한히 공을 던진다.
+      // 스트라이크를 던질 확률은 70%
+      // 볼을 던질 확률은 30%이다.
+      // 스트라이크 3개가 누적 될 때, 게임을 중단하시오.
+      // 총 투수 수를 출력하고, 볼의 갯수도 출력하라.
+      let strike = 0;
+      let ball = 0;
+      let tusu = 0;
+      while (true) {
+        let rand = Math.floor(Math.random() * 100) + 1;
+        tusu++;
+        if (rand <= 70) {
+          strike++;
+          console.log(`스트라이크 ${strike}회`);
+        } else {
+          ball++;
+          console.log(`볼 ${ball}회`);
+        }
+
+        if (strike == 3) {
+          console.log(
+            `스트라이크: ${strike}개, 던진 투구 수: ${tusu}, 볼:${ball}`
+          );
+          break;
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
