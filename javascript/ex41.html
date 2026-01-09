@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>무한루프</title>
+    <script>
+      // 무한루프 만드는 법
+      // 무한루트 사용 이유 : 이벤트를 대기하고 있다가 처리하기 위해서 사용함.
+      // 1. for(;;)
+      // 2. while(true)
+      //   let count = 0;
+      //     for (;;) {
+      //       console.log(count++);
+      //     }
+
+      //   while (true) {
+      //     console.log(count++);
+      //     if (count >= 100) {
+      //       break;
+      //     }
+      //   }
+
+      // 연습문제
+      // 문제1
+      // 주사위 1개를 무한이 던져서, 숫자 5가 나오면 중단하고
+      // 그 숫자(5)를 출력하라.
+
+      while (true) {
+        let rand = Math.floor(Math.random() * 5) + 1;
+        if (rand == 5) {
+          console.log(`숫자 ${rand}`);
+          break;
+        }
+      }
+
+      // 문제2
+      // 철수는 승부욕이 강해서, 이길때 까지 주사위를 던지는 애다.
+      // 철수와 영희가 주사위를 1번씩 번갈아 던지면서,
+      // 승자와 패자와 무승부를 출력하고,
+      // 철수가 승리하면 게임을 멈추는 코드를 출력하시오.
+
+      while (true) {
+        let male = Math.floor(Math.random() * 5) + 1;
+        let female = Math.floor(Math.random() * 5) + 1;
+
+        if (male > female) {
+          console.log(`철수 승! 값: ${male}`);
+          break;
+        } else if (male < female) {
+          console.log(`영희 승! 주사위 값: ${female}`);
+        } else console.log("무승부");
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
