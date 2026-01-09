@@ -3,7 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>반복문 - for, while, do-while</title>
+    <script>
+      // 반복문 - while문
+      // while문을 쓰는 이유 : 조금 더 자유롭게 반복문을 구사할 수 있음.
+
+      // for문 형식 : for(변수초기화(초기값); 조건식; 증감식;){
+      //                 조건식이 참일 때 수행할 코드
+      //             }
+      for (let i = 0; i < 5; i++) {
+        console.log(i);
+      }
+
+      // while문 형식
+      // 변수초기화 1
+      // while(조건식2){
+      // 수행문3
+      // ...
+      // 증감문4
+      // }
+      let i = 0;
+      while (i < 5) {
+        console.log(i);
+        i++;
+      }
+
+      console.log("------------");
+
+      // do-while문 형식 : 한 번 먼저 수행하고 조건식을 수행한다.
+      //                   -적어도 한 번은 수행하고 조건판단을 할 때
+      let j = 0;
+      do {
+        console.log(j);
+        j++;
+      } while (j < 5);
+    </script>
   </head>
   <body></body>
 </html>
