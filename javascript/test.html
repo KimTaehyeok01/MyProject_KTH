@@ -25,28 +25,28 @@
       console.log("=== 문제 1: ATM 시뮬레이션 ===");
       // 여기에 코드를 작성하세요.
 
-      let user_money = 100000;
-      for (let i = 1; i <= 10; i++) {
-        let rand = Math.floor(Math.random() * 2) + 1;
-        let money = Math.floor(Math.random() * (50000 - 10000 + 1)) + 10000;
+      // let user_money = 100000;
+      // for (let i = 1; i <= 10; i++) {
+      //   let rand = Math.floor(Math.random() * 2) + 1;
+      //   let money = Math.floor(Math.random() * (50000 - 10000 + 1)) + 10000;
 
-        if (rand == 1) {
-          user_money += money;
-          document.write(
-            `잔액 증가 ${money}원 입금 (잔액: ${user_money}원) </br>`
-          );
-        } else if (rand == 2) {
-          if (user_money >= money) {
-            user_money -= money;
-            document.write(
-              `잔액 차감 ${money}원 출금 (잔액: ${user_money}원)</br>`
-            );
-          } else {
-            document.write("출금 실패: 잔액 부족</br>");
-          }
-        }
-      }
-      document.write(`최종 잔액 ${user_money}원</br>`);
+      //   if (rand == 1) {
+      //     user_money += money;
+      //     document.write(
+      //       `잔액 증가 ${money}원 입금 (잔액: ${user_money}원) </br>`
+      //     );
+      //   } else if (rand == 2) {
+      //     if (user_money >= money) {
+      //       user_money -= money;
+      //       document.write(
+      //         `잔액 차감 ${money}원 출금 (잔액: ${user_money}원)</br>`
+      //       );
+      //     } else {
+      //       document.write("출금 실패: 잔액 부족</br>");
+      //     }
+      //   }
+      // }
+      // document.write(`최종 잔액 ${user_money}원</br>`);
 
       /* =======================================================
          [실전 문제 2: 서버 과부하 탐지기 (이중 반복문)]
@@ -63,6 +63,21 @@
       ======================================================= */
       console.log("=== 문제 2: 서버 모니터링 ===");
       // 여기에 코드를 작성하세요.
+
+      for (let i = 1; i <= 7; i++) {
+        for (let j = 0; j <= 23; j++) {
+          let load = Math.floor(Math.random() * 101);
+          if (load >= 80) {
+            console.log(`"Warning: ${i}일차 ${j}시 - 서버 부하 높음!"`);
+          } else {
+            console.log("아무 문제 없음.");
+          }
+          if (load >= 100) {
+            console.log("Error: 서버 다운! 시스템 종료");
+            break;
+          }
+        }
+      }
 
       /* =======================================================
          [실전 문제 3: 쇼핑몰 재고떨이 (while문)]
@@ -81,6 +96,26 @@
       ======================================================= */
       console.log("=== 문제 3: 재고 관리 시스템 ===");
       // 여기에 코드를 작성하세요.
+      let stock = 30;
+
+      while (true) {
+        let rand = Math.floor(Math.random() * 5) + 1;
+
+        if (stock >= rand) {
+          stock -= rand;
+          console.log(
+            `판매 성공! 재고 차감. "${rand}켤레 판매 완료 (남은 재고: ${stock})`
+          );
+          if (stock == 0) {
+            console.log("완판되었습니다!");
+            break;
+          }
+        } else {
+          console.log(
+            `재고 부족으로 판매 불가 (주문: ${rand}, 남은 것: ${stock})`
+          );
+        }
+      }
     </script>
   </head>
   <body>
