@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>while문 연습문제</title>
+    <script>
+      // 문제1
+      // 1부터 100까지의 정수 중에서
+      // 2의 배수이면서, 3의 배수인 수를 모두 출력하시오.
+      let num = 1;
+      while (num <= 100) {
+        if (num % 2 == 0 && num % 3 == 0) {
+          console.log(num);
+        }
+        num++;
+      }
+      console.log("-------------------");
+
+      // 문제2 - 소수판별
+      // 1부터 100사이의 정수 중에서
+      // 소수인 숫자만 출력하시오.
+      //
+      let num2 = 1;
+      while (num2 <= 100) {
+        let isPrime = true;
+        if (num2 == 1) {
+          isPrime = false;
+        } else {
+          let i = 2;
+
+          while (i <= Math.sqrt(num2)) {
+            if (num2 % i == 0) {
+              isPrime = false;
+              break;
+            }
+            i++;
+          }
+        }
+        if (isPrime) {
+          console.log(num2);
+        }
+        num2++;
+      }
+      console.log("-------------------");
+
+      // 문제3 - 배열사용
+      // 1부터 45까지 랜덤한 정수 6개를 뽑아서, 로또번호를 만드시오.
+      // 단 이미 추첨된 번호가 나오면, 다시 추첨하시오.
+      // continue문을 이용한 재추첨 로직이 필요함.
+
+      //로또 번호는 6자리
+
+      //   let lotto_num = [0, 0, 0, 0, 0, 0];
+      //   let i = 0;
+      //   while (i < 6) {
+      //     let rand = Math.floor(Math.random() * 45) + 1;
+
+      //     //이미 추첨한 번호인가 판별
+      //     for (let j = 0; j < i; j++) {
+      //       // 추천된 로또 번호가 방금 추첨된 로또번호와 같은가?
+      //       if (lotto_num[j] == rand) {
+      //         console.log(`중복된 수 입니다. ${rand}`);
+      //         continue;
+      //       }
+      //     }
+      //     lotto_num[i] = rand;
+      //     console.log(rand);
+      //     i++;
+      //   }
+
+      let lotto_num = [];
+      let i = 0;
+      while (i < 6) {
+        let rand = Math.floor(Math.random() * 45) + 1;
+
+        //이미 추첨한 번호인가 판별
+        for (let j = 0; j < i; j++) {
+          // 추천된 로또 번호가 방금 추첨된 로또번호와 같은가?
+          if (lotto_num[j] == rand) {
+            // console.log(`중복된 수 입니다. ${rand}`);
+            continue;
+          }
+        }
+        lotto_num.push(rand);
+        console.log(rand);
+        i++;
+      }
+
+      console.log("-----------------");
+
+      //   let number = 1;
+      //   let lotto = [];
+      //   while (lotto.length < 6) {
+      //     let rand = Math.floor(Math.random() * 45) + 1;
+      //     let isPrime = false;
+      //     for (let i = 0; i < lotto.length; i++) {
+      //       if (lotto[i] == rand) {
+      //         isPrime = true;
+      //         break;
+      //       }
+      //     }
+
+      //     if (isPrime) {
+      //       continue;
+      //     } else {
+      //       lotto.push(rand);
+      //     }
+      //     console.log(lotto);
+      //     number++;
+      //   }
+
+      let lotto = [];
+      while (lotto.length < 6) {
+        const rand = Math.floor(Math.random() * 45) + 1;
+
+        let isDup = false;
+        for (let i = 0; i < lotto.length; i++) {
+          if (lotto[i] === rand) {
+            isDup = true;
+            break;
+          }
+        }
+        if (isDup) continue;
+
+        lotto.push(rand);
+        console.log([...lotto]); // 또는 console.log(lotto.slice());
+      }
+
+      console.log("최종 번호:", lotto);
+    </script>
+  </head>
+  <body></body>
+</html>
