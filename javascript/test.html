@@ -63,33 +63,109 @@
          ============================================== */
 
       alert("=== [미션 2] ATM 서비스를 시작합니다 ===");
+      // // while문으로 만든 코드
+      // let balance = 10000; // 초기 잔액
+      // while (true) {
+      //   let order = Number(
+      //     prompt("1.입금 2.출금 3.잔액 4.종료\n\n원하시는 번호를 입력하세요.")
+      //   );
+      //   if (order == 1) {
+      //     let money = Number(prompt("입금"));
+      //     balance += money;
+      //     alert(`${balance}원 입금 완료.`);
+      //     continue;
+      //   } else if (order == 2) {
+      //     let money = Number(prompt("출금"));
+      //     if (balance < money) {
+      //       alert("잔액 부족!");
+      //     } else {
+      //       balance -= money;
+      //     }
+      //     continue;
+      //   } else if (order == 3) {
+      //     alert(`현재 잔액: ${balance}원`);
+      //     continue;
+      //   } else {
+      //     alert("이용해주셔서 감사합니다.");
+      //     break;
+      //   }
+      // }
 
-      let balance = 10000; // 초기 잔액
-      // let order = Number(prompt("메뉴입력"));
+      // switch문으로 만든 코드
+      // let balance = 10000;
+      // let run = true;
+      // while (run) {
+      //   let order = Number(
+      //     prompt("1.입금 2.출금 3.잔액 4.종료\n\n원하시는 번호를 입력하세요.")
+      //   );
 
-      while (true) {
+      //   switch (order) {
+      //     case 1: // 입금
+      //       let deposit = Number(prompt("입금할 금액을 입력하세요"));
+      //       balance += deposit;
+      //       alert(`${balance}원 입금 완료.`);
+      //       break; // switch 탈출 -> 다시 while문 처음으로
+
+      //     case 2: // 출금
+      //       let withdraw = Number(prompt("출금할 금액을 입력하세요"));
+      //       if (balance < withdraw) {
+      //         alert("잔액 부족!");
+      //       } else {
+      //         balance -= withdraw;
+      //         alert(`${withdraw}원 출금 완료.`);
+      //       }
+      //       break; // switch 탈출 -> 다시 while문 처음으로
+
+      //     case 3: // 잔액 확인
+      //       alert(`현재 잔액: ${balance}원`);
+      //       break; // switch 탈출 -> 다시 while문 처음으로
+
+      //     case 4: // 종료
+      //       alert("이용해주셔서 감사합니다.");
+      //       run = false; // ★ 스위치를 끈다! (while문 조건이 false가 됨)
+      //       break; // switch 탈출 -> while문 조건 확인하러 갔다가 false라서 종료됨
+
+      //     default: // 1,2,3,4 외의 엉뚱한 키를 눌렀을 때
+      //       alert("잘못된 입력입니다. 1~4번 중 선택해주세요.");
+      //       break;
+      //   }
+      // }
+
+      let balance = 10000;
+      // exit:는 "예약어(명령어)"가 아니라,
+      // 님이 마음대로 지어준 변수명 같은 이름입니다. (gohome:, superLoop: 다 됨)
+      exit: while (true) {
         let order = Number(
           prompt("1.입금 2.출금 3.잔액 4.종료\n\n원하시는 번호를 입력하세요.")
         );
-        if (order == 1) {
-          let money = Number(prompt("입금"));
-          balance += money;
-          alert(`${balance}원 입금 완료.`);
-          continue;
-        } else if (order == 2) {
-          let money = Number(prompt("출금"));
-          if (balance < money) {
-            alert("잔액 부족!");
-          } else {
-            balance -= money;
-          }
-          continue;
-        } else if (order == 3) {
-          alert(`현재 잔액: ${balance}원`);
-          continue;
-        } else {
-          alert("이용해주셔서 감사합니다.");
-          break;
+
+        switch (order) {
+          case 1: // 입금
+            let deposit = Number(prompt("입금할 금액을 입력하세요"));
+            balance += deposit;
+            alert(`${balance}원 입금 완료.`);
+            break; // switch 탈출 -> 다시 while문 처음으로
+
+          case 2: // 출금
+            let withdraw = Number(prompt("출금할 금액을 입력하세요"));
+            if (balance < withdraw) {
+              alert("잔액 부족!");
+            } else {
+              balance -= withdraw;
+              alert(`${withdraw}원 출금 완료.`);
+            }
+            break; // switch 탈출 -> 다시 while문 처음으로
+
+          case 3: // 잔액 확인
+            alert(`현재 잔액: ${balance}원`);
+            break; // switch 탈출 -> 다시 while문 처음으로
+
+          case 4: // 종료
+            alert("이용해주셔서 감사합니다.");
+            break exit;
+          default: // 1,2,3,4 외의 엉뚱한 키를 눌렀을 때
+            alert("잘못된 입력입니다. 1~4번 중 선택해주세요.");
+            break;
         }
       }
     </script>
