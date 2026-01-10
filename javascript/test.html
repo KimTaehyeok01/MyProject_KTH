@@ -2,62 +2,102 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>생존 게임 시뮬레이션</title>
+    <title>JS Interactive Practice</title>
     <script>
-      /* [미션: 용사의 생존기]
-           
-           1. events 배열: 20, -50, 40, -100, 30
-           2. hp 변수: 100 (시작 체력)
-           3. isAlive 변수: true (생존 여부)
+      /* ==============================================
+         [미션 1: Up & Down 숫자 맞추기 게임]
+         
+         1. 컴퓨터가 1~100 사이의 랜덤 숫자를 정답(answer)으로 숨깁니다.
+         2. 사용자는 prompt로 숫자를 계속 입력합니다.
+         3. 로직 (while문 사용):
+            - 입력값 > 정답 : alert("Down! 더 작은 수입니다.");
+            - 입력값 < 정답 : alert("Up! 더 큰 수입니다.");
+            - 입력값 === 정답 : 
+              alert("정답입니다! O회 만에 맞췄어요!");
+              반복문 종료 (break);
+         4. 횟수를 세는 변수(count)도 매 턴 증가시켜 주세요.
+         ============================================== */
 
-           4. for문 로직 작성
-              - events[i] 값을 hp에 더하기 (회복 or 데미지)
-              
-              - [사망 체크] 
-                hp가 0 이하라면?
-                "사망했습니다..." 출력
-                isAlive = false 변경
-                반복문 종료(break)
+      alert("=== [미션 1] Up & Down 게임을 시작합니다 ===");
+      let answer = Math.floor(Math.random() * 100) + 1;
+      // 정답 (1~100)
+      let count = 0; // 시도 횟수
 
-              - [최대 체력 체크]
-                hp가 100을 넘는다면?
-                hp = 100 으로 고정 (101이어도 100이 됨)
-                "최대 체력으로 보정됨" 출력
+      while (true) {
+        // 1. 사용자 입력 받기 (숫자로 변환 필수!)
 
-              - [생존 신고]
-                살아있다면 "현재 체력: OOO" 출력
-        */
+        count++;
+        let input = Number(
+          prompt("1~100 사이의 숫자를 맞춰보세요 (정답: " + answer + ")")
+        );
 
-      console.log("=== ⚔️ 던전 탐험 시작 ===");
+        // ↓↓↓ 여기에 미션 1 코드를 작성하세요.
 
-      let events = [20, -50, 40, -100, 30];
-      let hp = 100;
-      let isAlive = true;
+        if (input > answer) {
+          console.log("유저의 숫자가 더 큽니다.");
+        } else {
+          console.log("컴퓨터의 숫자가 더 큽니다.");
+        }
 
-      // ↓↓↓ 아래에 코드를 작성하세요 ↓↓↓
-      for (let i = 0; i < events.length; i++) {
-        hp += events[i];
-        if (hp <= 0) {
-          isAlive = false;
-          console.log("사망했습니다...");
+        if (input == answer) {
+          console.log(
+            `유저: ${input}, 컴퓨터: ${answer}. 정답을 맞췄습니다. count: ${count}`
+          );
           break;
         }
-
-        if (hp >= 100) {
-          hp = 100;
-          console.log("최대 최력으로 보정됨.");
-        }
       }
-      // ↑↑↑ 작성 끝 ↑↑↑
 
-      if (isAlive) {
-        console.log("탐험 성공! 최종 생존!");
-      } else {
-        console.log("GAME OVER");
+      /* ==============================================
+         [미션 2: 자바스크립트 은행 ATM]
+         
+         1. 미션 1이 끝나면 바로 시작됩니다.
+         2. 초기 잔액(balance)은 10000원입니다.
+         3. 메뉴 입력 (prompt): "1.입금 2.출금 3.잔액확인 4.종료"
+         4. 로직 (switch 또는 if문 사용):
+            - 1번(입금): 입금액 입력받기 -> 잔액에 더하기 -> alert("O원 입금 완료");
+            - 2번(출금): 출금액 입력받기 
+                 -> (심화) 잔액보다 출금액이 크면? alert("잔액 부족!");
+                 -> 아니면 잔액에서 빼기 -> alert("출금 완료");
+            - 3번(잔액): alert("현재 잔액: O원");
+            - 4번(종료): alert("이용해주셔서 감사합니다."); -> break;
+         ============================================== */
+
+      alert("=== [미션 2] ATM 서비스를 시작합니다 ===");
+
+      let balance = 10000; // 초기 잔액
+      // let order = Number(prompt("메뉴입력"));
+
+      while (true) {
+        let order = Number(
+          prompt("1.입금 2.출금 3.잔액 4.종료\n\n원하시는 번호를 입력하세요.")
+        );
+        if (order == 1) {
+          let money = Number(prompt("입금"));
+          balance += money;
+          alert(`${balance}원 입금 완료.`);
+          continue;
+        } else if (order == 2) {
+          let money = Number(prompt("출금"));
+          if (balance < money) {
+            alert("잔액 부족!");
+          } else {
+            balance -= money;
+          }
+          continue;
+        } else if (order == 3) {
+          alert(`현재 잔액: ${balance}원`);
+          continue;
+        } else {
+          alert("이용해주셔서 감사합니다.");
+          break;
+        }
       }
     </script>
   </head>
   <body>
-    <h1>Survival Game Logic</h1>
+    <h1>JavaScript Interactive Mission</h1>
+    <p>
+      F12를 누르거나 코드를 완성하여 화면의 팝업(alert/prompt)을 확인하세요.
+    </p>
   </body>
 </html>
