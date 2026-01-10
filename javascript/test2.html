@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>함수(Function) 기초 완전 정복</title>
+    <script>
+      /* [ex44. 함수(Function)란 무엇인가?]
+           
+           1. 정의: 자주 쓰는 코드를 묶어서 이름을 붙인 "기능의 단위".
+           2. 비유: "자판기"와 같습니다.
+              - 동전 구멍 (Input/매개변수)
+              - 기계 내부 (Logic/코드 블록)
+              - 음료수 배출구 (Output/리턴값)
+           
+           3. 쓰는 이유:
+              - 복사/붙여넣기 안 해도 됨 (재사용성)
+              - 코드가 깔끔해짐 (가독성)
+              - 고칠 때 한곳만 고치면 됨 (유지보수)
+        */
+
+      /*
+        //   ①이름   ②입력  (재료)
+          function 함수이름(매개변수1, 매개변수2) {
+    
+        // ③구현(로직)
+           let 결과 = 매개변수1 + 매개변수2;
+
+        // ④출력(결과물)
+           return 결과; 
+}
+        */
+
+      // ==============================================
+      // 1. 가장 단순한 함수 (입력 X, 출력 X)
+      // ==============================================
+      // 선언 (기계를 만들기만 함. 실행 안 됨)
+      function sayHello() {
+        console.log("안녕하세요! 반가워요!");
+        console.log("오늘 날씨가 좋네요.");
+      }
+
+      console.log("=== 1단계: 단순 함수 ===");
+      sayHello(); // 호출 (버튼 누르기) - 이때 실행됨
+      sayHello(); // 여러 번 재사용 가능
+
+      // ==============================================
+      // 2. 매개변수가 있는 함수 (입력 O)
+      // ==============================================
+      // 괄호 안의 변수(name)는 자판기의 '동전 구멍'입니다.
+      function introduce(name) {
+        console.log("제 이름은 " + name + "입니다.");
+      }
+      function calculate(num1, num2) {
+        let result = num1 + num2;
+        console.log(num1 + " + " + num2 + " = " + result);
+      }
+
+      console.log("=== 2단계: 매개변수(입력) ===");
+      introduce("철수"); // "철수"가 name으로 들어감
+      introduce("영희"); // "영희"가 name으로 들어감
+
+      calculate(10, 20); // 10, 20이 각각 num1, num2로 전달됨
+
+      // ==============================================
+      // 3. 리턴(Return)이 있는 함수 (출력 O) ★★★ 가장 중요
+      // ==============================================
+      // return은 함수가 끝날 때 결과물을 '뱉어내는' 것입니다.
+      // return이 없으면 함수는 결과를 혼자만 알고 끝납니다.
+
+      function add(a, b) {
+        let sum = a + b;
+        return sum; // 계산된 값을 밖으로 던져줌!
+
+        console.log("이 코드는 실행 안 됨"); // return 뒤는 무시됨 (함수 종료)
+      }
+
+      console.log(add(10, 20));
+
+      console.log("=== 3단계: 리턴(출력) ===");
+
+      let myMoney = add(1000, 2000); // add 함수가 3000으로 '변신'해서 myMoney에 들어감
+      console.log("내 지갑: " + myMoney);
+
+      // 리턴값이 있으면 이렇게 바로 다른 계산에 쓸 수 있음
+      let total = add(10, 20) + add(5, 5); // 30 + 10 = 40
+      console.log("총합: " + total);
+
+      // ==============================================
+      // [실전 예제] 쇼핑몰 할인 계산기
+      // ==============================================
+      function getDiscountPrice(price, rate) {
+        // 가격(price)과 할인율(rate, %)을 받아서 할인가 계산
+        let discount = price * (rate / 100);
+        let finalPrice = price - discount;
+
+        return finalPrice; // 최종 가격만 툭 뱉어냄
+      }
+
+      console.log("=== 실전 예제 ===");
+
+      let shirt = getDiscountPrice(50000, 10); // 5만원, 10% 할인
+      console.log("셔츠 할인가: " + shirt + "원");
+
+      let pants = getDiscountPrice(30000, 50); // 3만원, 50% 할인
+      console.log("바지 할인가: " + pants + "원");
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript Function Basics</h1>
+    <p>F12 콘솔창을 확인하세요.</p>
+  </body>
+</html>
