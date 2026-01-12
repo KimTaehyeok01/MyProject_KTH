@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Array Mastery Test</title>
+    <script>
+      /* ========================================================
+         [문제 1] 영화관 입장 줄서기 (앞/뒤 조작)
+
+         1. `line` 배열 생성: ["민수", "동수", "영희"]
+         2. "민수"는 표를 샀으므로 줄에서 나갑니다. (맨 앞 삭제)
+         3. "철수"가 늦게 와서 줄 맨 끝에 섭니다. (맨 뒤 추가)
+         4. "대장"이 갑자기 새치기를 해서 줄 맨 앞에 섭니다. (맨 앞 추가)
+         5. 최종 대기열 `line`을 출력하세요.
+         (목표 결과: ["대장", "동수", "영희", "철수"])
+         ======================================================== */
+      console.log("=== 문제 1 ===");
+      // ↓↓↓ 코드 작성
+      const line = ["민수", "동수", "영희"];
+      line.shift();
+      line.push("철수");
+      line.unshift("대장");
+      console.log(line);
+
+      /* ========================================================
+         [문제 2] 데이터 오타 수정 (Splice 활용)
+
+         1. `subjects` 배열 생성: ["HTML", "CSS", "Javax", "React"]
+         2. "Javax"라는 오타가 발견되었습니다.
+         3. `indexOf`를 사용해 "Javax"가 몇 번째 인덱스인지 찾아서 변수에 저장하세요.
+         4. `splice`를 사용해 그 인덱스의 값을 "Java"로 교체하세요. (삭제 후 추가 아님, 교체임)
+         5. 최종 배열을 출력하세요.
+         ======================================================== */
+      console.log("=== 문제 2 ===");
+      // ↓↓↓ 코드 작성
+      const subjects = ["HTML", "CSS", "Javax", "React"];
+      let java = subjects.indexOf("Javax");
+      console.log(java);
+      subjects.splice(java, 1, "Java");
+      console.log(subjects);
+
+      /* ========================================================
+         [문제 3] 점수 분석기 (Split + For + If)
+
+         1. 문자열 `scoreStr` 생성: "85, 40, 92, 30, 100"
+         2. 쉼표(,)를 기준으로 잘라서 `scoreArr` 배열로 만드세요.
+         3. 반복문(for)을 돌면서 60점 이상인 점수만 골라내어 `passArr`라는 새 배열에 넣으세요(push).
+         (주의: 문자열을 숫자로 변환해서 비교해야 함. 공백 제거 주의)
+         4. 합격자 점수 목록(`passArr`)을 출력하세요.
+         (목표 결과: [85, 92, 100])
+         ======================================================== */
+      console.log("=== 문제 3 ===");
+      // ↓↓↓ 코드 작성
+      const scoreStr = "85, 40, 92, 30, 100";
+      const scoreArr = scoreStr.split(",");
+      const passArr = [];
+      for (let scorearr of scoreArr) {
+        let num = Number(scorearr);
+
+        if (num >= 60) {
+          passArr.push(num);
+        }
+      }
+      console.log(passArr);
+
+      /* ========================================================
+         [문제 4] 금지어 필터링 (Array.from + For)
+
+         1. 문자열 `comment` 생성: "이런 개나리 십장생 수박씨"
+         2. 이 문자열을 단어 단위가 아닌, "글자 단위"의 배열 `chars`로 변환하세요. (Array.from 사용)
+         3. 반복문을 돌면서 글자가 "십" 이거나 "개" 라면 해당 글자를 "X"로 바꾸세요.
+         (힌트: OR 연산자 || 사용)
+         4. 필터링된 배열을 다시 문자열로 합쳐서(join 사용 추천, 모르면 for문 합치기) 출력하세요.
+         (목표 결과: "이런 X나리 X장생 수박씨")
+         ======================================================== */
+      console.log("=== 문제 4 ===");
+      // ↓↓↓ 코드 작성
+      let comment = "이런 개나리 십장생 수박씨";
+      let chars = Array.from(comment);
+      console.log(chars);
+
+      for (let i = 0; i < chars.length; i++) {
+        if (chars[i] == "개" || chars[i] == "십") {
+          chars[i] = "x";
+        }
+      }
+      console.log(chars);
+    </script>
+  </head>
+  <body>
+    <h1>JavaScript Array Mastery</h1>
+  </body>
+</html>
