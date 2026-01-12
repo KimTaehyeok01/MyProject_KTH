@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Array Final Test</title>
+    <script>
+      /* ========================================================
+         [문제 1] 장바구니 품절 상품 삭제
+         
+         1. `cart` 배열 생성: ["우유", "콩나물", "삼겹살", "생수"]
+         2. "삼겹살"이 품절되었습니다.
+         3. "삼겹살"이 몇 번째에 있는지 찾아서 변수에 저장하세요.
+         4. 찾은 위치의 아이템을 삭제하세요. (다른 값으로 교체 아님. 그냥 삭제)
+         5. 최종 배열을 출력하세요.
+         ======================================================== */
+      console.log("=== 문제 1 ===");
+      // ↓↓↓ 코드 작성
+      const cart = ["우유", "콩나물", "삽겹살", "생수"];
+      let result = cart.indexOf("삽겹살");
+      console.log(result);
+      cart.splice(result, 1);
+      console.log(cart);
+
+      /* ========================================================
+         [문제 2] 회전 초밥 (Rotation Logic)
+         
+         1. `sushi` 배열 생성: ["연어", "광어", "새우", "장어"]
+         2. 손님이 맨 앞에 있는 "연어"를 먹지 않고 지나쳤습니다.
+         3. 맨 앞에 있는 아이템을 빼서, 맨 뒤로 다시 보내세요. (순서 이동)
+         4. 이 작업을 2번 반복하세요. (연어 뒤로 가고, 광어 뒤로 가고)
+         5. 최종 배열을 출력하세요.
+         ======================================================== */
+      console.log("=== 문제 2 ===");
+      // ↓↓↓ 코드 작성
+      const sushi = ["연어", "광어", "새우", "장어"];
+      // 2번 반복
+      for (let i = 0; i < 2; i++) {
+        // 중요: 뺀 녀석을 변수에 저장했다가 -> 뒤로 보냄
+        let item = sushi.shift();
+        sushi.push(item);
+      }
+      console.log(sushi);
+
+      /* ========================================================
+         [문제 3] URL 슬러그 만들기 (Slugify)
+         
+         1. 변수 `title` 생성: "Java Script Is Awesome"
+         2. 이 문자열을 띄어쓰기 기준으로 다 잘라서 배열로 만드세요.
+         3. 잘라진 배열을 하이픈(-) 기호로 다시 이어 붙여서 문자열로 만드세요.
+         4. 완성된 문자열을 소문자로 변환하여 `slug` 변수에 담아 출력하세요.
+         (목표 결과: "java-script-is-awesome")
+         ======================================================== */
+      console.log("=== 문제 3 ===");
+      // ↓↓↓ 코드 작성
+      let title = "Java Script Is Awesome";
+      console.log(title);
+      let title_split = title.split(" ");
+      console.log(title_split);
+      let title_result = title_split.join("-");
+      let title1 = title_result.toUpperCase();
+      console.log(title1);
+
+      /* ========================================================
+         [문제 4] 스팸 전화번호 필터링 (심화)
+         
+         1. 전화번호 목록 `numbers` 생성: ["010-1234-5678", "02-111-2222", "010-9999-8888", "031-123-4567"]
+         2. `validList`라는 빈 배열을 만드세요.
+         3. 반복문을 이용해 `numbers`를 검사하세요.
+         4. 번호가 "010"으로 시작하는 경우에만 `validList`에 추가(push)하세요.
+            (참고: 문자열도 startsWith 같은 함수 없이, substring이나 인덱스[0][1][2] 비교로 풀 수 있음)
+         5. `validList`를 출력하세요.
+         ======================================================== */
+      console.log("=== 문제 4 ===");
+      // ↓↓↓ 코드 작성
+      let numbers = [
+        "010-1234-5678",
+        "02-111-2222",
+        "010-9999-8888",
+        "031-123-4567",
+      ];
+      let validList = [];
+
+      for (let i = 0; i < numbers.length; i++) {
+        let num = numbers[i];
+
+        if (num.substring(0, 3) === "010") {
+          validList.push(num);
+        }
+      }
+      console.log(validList);
+    </script>
+  </head>
+  <body>
+    <h1>Final Boss Stage</h1>
+  </body>
+</html>
