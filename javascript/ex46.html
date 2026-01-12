@@ -70,6 +70,67 @@
       // 정규 표현식(Regular Expression)
       let fullTrim = string8.replace(/(|s*)/g, "");
       console.log(fullTrim);
+
+      // 정규표현식 - 숫자만 인지? 이메일 형식인지? 핸드폰 번호인지?
+      //             이름(알파벳)인지?
+
+      //--------------------------------------------------------------------
+
+      // [문자열 함수 한 눈에 보기 요약본]
+
+      // 1. 선언 (Declaration)
+      let str = "Hello Java Script"; // [추천] 리터럴 방식 (가벼움)
+      let strObj = new String("Obj"); // [비추] 객체 방식 (무거움, 수정가능이라지만 잘 안씀)
+
+      // =======================================================
+
+      // 2. 확인 및 탐색 (Check & Search)
+      console.log(str.length); // 길이 확인 (공백 포함) -> 17
+      console.log(str.charAt(0)); // 0번째 글자 가져오기 -> "H"
+      console.log(str[0]); // [추천] 0번째 글자 (배열처럼 접근) -> "H"
+
+      console.log(str.indexOf("Java")); // "Java"가 시작되는 인덱스 -> 6
+      console.log(str.indexOf("Python")); // 못 찾으면 -> -1 (중요!)
+      console.log(str.lastIndexOf("a")); // 뒤에서부터 찾은 "a"의 인덱스 -> 9
+
+      // =======================================================
+
+      // 3. 변환 (Change) - ★ 원본은 안 바뀜! (복사본 반환)
+      console.log(str.toUpperCase()); // 대문자로 -> "HELLO JAVA SCRIPT"
+      console.log(str.toLowerCase()); // 소문자로 -> "hello java script"
+
+      // 치환: replace("찾을거", "바꿀거")
+      let newStr = str.replace("Java", "ECMA");
+      console.log(newStr); // "Hello ECMA Script"
+
+      // =======================================================
+
+      // 4. 자르기 & 나누기 (Cut & Split)
+      // substring(시작, 끝-1) : 인덱스 6부터 10번 앞까지(9번까지)
+      console.log(str.substring(6, 10)); // "Java"
+
+      // split("기준") : 문자를 쪼개서 [배열]로 만듦 (CSV 데이터 처리에 필수)
+      let fruits = "사과,배,포도";
+      let arr = fruits.split(",");
+      console.log(arr); // ["사과", "배", "포도"]
+
+      // =======================================================
+
+      // 5. 합치기 (Join)
+      let str1 = "Hello";
+      let str2 = "World";
+      console.log(str1.concat(str2)); // 함수 사용 -> "HelloWorld"
+      console.log(str1 + str2); // [추천] + 연산자 사용 (직관적) -> "HelloWorld"
+
+      // =======================================================
+
+      // 6. 공백 제거 (Cleaning)
+      let messy = "  Hello World  ";
+      console.log(messy.trim()); // 앞뒤 공백만 제거 -> "Hello World"
+
+      // [심화] 모든 공백 제거 (정규표현식 활용)
+      // / \s /g -> s(Space, 공백)를 g(Global, 전체)에서 찾아라
+      console.log(messy.replace(/\s/g, "")); // "HelloWorld"
     </script>
   </head>
   <body></body>
