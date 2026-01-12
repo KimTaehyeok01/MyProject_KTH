@@ -49,6 +49,31 @@
 
       arr8.shift(); // 맨 처음 지우기
       console.log(arr8);
+
+      // 배열 합치기 - concat()
+      let arrA = [10, 20, 30];
+      let arrB = [30, 40, 50];
+      let arrC = arrA.concat(arrB);
+      console.log(arrC);
+
+      // 중복하는 요소를 제거하고 합치기 : 집합함수 Set
+      // 공식: new Set();
+      let setA = new Set(arrC);
+      console.log(setA);
+
+      // 정렬: sort()
+      // 공식 배열이름.sort();
+      // 오름차순(ASC) : 값이 올라가면서 정렬됨
+      let arrD = [20, 10, 30, 40, 50];
+      arrD.sort();
+      console.log(arrD); // 오름차순 정렬 - 주의! 원본배열이 변경되어 버림.
+      console.log(arrD);
+
+      //정렬 : reverse()
+      // 공식 배열이름.reverse();
+      // 오름차순(ASC) : 값이 올라가면서 정렬됨
+      arrD.reverse();
+      console.log(arrD); // 내림차순 정렬 - 주의! 원본배열이 변경되어 버림.
     </script>
   </head>
   <body></body>
