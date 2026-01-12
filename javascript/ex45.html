@@ -11,19 +11,89 @@
       console.log(str);
       console.log(str[0]);
       console.log(str.length);
+      // 문자열은(읽기전용) 불변이므로, str[1] = "t" 와 같이 특정 인덱스의 문자를 직접 변경하려는 시도는 무시됩
+      str[1] = "t";
+      console.log("바꿈", str[1]);
+
       // 문자열 순회
       for (let i = 0; i < str.length; i++) {
         console.log(str[i]);
       }
       console.log("---------------");
-      /* for of문으로 써봄. 
-      for (let st of str) {
-        console.log(st);
-      }*/
+      /* for of문으로 써봄.
+                 for (let st of str) {
+                   console.log(st);
+                 }*/
 
       // 문자(Character)가 복수로 모이면 문자열(String)이다.
       // 문자 인코드 표(유니코드표) - 글자를 숫자로 정리한 표.
       // 유니코드 첫페이지는 아스키코드이다.(키보드 자판 문자 + 특수기호)
+      // 한글은 0xAC00부터 "가",....
+      // 아스키(ASCII) 코드를 문자로 변환하려면 String.fromCharCode() 메서드를 사용
+      // 반대로 문자를 코드로 바꿀 때는 charCodeAt() 메서드를 사용
+
+      // 숫자를 문자(열)로 바꾸기 - String.fromCharCode()
+      let code = 65;
+      let codeChar = String.fromCharCode(code); //A로 변환과정
+      console.log(codeChar);
+      console.log(String.fromCharCode(66)); // B
+
+      // 문자(열)을 아스키코드 값(숫자로) 바꾸기. - charCodeAt()
+      console.log("A".charCodeAt(0)); // 65
+      console.log("Z".charCodeAt(0)); // 90
+      console.log("a".charCodeAt(0)); // 97
+
+      // 연습문제
+      // 1. "G"라는 문자가 대문자 인지 여부를 true/false를 출력하시오.
+      console.log("1번 문제");
+      let char = "G";
+      let Char = char.charCodeAt(0) >= 65 && char.charCodeAt(0) <= 90;
+      console.log(Char);
+
+      // 2. "hello"문자열을 대문자 문자열로 바꾸시오.
+      console.log("2번 문제");
+      let str2 = "hello";
+      let HELLO = "";
+      for (let i = 0; i < str2.length; i++) {
+        HELLO += String.fromCharCode(str2.charCodeAt(i) - 32);
+      }
+      console.log(HELLO);
+
+      // 3. "7" 문자열을 숫자 7로 바꾸시오.
+      console.log("3번 문제");
+      let str_num = "7";
+      //          55를 48로 빼서 값은 7
+      let num = str_num.charCodeAt(0) - "0".charCodeAt(0);
+      console.log(num);
+
+      // 코드는 반드시 재작성(리펙토리)하면 좋다.
+
+      // 문자열을 배열로 가져오기
+      let arrStr = Array.from("hello");
+      console.log(arrStr);
+
+      let arrStr1 = "apple, banana, orange";
+      console.log(arrStr1);
+
+      // 구분자로 문자열분리 후 배열
+      let arrStr2 = "apple, banana, orange".split(",");
+      console.log(arrStr2);
+      let arrStr3 = "apple, banana, orange".split(""); // 공백
+      console.log(arrStr3);
+      let arrStr4 = "apple".split(",");
+      console.log(arrStr4);
+
+      // 전개연산자 ...
+      let apple = "apple";
+      let arrStr5 = [..."apple"];
+      console.log(arrStr5);
+
+      let str3 = "apple";
+      str3[0] = "c"; // 읽기 전용이므로 안바뀜.
+
+      let arrstr = Array.from("goodbye"); //이건 바꿀 수 있음.
+      arrstr[3] = "K";
+      console.log(arrstr);
     </script>
   </head>
   <body></body>
