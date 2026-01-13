@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>함수</title>
+    <script>
+      // 함수 : function
+      //      : 기능 단위로 분리 해놓은 코드 뭉치
+      //      : 코드에 이름을 붙야놓고, 호출(실행),
+      //      : 전달(함수형변수, 익명함수) 할 수 있다.
+      // 사용하는 이유
+      // 1. 중복되는 코드를 줄이기 위해(반복문, 함수, 클래스)
+      // 2. 코드뭉치에 이름을 붙여서 가독성을 올릴 수 있다(기존 코멘트보다는 낫다.)
+
+      // 함수의 4가지 형식
+      // 선언부 - 선언만 하고 실행되진 않음.
+      // 호출부 - 위에서 선언되어 있지 않으면 실행 x
+      // 1. 매개변수(입력값) x, 반환값 x
+      // 2. 매개변수(입력값) o, 반환값 x
+      // 3. 매개변수(입력값) x, 반환값 o
+      // 4. 매개변수(입력값) o, 반환값 o
+
+      // 함수의 종료
+      // 1. return문 종료
+      // 2. { } 블럭(스코프)의 마지막에서 종료
+      // break문은 함수 종료 x -> 반복문 종료
+
+      // 1. 매개변수(입력값) x, 반환값 x
+      function myfunc1() {
+        // 선언부
+        console.log("myfunc1()");
+        return; // 생략 가능
+      }
+      myfunc1(); // 호출부
+
+      // 2. 매개변수(입력값) o, 반환값 x
+      function myfunc2(param) {
+        console.log("파라미터:", param);
+      }
+      myfunc2(10);
+      // 3. 매개변수(입력값) x, 반환값 o
+      function myfunc3() {
+        return "김태혁";
+      }
+      // 함수반환값을 받으려면 대입 연산자 이용
+      myfunc3();
+
+      // 함수반환값을 받으려면 대입 연산자 방법들
+      let name = myfunc3();
+      console.log(name);
+      console.log(myfunc3());
+
+      // 4. 매개변수(입력값) o, 반환값 o
+      function myfunc4(a, b) {
+        // 입력값 2개를 더한 값을 output(결과값)으로 반환
+        return a + b;
+      }
+      let sum = myfunc4(10, 20);
+      console.log(sum);
+      console.log(myfunc4(10, 20));
+    </script>
+  </head>
+  <body></body>
+</html>
