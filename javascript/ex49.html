@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>정렬 알고리즘</title>
+    <!-- ex49 -->
     <script>
-      // 정렬 알고리즘
-      // 가장 대표적인 것 : 버블정렬, 선택정렬, 삽입정렬
+      // 정렬알고리즘
+      // 대표적인 정렬 알고리즘 : 버블정렬, 선택정렬, 삽입정렬
+      // https://velog.io/@minji0801/버블정렬-vs-선택정렬-vs-삽입정렬-차이-제대로-알고가자
 
       // 치환(변수 교환하기)
+      let a = 10;
+      let b = 20;
+      //값을 교환하려면, 임시변수를 하나 사용한다.
+      let temp = a;
+      a = b;
+      b = temp;
 
-      // 버블정렬
+      //1.버블정렬(bubble sort)
       let numbers = [9, 8, 1, 3, 2];
-      // 모든 요소를 쌍으로 비교한다.
-      // 0:1, 0:2, 0:3, 0:4
-      // 8:1, 8:3, ...
-      //....
-      // 이중반복문으로 i,j 인덱스 발생
-
-      // 버블정렬-오름차순
-      // 모든 자릿수를 쌍으로 처리하여, 오른쪽 값이 더 작으면
-      // 치환한다.
+      //모든 요소를 쌍으로 비교한다.
+      // 0:1 0:2 0:3: 0:4
+      // 1:2 1:3 1:4
+      // 2:3 2:4
+      // 3:4
+      // 이중 반복문으로 i,j인덱스 발생
       for (let i = 0; i < numbers.length - 1; i++) {
-        // console.log("i", i);
+        console.log("i", i);
         for (let j = i + 1; j < numbers.length; j++) {
-          //   console.log("j", j);
-          if (numbers[i] > numbers[j]) {
-            // 치환
-            t = numbers[i];
-            numbers[i] = numbers[j];
-            numbers[j] = t;
-          }
+          console.log(" j", j);
         }
       }
 
+      //버블 정렬-오름차순
+      //모든 자릿수를 쌍으로 비교하여, 왼쪽 값이 더 크면,
+      //치환한다.
+      numbers = [9, 8, 1, 3, 2];
+      let t = 0;
+      for (let i = 0; i < numbers.length - 1; i++) {
+        for (let j = 0; j < numbers.length - 1 - i; j++) {
+          console.log("비교 쌍:", j, j + 1);
+          if (numbers[j] > numbers[j + 1]) {
+            //치환
+            t = numbers[j];
+            numbers[j] = numbers[j + 1];
+            numbers[j + 1] = t;
+          }
+        }
+      }
       console.log(numbers);
+      // [9, 8, 1, 3, 2]
     </script>
   </head>
-  <body></body>
 </html>
