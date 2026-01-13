@@ -20,16 +20,40 @@
       // 그 3개 값중에 가장 큰 수를 반환하는 함수를 만드시오.
 
       function max(a, b, c) {
-        let maxNum = a;
-        if (b > maxNum) {
-          maxNum = b;
-        }
-        if (c > maxNum) {
-          maxNum = c;
-        }
-        return maxNum;
+        // let maxNum = a;
+        // if (b > maxNum) {
+        //   maxNum = b;
+        // }
+        // if (c > maxNum) {
+        //   maxNum = c;
+        // }
+        // return maxNum;
+        return Math.max(a, b, c);
       }
-      console.log(max(10, 20, 30));
+      console.log(max(120, 40, 30));
+
+      //3. 복불복 게임을 함수로 설계해 보자.
+      //   입력 값으로 number타입(정수 1~10사이) 1개를 입력받고,
+      //   그중 정수 3과 7일 때는 "게임에 졌습니다." 문자열을 반환하고,
+      //   그외의 수(1,2,4,5,6,8,9,10)일때는 "게임에 이겼습니다"
+      //   문자열을 반환하는 함수를 설계하시오.
+      // 호출부에서 몇번 실행하여 테스트하시오.
+
+      function Scoregame(num) {
+        let result = "";
+        if (num >= 1 || num <= 10) {
+          if (num === 3 || num === 7) {
+            result = "게임에 졌습니다.";
+          } else if (num !== 3 && num !== 7) {
+            result = "게임에 이겼습니다.";
+          } else {
+            result = "지정된 수가 아닙니다.";
+          }
+          return result;
+        }
+      }
+      let num = Number(prompt("(정수 1~10사이) 1개 입력"));
+      console.log("숫자:", num, Scoregame(num));
     </script>
   </head>
   <body></body>
