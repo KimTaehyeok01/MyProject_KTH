@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mass Sender System</title>
+    <script>
+      /* =================================================================
+         [프로젝트] 회원 일괄 안내 시스템 구축
+
+         [1. 비즈니스 목표 (Business Goal)]
+         - 회원 명단(배열)이 주어졌을 때, 반복문을 통해 
+           모든 회원에게 '동일한 방식(이메일 or 문자)'으로 메시지를 전송한다.
+         - 전송 방식(이메일, 문자 등)이 바뀌더라도 
+           반복 처리하는 핵심 로직(processAll)은 수정할 필요가 없어야 한다.
+
+         [2. 기술적 요구사항 (Technical Requirements)]
+         - 모든 함수는 ES6 '화살표 함수(=>)' 문법을 준수할 것.
+         - `processAll` 함수는 데이터(배열)와 행동(콜백 함수)을 인자로 받아 처리할 것.
+         - 배열 순회 시 `for ... of` 문법을 사용할 것.
+         ================================================================= */
+
+      // [Data] 회원 명단 (DB에서 가져왔다고 가정)
+      const members = ["철수", "영희", "민수", "지수"];
+
+      /* [개발 영역] */
+
+      // 1. 화살표 함수 `email` 작성 (전송 모듈 1)
+      // - 매개변수: name
+      // - 기능: 콘솔에 `[이메일] ${name}님, 안녕하세요.` 형식으로 출력
+      const email = (name) => console.log(`[이메일] ${name}님, 안녕하세요.`);
+
+      // 2. 화살표 함수 `sms` 작성 (전송 모듈 2)
+      // - 매개변수: name
+      // - 기능: 콘솔에 `[문자] ${name}님, 확인 부탁드립니다.` 형식으로 출력
+      const sms = (name) => console.log(`[문자] ${name}님, 안녕하세요.`);
+
+      // 3. 화살표 함수 `processAll` 작성 (일괄 처리 컨트롤러)
+      // - 매개변수: names (배열), action (콜백 함수)
+      // - 기능: 전달받은 names 배열을 `for..of`로 반복하면서,
+      //         각 요소를 action 함수에 넣어 실행함.
+
+      const processAll = (names, action) => {
+        for (let member of members) {
+          names = member;
+          action(names);
+        }
+      };
+
+      processAll(members, email);
+      processAll(members, sms);
+
+      /* [테스트 영역] */
+      // 4. 실행
+      // - members 배열을 `email` 방식으로 일괄 처리
+      // - members 배열을 `sms` 방식으로 일괄 처리
+    </script>
+  </head>
+  <body>
+    <h1>단체 발송 시스템</h1>
+  </body>
+</html>
