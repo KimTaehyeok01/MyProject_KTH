@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Mission: Find MVP</title>
+    <script>
+      let rawData = " Park:85, Kim:92, Lee:78, Choi:96, Jung:88 ";
+      console.log("원본:", rawData);
+
+      // 1. [데이터 정리]
+      // rawData를 콤마(,) 기준으로 잘라서 배열 'scoreList'에 담으시오.
+      let scoreList = rawData.split(",");
+      console.log(scoreList);
+
+      // 1등 정보를 기록할 변수 (초기화 완료)
+      let maxScore = 0;
+      let mvpName = "";
+
+      // 2. [최대값 찾기 로직]
+      // scoreList 배열을 for문으로 돌면서 다음 로직을 수행하시오.
+      // ① 각 항목의 공백을 제거하고, 콜론(:)을 기준으로 이름과 점수를 분리하시오.
+      // ② 점수는 반드시 '숫자'로 변환하시오.
+      // ③ [1등 교체] 만약 '현재 점수'가 '지금까지의 1등 점수(maxScore)'보다 크다면,
+      //    maxScore와 mvpName을 현재 사람의 것으로 덮어쓰시오(갱신).
+
+      // ↓↓↓ 코드 작성
+
+      for (let scorelist of scoreList) {
+        let trim = scorelist.trim();
+        let split = trim.split(":");
+        let name = split[0];
+        let score = Number(split[1]);
+
+        if (score > maxScore) {
+          maxScore = score;
+          mvpName = name;
+        }
+      }
+
+      // [결과 확인]
+      console.log("🏆 우승자:", mvpName); // 예상: "Choi"
+      console.log("💯 점수:", maxScore); // 예상: 96
+    </script>
+  </head>
+  <body>
+    <h1>오디션 MVP 찾기</h1>
+  </body>
+</html>
