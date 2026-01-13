@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Function Practice</title>
+    <script>
+      /* =================================================================
+           [미션] 나만의 함수 만들기 실습
+
+           * 조건: 아래 주석에 적힌 요구사항대로 함수를 직접 '선언'하고 만드세요.
+           * 힌트: 함수 만드는 법 -> function 이름(매개변수) { ... return ... }
+           ================================================================= */
+
+      // 1. [사각형 넓이 구하기]
+      // - 함수 이름: getRectArea
+      // - 매개변수: 가로(width), 세로(height) -> 숫자 2개
+      // - 기능: 가로와 세로를 곱한 값을 반환(return)하시오.
+
+      // ↓↓↓ 여기에 코드 작성
+      function getRectArea(width, height) {
+        return width * height;
+      }
+      console.log(`가로x세로: ${getRectArea(12, 4)}`);
+
+      // 2. [계절 판독기]
+      // - 함수 이름: getSeason
+      // - 매개변수: 월(month) -> 숫자 1개
+      // - 기능:
+      //    * 3~5월이면 "봄" 반환
+      //    * 6~8월이면 "여름" 반환
+      //    * 9~11월이면 "가을" 반환
+      //    * 12월, 1월, 2월이면 "겨울" 반환
+      //    * 그 외의 숫자(13월 등)가 들어오면 "잘못된 입력" 반환
+
+      // ↓↓↓ 여기에 코드 작성
+      function getSeason(month) {
+        if (month >= 3 && month <= 5) {
+          return "봄";
+        } else if (month >= 6 && month <= 8) {
+          return "여름";
+        } else if (month >= 9 && month <= 11) {
+          return "가을";
+        } else if (month == 12 || month <= 2) {
+          return "겨울";
+        }
+      }
+      console.log(getSeason(2));
+
+      // 3. [성인 판별기] (true/false 반환)
+      // - 함수 이름: isAdult
+      // - 매개변수: 나이(age) -> 숫자 1개
+      // - 기능:
+      //    * 나이가 20세 이상이면 true 반환
+      //    * 나이가 20세 미만이면 false 반환
+
+      // ↓↓↓ 여기에 코드 작성
+      function isAdult(age) {
+        let isfalse = false;
+        if (age >= 20) {
+          isfalse = true;
+        } else isfalse;
+
+        return isfalse;
+      }
+      console.log(isAdult(19));
+
+      // 4. [배달비 계산기] (심화)
+      // - 함수 이름: calcDeliveryFee
+      // - 매개변수: 주문금액(amount) -> 숫자 1개
+      // - 기능:
+      //    * 주문금액이 50,000원 이상이면 배달비 0원 반환 (무료)
+      //    * 주문금액이 20,000원 이상 ~ 50,000원 미만이면 배달비 1000원 반환
+      //    * 주문금액이 20,000원 미만이면 배달비 3000원 반환
+
+      // ↓↓↓ 여기에 코드 작성
+      function calcDeliveryFee(amount) {
+        let money = 0;
+        if (amount >= 50000) {
+          money;
+        } else if (amount >= 20000 && amount < 50000) {
+          money = 1000;
+        } else if (amount < 20000) {
+          money = 3000;
+        }
+        return money;
+      }
+
+      console.log(calcDeliveryFee(10000));
+    </script>
+  </head>
+  <body>
+    <h1>함수 만들기 연습</h1>
+  </body>
+</html>
