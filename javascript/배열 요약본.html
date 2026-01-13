@@ -2,131 +2,146 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>JS 문법 공식 총정리 (ex44~ex47)</title>
+    <title>JS 문법 완전 정복 (Ultimate Cheat Sheet)</title>
     <script>
-      /*
-           --- 변수 선언 없어도 되는 것 ---
-      함수명,역할,리턴값(반환값),비고 (원본 변화)
-      push(),뒤에 추가,변경된 배열의 길이(숫자),변함 (추가됨)
-      pop(),뒤에서 뺌,빠진 놈(값),변함 (삭제됨)
-      unshift(),앞에 추가,변경된 배열의 길이(숫자),변함 (추가됨)
-      shift(),앞에서 뺌,빠진 놈(값),변함 (삭제됨)
-      splice(),중간 삭제/추가,삭제된 놈들(배열),변함 (수정됨)
-      sort(),정렬,정렬된 배열 그 자체,변함 (순서 바뀜)
-      reverse(),뒤집기,뒤집힌 배열 그 자체,변함 (뒤집힘)
-      */
-
-      /* 
-          --- 변수 선언이 있어야 하는 것 ---
-      함수명,역할,리턴값(반환값),비고 (원본 변화)
-      join(),문자로 합치기,합쳐진 문자열,안 변함 (멀쩡)
-      slice(),배열 자르기,잘린 새 배열,안 변함 (멀쩡)
-      concat(),배열 합치기,합쳐진 새 배열,안 변함 (멀쩡)
-      map(),가공하기,가공된 새 배열,안 변함 (멀쩡)
-      indexOf()	위치 찾기	인덱스 숫자 (없으면 -1)	안 변함 (멀쩡)
-      filter(),걸러내기,걸러진 새 배열,안 변함 (멀쩡)*/
       /* ========================================================================
-           [PART 1] 함수 (Function) - ex44
-           : 입력(매개변수)을 받아 로직을 수행하고 결과(return)를 뱉는 기계
+           [PART 1] 함수 (Function)
+           : 코드를 묶어놓은 박스
            ======================================================================== */
 
-      // [공식 1: 선언] function 함수명(매개변수) { 실행코드; return 반환값; }
-      function add(a, b) {
-        let sum = a + b;
-        return sum; // 이 줄이 없으면 undefined 반환
+      // 1. 기본 선언
+      function basicFunc(x) {
+        return x + 1;
       }
 
-      // [공식 2: 호출] 변수 = 함수명(인자);
-      let result = add(10, 20);
-      console.log("함수결과:", result); // 30
+      // 2. 익명 함수
+      let anonFunc = function (x) {
+        return x + 1;
+      };
+
+      // 3. 화살표 함수 (실무용)
+      let arrowFunc = (x) => x + 1;
 
       /* ========================================================================
-           [PART 2] 문자열 (String) - ex45, ex46
-           : 읽기 전용(Immutable) 배열. 원본은 절대 변하지 않음.
+           [PART 2] 문자열 (String)
+           🚨 특징: 읽기 전용 (Immutable). 원본 절대 안 변함.
+           👉 결론: 무조건 결과를 '변수'에 담아서 써야 함.
            ======================================================================== */
 
-      // 1. 아스키코드 변환
-      // [공식] 문자 -> 숫자: 문자열.charCodeAt(인덱스)
-      // [공식] 숫자 -> 문자: String.fromCharCode(숫자)
-      console.log("A".charCodeAt(0)); // 65
-      console.log(String.fromCharCode(65)); // "A"
+      let str = "Hello World";
 
-      // 2. 문자열 배열 변환 (★중요)
-      // [공식] Array.from(문자열) 또는 [...문자열]
-      let charArr = Array.from("Hello"); // ['H', 'e', 'l', 'l', 'o']
+      // --- 1. 정보 확인 ---
+      let len = str.length; // [변수필수] 길이
+      let char = str.charAt(0); // [변수필수] 한 글자 가져오기
 
-      // 3. 문자열 조작 함수 (반드시 변수로 받아야 함)
-      let str = "  Hello,World  ";
+      // --- 2. 검색 ---
+      let index = str.indexOf("World"); // [변수필수] 위치 찾기
+      let hasIt = str.includes("Hello"); // [변수필수] 존재 여부
 
-      // [공식: 길이] 문자열.length
-      console.log(str.length); // 15
-
-      // [공식: 검색] 문자열.indexOf("찾을값") -> 인덱스 반환 (없으면 -1)
-      console.log(str.indexOf("World")); // 8
-
-      // [공식: 자르기] 문자열.substring(시작, 끝);
-      console.log(str.substring(2, 7)); // "Hello" (인덱스 2~6까지)
-
-      // [공식: 분리] 문자열.split("구분자") -> 배열로 변환됨
-      let words = str.split(","); // ["  Hello", "World  "]
-
-      // [공식: 공백제거] 문자열.trim()
-      console.log(str.trim()); // "Hello,World"
+      // --- 3. 조작 (원본 안 변함!!) ---
+      let sub1 = str.substring(0, 5); // [변수필수] 자르기 (Hello)
+      let sub2 = str.slice(0, 5); // [변수필수] 자르기 (음수 가능)
+      let replaced = str.replace("World", "JS"); // [변수필수] 교체
+      let upper = str.toUpperCase(); // [변수필수] 대문자
+      let lower = str.toLowerCase(); // [변수필수] 소문자
+      let combined = str.concat("!!!"); // [변수필수] 붙이기
+      let trimmed = str.trim(); // [변수필수] 공백 제거
+      let splitArr = str.split(" "); // [변수필수] 배열로 변환
 
       /* ========================================================================
-           [PART 3] 배열 (Array) - ex47
-           : 데이터 기차. 수정 가능(Mutable).
+           [PART 3] 배열 (Array)
+           🚨 특징: 원본을 바꾸는 놈(파괴) vs 안 바꾸는 놈(비파괴) 섞여 있음.
            ======================================================================== */
 
-      // 1. 선언
-      // [공식] let 변수명 = [값1, 값2, ...];
-      let arr = [10, 20, 30];
+      // 1. 배열 생성
+      let arr1 = [1, 2, 3];
+      let arr4 = Array.of(1, 2, 3);
+      let arr5 = Array.from("Hello");
 
-      // 2. 뒤쪽 조작 (Stack) - 빠름/추천
-      // [공식] 배열.push(값); (추가) / 배열.pop(); (삭제)
-      arr.push(40); // [10, 20, 30, 40]
-      arr.pop(); // 40 삭제됨
+      // -----------------------------------------------------------
+      // [그룹 A] 원본 파괴자들 (★변수 선언 필요 없음! 그냥 쓰면 됨)
+      // -----------------------------------------------------------
+      let data = ["A", "B", "C"];
 
-      // 3. 앞쪽 조작 (Queue) - 느림
-      // [공식] 배열.unshift(값); (추가) / 배열.shift(); (삭제)
-      arr.shift(); // 10 삭제됨 -> [20, 30]
+      data.push("D"); // [원본변경] 뒤 추가
+      data.pop(); // [원본변경] 뒤 삭제
+      data.unshift("Z"); // [원본변경] 앞 추가
+      data.shift(); // [원본변경] 앞 삭제
 
-      // 4. 중간 조작 (Splice) - 만능함수
-      // [공식] 배열.splice(시작인덱스, 삭제개수, 넣을값...);
+      // ★만능툴: 중간 데이터 삭제/추가 (1번 인덱스부터, 1개 지우고, "B" 넣기)
+      data.splice(1, 1, "B"); // [원본변경]
 
-      // (예시1) 삭제만: 1번 인덱스부터 1개 삭제
-      arr.splice(1, 1);
+      data.reverse(); // [원본변경] 뒤집기
+      data.sort(); // [원본변경] 정렬
 
-      // (예시2) 끼워넣기: 1번 자리에 0개 지우고 "New" 추가
-      arr.splice(1, 0, "New");
+      // -----------------------------------------------------------
+      // [그룹 B] 원본 지킴이들 (★변수에 저장 안 하면 결과 날아감!)
+      // -----------------------------------------------------------
+      let nums = [1, 2, 3, 4, 5];
 
-      // (예시3) 교체하기: 1번 자리에 1개 지우고 "Update" 추가
-      arr.splice(1, 1, "Update");
+      let subArr = nums.slice(0, 2); // [변수필수] 자르기
+      let newArr = nums.concat([6, 7]); // [변수필수] 합치기
+      let strResult = nums.join("-"); // [변수필수] 문자로 합치기
+      let findIdx = nums.indexOf(3); // [변수필수] 위치 찾기
+      let isExist = nums.includes(3); // [변수필수] 존재 여부
 
       /* ========================================================================
-           [PART 4] 배열 유틸리티 - ex47 심화
+           [PART 4] 배열 반복/변형 (심화)
            ======================================================================== */
 
-      let numList = [3, 1, 5, 2, 2];
+      // 1. forEach (단순 반복)
+      nums.forEach((item) => {
+        console.log(item);
+      });
 
-      // 1. 정렬
-      // [공식] 배열.sort(); (오름차순) / 배열.reverse(); (뒤집기)
-      numList.sort(); // [1, 2, 2, 3, 5]
+      // 2. map (변신 - 새 배열 반환)
+      let doubled = nums.map((item) => item * 2); // [변수필수]
 
-      // 2. 합치기
-      // [공식] 배열1.concat(배열2)
-      let newArr = numList.concat([10, 20]);
+      // 3. filter (필터링 - 새 배열 반환)
+      let even = nums.filter((item) => item % 2 === 0); // [변수필수]
 
-      // 3. 중복제거 (Set)
-      // [공식] Array.from(new Set(배열))
-      let uniqueArr = Array.from(new Set(numList)); // [1, 2, 3, 5]
+      /* ========================================================================
+           [PART 5] 형 변환 & 수학 (★보너스 추가)
+           : 실무에서 데이터 가공할 때 밥 먹듯이 씀
+           ======================================================================== */
 
-      // 4. 배열을 문자열로 (Join)
-      // [공식] 배열.join("구분자")
-      console.log(uniqueArr.join("-")); // "1-2-3-5"
+      let sNum = "100";
+      let nNum = 100;
+
+      // 1. 문자를 숫자로 (String -> Number)
+      let result1 = parseInt(sNum); // [변수필수] 정수로 변환 (권장)
+      let result2 = Number(sNum); // [변수필수] 숫자로 변환
+      let result3 = +sNum; // [변수필수] (꼼수) 앞에 + 붙이면 숫자 됨
+
+      // 2. 숫자를 문자로 (Number -> String)
+      let str1 = String(nNum); // [변수필수] "100"
+      let str2 = nNum.toString(); // [변수필수] "100"
+
+      // 3. 수학 (Math)
+      let pi = 3.141592;
+      console.log(Math.round(pi)); // [반올림] 3
+      console.log(Math.ceil(pi)); // [올림] 4
+      console.log(Math.floor(pi)); // [내림] 3
+      console.log(Math.abs(-100)); // [절댓값] 100
+      console.log(Math.max(1, 5, 3)); // [최댓값] 5
+      console.log(Math.min(1, 5, 3)); // [최솟값] 1
+      console.log(Math.random()); // [랜덤] 0 ~ 1 사이 무작위 소수
+
+      /* ========================================================================
+           [PART 6] 배열의 끝판왕 reduce (★고급)
+           : 합계 구할 때 for문 대신 이거 씀 (간지남)
+           ======================================================================== */
+
+      let scores = [10, 20, 30];
+
+      // [역할] 배열을 싹 돌면서 값 하나로 압축함 (acc: 누적값, cur: 현재값)
+      // 0은 시작값. (0 + 10 -> 10 + 20 -> 30 + 30 -> 60)
+      let sum = scores.reduce((acc, cur) => acc + cur, 0);
+      console.log("합계:", sum); // 60
     </script>
   </head>
   <body>
-    <h1>JS 공식 총정리 (Code Version)</h1>
+    <h1>JS 문법 마스터 (Complete Reference)</h1>
+    <p>F12를 눌러 콘솔을 확인하세요.</p>
   </body>
 </html>
