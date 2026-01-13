@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Mission: Library Fine</title>
+    <script>
+      let rawData = " HarryPotter:3, Hobbit:0, GreatGatsby:7, Spiderman:1 ";
+      console.log("원본:", rawData);
+
+      let bookList = rawData.split(",");
+
+      // 1. 큰 바구니 준비
+      let fineList = [];
+      let totalFine = 0;
+
+      for (let i = 0; i < bookList.length; i++) {
+        let book_trim = bookList[i].trim();
+
+        // [수정 1] fineList를 덮어쓰지 말고, 'temp'라는 임시 변수에 담으세요!
+        let temp = book_trim.split(":");
+
+        let title = temp[0];
+        let days = Number(temp[1]);
+
+        let money = 0;
+        if (days == 0) {
+          money = 0;
+        } else if (days >= 6) {
+          money = days * 500;
+        } else {
+          money = days * 100;
+        }
+
+        // [수정 2] 따옴표 빼기 & 바구니에 담기
+        if (money > 0) {
+          // "[제목, 벌금]" (X) -> 글자가 들어감
+          // [title, money] (O) -> 변수 값이 들어감
+          fineList.push([title, money]);
+
+          totalFine += money;
+        }
+      }
+
+      console.log("📜 벌금 내역:", fineList);
+      // 결과: [ ["HarryPotter", 300], ["GreatGatsby", 3500], ["Spiderman", 100] ]
+
+      console.log("💰 총 벌금:", totalFine);
+      // 결과: 3900
+    </script>
+  </head>
+  <body>
+    <h1>도서관 연체료 미션 (정답)</h1>
+  </body>
+</html>
