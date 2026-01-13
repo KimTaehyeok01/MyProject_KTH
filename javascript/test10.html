@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Mission: Rank System</title>
+    <script>
+      /* =================================================================
+           [미션] 게임 랭킹 분류하기
+           
+           * 난이도: ★★★★☆ (쪼개고, 판단하고, 이름만 골라 담기)
+           * map 금지, for문 사용 필수
+           ================================================================= */
+
+      let rawLog = " Faker:95,  Deft:88 , Chovy:70,  Keria:65 ";
+      console.log("원본:", rawLog);
+
+      // 1. [초벌 정리]
+      // 콤마(,) 기준으로 잘라서 배열 'logList'에 담으세요. (split 사용)
+      let logList = rawLog.split(",");
+      console.log(logList);
+
+      // 결과를 담을 두 개의 바구니 준비
+      let goldTier = []; // 80점 이상
+      let bronzeTier = []; // 80점 미만
+
+      // 2. [분류 로직]
+      // for문으로 logList를 돌면서 다음을 수행하세요:
+      //  ① 공백 제거 (trim)
+      //  ② 콜론(:) 기준으로 이름과 점수 쪼개기 (split)
+      //  ③ 점수는 숫자로 변환 (Number)
+      //  ④ if문을 써서 점수가 80 이상이면 goldTier에 '이름'을 push
+      //  ⑤ 아니면 bronzeTier에 '이름'을 push
+
+      // ↓↓↓ for문 작성 (여기가 승부처입니다!)
+      for (let i = 0; i < logList.length; i++) {
+        let temp = logList[i].trim();
+        let temp1 = temp.split(":");
+        let num = temp1[0];
+        let num1 = Number(temp1[1]);
+
+        if (num1 >= 80) {
+          goldTier.push(num);
+        } else {
+          bronzeTier.push(num);
+        }
+      }
+
+      // [결과 확인]
+      console.log("🏆 골드 티어:", goldTier);
+      // 예상 정답: ["Faker", "Deft"]
+
+      console.log("🥉 브론즈 티어:", bronzeTier);
+      // 예상 정답: ["Chovy", "Keria"]
+    </script>
+  </head>
+  <body>
+    <h1>게임 랭킹 분류 미션</h1>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Final Test: 편의점 정산</title>
+    <script>
+      /* =================================================================
+         [미션] 편의점 매출 데이터 정산하기
+
+         * 목표: 지저분한 문자열 데이터를 정리하고,
+                폐기 상품을 뺀 뒤, 최종 수익을 계산하시오.
+         ================================================================= */
+
+      // [입력 데이터] (상품명:가격)
+      let rawData = "  김밥:3000,   콜라:1500 ,  상한우유:500,   핫바:2000  ";
+      console.log("원본:", rawData);
+
+      // 1. [문자열 정리]
+      // rawData의 양쪽 공백을 없애고, 콤마(,)를 기준으로 잘라서 배열 'dataList'에 담으시오.
+      let dataList = rawData.trim();
+      let data = dataList.split(",");
+      console.log(data);
+      dataList = data;
+
+      // 2. [배열 다듬기]
+      // dataList의 각 항목들에 붙어있는 지저분한 공백을 모두 제거해서 다시 저장하시오. (map 사용 권장)
+      for (let i = 0; i < dataList.length; i++) {
+        dataList[i] = dataList[i].trim();
+      }
+      dataList = dataList;
+      console.log(dataList);
+
+      // 3. [데이터 삭제]
+      // "상한우유"가 포함된 항목을 찾아서 배열에서 완전히 삭제하시오. (splice 사용)
+      // (indexOf로 위치를 찾아서 지우든, 눈으로 세서 지우든 결과만 맞으면 됨)
+      let dataList1 = dataList.splice(2, 1);
+      console.log(dataList1);
+      console.log(dataList);
+
+      // 4. [데이터 변환]
+      // "김밥:3000" 형태의 문자열들을 -> 숫자 3000 으로 변환해서 'priceList' 배열을 만드시오.
+      // (split, Number 또는 parseInt 사용)
+      let priceList = [];
+      for (let i = 0; i < dataList.length; i++) {
+        let st1 = dataList[i];
+        let temp = st1.split(":");
+        let len = temp[1];
+        let result = Number(len);
+        priceList.push(result);
+      }
+      console.log(priceList);
+
+      // 5. [총합 계산]
+      // priceList의 모든 가격을 합쳐서 'totalPrice'에 저장하시오.
+      // (님이 짠 for문 로직을 살려서 수정했습니다!)
+
+      let totalPrice = 0; // 배열[] 말고 숫자 0으로 초기화!
+
+      for (let i = 0; i < priceList.length; i++) {
+        totalPrice += priceList[i]; // 하나씩 더하기
+      }
+      console.log("총 매출:", totalPrice); // 6500
+
+      // 6. [최종 정산]
+      // 총 수입(totalPrice)에서 세금 10%를 떼고(0.9 곱하기),
+      // 소수점 아래는 버림(floor) 처리하여 'finalMoney'에 저장하시오.
+
+      // 공식: Math.floor( 숫자 ) -> 소수점 버림
+      let finalMoney = Math.floor(totalPrice * 0.9);
+
+      // [결과 확인]
+      console.log("최종 정산 금액:", finalMoney);
+      // 결과: 5850 나오면 성공!
+    </script>
+  </head>
+  <body>
+    <h1>JS Final Test</h1>
+    <p>F12 콘솔을 확인하세요.</p>
+  </body>
+</html>

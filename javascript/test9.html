@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Mission: Playlist Manager</title>
+    <script>
+      /* =================================================================
+         [미션] 플레이리스트 검열 시스템
+
+         * 스팸 필터 문제와 논리는 100% 똑같습니다.
+         * 변수 이름만 바뀌었으니 천천히 풀어보세요.
+         ================================================================= */
+
+      // [친구의 추천 리스트]
+      let songs = [
+        "Hype Boy",
+        "[19금] 욕설랩",
+        "Ditto",
+        "우울한 발라드",
+        "OMG",
+      ];
+      console.log("원본:", songs);
+
+      // 1. [특정 곡 삭제]
+      // "우울한 발라드"를 찾아서(indexOf), 원본 songs 배열에서 삭제(splice) 하시오.
+
+      // ↓↓↓ 코드 작성 (2줄)
+      let hateIdx = songs.indexOf("우울한 발라드");
+      let song = songs.splice(hateIdx, 1);
+      console.log(songs);
+
+      // 2. [필터링]
+      // songs 배열을 for문으로 돌면서
+      // "[19금]" 글자가 '없는(!)' 노래만 골라서 'shopPlaylist'에 push 하시오.
+
+      let shopPlaylist = [];
+
+      // ↓↓↓ for문 작성
+      for (let i = 0; i < songs.length; i++) {
+        if (!songs[i].includes("[19금]")) {
+          let temp = songs[i];
+          shopPlaylist.push(temp);
+        }
+      }
+      console.log(shopPlaylist);
+
+      // 3. [오프닝 추가]
+      // shopPlaylist의 '맨 앞'에 "매장 안내 방송" 트랙을 추가(unshift) 하시오.
+
+      // ↓↓↓ 코드 작성
+      shopPlaylist.unshift("매장 안내 방송");
+      // [결과 확인]
+      console.log("최종 리스트:", shopPlaylist);
+      // 정답 예상: ["매장 안내 방송", "Hype Boy", "Ditto", "OMG"]
+    </script>
+  </head>
+  <body>
+    <h1>플레이리스트 정리 미션</h1>
+  </body>
+</html>

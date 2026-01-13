@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Mission: Reverse Numbers</title>
+    <script>
+      /* =================================================================
+         [미션] 대기표 역순 출력하기
+
+         * 치트시트 [Part 2], [Part 3], [Part 5]를 참고하세요.
+         ================================================================= */
+
+      let rawInput = " 3번, 1번 , 4번, 2번 ";
+      console.log("원본:", rawInput);
+
+      // 1. [청소 및 분해]
+      // 콤마(,)를 기준으로 잘라서 배열 'waitingArr'에 담으시오.
+      // (힌트: split 사용)
+      let waitingArr = rawInput.split(",");
+      console.log(waitingArr);
+
+      // 2. [데이터 변환]
+      // 배열을 돌면서 지저분한 공백과 "번" 글자를 제거하고, '숫자'로 변환해서 'cleanArr'에 담으시오.
+      // (힌트: for문 사용, trim(), replace("번", ""), Number() 조합)
+      let cleanArr = [];
+
+      // ↓↓↓ for문 작성
+      for (let i = 0; i < waitingArr.length; i++) {
+        let temp = waitingArr[i].trim();
+        let result = temp.replace("번", "");
+        let num = Number(result[0]);
+        cleanArr.push(num);
+      }
+      console.log(cleanArr);
+
+      // 3. [뒤집기]
+      // cleanArr의 순서를 거꾸로 뒤집으시오.
+      // (힌트: 원본을 바꾸는 파괴자 함수 reverse 사용)
+
+      // ↓↓↓ 코드 작성
+      cleanArr.reverse();
+      console.log(cleanArr);
+
+      // 4. [출력 포맷 만들기]
+      // 뒤집힌 배열을 하이픈(-)으로 연결해서 문자열 'result'로 만드시오.
+      // (힌트: join 사용)
+
+      let result = cleanArr.join("-");
+
+      // [정답 확인]
+      console.log("결과:", result);
+      // 정답: "2-4-1-3" 나오면 성공!
+    </script>
+  </head>
+  <body>
+    <h1>대기표 역순 미션</h1>
+  </body>
+</html>
