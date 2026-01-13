@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>함수의 중급기법</title>
+    <script>
+      // 함수의 중급기법 - 함수형 변수
+
+      // 함수 : 코드 뭉치를 기능적으로 분리하고 이름을 붙여놓은 것.
+      // 일반함수 :
+      function myfunc() {
+        console.log("myfunc호출됨");
+      }
+      myfunc();
+
+      // 함수형 변수 : 함수를 변수(값)처럼 코드를 저장해 놓는다.
+      // 함수의 매개변수로 전달하려고!
+      // 비동기처리를 하려고(코드의 선언 시점과 실행 시점이 다른 것을 비동기라고 함.)
+      // 예1) 사용자의 ui액션 - 버튼 선언시점과 클릭 시점이 다름.
+      // 예2) http통신 - 요청시점과 응답시점이 다르다.
+      let funcVar = function () {
+        console.log("funcVar호출됨");
+      };
+      // 호출은 일반함수처럼 호출
+
+      // 익명함수의 매개변수와 반환값
+      let funcVar2 = function (param) {
+        return param * 2;
+      };
+      funcVar();
+
+      // 화살표함수(Arrow Function)
+      let funcVar3 = (param) => {
+        return param * 2;
+      };
+
+      // 일반함수의 매개변수로 함수형 변수를 입력해보자.
+      let sumFunc = (a, b) => {
+        return a + b;
+      };
+      // 입력값과 메소드(코드)까지 입력해준다.
+      function sum(p1, p2, method) {
+        return method(p1, p2);
+      }
+      let result = sum(10, 20, sumFunc);
+      console.log(result);
+    </script>
+  </head>
+  <body></body>
+</html>
