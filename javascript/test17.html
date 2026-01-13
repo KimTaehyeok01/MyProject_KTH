@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Temperature System</title>
+    <script>
+      /* =================================================================
+         [미션] 온도 제어 시스템 (콜백에 데이터 넘기기)
+
+         [1. 핵심 포인트]
+         이전 문제: onSuccess() -> 그냥 실행함
+         이번 문제: high(temp) -> 실행하면서 온도값을 같이 던져줌!
+
+         [2. 요구사항]
+         - 30도 이상이면 high(temp) 실행
+         - 30도 미만이면 low(temp) 실행
+         ================================================================= */
+
+      /* [단계별 구현] */
+
+      // 1. 화살표 함수 `hot` 만들기
+      // - 매개변수: t (온도)
+      // - 기능: 콘솔에 `현재 ${t}도, 에어컨 가동!` 출력
+      const hot = (t) => console.log(`현재 ${t}도, 에어컨 가동!`);
+
+      // 2. 화살표 함수 `cold` 만들기
+      // - 매개변수: t (온도)
+      // - 기능: 콘솔에 `현재 ${t}도, 히터 가동!` 출력
+      const cold = (t) => console.log(`현재 ${t}도, 히터 가동!`);
+
+      // 3. 화살표 함수 `checkTemp` 만들기 (온도계)
+      // - 매개변수: temp, high, low
+      // - 기능: temp가 30 이상이면 high(temp) 실행, 아니면 low(temp) 실행
+
+      const checkTemp = (temp, high, low) => {
+        if (temp >= 30) {
+          high(temp);
+        } else low(temp);
+      };
+      checkTemp(35, hot, cold);
+      checkTemp(-10, hot, cold);
+
+      // 4. 실행
+      // - 35도를 넣어서 hot 함수 동작 확인
+      // - 10도를 넣어서 cold 함수 동작 확인
+    </script>
+  </head>
+  <body>
+    <h1>온도 제어 시스템</h1>
+  </body>
+</html>
