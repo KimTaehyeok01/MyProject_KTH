@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>정렬 알고리즘</title>
+    <script>
+      // 정렬 알고리즘
+      // 가장 대표적인 것 : 버블정렬, 선택정렬, 삽입정렬
+
+      // 치환(변수 교환하기)
+
+      // 버블정렬
+      let numbers = [9, 8, 1, 3, 2];
+      // 모든 요소를 쌍으로 비교한다.
+      // 0:1, 0:2, 0:3, 0:4
+      // 8:1, 8:3, ...
+      //....
+      // 이중반복문으로 i,j 인덱스 발생
+
+      // 버블정렬-오름차순
+      // 모든 자릿수를 쌍으로 처리하여, 오른쪽 값이 더 작으면
+      // 치환한다.
+      for (let i = 0; i < numbers.length - 1; i++) {
+        // console.log("i", i);
+        for (let j = i + 1; j < numbers.length; j++) {
+          //   console.log("j", j);
+          if (numbers[i] > numbers[j]) {
+            // 치환
+            t = numbers[i];
+            numbers[i] = numbers[j];
+            numbers[j] = t;
+          }
+        }
+      }
+
+      console.log(numbers);
+    </script>
+  </head>
+  <body></body>
+</html>
