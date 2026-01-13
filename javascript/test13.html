@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Mission: Statistics</title>
+    <script>
+      // 이번엔 문자열이 아니라, '숫자 배열'을 바로 드립니다. (Number 변환 불필요)
+      let scores = [55, 90, 80, 40, 100];
+      console.log("학생 점수:", scores);
+
+      // 결과 담을 변수들
+      let passNum = 0; // 합격생 수
+      let failNum = 0; // 불합격생 수
+      let sum = 0; // 점수 총합 (평균 구하기용)
+      let avg = 0; // 평균 점수
+
+      // 1. [통계 로직]
+      // 반복문(for)을 돌면서 3가지 일을 동시에 처리하시오.
+      // ① 합격(60점 이상)이면 passNum 1 증가
+      // ② 불합격(60점 미만)이면 failNum 1 증가
+      // ③ 평균 계산을 위해 sum에 점수 누적하기
+
+      for (let score of scores) {
+        if (score >= 60) {
+          passNum++;
+        } else {
+          failNum++;
+        }
+        sum += score;
+      }
+      avg = Math.floor(sum / scores.length);
+
+      // 2. [최종 계산]
+      // 반복문이 끝난 뒤, 총합(sum)과 학생수(scores.length)를 나눠서
+      // 평균(avg)을 구하시오.
+
+      // ↓↓↓ 코드 작성
+
+      // [결과 확인]
+      console.log("🎉 합격자:", passNum, "명"); // 예상: 3명
+      console.log("😭 불합격:", failNum, "명"); // 예상: 2명
+      console.log("📊 평균점수:", avg, "점"); // 예상: 73점
+    </script>
+  </head>
+  <body>
+    <h1>시험 성적 통계</h1>
+  </body>
+</html>
