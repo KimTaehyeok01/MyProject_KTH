@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>타이머 함수, 인터벌 함수</title>
+    <script>
+      // 타이머 함수, 인터벌 함수
+      // setTimeout함수 : 일정시간 후에 코드 호출
+      // setInterval함수 : 일정시간마다(주기적) 코드 호출
+
+      setTimeout(() => {
+        console.log("타이머 3초 지남");
+      }, 3000);
+      //setTimeout(화살표함수, 3000) 괄호 안에 화살표함수, 지연시간이 들어감
+
+      setInterval(() => {
+        console.log("1초마다 수행됨.");
+        // console.log(new Date());
+
+        let time = new Date().toTimeString().split(" ")[0];
+        let date = new Date().toISOString().split("T")[0];
+        console.log(date + " " + time);
+      }, 1000);
+    </script>
+  </head>
+  <body></body>
+</html>
