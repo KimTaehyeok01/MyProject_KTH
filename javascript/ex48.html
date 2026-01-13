@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>정렬하기</title>
+    <script>
+      // 정렬하기
+      // 1. sort()함수 : 정렬 알고리즘 - Tim sort
+      // 삽입정렬과 합병정렬을 결합하여 만든 알고리즘
+      let arrNum = [20, 10, 30, 40, 50];
+      let arrNum_sorted = arrNum.sort();
+      console.log(arrNum_sorted);
+      console.log(arrNum);
+
+      let newNum = Array.from(arrNum);
+      newNum.sort();
+      console.log(newNum);
+
+      let arrNum2 = ["1", "10", "2"]; // 배열 타입이 number가 아닌 문자열임4
+      let a = [];
+      console.log(arrNum2.sort()); // 유니코드 순서대로 정렬하기 때문이다.
+      for (let i = 0; i < arrNum2.length; i++) {
+        let num = Number(arrNum2[i]);
+        a.push(num);
+      }
+      console.log(a);
+
+      // 숫자로 정렬하고 싶으면, sort()에 비교함수를 넣는다.
+      arrNum2.sort(function (a, b) {
+        return Number(a) - Number(b); // 값을 양수로 리턴, 음수로 리턴, 0으로 리턴함에 따라
+        // 정렬결과가 바뀜.
+      });
+      console.log(arrNum2);
+    </script>
+  </head>
+  <body></body>
+</html>
