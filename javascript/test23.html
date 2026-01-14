@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Online Shop Order System</title>
+    <script>
+      /*
+        2. 목표 결과물 (Expected Output) 연체된 책들을 찾아내어, 연체료가 계산된 새로운 명단(lateList)을 출력하세요.
+        3. 필수 구현 로직
+        연체 여부(late)가 true인지 확인하는 함수를 만드세요.
+        처리: 메인 함수에서 위 판별 함수를 사용하여 연체된 항목만 걸러내세요.
+        가공: 결과 배열에 담을 때는 객체 구조를 다음과 같이 변경해야 합니다.
+        책 제목 → bookName으로 변경
+        연체료 → penalty라는 이름으로 저장 (대여일수 한 날당 500원씩 곱해서 계산)
+        */
+      const rentals = [
+        { title: "자바스크립트 완벽 가이드", days: 5, late: false },
+        { title: "슬램덩크 1권", days: 10, late: true },
+        { title: "개미", days: 3, late: false },
+        { title: "해리포터와 마법사의 돌", days: 15, late: true },
+        { title: "삼국지 1권", days: 7, late: true },
+      ];
+      const lateusers = [];
+
+      const booklate = (order) => {
+        if (order.late == true) {
+          return true;
+        } else return false;
+      };
+
+      const mainSystem = (list, bolat) => {
+        for (let item of list) {
+          if (bolat(item) == true) {
+            item.days = item.days * 500;
+            lateusers.push({ bookName: item.title, penalty: item.days });
+          }
+        }
+      };
+
+      mainSystem(rentals, booklate);
+      console.log(lateusers);
+    </script>
+  </head>
+  <body>
+    <h1>주문 관리 시스템 (신입 개발자 평가)</h1>
+  </body>
+</html>
