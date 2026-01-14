@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>key-value 객체 기초</title>
+    <script>
+      // 괄호 정리(어디에 쓰는 지)
+      // 소괄호() : 함수(function), 화살표함수, 조건문, 반복문
+      // 중괄호{} : 함수 본체를 엮을 때( () => {} ), 조건문, 반복문, 키벨류 객체
+      // 대괄호[] : 배열 선언이나 요소에 접근할때, 키벨류 객체에서 데이터 참조(접근)할 때
+      //                                         ex) kv_obj['key']
+
+      // pc통신 프로토콜(http(web), socket(채팅,게임), 이메일, 파일전송, 원격접속)
+      // 프론트엔드(web(html,js), app) <---http---> 백엔드(server)
+      //                                            html, json
+      //        js  kv객체             <---json--->
+
+      // 자바(클래스-> 객체), JS(key-value, 배열)
+      // 키-벨류(key-value)객체
+      //  : key와 값의 쌍으로 이루어진 자료구조이다.(엄청 자주 사용해서 매우 중요)
+      //  : key는 반드시 타입이 문자열형식이다, value는 다양한 타입 가능.
+
+      // apple과 banana가 key이고, 1000,2000이 value다.
+      let kv_object = { apple: 1000, banana: 2000 };
+      // http통신 응답은 3가지 종류다. html, json, file, stream
+      // json데이터와 1대1 매칭해주는 데이터 구조가 k-v객체이다.(자바는 map이랑 같음)
+      console.log(kv_object["apple"]);
+      console.log(kv_object["banana"]);
+      console.log(kv_object.apple);
+      console.log(kv_object.banana);
+    </script>
+  </head>
+  <body></body>
+</html>
