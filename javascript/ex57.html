@@ -29,6 +29,77 @@
       console.log(kv_object["banana"]);
       console.log(kv_object.apple);
       console.log(kv_object.banana);
+
+      // kv객체 value에는 다양한 타입을 넣을 수 있음
+      // 익명함수(함수형변수)를 벨류에 넣어보자.
+      // 같은 말임 -let person = { name: "홍길동", action: () => {console.log("액션 시작!");}};
+      let person = {
+        name: "홍길동", // 변수 - 속성
+        // action: function(){} // 메소드(함수) - 행동
+        action: () => {
+          console.log("액션 시작!");
+        },
+      };
+
+      console.log(person.name);
+      person.action();
+
+      // 다양한 타입으로 객체를 선언
+      let toy = {
+        name: "마징가 피규어",
+        price: 1000,
+        lang: "한국어",
+        color: "white & black",
+      };
+      // kv객체 순회
+      // for in문 : key를 가져온다.
+      // for of문 : key와 value 둘 다 가져온다.
+
+      for (let key in toy) {
+        console.log("--", key);
+        console.log(typeof key);
+
+        console.log(toy[key]);
+      }
+      console.log("-------------------------------------");
+
+      for (let [key, value] of Object.entries(toy)) {
+        console.log(key);
+        console.log(value);
+      }
+
+      //연습문제
+      // student KV객체를 선언하고,
+      // 이 학생의 국어, 영어, 수학 성적을 각각 70, 80,90으로 설정하고,
+      // 합산과 평균을 내는 익명함수를 각각 sum, avr로 설정하고,
+      // 익명함수를 통해, sum과 avr값을 출력하시오.
+      //그리고 국어,영어,수학 점수도 각각 출력하시오.
+
+      const student = {
+        kor: 70,
+        math: 80,
+        eng: 90,
+        sum: () => {
+          return student.kor + student.math + student.eng;
+        },
+        avg: () => {
+          return Math.floor((student.kor + student.math + student.eng) / 3);
+        },
+      };
+
+      console.log(student.sum());
+      console.log(student.avg());
+
+      const add1 = () => {
+        return student.kor + student.math + student.eng;
+      };
+
+      const avr1 = () => {
+        return Math.floor((student.kor + student.math + student.eng) / 3);
+      };
+
+      console.log(`합점: ${add1()}`);
+      console.log(`평균: ${avr1()}`);
     </script>
   </head>
   <body></body>
