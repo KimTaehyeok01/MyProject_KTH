@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Final Mission: Movie Theater</title>
+    <script>
+      /* =================================================================
+           [최종 보스] 영화관 매출 정산 시스템
+           
+           * 목표: 함수 3개를 서로 협력하게(호출하게) 만들어서 문제를 해결하시오.
+           ================================================================= */
+
+      // 1. [기본 요금 구하는 함수]
+      // - 매개변수: 나이(age)
+      // - 기능: 어린이 5000, 일반 12000, 노인 8000 반환
+      function getBasePrice(age) {}
+
+      // 2. [할인 적용 함수]
+      // - 매개변수: 가격(price), 타입(type) -> 예: "Member" 또는 "Guest"
+      // - 기능:
+      //    * type이 "Member"면 price * 0.8 반환
+      //    * type이 "Guest"면 price 그대로 반환
+      function getFinalPrice(price, type) {
+        // ↓↓↓ 코드 작성
+      }
+
+      // 3. [총 매출 계산 함수] (메인 로직)
+      // - 매개변수: 원본 문자열(dataString)
+      // - 기능:
+      //    ① 콤마(,)로 쪼갠다.
+      //    ② 반복문을 돌며 "나이"와 "타입"을 분리한다. (split("-"))
+      //    ③ getBasePrice()를 호출해 기본 요금을 구한다.
+      //    ④ getFinalPrice()를 호출해 최종 요금을 구한다.
+      //    ⑤ 모든 요금을 더해서 반환한다.
+      function calculateTotal(dataString) {
+        // ↓↓↓ 코드 작성
+
+        // 힌트:
+        // 1. let list = dataString.split(",");
+        // 2. for문 돌리기
+        // 3. 내부에서 split("-") 또 하기
+        // 4. 숫자 변환 잊지 말기!
+        // 5. 함수 호출: let base = getBasePrice(age);
+
+        return 0; // (나중에 total 변수 리턴으로 수정하세요)
+      }
+
+      // [테스트 실행]
+      let rawData = "15-Member, 25-Guest, 70-Member, 8-Guest, 45-Member";
+
+      console.log("오늘의 총 매출:", calculateTotal(rawData), "원");
+
+      // 정답 검증 가이드:
+      // 1. 15세(Member): 12000 * 0.8 = 9600
+      // 2. 25세(Guest):  12000
+      // 3. 70세(Member): 8000 * 0.8 = 6400
+      // 4. 8세(Guest):   5000
+      // 5. 45세(Member): 12000 * 0.8 = 9600
+      // ------------------------------------
+      // 합계: 42,600원 나오면 정답!
+    </script>
+  </head>
+  <body>
+    <h1>최종 보스: 영화관 정산</h1>
+  </body>
+</html>

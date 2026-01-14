@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exam Results</title>
+    <script>
+      const students = [
+        { name: "철수", score: 85 },
+        { name: "영희", score: 40 },
+        { name: "민수", score: 95 },
+        { name: "지수", score: 55 },
+      ];
+
+      /* [개발 영역] */
+
+      // 1. 합격 판독기: student 객체에서 score를 꺼내 60 이상인지 확인
+      const isPass = (student) => student.score >= 60;
+      // (참고: 위와 같이 쓰면 결과값인 true/false가 자동으로 return 됩니다.)
+
+      // 2. 출력 담당자: 합격한 학생의 이름을 출력
+      const printSuccess = (student) =>
+        console.log(`[합격] ${student.name} 축하합니다!`);
+
+      // 3. 시험 관리자: 리스트를 돌면서 조건에 맞는 학생만 출력기로 보냄
+      const processExams = (list, checkRule, printer) => {
+        for (let s of list) {
+          // checkRule(isPass)에 학생을 넣었을 때 true가 나오면
+          if (checkRule(s)) {
+            printer(s); // printer(printSuccess)에게 학생을 넘김
+          }
+        }
+      };
+
+      /* [실행 영역] */
+      console.log("--- 합격자 발표 ---");
+
+      // 4. 실행: 명단, 규칙, 출력기를 조립
+      processExams(students, isPass, printSuccess);
+    </script>
+  </head>
+  <body>
+    <h1>시험 합격자 처리 시스템</h1>
+  </body>
+</html>
