@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee Salary Report</title>
+    <script>
+      /**
+       * [원본 데이터]
+       * 우리 회사 직원들의 현재 연봉 정보입니다. (단위: 만원)
+       */
+      const employees = [
+        { id: 1, name: "강대리", salary: 3500, performance: "A" },
+        { id: 2, name: "이사원", salary: 2800, performance: "C" },
+        { id: 3, name: "박팀장", salary: 5500, performance: "A" },
+        { id: 4, name: "최주임", salary: 3200, performance: "B" },
+      ];
+      // 예상 결과:
+      // [{ empName: "강대리", newSalary: 3850 }, { empName: "박팀장", newSalary: 6050 }]
+      /**
+       * [요구사항]
+       * 1. 고과 성적(performance)이 "A"인 우수 직원들만 골라내세요.
+       * 2. 우수 직원들에게는 보너스로 연봉의 10%를 더해줄 겁니다.
+       * 3. 'bonusList'라는 빈 배열에 다음과 같은 새로운 객체 모양으로 담으세요.
+       * 형태: { empName: "이름", newSalary: 계산된연봉 }
+       * (계산법: 원래salary + (원래salary * 0.1))
+       * 4. 마지막에 bonusList를 출력해서 확인하세요.
+       */
+      let bonusList = [];
+      for (let item of employees) {
+        if (item.performance == "A") {
+          item.salary = item.salary * 0.1;
+          bonusList.push({ empName: item.name, newSalary: item.salary });
+        }
+      }
+      console.log(bonusList);
+    </script>
+  </head>
+  <body>
+    <h1>우수 사원 보너스 정산 시스템</h1>
+  </body>
+</html>
