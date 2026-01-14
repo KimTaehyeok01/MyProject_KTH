@@ -2,33 +2,82 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>Refund System</title>
+    <title>Data Manipulation Level 2</title>
     <script>
-      const money = [2000, -500, 3000, -1000, 5000];
+      // ==========================================
+      // [Scenario 1] 블랙프라이데이 세일 (데이터 수정)
+      // ==========================================
+      // 상황: 사장님이 "오늘만 모든 상품 10% 할인해!"라고 지시했습니다.
+      // 미션: 반복문을 돌면서 모든 상품의 price를 10% 깎은 가격으로 '수정'하세요.
+      //       (콘솔 출력이 아니라, 데이터 자체를 바꿔야 합니다.)
 
-      // [Mission]
-      // 1. 환불 판독기 (음수인지 확인)
-      // 2. 정산 시스템 (환불액만 골라서 '더하기')
-      const refund = (moneys) => {
-        if (moneys < 0) {
-          return true;
-        } else return false;
-      };
+      let products = [
+        { name: "티셔츠", price: 20000 },
+        { name: "바지", price: 50000 },
+        { name: "재킷", price: 100000 },
+      ];
 
-      const system = (list, func) => {
-        let sum = 0;
-        for (let s of list) {
-          if (func(s) == true) {
-            sum += s;
-          }
+      // (Code Start)
+      for (let item of products) {
+        item.price = item.price * 0.9;
+      }
+      // (Code End)
+
+      console.log("=== 할인 적용 결과 ===");
+      console.log(products); // 가격이 바뀌어 있어야 함 (18000, 45000, 90000)
+
+      // ==========================================
+      // [Scenario 2] 합격자 명단 만들기 (데이터 추출 & 저장)
+      // ==========================================
+      // 상황: 점수가 80점 이상인 학생만 골라서, '합격자 명단(passList)' 배열에 이름을 넣고 싶습니다.
+      // 미션:
+      // 1. students 배열을 순회.
+      // 2. score가 80점 이상이면, 그 학생의 'name'을 passList 배열에 추가(push).
+
+      const students = [
+        { name: "철수", score: 70 },
+        { name: "영희", score: 90 },
+        { name: "민수", score: 85 },
+        { name: "지수", score: 40 },
+      ];
+
+      let passList = []; // 여기에 합격자 이름들이 쌓여야 함
+
+      // (Code Start)
+      for (let index of students) {
+        if (index.score >= 80) {
+          passList.push(index.name);
         }
-        console.log(`총 환불해야 하는 금액은 ${sum}원 입니다.`);
+      }
+      // (Code End)
+
+      console.log("=== 합격자 명단 ===");
+      console.log(passList); // ["영희", "민수"] 가 나와야 정답
+
+      // ==========================================
+      // [Scenario 3] 보스몹: 복잡한 데이터 구조 (객체 안의 배열)
+      // ==========================================
+      // 상황: 한 '팀'의 정보가 담긴 객체입니다. 근데 멤버가 배열로 들어있네요?
+      // 미션:
+      // 1. myTeam 객체 안에 있는 'members' 배열을 반복문으로 순회하세요.
+      // 2. 멤버들의 이름을 콘솔에 하나씩 출력하세요.
+      // 힌트: 점(.)을 찍어서 배열까지 들어간 다음, 그 배열을 반복 돌려야 합니다.
+
+      const myTeam = {
+        teamName: "Avengers",
+        leader: "IronMan",
+        members: ["Hulk", "Thor", "Captain", "Spiderman"],
       };
 
-      system(money, refund);
+      // (Code Start)
+      for (let index of myTeam.members) {
+        console.log(index);
+      }
+
+      // (Code End)
     </script>
   </head>
   <body>
-    <h1>환불금 계산 시스템</h1>
+    <h1>데이터 조작 실전 테스트</h1>
   </body>
 </html>
