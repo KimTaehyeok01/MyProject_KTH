@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ex58 -->
+    <script>
+      // this 예약어 : 객체가 자기 자신의 속성이나 메소드에 접근할 때 사용.
+      // 주의: 일반 함수(function)에서는 제대로 동작, 화살표함수에서는
+      //     상위 스코프(Scope)를 지정하기에 주의 요망.
+      let globalVar = "전역 변수";
+      let person = {
+        name: "홍길동",
+        regularFunc: function () {
+          let localVar = "지역 변수";
+          console.log(localVar);
+          console.log(this.name); // 동위레벨 변수참조 가능
+
+          // 화살표 함수는 상위 스코프의 변수와 this 접근 가능
+          let arrowFunc = () => {
+            console.log(this.name);
+            console.log(localVar); // 동위레벨 변수참조 가능
+            console.log(globalVar); // 상위레벨 변수 참조 가능
+          };
+          arrowFunc();
+        },
+      };
+      //person.introduce();
+      person.regularFunc();
+    </script>
+  </head>
+</html>
