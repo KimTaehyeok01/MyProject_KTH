@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>사칙연산 프로그램</title>
+  </head>
+  <body>
+    <script>
+      // 사칙연산 함수들
+      function add(a, b) {
+        //   const add = (a, b) => a + b; 이렇게도 사용 가능
+        return a + b;
+      }
+
+      function subtract(a, b) {
+        return a - b;
+      }
+
+      function multiply(a, b) {
+        return a * b;
+      }
+
+      function divide(a, b) {
+        return a / b;
+      }
+
+      // 테스트 실행
+      let x = 10;
+      let y = 5;
+
+      console.log("=== 사칙연산 결과 ===");
+      console.log(x + " + " + y + " = " + add(x, y));
+      console.log(x + " - " + y + " = " + subtract(x, y));
+      console.log(x + " × " + y + " = " + multiply(x, y));
+      console.log(x + " ÷ " + y + " = " + divide(x, y));
+    </script>
+  </body>
+</html>
