@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Object + Array + Push Practice</title>
+    <script>
+      /**
+       * [원본 데이터]
+       * 창고에 있는 상품들의 재고 현황입니다.
+       */
+      const stockData = [
+        { id: "p1", name: "사과", count: 80 },
+        { id: "p2", name: "포도", count: 15 },
+        { id: "p3", name: "딸기", count: 0 },
+        { id: "p4", name: "참외", count: 5 },
+      ];
+      /**
+       * [요구사항]
+       * 1. 재고가 10개 미만(count < 10)인 상품들을 추출하여 '위험 상품' 리스트를 만드세요.
+       * 2. 대신, 새로운 리스트에는 상품의 '이름(name)'과 '현재 재고(count)'를
+       * 새로운 객체 형태 { productName: "이름", stockLeft: 숫자 } 로 만들어서 담아주세요.
+       * 3. 최종적으로 추출된 '위험 상품' 배열(dangerList)을 출력하세요.
+       */
+      // (아래에 로직을 구현하세요)
+      let dangerList = [];
+      for (let item of stockData) {
+        if (item.count < 10) {
+          dangerList.push({ productName: item.name, stockLeft: item.count });
+        }
+      }
+      console.log(dangerList);
+    </script>
+  </head>
+  <body>
+    <h1>고급 쇼핑몰 필터링 시스템</h1>
+    <p>주석의 요구사항을 하나씩 해결해보세요!</p>
+  </body>
+</html>
