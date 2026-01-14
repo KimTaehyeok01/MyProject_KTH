@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      /*
+        2. 업무 규칙 (Business Logic)
+        추출 대상: 오직 VIP 멤버의 주문 건만 정산 대상입니다.
+        포인트 적립: VIP는 구매 금액(amount)의 **5%**를 포인트로 돌려받습니다. 0.05곱하기
+        배송비 혜택: VIP 중 구매 금액이 100,000원 이상이면 배송비가 0원이고, 그 미만이면 3,000원의 배송비가 발생합니다.
+        3. 최종 결과물 형식 위 규칙을 적용하여 가공된 새로운 배열(settlementList)을 만드세요.
+        customerName: 유저 이름
+        reward: 계산된 적립금 (금액의 5%)
+        deliveryFee: 배송비 (0원 혹은 3,000원)
+        4. 기술 제약 조건
+        구조적 설계: "판단하는 로직"과 "데이터를 순회하며 가공하는 로직"을 반드시 분리하여 콜백 함수 구조로 설계하세요.
+        데이터 보호: 원본 데이터인 salesData는 절대 수정되어선 안 됩니다.
+        */
+      const salesData = [
+        { orderId: "S-001", user: "강대리", amount: 120000, member: "VIP" },
+        { orderId: "S-002", user: "이사원", amount: 15000, member: "NORMAL" },
+        { orderId: "S-003", user: "박팀장", amount: 80000, member: "VIP" },
+        { orderId: "S-004", user: "최주임", amount: 45000, member: "NORMAL" },
+        { orderId: "S-005", user: "권이사", amount: 200000, member: "VIP" },
+      ];
+      let settlementList = [];
+
+      // 등급 구별과 포인트 적립
+      const userVip = (level) => {
+        if (level.member == "VIP") {
+          return true;
+        } else return false;
+      };
+
+      const amountMoney = (money) => {
+        if (money.amount >= 100000) {
+          return true;
+        } else return false;
+      };
+
+      const main = (lists, func1, func2) => {
+        for (let list of lists) {
+          if (func1(list) == true) {
+            let reward = 0;
+            if (func2(list) == true) {
+              reward = 0;
+            } else {
+              reward = 3000;
+            }
+            settlementList.push({
+              customerName: list.user,
+              reward: list.amount * 0.05,
+              deliveryFee: reward,
+            });
+          }
+        }
+      };
+
+      main(salesData, userVip, amountMoney);
+      console.log(settlementList);
+    </script>
+  </head>
+  <body></body>
+</html>
