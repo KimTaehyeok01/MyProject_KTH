@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자바스크립트 중급 문법</title>
+    <!-- js 중급문법 : ES6버전이상 - 리액트.js(생성형AI) -->
+    <!-- 최신 트렌드 문법을 구사해야 ai코드를 이해 가능! -->
+    <!-- 구조분해할당과 전개연산자 -->
+    <!--   쪼갠다       나열한다   -->
+    <!-- Destructring Assigment (구조 분해)-->
+    <!-- Spread Operator (전개 연산) -->
+    <script>
+      // 배열의 구조분해
+      let array1 = [10, 20, 30];
+      let a = array1[0];
+      let b = array1[1];
+      let c = array1[2]; // 이 과정을 간단하게 해보자.
+      let [x, y, z] = [10, 20, 30];
+      //let [x, y, z] = array1; 도 됨.
+      console.log(x);
+
+      // 여러 개 중에 일부만 할당하기
+      let [d] = [10, 20, 30];
+      console.log(d);
+      let [, e] = [10, 20, 30];
+      console.log(e);
+      let [, , f] = [10, 20, 30];
+      console.log(f);
+
+      // 객체의 구조분해(할당)
+      let obj = {
+        apple: 1000, // 객체에는 인덱스(순서)가 없음
+        banana: 2000,
+      };
+      //let apple = obj.apple;
+      //let banana = obj.banana;
+      // 객체의 키와 변수 이름을 매칭해줘야 함.
+      let { apple, banana } = obj;
+      console.log(apple);
+      console.log(banana);
+
+      // 새로운 이름으로 할당해보기
+      let { apple: fruit1, banana: fruit2 } = obj;
+      console.log(fruit1);
+      console.log(fruit2);
+
+      // 여러 개 중에 일부만 할당하기
+      let { apple: newFruit } = obj;
+      console.log(newFruit);
+
+      // 배열의 전개연산자 : ...변수이름
+      let [i, j, ...rest] = [10, 20, 30, 40, 50];
+      console.log(i);
+      console.log(j);
+      console.log(rest); // 나머지[30,40,50] : 단체로 묶어서 나오는것이기에 배열로 나옴.
+
+      // 값의 치환
+      let aa = 10;
+      let bb = 20;
+      //   let temp = aa;
+      //   aa == bb;
+      //   bb = temp;
+      [bb, aa] = [aa, bb];
+      console.log(aa);
+      console.log(bb);
+      // 객체의 전개연산자
+      let pet = {
+        cat: 1000,
+        dog: 2000,
+        pig: 3000,
+      };
+      let ball = {
+        baseball: 1000,
+        soccor: 2000,
+        basketball: 3000,
+      };
+      let favorit = {
+        ...pet,
+        ...ball,
+      };
+      console.log(favorit);
+
+      // 기본값 설정
+      let [n = 5, m = 7] = [1];
+      console.log(n, m); // 1,7이 출력됨.
+
+      // 함수의 결과값으로 구조분해할당
+      function foo() {
+        return [10, 20];
+      }
+      [n, m] = foo();
+      console.log(n, m);
+    </script>
+  </head>
+  <body></body>
+</html>
