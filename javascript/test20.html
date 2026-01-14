@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Refund System</title>
+    <script>
+      const money = [2000, -500, 3000, -1000, 5000];
+
+      // [Mission]
+      // 1. 환불 판독기 (음수인지 확인)
+      // 2. 정산 시스템 (환불액만 골라서 '더하기')
+      const refund = (moneys) => {
+        if (moneys < 0) {
+          return true;
+        } else false;
+      };
+
+      const system = (list, func) => {
+        let sum = 0;
+        for (let s of list) {
+          if (func(s) == true) {
+            sum += s;
+          }
+        }
+        console.log(`총 환불해야 하는 금액은 ${sum}원 입니다.`);
+      };
+
+      system(money, refund);
+    </script>
+  </head>
+  <body>
+    <h1>환불금 계산 시스템</h1>
+  </body>
+</html>
