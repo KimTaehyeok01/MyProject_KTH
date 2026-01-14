@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kv객체 사용 예 - http통신(맛만 보기)</title>
+    <script>
+      // kv객체 사용 예 - http통신
+      // https://jsonplaceholder.typicode.com/
+      // Fake Server : 가짜 서버
+      // http요청 -> json데이터 응답
+
+      // http통신 요청 방법 3가지
+      // 1. html form태그
+      // 2. js fetch()함수 - 표준
+      // 3. axios()함수 - 외부 라이브러리
+      // 4. jQuery ajax()함수 - 외부 라이브러리
+
+      fetch(" https://jsonplaceholder.typicode.com/todos/1")
+        .then((response) => response.json())
+        .then((json) => {
+          // 화살표 함수의 실행문이 한줄일때, 중괄호{}, return값 생략 가능
+          console.log(json); // json = 타입은 kv객체이다.
+          for (let key in json) {
+            console.log(json[key]);
+          }
+        });
+    </script>
+  </head>
+  <body></body>
+</html>
