@@ -13,6 +13,7 @@
   <body>
     <h1 id="id1">innerHTML의 내용</h1>
     <h1 id="id2">innerText의 내용</h1>
+    <h1 id="id3">innerText의 내용(한줄코드)</h1>
 
     <script>
       // 문서객체를 id로 찾아온다.
@@ -20,6 +21,7 @@
       e1.innerHTML = "<ins>변경된 내용</ins>";
       let e2 = document.getElementById("id2");
       e2.innerText = "<ins>변경된 내용</ins>";
+      document.getElementById("id3").innerHTML = "찾음";
     </script>
   </body>
 </html>
