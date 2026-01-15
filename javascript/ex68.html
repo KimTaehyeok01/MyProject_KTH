@@ -5,13 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>문서객체 선택함수</title>
     <script>
+      // 1. id로 선택 : getElementById
+      // 2. class로 선택 : getElementsByClassName
+      // 3. 태그명으로 선택 : getElementsByTagName
+      // 4. css선택자로 선택 : querySelector(css선택자) - 1개
+      // 5.                 : querySelectorAll(css선택자) - 여러개
+
       // window.onload()함수 : 웹브라우저가 HTML문서 로딩후에 한번 호출
       window.onload = () => {
+        // id로 선택
         let h1 = document.getElementById("header1");
         console.log(h1);
         h1.innerHTML = "찾음";
+
+        // class로 선택
+        let arrH2 = document.getElementsByClassName("header-h2");
+        for (let h2 of arrH2) {
+          h2.innerHTML = "찾음";
+        }
+
+        // 태그명으로 선택
+        let arrP = document.getElementsByTagName("p");
+        for (let p of arrP) {
+          p.innerHTML = "찾음";
+        }
+
+        // css로 선택자로 문서객체 찾기
+        let h1_2 = document.querySelector("#header2");
+        h1_2.style.backgroundColor = "green";
+
+        setInterval(() => {
+          if (h1_2.style.backgroundColor == "green") {
+            h1_2.style.backgroundColor = "blue";
+          } else {
+            h1_2.style.backgroundColor = "green";
+          }
+        }, 1000);
+
+        // css로 선택자로 문서객체 찾기
+        let arrH2_2 = document.querySelectorAll(".header-h2");
+        arrH2_2[0].style.backgroundColor = "orange";
       };
     </script>
+    <style>
+      #header2 {
+        background-color: yellow;
+      }
+    </style>
   </head>
   <body>
     <h1 id="header1">제목태그1</h1>
