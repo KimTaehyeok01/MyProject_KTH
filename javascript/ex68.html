@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문서객체 선택함수</title>
+    <script>
+      // window.onload()함수 : 웹브라우저가 HTML문서 로딩후에 한번 호출
+      window.onload = () => {
+        let h1 = document.getElementById("header1");
+        console.log(h1);
+        h1.innerHTML = "찾음";
+      };
+    </script>
+  </head>
+  <body>
+    <h1 id="header1">제목태그1</h1>
+    <h1 id="header2">제목태그2</h1>
+
+    <h2 class="header-h2">제목태그3</h2>
+    <h2 class="header-h2">제목태그4</h2>
+    <h2 class="header-h2">제목태그5</h2>
+
+    <p>문단태그 p</p>
+    <p>문단태그 p</p>
+    <p>문단태그 p</p>
+
+    <script></script>
+  </body>
+</html>
