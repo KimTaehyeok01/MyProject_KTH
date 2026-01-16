@@ -73,25 +73,29 @@
       const calcScore = (killscore) => {
         if (killscore.death == 0) {
           return (
-            (killscore.kill * 20 +
-              killscore.assist * 10 -
+            (killscore.kill * 200 +
+              killscore.assist * 50 -
               killscore.death * 5) *
             1.5
           );
         } else {
           return (
-            killscore.kill * 20 + killscore.assist * 10 - killscore.death * 5
+            killscore.kill * 200 + killscore.assist * 50 - killscore.death * 5
           );
         }
       };
 
       const getTier = (score) => {
         let tier = "";
-        if (score >= 500) {
+        if (score >= 4000) {
+          tier = "GrandMaster";
+        } else if (score >= 3000) {
           tier = "Master";
-        } else if (score >= 300) {
+        } else if (score >= 2000) {
           tier = "Diamond";
-        } else tier = "Platinum";
+        } else {
+          tier = "Platinum";
+        }
         return tier;
       };
 

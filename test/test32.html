@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Library Grouping</title>
+    <script>
+      /*
+        [마지막 미션: 도서관 장르별 분류 시스템]
+        1. 상황
+           - 도서관에 책이 마구잡이로 들어왔습니다. (books 배열)
+           - 사서가 "장르별로 책 제목을 묶어서 정리해줘"라고 요청했습니다.
+        2. 목표
+           - 배열을 순회해서 하나의 "객체(Object)"로 만드세요.
+           - reduce 함수를 사용해야 합니다.
+        3. 결과 모양 (예상)
+           {
+             "Fantasy": ["해리포터", "반지의 제왕"],
+             "History": ["사피엔스", "총균쇠"],
+             "Science": ["코스모스"]
+           }
+        4. 로직 힌트 (reduce 사용법)
+           - reduce((acc, cur) => { ... }, {})
+           - acc: 결과가 쌓일 누적 객체 (처음엔 빈 객체 {})
+           - cur: 현재 돌고 있는 책 데이터
+           (단계)
+           1. acc 안에 현재 책의 장르(cur.genre)에 해당하는 방(Key)이 있는지 확인합니다.
+           2. 없으면? -> 빈 방(배열 [])을 먼저 만들어줍니다.
+           3. 방이 준비됐으면? -> 책 제목(cur.title)을 그 방에 집어넣습니다(push).
+           4. 마지막에 acc를 return 합니다.
+      */
+      const books = [
+        { title: "해리포터", genre: "Fantasy" },
+        { title: "사피엔스", genre: "History" },
+        { title: "코스모스", genre: "Science" },
+        { title: "반지의 제왕", genre: "Fantasy" },
+        { title: "총균쇠", genre: "History" },
+      ];
+
+      // 여기에 코드를 작성하세요.
+      // 힌트: const result = books.reduce((acc, cur) => { ... }, {});
+    </script>
+  </head>
+  <body></body>
+</html>
