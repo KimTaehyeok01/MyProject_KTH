@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Ranking System</title>
+    <script>
+      const players = [
+        {
+          name: "Faker",
+          kill: 10,
+          death: 0,
+          assist: 5,
+          playTime: 50,
+          isCheater: false,
+        },
+        {
+          name: "Troll",
+          kill: 2,
+          death: 10,
+          assist: 1,
+          playTime: 5,
+          isCheater: false,
+        },
+        {
+          name: "Hacker",
+          kill: 50,
+          death: 0,
+          assist: 20,
+          playTime: 100,
+          isCheater: true,
+        },
+        {
+          name: "Chovy",
+          kill: 8,
+          death: 2,
+          assist: 8,
+          playTime: 45,
+          isCheater: false,
+        },
+        {
+          name: "Deft",
+          kill: 15,
+          death: 0,
+          assist: 10,
+          playTime: 60,
+          isCheater: false,
+        },
+      ];
+      /*
+        [최종 심화: 게임 랭킹 및 티어 산정]
+        1. 목표
+           - 부정 행위자를 거르고, 복잡한 공식으로 점수를 계산하여 티어를 매기세요.
+        2. 업무 규칙 (Business Logic)
+           (1) 필터 조건 (함수명: isValidPlayer)
+               - isCheater가 false(부정행위 없음) 이고(&&), playTime이 10 이상이어야 함.
+           (2) 점수 계산 (함수명: calcScore)
+               - 기본 공식: (kill * 20) + (assist * 10) - (death * 5)
+               - [퍼펙트 게임 보너스]: 만약 death가 0이면 -> (위에서 계산한 기본 점수 * 1.5) 적용
+               - 반환값: 최종 점수 (숫자)
+           (3) 티어 산정 (함수명: getTier)
+               - 점수를 받아서 티어 문자열 반환
+               - 2000점 이상: "Master"
+               - 1000점 이상: "Diamond"
+               - 나머지: "Platinum"
+        3. 결과 모양
+           - { name: "닉네임", finalScore: 점수, tier: "등급" }
+           - 최종 결과를 console.table로 출력하세요.      */
+
+      const isValidPlayer = (yesorno) =>
+        yesorno.isCheater == false && yesorno.playTime >= 10;
+
+      const calcScore = (killscore) => {
+        if (killscore.death == 0) {
+          return (
+            (killscore.kill * 20 +
+              killscore.assist * 10 -
+              killscore.death * 5) *
+            1.5
+          );
+        } else {
+          return (
+            killscore.kill * 20 + killscore.assist * 10 - killscore.death * 5
+          );
+        }
+      };
+
+      const getTier = (score) => {
+        let tier = "";
+        if (score >= 500) {
+          tier = "Master";
+        } else if (score >= 300) {
+          tier = "Diamond";
+        } else tier = "Platinum";
+        return tier;
+      };
+
+      const main = (func1, func2, func3) => {
+        result = players
+          .filter((lists) => func1(lists))
+          .map((list) => {
+            const killscore = func2(list);
+            const gammer = func3(killscore);
+
+            return {
+              name: list.name,
+              finalScore: killscore,
+              tier: gammer,
+            };
+          });
+      };
+
+      main(isValidPlayer, calcScore, getTier);
+      console.table(result);
+    </script>
+  </head>
+  <body></body>
+</html>
