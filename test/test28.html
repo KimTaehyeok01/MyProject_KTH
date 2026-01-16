@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DOM 연습문제</title>
+    <script>
+      /*
+        ========== 연습문제 ==========
+        
+        1번:  id="main-title"인 h1 태그의 내용을 "DOM 완전 정복!"으로 바꾸시오.
+        
+        2번: class="box"인 div 태그들의 내용을 각각 "박스-A", "박스-B", "박스-C"로 바꾸시오.
+        
+        3번: 모든 li 태그의 내용을 "수정된 리스트-1", "수정된 리스트-2", "수정된 리스트-3"으로 바꾸시오. 
+        
+        4번: id="btn"인 버튼의 내용을 "버튼 수정됨!"으로 바꾸시오.
+        
+        5번: id="username"인 input의 value 값을 "김철수"로 바꾸시오.
+        
+        6번: class="info"인 span 태그들의 내���을 "새정보-A", "새정보-B"로 바꾸시오. 
+        
+        ==============================
+      */
+
+      window.onload = () => {
+        document.getElementById("main-title").innerHTML = "DOM 완전 정복!";
+        let div_box = document.getElementsByClassName("box");
+        div_box[0].innerHTML = "박스-A";
+        div_box[1].innerHTML = "박스-B";
+        div_box[2].innerHTML = "박스-C";
+        let lilost = document.querySelectorAll("ul>li");
+        lilost[0].innerHTML = "수정된 리스트-1";
+        lilost[1].innerHTML = "수정된 리스트-2";
+        lilost[2].innerHTML = "수정된 리스트-3";
+        document.getElementById("btn").innerHTML = "버튼 수정됨!";
+
+        let name = document.getElementById("username");
+        name.value = "김철수";
+        let cclass = document.getElementsByClassName("info");
+        cclass[0].innerHTML = "새정보-A";
+        cclass[1].innerHTML = "새정보-B";
+      };
+    </script>
+  </head>
+  <body>
+    <h1 id="main-title">메인 제목</h1>
+
+    <div class="box">첫번째 박스</div>
+    <div class="box">두번째 박스</div>
+    <div class="box">세번째 박스</div>
+
+    <ul>
+      <li>리스트 1</li>
+      <li>리스트 2</li>
+      <li>리스트 3</li>
+    </ul>
+
+    <button id="btn">클릭하세요</button>
+
+    <input type="text" id="username" value="홍길동" />
+
+    <span class="info">정보1</span>
+    <span class="info">정보2</span>
+  </body>
+</html>
