@@ -25,16 +25,27 @@
       { orderId: "S-005", user: "권이사", amount: 200000, member: "VIP" },
     ];
 
-    const VIP = (vipjudge) => (vipjudge.member = "VIP");
+    const VIP = (vipjudge) => vipjudge.member == "VIP";
     const DeliveryFee = (deliverymoney) =>
       deliverymoney.amount >= 100000 ? 0 : 3000;
 
     const main = (lists, func1, func2) => {
-      return lists.filter((list) => {
-        console.log(func1(list));
-      });
+      return lists
+        .filter((list) => func1(list))
+        .map((list) => {
+          const fee = func2(list);
+          const reward = list.amount * 0.05;
+
+          return {
+            customerName: list.user,
+            reward: reward,
+            deliveryFee: fee,
+          };
+        });
     };
 
-    main(salesData, VIP, DeliveryFee);
+    const result = main(salesData, VIP, DeliveryFee);
+    console.table(result);
   </script>
+  <body></body>
 </html>
