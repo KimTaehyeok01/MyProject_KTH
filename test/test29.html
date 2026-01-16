@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .wrap {
+        width: 700px;
+        margin: 0 auto;
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .header {
+        margin-top: 30px;
+        font-size: 30px;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-weight: 500;
+      }
+      .main {
+        margin-top: 20px;
+        border: 1px solid black;
+        border-radius: 10px;
+        width: 75%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      /* 키 전체 창 */
+      .height-info {
+        margin-top: 40px;
+        display: flex;
+        gap: 40px;
+        text-align: center;
+      }
+      .height-text {
+        font-size: 20px;
+      }
+      /* 키 입력창 */
+      #height-input {
+        padding: 5px 50px;
+        background-color: rgb(229, 247, 247);
+        border: none;
+        border-radius: 2px;
+        text-align: center;
+      }
+
+      /* 몸무게 전체 창 */
+      .kg-info {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        justify-content: start;
+        text-align: center;
+      }
+      .kg-text {
+        font-size: 20px;
+      }
+      /* 몸무게 입력창 */
+      #kg-input {
+        padding: 5px 50px;
+        background-color: rgb(229, 247, 247);
+        border: none;
+        border-radius: 2px;
+        text-align: center;
+      }
+
+      /* BMI 전체 창 */
+      .bmi-info {
+        margin-top: 70px;
+        display: flex;
+        gap: 30px;
+        justify-content: start;
+        text-align: center;
+      }
+      .bmi-text {
+        font-size: 20px;
+      }
+      /* BMI 출력창 */
+      #bmi-input {
+        padding: 5px 50px;
+        background-color: rgb(229, 247, 247);
+        border: none;
+        border-radius: 2px;
+        text-align: center;
+      }
+
+      /* 현재상태 전체 창 */
+      .condition-info {
+        margin-top: 20px;
+        display: flex;
+        gap: 25px;
+        justify-content: start;
+        text-align: center;
+      }
+      .condition-text {
+        font-size: 20px;
+      }
+      /* 현재상태 출력창 */
+      #condition-input {
+        padding: 5px 50px;
+        background-color: rgb(229, 247, 247);
+        border: none;
+        border-radius: 2px;
+        text-align: center;
+      }
+      .btn-group {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 50px;
+      }
+      .calculate {
+        width: 365px;
+        border: none;
+        padding: 10px 0;
+        background-color: rgb(73, 185, 205);
+        border-radius: 5px;
+        color: aliceblue;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .calculate:active {
+        background-color: rgb(62, 163, 180);
+      }
+      .delete {
+        width: 365px;
+        border: none;
+        padding: 10px 0;
+        background-color: rgb(219, 73, 71);
+        border-radius: 5px;
+        color: aliceblue;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .delete:active {
+        background-color: rgb(191, 65, 63);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="header">BMI계산기</div>
+      <div class="main">
+        <div class="height-info">
+          <span class="height-text">키(cm)</span>
+          <input type="text" id="height-input" value="" />
+        </div>
+
+        <div class="kg-info">
+          <span class="kg-text">몸무게(kg)</span>
+          <input type="text" id="kg-input" value="" />
+        </div>
+
+        <div class="bmi-info">
+          <span class="bmi-text">BMI결과</span>
+          <input type="text" disabled="deleted" id="bmi-input" value="" />
+        </div>
+
+        <div class="condition-info">
+          <span class="condition-text">현재 상태</span>
+          <input type="text" disabled="deleted" id="condition-input" value="" />
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="calculate" onclick="calculate()">
+            계산하기
+          </button>
+          <button type="button" class="delete" onclick="deleted()">
+            지우기
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calculate() {
+        let userHeight = document.getElementById("height-input").value;
+        let kgInput = document.getElementById("kg-input").value;
+        let bmiResult = document.getElementById("bmi-input");
+        let conditionInput = document.getElementById("condition-input");
+
+        let height = userHeight / 100;
+        // prettier-ignore
+        bmiResult.value = (Number(kgInput) / (Number(height) * Number(height))).toFixed(1);
+
+        condition_text = "";
+        if (bmiResult.value < 18.5) {
+          condition_text = "저체중";
+        } else if (bmiResult.value >= 18.5 && bmiResult.value <= 22.9) {
+          condition_text = "정상";
+        } else if (bmiResult.value >= 23 && bmiResult.value <= 24.9) {
+          condition_text = "과체중";
+        } else condition_text = "비만";
+        conditionInput.value = condition_text;
+      }
+
+      function deleted() {
+        let userHeight = document.getElementById("height-input");
+        let kgInput = document.getElementById("kg-input");
+        let bmiResult = document.getElementById("bmi-input");
+        let conditionInput = document.getElementById("condition-input");
+        userHeight.value = "";
+        kgInput.value = "";
+        bmiResult.value = "";
+        conditionInput.value = "";
+      }
+    </script>
+  </body>
+</html>
