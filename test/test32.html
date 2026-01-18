@@ -1,44 +1,116 @@
+폴더 하이라이트 자료들은 자바스크립트 기본 문법과 배열, 문자열 제어 함수, 그리고
+반복문 및 조건문 활용 연습에 초점을 맞춘 HTML 예제들로 구성되어 있습니다.
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>Library Grouping</title>
-    <script>
-      /*
-        [마지막 미션: 도서관 장르별 분류 시스템]
-        1. 상황
-           - 도서관에 책이 마구잡이로 들어왔습니다. (books 배열)
-           - 사서가 "장르별로 책 제목을 묶어서 정리해줘"라고 요청했습니다.
-        2. 목표
-           - 배열을 순회해서 하나의 "객체(Object)"로 만드세요.
-           - reduce 함수를 사용해야 합니다.
-        3. 결과 모양 (예상)
-           {
-             "Fantasy": ["해리포터", "반지의 제왕"],
-             "History": ["사피엔스", "총균쇠"],
-             "Science": ["코스모스"]
-           }
-        4. 로직 힌트 (reduce 사용법)
-           - reduce((acc, cur) => { ... }, {})
-           - acc: 결과가 쌓일 누적 객체 (처음엔 빈 객체 {})
-           - cur: 현재 돌고 있는 책 데이터
-           (단계)
-           1. acc 안에 현재 책의 장르(cur.genre)에 해당하는 방(Key)이 있는지 확인합니다.
-           2. 없으면? -> 빈 방(배열 [])을 먼저 만들어줍니다.
-           3. 방이 준비됐으면? -> 책 제목(cur.title)을 그 방에 집어넣습니다(push).
-           4. 마지막에 acc를 return 합니다.
-      */
-      const books = [
-        { title: "해리포터", genre: "Fantasy" },
-        { title: "사피엔스", genre: "History" },
-        { title: "코스모스", genre: "Science" },
-        { title: "반지의 제왕", genre: "Fantasy" },
-        { title: "총균쇠", genre: "History" },
-      ];
+    <title>연습문제 - 계산기 프로그램</title>
+    <style>
+      /* CSS 스타일은 그대로 유지하거나 가독성을 위해 소폭 조정 가능 */
+      #wrap {
+        border: 1px solid black;
+        padding: 20px;
+        margin: 0 auto;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      #res {
+        display: flex;
+        align-items: center;
+      }
+      #num1,
+      #num2,
+      #result {
+        margin-bottom: 15px;
+        width: 150px;
+        height: 25px;
+        text-align: center;
+        border: 1px solid #ccc;
+      }
+      #result {
+        background-color: #b5acac;
+        color: white;
+      }
+      .btn-calc {
+        width: 220px;
+        height: 30px;
+        background-color: #286cd1;
+        border: 0;
+        color: white;
+        margin-bottom: 5px;
+        cursor: pointer;
+      }
+      #del {
+        width: 220px;
+        height: 30px;
+        background-color: #f13232;
+        border: 0;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
 
-      // 여기에 코드를 작성하세요.
-      // 힌트: const result = books.reduce((acc, cur) => { ... }, {});
+    <script>
+      // 계산 기능을 수행하는 함수 정의
+      function calculate(operator) {
+        const n1 = Number(document.getElementById("num1").value);
+        const n2 = Number(document.getElementById("num2").value);
+        const resField = document.getElementById("result");
+
+        if (operator === "+") resField.value = n1 + n2;
+        else if (operator === "-") resField.value = n1 - n2;
+        else if (operator === "*") resField.value = n1 * n2;
+        else if (operator === "/") {
+          resField.value = n2 !== 0 ? n1 / n2 : "0으로 나눌 수 없음";
+        }
+      }
+
+      // 초기화 함수(clear()불가)
+      function resetFields() {
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("result").value = "";
+      }
+
+      window.onload = () => {
+        let buttons = document.getElementsByClassName("btn-calc");
+        buttons[0].onclick = () => {
+          alert("클릭");
+        };
+      };
     </script>
   </head>
-  <body></body>
+  <body>
+    <div id="wrap">
+      <div>
+        <p><strong>JavaScript</strong></p>
+        <p>계산기 프로그램을 작성해보자</p>
+      </div>
+
+      <div>
+        <label>숫자 1</label>
+        <input type="text" id="num1" />
+      </div>
+      <div>
+        <label>숫자 2</label>
+        <input type="text" id="num2" />
+      </div>
+      <div id="res">
+        <label>연산 결과</label>
+        <input type="text" id="result" disabled />
+      </div>
+
+      <div id="btn-group">
+        <button class="btn-calc" onclick="calculate('+')">덧셈</button>
+        <button class="btn-calc" onclick="calculate('-')">뺄셈</button>
+        <button class="btn-calc" onclick="calculate('*')">곱셈</button>
+        <button class="btn-calc" onclick="calculate('/')">나눗셈</button>
+        <button id="del" onclick="resetFields()">지우기</button>
+      </div>
+    </div>
+  </body>
 </html>
