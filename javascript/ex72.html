@@ -78,9 +78,13 @@
         let water_value = document.getElementById("water");
         let result = document.getElementById("result");
 
-        money1_value.onclick = function () {
+        // money1_value.onclick = function () {
+        //   result.innerHTML = Number(result.innerHTML) + 1000;
+        // };
+
+        money1_value.addEventListener("click", function () {
           result.innerHTML = Number(result.innerHTML) + 1000;
-        };
+        });
 
         money2_value.onclick = function () {
           result.innerHTML = Number(result.innerHTML) + 500;
