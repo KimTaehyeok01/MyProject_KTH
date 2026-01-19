@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS로 class명 변경하기</title>
+    <style>
+      .active {
+        background-color: aqua;
+        font-size: 24px;
+      }
+      .select {
+        color: red;
+        border: 1px solid blue;
+      }
+    </style>
+    <script>
+      function func1() {
+        let h1 = document.getElementById("header");
+        h1.style.color = "red";
+        // contains() : 요소 안에 내가 찾는 것이 있는지 확인하는 함수
+        // false/true로 리턴
+        if (h1.classList.contains("active")) {
+          h1.classList.remove("active");
+        } else {
+          h1.classList.add("active");
+        }
+      }
+      function func2() {
+        let h1 = document.getElementById("header");
+        if (h1.classList.contains("select")) {
+          h1.classList.remove("select");
+        } else {
+          h1.classList.add("select");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1 id="header" class="">액티브 셀렉트</h1>
+    <button onclick="func1()">액티브</button>
+    <button onclick="func2()">셀렉트</button>
+  </body>
+</html>
