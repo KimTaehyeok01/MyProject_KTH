@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>피자 주문하기</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: sans-serif;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 5px;
+        background: white;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+      /* 선택되었을 때 스타일 (주황색) */
+      .active {
+        background-color: #ff9800;
+        color: white;
+        border: 1px solid #e65100;
+        font-weight: bold;
+      }
+      h2 {
+        color: #d84315;
+      }
+    </style>
+    <script>
+      // [JS 문제]
+      // 함수명: toggleTopping
+      // 매개변수: price (가격), id (버튼아이디)
+
+      let totalPrice = 0;
+
+      function toggleTopping(price, id) {
+        let btn = document.getElementById(id);
+        let totalspan = document.getElementById("total");
+
+        if (btn.classList.contains("active")) {
+          btn.classList.remove("active");
+          totalPrice -= price;
+        } else {
+          btn.classList.add("active");
+          totalPrice += price;
+        }
+        totalspan.innerHTML = totalPrice;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>🍕 피자 토핑을 추가하세요</h1>
+
+    <h2>총 금액: <span id="total">0</span>원</h2>
+
+    <hr />
+
+    <button id="btn1" onclick="toggleTopping(1000, 'btn1')">
+      페퍼로니 (1000원)
+    </button>
+
+    <button id="btn2" onclick="toggleTopping(500, 'btn2')">
+      올리브 (500원)
+    </button>
+
+    <button id="btn3" onclick="toggleTopping(2000, 'btn3')">
+      치즈 (2000원)
+    </button>
+
+    <p class="result">결제 금액</p>
+  </body>
+</html>
