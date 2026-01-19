@@ -1,0 +1,47 @@
+폴더 하이라이트 JavaScript 문법 학습 자료로, DOM 조작, 배열 메소드, 함수 개념을
+다루는 HTML 예제들을 포함합니다.
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- ex79 -->
+    <title>테이블 태그에서 버튼 클릭 이벤트 처리</title>
+    <script>
+      function clickBtn(index) {
+        //h2에 몇번째 버튼 클릭인지와 value를 출력하시오.
+        let button = document.getElementById("btn" + index);
+        let h2 = document.getElementsByTagName("h2");
+        h2[0].innerHTML = index + "번째 클릭됨(value=" + button.value + ")";
+      }
+    </script>
+  </head>
+  <body>
+    <h2>1번째 버튼 클릭됨.(value=10)</h2>
+    <table border="1">
+      <tr>
+        <th>제목1</th>
+        <th>제목2</th>
+      </tr>
+      <tr>
+        <td>목록1</td>
+        <td>
+          <button type="button" id="btn1" value="10" onclick="clickBtn(1)">
+            내용보기
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>목록2</td>
+        <td>
+          <button id="btn2" value="20" onclick="clickBtn(2)">삭제하기</button>
+        </td>
+      </tr>
+      <tr>
+        <td>목록3</td>
+        <td>
+          <button id="btn3" value="30" onclick="clickBtn(3)">수정하기</button>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
