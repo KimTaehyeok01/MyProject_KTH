@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- ex80 -->
+    <title>테이블 입력값 조작하기</title>
+    <script>
+      //연습문제
+      //값 지우기 버튼을 클릭하면, 왼쪽의 입력창의 값을 지우시오.
+      window.onload = () => {
+        makeTable();
+
+        //코드를 입력하시오.
+        // 동적 이벤트 함수 등록(대량일 때)
+        for (let i = 1; i <= 10; i++) {
+          let btn = document.getElementById("btn" + i);
+          btn.onclick = function () {
+            let input = document.getElementById("input" + i);
+            input.value = "";
+          };
+        }
+
+        let btaArray = document.getElementsByTagName("button"); // 10개
+        for (let btn of btaArray) {
+          btn.onclick = function () {
+            // console.log(this.value);
+            let input = document.getElementById("input" + this.value);
+            input.value = "";
+          };
+        }
+      };
+      function makeTable() {
+        //document.writeln함수를 이용하여
+        //동적으로 테이블을 작성하시오.
+        document.writeln("<table border=1>");
+        for (var i = 1; i <= 10; i++) {
+          document.writeln("<tr>");
+          document.writeln("<td>목록" + i + "</td>");
+          document.writeln('<td><input id="input' + i + '" type="text"></td>');
+          //prettier-ignore
+          document.writeln('<td><button id="btn' + i + '" value="' +i +'">값지우기</button></td>',);
+          document.writeln("</tr>");
+        }
+        document.writeln("</table");
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
