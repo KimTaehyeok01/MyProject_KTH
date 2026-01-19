@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- ex72 -->
+    <title>연습문제 - 자판기 프로그램</title>
+    <style>
+      #wrap {
+        border: 1px solid gray;
+        width: 300px;
+        height: 400px;
+        margin: 30px auto;
+        display: flex;
+        flex-flow: wrap column;
+        align-items: center;
+        text-align: center;
+      }
+      .btn {
+        width: 250px;
+        height: 30px;
+        /* margin-bottom: 10px; */
+        cursor: pointer;
+      }
+      #can {
+        background-color: green;
+        color: rgb(240, 228, 228);
+      }
+      #water {
+        background-color: rgb(9, 216, 19);
+        color: rgb(240, 228, 228);
+      }
+      #result {
+        background-color: rgb(108, 158, 235);
+        color: rgb(240, 228, 228);
+      }
+      .won {
+        width: 120px;
+        height: 30px;
+        margin-bottom: 10px;
+        background-color: rgb(214, 48, 70);
+        color: rgb(240, 228, 228);
+        cursor: pointer;
+      }
+      button {
+        border: 1px solid rgba(65, 65, 65, 0.5);
+      }
+      #remain {
+        font-size: 14px;
+      }
+    </style>
+    <script>
+      // 오른쪽 그림과 같이 동작하는 자판기를 만드시오.
+
+      window.onload = function () {
+        // let money1_value = document.getElementById("coin1000").value;
+        // let money2_value = document.getElementById("coin500").value;
+        // let can_value = document.getElementById("can").value;
+        // let water_value = document.getElementById("water").value;
+        // let result = document.getElementById("result");
+        // window.money1000 = function () {
+        //   result.innerHTML = Number(result.innerHTML) + +Number(money1_value);
+        // };
+        // window.money500 = function () {
+        //   result.innerHTML = Number(result.innerHTML) + +Number(money2_value);
+        // };
+        // window.can2000 = function () {
+        //   if (Number(result.innerHTML) >= Number(can_value)) {
+        //     result.innerHTML = Number(result.innerHTML) - Number(can_value);
+        //   } else alert("잔액 부족");
+        // };
+        // window.water700 = function () {
+        //   if (Number(result.innerHTML) >= Number(water_value)) {
+        //     result.innerHTML = Number(result.innerHTML) - Number(water_value);
+        //   } else alert("잔액 부족");
+        // };
+        let money1_value = document.getElementById("coin1000");
+        let money2_value = document.getElementById("coin500");
+        let can_value = document.getElementById("can");
+        let water_value = document.getElementById("water");
+        let result = document.getElementById("result");
+
+        money1_value.onclick = function () {
+          result.innerHTML = Number(result.innerHTML) + 1000;
+        };
+
+        money2_value.onclick = function () {
+          result.innerHTML = Number(result.innerHTML) + 500;
+        };
+
+        can_value.onclick = function () {
+          if (Number(result.innerHTML) >= 2000) {
+            result.innerHTML = result.innerHTML - 2000;
+            alert("캔 음료 나왔습니다.");
+          } else alert("잔액 부족");
+        };
+        water_value.onclick = function () {
+          if (Number(result.innerHTML) >= 700) {
+            result.innerHTML = result.innerHTML - 700;
+            alert("생수 나왔습니다.");
+          } else alert("잔액 부족");
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div id="wrap">
+      <div>
+        <p>JavaScript</p>
+        <p>자판기 프로그램을 작성해보자</p>
+      </div>
+      <div>
+        <p>1. 동전 투입 시 잔액 추가됨.</p>
+        <p>2. 잔액 부족 시 잔액 부족 팝업</p>
+        <p>3. 뽑기 후에 잔액 차감.</p>
+      </div>
+      <div id="insert">
+        <button class="won" id="coin1000" value="1000">1000원 투입</button>
+        <button class="won" id="coin500" value="500">500원 투입</button>
+      </div>
+      <button class="btn" id="can" value="2000">캔음료 2000원 뽑기</button>
+      <button class="btn" id="water" value="700">생수 700원 뽑기</button>
+      <label id="remain">잔액</label>
+      <button class="btn" id="result">0</button>
+    </div>
+  </body>
+</html>
