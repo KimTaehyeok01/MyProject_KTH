@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>생성자 함수와 클래스</title>
+    <script>
+      // 1. 일반함수
+      function user() {
+        let name = "홍길동";
+        // js : 함수 안에 함수 선언 가능(자바랑 c는 안됨)
+        function sayBy() {
+          console.log(this); // window객체
+          console.log(this.name);
+        }
+        sayBy();
+      }
+      user();
+
+      // 2. 생성자 함수 => object임.
+      // 2-1. 함수 이름이 대문자로 시작한다.
+      // 2-2. 호출시에 new라는 키워드를 사용한다.
+      function User(name) {
+        this.name = name;
+        this.sayBy = function () {
+          console.log("저는 " + this.name + " 입니다.");
+        };
+      }
+      const user2 = new User("철수");
+      user2.sayBy();
+
+      let str = "문자열"; // String 타입
+      let strObj = new String("문자열"); // Object타입
+
+      // 3. 클래스
+      class Animal {
+        constructor(name) {
+          // constructor: 생성자
+          this.name = name;
+        }
+        sayHi() {
+          console.log("나는 " + this.name + " 입니다.");
+        }
+      }
+      const animal = new Animal("강아지");
+      animal.sayHi();
+
+      // 4. 객체
+      let user4 = {
+        name: "영희",
+        sayHi: function () {},
+      };
+    </script>
+  </head>
+  <body></body>
+</html>
