@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>this 예약어(참조변수)</title>
+    <script>
+      // this 예약어 : 객체 자기 참조 변수
+      // 호출하는 상황 3가지
+      // 1. 객체 안에서 호출될 때(가장 일반적)
+      const person = {
+        name: "철수",
+        // sayHello를 호출하는 주체는? person객체
+        // 객체 안에서 this를 쓰면 그 객체는 자신을 가르킨다.
+        sayHello: function () {
+          console.log("내 이름은 " + this.name + "야");
+        },
+      };
+      person.sayHello();
+      console.log(person.name);
+
+      // 2. 그냥 혼자 호출될 때(전역 객체)
+      // 여기서 this는 window(창, 모든세계) 전역객체를 가르킨다.
+      function showThis() {
+        console.log("showThis", this);
+      }
+      showThis();
+      // 3. 화살표 함수에서(=>)로 호출될 때(예외 상황)
+      const user = {
+        name: "영희",
+        regularFunc: function () {
+          console.log("일반함수:", this);
+          console.log("일반함수:", this.name);
+        },
+        arrowFunc: () => {
+          console.log("화살표함수:", this);
+          console.log("화살표함수:", this.name);
+        },
+      };
+
+      user.regularFunc();
+      user.arrowFunc();
+    </script>
+  </head>
+  <body></body>
+</html>
