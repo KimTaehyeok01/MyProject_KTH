@@ -61,54 +61,6 @@
         font-weight: bold;
       }
     </style>
-    <script>
-      // 1. 데이터
-      const menuList = [
-        { id: 1, name: "치즈버거", price: 5000, category: "burger" },
-        { id: 2, name: "불고기버거", price: 6000, category: "burger" },
-        { id: 3, name: "감자튀김", price: 3000, category: "side" },
-        { id: 4, name: "콜라", price: 2000, category: "drink" },
-        { id: 5, name: "새우버거", price: 7000, category: "burger" },
-        { id: 6, name: "치즈스틱", price: 2500, category: "side" },
-      ];
-
-      // 2. 전역 변수
-      let totalPrice = 0;
-
-      // [핵심 1] 화면 그리기 (map 사용)
-      function renderMenu(list) {
-        const htmlArray = list.map((item) => {
-          return `<button class="menu-item" onclick="addToTotal(${item.price})">
-                    ${item.name}
-                    <span class="price-tag">${item.price}원</span>
-                  </button>`;
-        });
-        document.getElementById("menu-container").innerHTML =
-          htmlArray.join("");
-      }
-
-      // [핵심 2] 카테고리 필터링 (filter 사용)
-      function filterCategory(category) {
-        let filteredList;
-        if (category == "all") {
-          filteredList = menuList;
-        } else {
-          filteredList = menuList.filter((item) => item.category === category);
-        }
-        renderMenu(filteredList);
-      }
-
-      // [핵심 3] 가격 계산
-      function addToTotal(price) {
-        totalPrice += price;
-        document.getElementById("total-price").innerText = totalPrice;
-      }
-
-      // 시작하자마자 메뉴 그리기
-      window.onload = function () {
-        renderMenu(menuList);
-      };
-    </script>
   </head>
   <body>
     <h1>🍔 버거킹 키오스크</h1>
@@ -139,5 +91,46 @@
     </button>
     <hr />
     <div id="menu-container"></div>
+    <script>
+      // 1. 데이터
+      const menuList = [
+        { id: 1, name: "치즈버거", price: 5000, category: "burger" },
+        { id: 2, name: "불고기버거", price: 6000, category: "burger" },
+        { id: 3, name: "감자튀김", price: 3000, category: "side" },
+        { id: 4, name: "콜라", price: 2000, category: "drink" },
+        { id: 5, name: "새우버거", price: 7000, category: "burger" },
+        { id: 6, name: "치즈스틱", price: 2500, category: "side" },
+      ];
+
+      let totalPrice = 0;
+
+      function menulist(list) {
+        const menuHTMLlist = list.map((item) => {
+          return `<button class="menu-item" onclick="addToTotal(${item.price})">
+                    ${item.name}
+                    <span class="price-tag">${item.price}원</span>
+                  </button>`;
+        });
+        document.getElementById("menu-container").innerHTML =
+          menuHTMLlist.join(" ");
+      }
+
+      function filterCategory(category) {
+        let foodlist;
+        if (category == "all") {
+          foodlist = menuList;
+        } else {
+          foodlist = menuList.filter((item) => item.category === category);
+        }
+        menulist(foodlist);
+      }
+
+      function addToTotal(price) {
+        totalPrice += price;
+        document.getElementById("total-price").innerHTML = totalPrice;
+      }
+
+      menulist(menuList);
+    </script>
   </body>
 </html>
