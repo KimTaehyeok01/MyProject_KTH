@@ -237,12 +237,58 @@ END AS 고객등급,
 		ELSE '도시'
 END AS 도시등급 FROM 고객;
 
+-- if문으로 사용가능
+SELECT 마일리지, CASE 
+		WHEN 마일리지 >= 100000 THEN 'VVIP고객' 
+		WHEN 마일리지 >= 10000 THEN 'VIP고객' 
+		ELSE '일반고객'
+END AS 고객등급,도시
+		,if(도시 LIKE '%특별시' OR 도시 LIKE '%광역시', '대도시', '도시') 
+	AS 도시등급
+FROM 고객;
+
+-- 5. 주문 테이블에서 주문번호, 고객번호, 주문일 및 주문년도, 분기, 
+--   월, 일, 요일, 한글요일을 보이시오.
+
+SELECT *FROM 주문;
+-- DAYOFMONTH(주문일) , DAY(주문일) 둘이 같은 것임
+SELECT 주문번호, 고객번호, 주문일
+		,date_format(주문일, '%Y년')AS 주문년도
+		-- YEAR(주문일)
+		,QUARTER(주문일)AS 주문분기 -- QUARTER 1~12월을 4로 나눔. 1,2,3/1 4,5,6/2, ...
+		,date_format(주문일, '%m월')AS 월
+		-- DAY(주문일)
+		,date_format(주문일, '%d일')AS 일
+		,CONCAT(SUBSTR('월화수목금토일', WEEKDAY(주문일) + 1, 1), '요일')AS 한글요일
+		FROM 주문;
 
 
+-- 6. 주문 테이블에서 요청일보다 발송일이 7일 이상 늦은 주문내역을 보이시오.
+SELECT *, datediff(발송일, 요청일) AS 지연일수 FROM 주문
+		WHERE datediff(발송일, 요청일) >= 7;
+-- 실전문제
+-- 1. 고객테이블에서 이름에 ‘정’이 들어가는 담당자명을 검색하시오.
+SELECT *FROM 고객 WHERE 담당자명 LIKE '%정%';
 
+-- 2. 제품테이블에서 제품번호, 제품명, 재고, 재고구분을 보이시오.
+--  -재고구분 : 재고가 100개 이상이면 ‘과다재고’, 10개 이상이면 ‘적정’, 
+--              나머지는 ‘재고부족’
+SELECT 제품번호, 제품명, 재고, 
+       CASE WHEN 재고 >= 100 THEN '과다재고'
+            WHEN 재고 >= 10 THEN '적정'
+            ELSE '재고부족'
+END AS 재고구분
+FROM 제품;
 
+-- 3. 사원테이블에서 입사한 지 40개월이 지난 사원을 찾아,
+--    이름, 부서번호, 직위, 입사일, 입사일수, 입사개월수를 찾으시오.
 
+SELECT *FROM 사원;
 
+SELECT 이름, 부서번호, 직위, 입사일 
+		, datediff(now(), 입사일) AS 입사일수
+		, timestampdiff(MONTH,입사일, now()) AS 입사개월수
+FROM 사원 WHERE timestampdiff(MONTH,입사일, now()) >= 40;
 
 
 
