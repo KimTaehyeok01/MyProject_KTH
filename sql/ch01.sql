@@ -1,28 +1,83 @@
---  데이터베이스 생성
-CREATE DATABASE IF NOT EXISTS mydb;
+USE 세계무역;
 
--- 데이터베이스 전환
-use mydb;
+SELECT *FROM 고객;
 
--- 회원 테이블 생성
--- INT(10) : 정수 10자리 할당(고정길이) -> 10자리 이상의 숫자를 넣으면 오류 (예: 0000012345)
--- VARCHAR(50) : 문자열 길이 50할당(가변길이) -> (50자리 미만의 문자를 넣으면, 그만큼만 메모리 확보), 50자리 이상의 문자를 넣으면 오류
--- PRIMARY KEY : 기본키, 유일성!!, 열과 열을 구분하는 식별자(예: 주민번호)
--- AUTO_INCREMENT : INSERT할 때 1씩 증가하는 속성을 추가
-CREATE TABLE member (
-member_no int(10) PRIMARY KEY AUTO_INCREMENT,
-member_id varchar(50), -- 로그인 아이디
-member_password varchar(50), -- 로그인 비밀번호
-member_nickname varchar(50) -- 별명
-);
+-- 컬럼명에 별명을 넣어줌. as 일부러 생략함
+SELECT count(*) '행의 개수' FROM 고객;
 
--- 테이블 구조 확인할때
-DESC MEMBER;
+-- 고객 테이블에서 고객번호, 담당자명, 고객회사명, 마일리지, 10% 
+-- 인상된 마일리지를 조회하시오. 이때 마일리지는 ‘포인트’로, 인상된 마일리
+-- 지는 ‘10%인상된 마일리지’로 별명을 붙입니다.
+SELECT 고객번호, 담당자명, 고객회사명, 마일리지 '포인트', 마일리지 * 1.1 '10% 인상된 마일리지' FROM 고객;
 
--- row : 행/레코드/데이터추가
--- ""와 ''을 구분하지 않고 둘다 사용 가능(구분하지 않음)
--- 백틱(`) : 예약어를 사용자 정의어로 사용시 사용가능.
-INSERT INTO MEMBER (member_no, member_id, MEMBER_password, member_nickname) VALUES
-(1, 'hong', '1234', '홍길동');
+--  고객 테이블에서 마일리지가 100,000점 이상인 고객의 고객번호, 
+-- 담당자명, 마일리지를 조회하시오.
+SELECT 고객번호, 담당자명, 마일리지 FROM 고객 WHERE 마일리지 >= 100000;
 
-SELECT *FROM MEMBER;
+-- ‘서울특별시’에 사는 고객에 대해 고객번호, 담당자명, 도시, 마일
+-- 리지를 조회하시오. 이때 마일리지가 많은 고객부터 순서대로 보입니다.
+SELECT 담당자명, 도시, 마일리지 '포인트' FROM 고객 WHERE 도시 = '서울특별시' ORDER BY 포인트 DESC;
+
+SELECT 담당자명, 도시, 마일리지 '포인트' FROM 고객 WHERE 도시 = '서울특별시' AND 마일리지 >= 10000 ORDER BY 마일리지 DESC;
+
+-- limit n : 갯수 제한 -> 전체 컬럼데이터 중에서 순서대로 상위 n개만 가져오는 것.
+SELECT *FROM 고객 LIMIT 3;
+
+
+-- 마일리지 상위 3명 / 하위 3명
+SELECT *FROM 고객 ORDER BY 마일리지 DESC LIMIT 3;
+SELECT *FROM 고객 ORDER BY 마일리지 asc LIMIT 3;
+
+-- Distinct
+SELECT DISTINCT 도시 FROM 고객;
+
+-- 산술연산자
+SELECT 23+5 더하기
+	,23-5 AS 빼기
+	,23*5 곱하기
+	,23/5 '나누기 몫(실수)'
+	,23 DIV 5 AS '나누기 몫(정수)'
+	,23 % 5 AS '나머지1'
+	,23 MOD 5 AS '나머지2' ;
+
+-- 비교연산자
+-- MySQL/MariaDB -- 불리언(boolean)을 정수형으로 처리한다.
+--                  true는 1, false는 0(단 null과 비교는 NULL로 나옴)
+-- PostgreSQL : true/false 텍스트형태의 불리언 값 반환
+-- Oracle, MS, SQL Server - 불리언값을 직접 반환하지 않음
+SELECT 23 > 23
+	,23 < 23
+	,23 = 23
+	,23 = NULL
+	,23 != 23
+	,23 <> 23 -- <> : 같지 않은가?
+	,23 >= 5
+	,23 <= 5;
+	
+SELECT * FROM 고객 
+WHERE 담당자직위 = '영업 과장';
+	
+SELECT * FROM 고객 
+WHERE 도시 = '부산광역시' AND 마일리지 < 1000;
+
+-- 연습문제 - 게시판에 스샷 제출
+-- 1.‘서울’에 사는 고객 중에 마일리지가 15,000점 이상 20,000점 이하인 고객의 
+--    모든 컬럼 정보를 보이시오.
+-- 2. 세계무역의 고객들은 어느 지역, 어느 도시에 사는지 지역과 도시를 
+-- 한 번씩만 보이시오.
+--  이때 결과를 지역 순으로 나타내고, 동일 지역에 대해서는 도시 순으로 나타내시오.
+-- DISTINCT는 두개의 컬럼에 적용
+SELECT *FROM 고객
+WHERE 도시 = '서울특별시' AND 마일리지 BETWEEN 15000 and 20000;
+
+-- distinct 컬럼이 2개 이상이면, 쌍으로 구분된다.
+-- (경기도, 광명시) <> (경기도, 구리시)
+SELECT DISTINCT 지역, 도시 FROM 고객
+ ORDER BY 지역, 도시;
+
+
+
+	
+	
+	
+	
