@@ -176,42 +176,28 @@ SELECT *FROM 사원;
 -- 연습문제
 -- 1. 세계무역 데이터베이스의 제품 테이블과 주문 세부 테이블을 조인하여 
 --   제품명별로 주문수량합과 주문금액합을 보이시오.
-SELECT 제품.제품명, sum(제품.재고) AS 주문수량
-		,sum(제품.단가 * 제품.재고) AS 주문금액
+SELECT 제품.제품명, count(*) AS 주문수량
+		,sum(주문세부.단가 * 주문수량) AS 주문금액
 FROM 제품, 주문세부
 WHERE 제품.제품번호 = 주문세부.제품번호
-GROUP BY 1;
+GROUP BY 1
+ORDER BY 3 desc;
 
 -- 2. 주문, 주문세부, 제품 테이블을 활용하여 '아이스크림'제품에 대해서
 -- (주문년도 제품명)별로 주문수량합을 보이시오.
-SELECT *FROM 주문;
-SELECT *FROM 주문세부;
-SELECT *FROM 제품;
-
-SELECT YEAR(주문.주문일) AS 주문년도, 제품.제품명, sum(제품.단가*주문세부.주문수량) AS 주문수량
-FROM 제품 
-INNER JOIN 주문세부
-ON 제품.제품번호 = 주문세부.제품번호
-inner JOIN 주문 
-ON 주문세부.주문번호 = 주문.주문번호
-WHERE 제품.제품명 LIKE '%아이스크림'
-GROUP BY 1,2
-ORDER BY 3 desc;
-
-SELECT YEAR(주문.주문일) AS 주문년도, 제품.제품명, sum(제품.단가*주문세부.주문수량) AS 주문수량
+SELECT YEAR(주문.주문일), AS 주문년도, 제품.제품명, sum(주문세부.주문수량) AS 주문수량
 FROM 제품, 주문세부, 주문
 WHERE (제품.제품번호 = 주문세부.제품번호 AND 주문세부.주문번호 = 주문.주문번호)
-AND 제품.제품명 LIKE '%아이스크림'
+AND 제품.제품명 LIKE '%아이스크림%'
 GROUP BY 1,2
-ORDER BY 3 desc;
+ORDER BY 2;
 
 -- 3. 제품, 주문세부 테이블을 활용하여 제품명별로 주문수량합을 보이시오.
 --   이때 주문이 한 번도 안 된 제품에 대한 정보도 함께 나타내시오.
 SELECT *FROM 제품;
 SELECT *FROM 주문세부;
 
-SELECT 제품.제품명
-	,sum(주문세부.주문수량) AS 주문수량합
+SELECT 제품명 ,sum(주문수량) AS 주문수량합
 FROM 제품, 주문세부
 WHERE 제품.제품번호 = 주문세부.제품번호
 GROUP BY 1;
@@ -222,8 +208,41 @@ SELECT 고객번호, 담당자명, 고객회사명, 등급명, 마일리지
 FROM 고객, 마일리지등급
 WHERE (마일리지 BETWEEN 하한마일리지 AND 상한마일리지) AND 등급명 = 'A';
 
+-- 실전문제
+-- 1. 마일리지 등급명별로 고객수를 보이시오.
+SELECT 등급명, count(고객번호) AS 고객수
+FROM 마일리지등급 
+INNER join 고객 
+ON 마일리지 BETWEEN 하한마일리지 AND 상한마일리지
+GROUP BY 1;
+
+-- 2. 주문번호 ‘H0249’를 주문한 고객의 모든 정보를 보이시오.
+SELECT 고객.* FROM 주문
+INNER JOIN 고객 
+ON 고객.고객번호 = 주문.고객번호
+INNER JOIN 주문세부 
+ON 주문.주문번호 = 주문세부.주문번호
+WHERE 주문.주문번호 = 'H0249';
+
+-- 3. 2020년 4월 29일에 주문한 고객의 모든 정보를 보이시오.
+SELECT 고객.* FROM 주문
+INNER JOIN 고객
+ON 주문.고객번호 = 고객.고객번호
+WHERE 주문일 = '2020-04-29';
+
+-- 4. 도시별로 주문금액합을 보이되 주문금액합이 많은 상위 5개의 도시에 대한 
+-- 결과만 보이시오.
+SELECT 도시
+		,sum(단가 * 주문수량) AS '주문금액 합'
+FROM 고객 INNER JOIN 주문
+ON 고객.고객번호 = 주문.고객번호
+INNER JOIN 주문세부 
+ON 주문.주문번호 = 주문세부.주문번호
+GROUP BY 1
+ORDER BY '주문금액 합' DESC LIMIT 5;
 
 
+SELECT *FROM 고객;
 
 
 
