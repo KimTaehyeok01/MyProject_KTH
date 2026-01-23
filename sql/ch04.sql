@@ -160,16 +160,16 @@ order BY 직위;
 SELECT * FROM 사원;
 
 
-
 -- 복습 GROUP_CONCAT, WITH 
 
 
 
+SELECT *FROM 주문;
 
+SELECT *FROM  주문세부;
 
-
-
-
+SELECT *FROM 주문 a INNER join 주문세부 b
+ON a.주문번호 = b.주문번호;
 
 
 
