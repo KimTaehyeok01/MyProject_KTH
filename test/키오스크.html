@@ -92,7 +92,6 @@
     <hr />
     <div id="menu-container"></div>
     <script>
-      // 1. 데이터
       const menuList = [
         { id: 1, name: "치즈버거", price: 5000, category: "burger" },
         { id: 2, name: "불고기버거", price: 6000, category: "burger" },
@@ -100,24 +99,29 @@
         { id: 4, name: "콜라", price: 2000, category: "drink" },
         { id: 5, name: "새우버거", price: 7000, category: "burger" },
         { id: 6, name: "치즈스틱", price: 2500, category: "side" },
+        { id: 7, name: "치킨버거", price: 2500, category: "burger" },
+        { id: 8, name: "아이크스림", price: 2500, category: "side" },
+        { id: 9, name: "사이다", price: 2500, category: "drink" },
+        { id: 10, name: "커피", price: 2500, category: "drink" },
+        { id: 11, name: "한우버거", price: 2500, category: "burger" },
       ];
 
       let totalPrice = 0;
 
+      // 전체 메뉴 리스트
       function menulist(list) {
-        const menuHTMLlist = list.map((item) => {
-          return `<button class="menu-item" onclick="addToTotal(${item.price})">
-                    ${item.name}
-                    <span class="price-tag">${item.price}원</span>
-                  </button>`;
+        const HTMLlist = list.map((list) => {
+          return `<Button class="menu-item" onclick="totalMoney(${list.price})">${list.name}
+                  <span class="price-tag">${list.price}원</span></Button>`;
         });
         document.getElementById("menu-container").innerHTML =
-          menuHTMLlist.join(" ");
+          HTMLlist.join(" ");
       }
 
+      // 특정 메뉴 리스트
       function filterCategory(category) {
         let foodlist;
-        if (category == "all") {
+        if (category === "all") {
           foodlist = menuList;
         } else {
           foodlist = menuList.filter((item) => item.category === category);
@@ -125,7 +129,8 @@
         menulist(foodlist);
       }
 
-      function addToTotal(price) {
+      // 계산하는 결과 값
+      function totalMoney(price) {
         totalPrice += price;
         document.getElementById("total-price").innerHTML = totalPrice;
       }
