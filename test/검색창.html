@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>YouTube 재생목록</title>
+    <style>
+      body {
+        background-color: #0f0f0f;
+        color: white;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+      }
+      .container {
+        width: 450px;
+      }
+      h1 {
+        color: #ff0000;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+
+      .add-box {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+      input {
+        flex-grow: 1;
+        padding: 12px;
+        border-radius: 5px;
+        border: 1px solid #3f3f3f;
+        background: #272727;
+        color: white;
+        font-size: 14px;
+      }
+      button {
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #cc0000;
+      }
+
+      .video-list {
+        list-style: none;
+        padding: 0;
+      }
+      .video-item {
+        background: #272727;
+        margin-bottom: 12px;
+        padding: 16px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .video-info {
+        flex-grow: 1;
+      }
+      .video-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .video-channel {
+        font-size: 13px;
+        color: #aaa;
+      }
+      .view-count {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📺 재생목록</h1>
+
+      <div class="add-box">
+        <input
+          type="text"
+          id="title-input"
+          placeholder="영상 제목을 입력하세요..."
+        />
+        <button onclick="search()">검색</button>
+      </div>
+
+      <ul class="video-list" id="video-list"></ul>
+    </div>
+
+    <script>
+      const videos = [
+        { title: "JavaScript 기초 강의", channel: "코딩애플", views: "12만회" },
+        { title: "React 완벽 가이드", channel: "노마드코더", views: "8.5만회" },
+        { title: "HTML CSS 입문", channel: "생활코딩", views: "25만회" },
+        { title: "JavaScript 심화 과정", channel: "드림코딩", views: "5만회" },
+        { title: "Python 기초 강의", channel: "코딩애플", views: "20만회" },
+        {
+          title: "Node.js 백엔드 개발",
+          channel: "노마드코더",
+          views: "15만회",
+        },
+        { title: "Vue.js 입문", channel: "생활코딩", views: "7만회" },
+        { title: "TypeScript 완전정복", channel: "드림코딩", views: "9만회" },
+        { title: "Next.js 풀스택 개발", channel: "코딩애플", views: "11만회" },
+        {
+          title: "React Native 모바일 앱",
+          channel: "노마드코더",
+          views: "6만회",
+        },
+        { title: "JavaScript ES6+ 문법", channel: "생활코딩", views: "18만회" },
+        { title: "웹 디자인 기초", channel: "드림코딩", views: "22만회" },
+        { title: "SQL 데이터베이스", channel: "코딩애플", views: "14만회" },
+        { title: "MongoDB 완벽가이드", channel: "노마드코더", views: "8만회" },
+        { title: "Express.js 서버 개발", channel: "생활코딩", views: "10만회" },
+        { title: "Git GitHub 사용법", channel: "드림코딩", views: "30만회" },
+        { title: "CSS Flexbox 레이아웃", channel: "코딩애플", views: "16만회" },
+        { title: "CSS Grid 완전정복", channel: "노마드코더", views: "12만회" },
+        { title: "반응형 웹 디자인", channel: "생활코딩", views: "19만회" },
+        { title: "Tailwind CSS 강좌", channel: "드림코딩", views: "13만회" },
+        { title: "Bootstrap 5 입문", channel: "코딩애플", views: "17만회" },
+        { title: "Sass SCSS 활용", channel: "노마드코더", views: "9만회" },
+        { title: "Webpack 번들러", channel: "생활코딩", views: "7만회" },
+        { title: "Vite 빌드 도구", channel: "드림코딩", views: "5만회" },
+        { title: "NPM 패키지 관리", channel: "코딩애플", views: "11만회" },
+        { title: "Yarn 사용법", channel: "노마드코더", views: "6만회" },
+        { title: "Docker 컨테이너", channel: "생활코딩", views: "21만회" },
+        { title: "AWS 클라우드 입문", channel: "드림코딩", views: "24만회" },
+        { title: "Firebase 백엔드", channel: "코딩애플", views: "15만회" },
+        { title: "REST API 설계", channel: "노마드코더", views: "18만회" },
+        { title: "GraphQL 기초", channel: "생활코딩", views: "10만회" },
+        { title: "WebSocket 실시간 통신", channel: "드림코딩", views: "8만회" },
+        { title: "JWT 인증 구현", channel: "코딩애플", views: "13만회" },
+        { title: "OAuth 소셜 로그인", channel: "노마드코더", views: "11만회" },
+        { title: "Redux 상태관리", channel: "생활코딩", views: "14만회" },
+        { title: "Recoil 상태관리", channel: "드림코딩", views: "7만회" },
+        { title: "Zustand 사용법", channel: "코딩애플", views: "6만회" },
+        { title: "Context API 활용", channel: "노마드코더", views: "9만회" },
+        {
+          title: "React Hook 완벽가이드",
+          channel: "생활코딩",
+          views: "20만회",
+        },
+        { title: "Custom Hook 만들기", channel: "드림코딩", views: "8만회" },
+        { title: "React Router 라우팅", channel: "코딩애플", views: "16만회" },
+        {
+          title: "React Query 데이터 fetching",
+          channel: "노마드코더",
+          views: "12만회",
+        },
+        { title: "SWR 데이터 캐싱", channel: "생활코딩", views: "7만회" },
+        { title: "Axios HTTP 통신", channel: "드림코딩", views: "15만회" },
+        { title: "Fetch API 사용법", channel: "코딩애플", views: "13만회" },
+        { title: "async await 비동기", channel: "노마드코더", views: "17만회" },
+        { title: "Promise 완벽이해", channel: "생활코딩", views: "14만회" },
+        { title: "JavaScript 클로저", channel: "드림코딩", views: "11만회" },
+        {
+          title: "JavaScript this 바인딩",
+          channel: "코딩애플",
+          views: "10만회",
+        },
+        {
+          title: "JavaScript 프로토타입",
+          channel: "노마드코더",
+          views: "9만회",
+        },
+        {
+          title: "JavaScript 이벤트루프",
+          channel: "생활코딩",
+          views: "12만회",
+        },
+        {
+          title: "JavaScript 실행컨텍스트",
+          channel: "드림코딩",
+          views: "8만회",
+        },
+        { title: "JavaScript 스코프", channel: "코딩애플", views: "11만회" },
+        {
+          title: "JavaScript 호이스팅",
+          channel: "노마드코더",
+          views: "10만회",
+        },
+        { title: "알고리즘 입문", channel: "생활코딩", views: "25만회" },
+        { title: "자료구조 완벽정복", channel: "드림코딩", views: "22만회" },
+        { title: "코딩테스트 대비", channel: "코딩애플", views: "28만회" },
+        { title: "백준 문제풀이", channel: "노마드코더", views: "19만회" },
+        {
+          title: "프로그래머스 문제풀이",
+          channel: "생활코딩",
+          views: "21만회",
+        },
+        { title: "LeetCode 문제풀이", channel: "드림코딩", views: "16만회" },
+        { title: "정렬 알고리즘", channel: "코딩애플", views: "14만회" },
+        { title: "탐색 알고리즘", channel: "노마드코더", views: "13만회" },
+        { title: "그래프 알고리즘", channel: "생활코딩", views: "11만회" },
+        { title: "동적 프로그래밍", channel: "드림코딩", views: "15만회" },
+        { title: "그리디 알고리즘", channel: "코딩애플", views: "12만회" },
+        { title: "DFS BFS 완벽이해", channel: "노마드코더", views: "18만회" },
+        { title: "이진트리 순회", channel: "생활코딩", views: "10만회" },
+        { title: "해시테이블 구현", channel: "드림코딩", views: "9만회" },
+        { title: "스택 큐 구현", channel: "코딩애플", views: "11만회" },
+        { title: "링크드리스트 구현", channel: "노마드코더", views: "8만회" },
+        { title: "Java 기초 강의", channel: "생활코딩", views: "30만회" },
+        { title: "Spring Boot 입문", channel: "드림코딩", views: "26만회" },
+        { title: "JPA Hibernate", channel: "코딩애플", views: "20만회" },
+        { title: "MyBatis 사용법", channel: "노마드코더", views: "15만회" },
+        { title: "C언어 기초", channel: "생활코딩", views: "28만회" },
+        { title: "C++ 프로그래밍", channel: "드림코딩", views: "22만회" },
+        { title: "C# 닷넷 개발", channel: "코딩애플", views: "18만회" },
+        { title: "Unity 게임 개발", channel: "노마드코더", views: "24만회" },
+        { title: "Unreal Engine 입문", channel: "생활코딩", views: "20만회" },
+        { title: "Kotlin 안드로이드", channel: "드림코딩", views: "19만회" },
+        { title: "Swift iOS 개발", channel: "코딩애플", views: "21만회" },
+        {
+          title: "Flutter 크로스플랫폼",
+          channel: "노마드코더",
+          views: "23만회",
+        },
+        { title: "Dart 언어 기초", channel: "생활코딩", views: "12만회" },
+        { title: "Go 언어 입문", channel: "드림코딩", views: "14만회" },
+        { title: "Rust 프로그래밍", channel: "코딩애플", views: "11만회" },
+        { title: "PHP 웹 개발", channel: "노마드코더", views: "16만회" },
+        { title: "Laravel 프레임워크", channel: "생활코딩", views: "13만회" },
+        { title: "Ruby on Rails", channel: "드림코딩", views: "10만회" },
+        { title: "Django 파이썬 웹", channel: "코딩애플", views: "22만회" },
+        {
+          title: "Flask 마이크로 프레임워크",
+          channel: "노마드코더",
+          views: "15만회",
+        },
+        { title: "FastAPI 모던 API", channel: "생활코딩", views: "17만회" },
+        { title: "Pandas 데이터 분석", channel: "드림코딩", views: "20만회" },
+        { title: "NumPy 수치 계산", channel: "코딩애플", views: "14만회" },
+        { title: "Matplotlib 시각화", channel: "노마드코더", views: "12만회" },
+        {
+          title: "Scikit-learn 머신러닝",
+          channel: "생활코딩",
+          views: "19만회",
+        },
+        { title: "TensorFlow 딥러닝", channel: "드림코딩", views: "24만회" },
+        { title: "PyTorch 입문", channel: "코딩애플", views: "21만회" },
+        { title: "Keras 신경망", channel: "노마드코더", views: "16만회" },
+        { title: "OpenCV 컴퓨터비전", channel: "생활코딩", views: "18만회" },
+      ];
+
+      function search() {
+        let userinput = document.getElementById("title-input").value;
+
+        let filtervideo = videos.filter((video) => {
+          return video.title.includes(userinput);
+        });
+
+        let result = filtervideo.map((item) => {
+          return `<li class="video-item">
+                    <div class="video-title">${item.title}</div>
+                    <div class="video-channel">${item.title}</div>
+                    <div class="video-views>${item.views}</div>
+                </li>`;
+        });
+        document.getElementById("video-list").innerHTML = result;
+      }
+    </script>
+  </body>
+</html>
