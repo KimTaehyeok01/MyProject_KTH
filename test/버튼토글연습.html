@@ -97,8 +97,8 @@
         { title: "범죄도시", liked: false },
       ];
 
-      function render(date) {
-        const html = date.map((movie, index) => {
+      function render(data) {
+        const html = data.map((movie, index) => {
           const heart = movie.liked ? "❤️" : "🤍";
           return `<li class="movie-item">
                     <span class="title">${movie.title}</span>
