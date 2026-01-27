@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Netflix Search</title>
+    <style>
+      body {
+        background-color: #141414;
+        color: white;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+      }
+      .container {
+        width: 400px;
+        text-align: center;
+      }
+      h1 {
+        color: #e50914;
+        margin-bottom: 20px;
+      }
+
+      .search-box {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+      input {
+        flex-grow: 1;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+      }
+      button {
+        background-color: #e50914;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #b20710;
+      }
+
+      .movie-list {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+      }
+      .movie-item {
+        background: #333;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .genre {
+        font-size: 12px;
+        color: #aaa;
+        background: #000;
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>NETFLIX</h1>
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="keyword"
+          placeholder="영화 제목을 입력하세요..."
+        />
+        <button onclick="searchMovie()">검색</button>
+      </div>
+
+      <ul class="movie-list" id="list-area"></ul>
+    </div>
+
+    <script>
+      // 원본 데이터
+      const movies = [
+        { title: "오징어 게임", genre: "스릴러" },
+        { title: "킹덤", genre: "좀비/사극" },
+        { title: "지금 우리 학교는", genre: "좀비/학원" },
+        { title: "아이언맨", genre: "SF/액션" },
+        { title: "스파이더맨", genre: "액션" },
+        { title: "범죄도시", genre: "액션/코미디" },
+      ];
+
+      function render(data) {
+        const html = data.map((movie) => {
+          return `<li class="movie-item">
+                    <span class="title">${movie.title}</span>
+                    <span class="genre">${movie.genre}</span>
+                  </li>`;
+        });
+        document.getElementById("list-area").innerHTML = html.join("");
+      }
+      render(movies);
+
+      function searchMovie() {
+        let keyword = document.getElementById("keyword").value;
+
+        const result = movies.filter((item) => {
+          return item.title.includes(keyword);
+        });
+      }
+    </script>
+  </body>
+</html>
