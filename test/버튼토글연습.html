@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Netflix 좋아요</title>
+    <style>
+      body {
+        background-color: #141414;
+        color: white;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+      }
+      .container {
+        width: 400px;
+        text-align: center;
+      }
+      h1 {
+        color: #e50914;
+        margin-bottom: 20px;
+      }
+
+      .movie-list {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+      }
+      .movie-item {
+        background: #333;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .like-btn {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .like-btn:hover {
+        transform: scale(1.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>NETFLIX</h1>
+
+      <ul class="movie-list" id="list-area"></ul>
+    </div>
+
+    <script>
+      //   function render(data) {
+      //     const html = data.map((movie, index) => {
+      //       const heart = movie.liked ? "❤️" : "🤍";
+      //       return `<li class="movie-item">
+      //                   <span class="title">${movie.title}</span>
+      //                   <button class="like-btn" onclick="toggleLike(${index})">${heart}</button>
+      //                 </li>`;
+      //     });
+      //     document.getElementById("list-area").innerHTML = html.join("");
+      //   }
+
+      //   function toggleLike(index) {
+      //     movies[index].liked = !movies[index].liked;
+      //     render(movies);
+      //   }
+
+      //   render(movies);
+      /*
+        [To. 개발팀]
+        디자인팀입니다. 아래 기능 구현 부탁드립니다.
+
+        1. movies 배��� 데이터를 화면에 렌더링해주세요
+           - 각 영화마다 제목과 좋아요 버튼을 표시해주세요
+           - liked가 true면 ❤️, false면 🤍로 표시해주세요
+
+        2. 좋아요 버튼을 클릭하면
+           - 해당 영화의 liked 값을 반대로 바꿔주세요
+           - 화면을 다시 렌더링해주세요
+      */
+
+      const movies = [
+        { title: "오징어 게임", liked: false },
+        { title: "킹덤", liked: false },
+        { title: "지금 우리 학교는", liked: false },
+        { title: "아이언맨", liked: false },
+        { title: "스파이더맨", liked: false },
+        { title: "범죄도시", liked: false },
+      ];
+
+      function render(date) {
+        const html = date.map((movie, index) => {
+          const heart = movie.liked ? "❤️" : "🤍";
+          return `<li class="movie-item">
+                    <span class="title">${movie.title}</span>
+                    <button class="like-btn" onclick="toggleON(${index})">${heart}</Button>
+                    </li>`;
+        });
+        document.getElementById("list-area").innerHTML = html.join("");
+      }
+
+      function toggleON(index) {
+        movies[index].liked = !movies[index].liked;
+        render(movies);
+      }
+      render(movies);
+    </script>
+  </body>
+</html>
