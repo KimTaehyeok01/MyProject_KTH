@@ -173,51 +173,6 @@
     </div>
 
     <script>
-      /*
-        [To. 개발팀]
-        디자인팀입니다. 아래 기능 구현 부탁드립니다.
-
-        1. students 배열 데이터를 화면에 렌더링해주세요
-           - 각 학생마다 이름, 과목별 점수, 평균, +5/-5 버튼, 삭제 버튼을 표시해주세요
-           - 평균 70점 이상이면 배경색 초록색(pass), 미만이면 빨간색(fail)
-           - 구조: <li class="student-item pass/fail">
-                    <div class="student-info">
-                      <div class="student-name">이름</div>
-                      <div class="student-scores">국어: 0 | 영어: 0 | 수학: 0</div>
-                      <div class="student-average pass/fail">평균: 0점</div>
-                    </div>
-                    <div class="student-controls">
-                      <button class="score-btn plus" onclick="increaseScore(인덱스)">+5</button>
-                      <button class="score-btn minus" onclick="decreaseScore(인덱스)">-5</button>
-                      <button class="remove-btn" onclick="removeStudent(인덱스)">삭제</button>
-                    </div>
-                  </li>
-
-        2. +5 버튼을 클릭하면
-           - 해당 학생의 국어, 영어, 수학 점수를 각각 5점씩 증가시켜주세요
-           - 단, 각 과목은 100점을 초과할 수 없게 해주세요
-           - 화면을 다시 렌더링해주세요
-
-        3. -5 버튼을 클릭하면
-           - 해당 학생의 국어, 영어, 수학 점수를 각각 5점씩 감소시켜주세요
-           - 단, 각 과목은 0점 미만이 될 수 없게 해주세요
-           - 화면을 다시 렌더링해주세요
-
-        4. 삭제 버튼을 클릭하면
-           - 해당 학생을 students 배열에서 제거해주세요
-           - 화면을 다시 렌더링해주세요
-
-        5. 통계를 계산해서 표시해주세요
-           - 전체 평균: 모든 학생의 평균 점수
-           - 합격: 평균 70점 이상인 학생 수
-           - 불합격: 평균 70점 미만인 학생 수
-
-        힌트: 
-        - 평균 = (국어 + 영어 + 수학) / 3
-        - Math.min(score, 100) → 100 초과 방지
-        - Math.max(score, 0) → 0 미만 방지
-      */
-
       const students = [
         { name: "김철수", korean: 85, english: 90, math: 78 },
         { name: "이영희", korean: 92, english: 88, math: 95 },
