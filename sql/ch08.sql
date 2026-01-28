@@ -352,8 +352,8 @@ BEGIN
 	END;
 	
 	START TRANSACTION;
-UPDATE 계좌 SET 잔액 = 잔액 - 1000 WHERE 이름 = '철수';
-UPDATE 계좌 SET 잔액 = 잔액 + 1000 WHERE 이름 = '영희';
+	UPDATE 계좌 SET 잔액 = 잔액 - 1000 WHERE 이름 = '철수';
+	UPDATE 계좌 SET 잔액 = 잔액 + 1000 WHERE 이름 = '영희';
 	COMMIT;
 	SELECT '이체가 성공적으로 완료했습니다.' AS 결과;
 END
@@ -375,7 +375,6 @@ SELECT *FROM 계좌;
 -- 자바/스프링(부트) : @TRANSACTION
 -- JS/PRISMA 라이브러리 : prisma.$transaction()
 -- Python/sqlalchemy 라이브러리 : Session 객체
-
 
 
 
