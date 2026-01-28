@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>학생 성적 관리 시스템</title>
+    <style>
+      body {
+        background-color: #f5f7fa;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+      }
+      .container {
+        width: 800px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .student-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+      }
+      .student-item {
+        background: #f8f9fa;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #dee2e6;
+      }
+      .student-item.pass {
+        background: #d4edda;
+        border-color: #c3e6cb;
+      }
+      .student-item.fail {
+        background: #f8d7da;
+        border-color: #f5c6cb;
+      }
+      .student-info {
+        flex-grow: 1;
+      }
+      .student-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+      }
+      .student-scores {
+        font-size: 14px;
+        color: #7f8c8d;
+        margin-bottom: 3px;
+      }
+      .student-average {
+        font-size: 16px;
+        font-weight: bold;
+        color: #3498db;
+      }
+      .student-average.pass {
+        color: #28a745;
+      }
+      .student-average.fail {
+        color: #dc3545;
+      }
+      .student-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .score-btn {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .score-btn:hover {
+        background-color: #5a6268;
+      }
+      .score-btn.plus {
+        background-color: #28a745;
+      }
+      .score-btn.plus:hover {
+        background-color: #218838;
+      }
+      .score-btn.minus {
+        background-color: #ffc107;
+      }
+      .score-btn.minus:hover {
+        background-color: #e0a800;
+      }
+      .remove-btn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .remove-btn:hover {
+        background-color: #c82333;
+      }
+
+      .stats-section {
+        border-top: 2px solid #dee2e6;
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .stat-item {
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        background: #f8f9fa;
+      }
+      .stat-label {
+        font-size: 14px;
+        color: #7f8c8d;
+        margin-bottom: 5px;
+      }
+      .stat-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2c3e50;
+      }
+      .stat-item.pass .stat-value {
+        color: #28a745;
+      }
+      .stat-item.fail .stat-value {
+        color: #dc3545;
+      }
+      .stat-item.average .stat-value {
+        color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📝 학생 성적 관리 시스템</h1>
+
+      <ul class="student-list" id="student-list"></ul>
+
+      <div class="stats-section">
+        <div class="stat-item average">
+          <div class="stat-label">전체 평균</div>
+          <div class="stat-value" id="class-average">0점</div>
+        </div>
+        <div class="stat-item pass">
+          <div class="stat-label">합격 (70점 이상)</div>
+          <div class="stat-value" id="pass-count">0명</div>
+        </div>
+        <div class="stat-item fail">
+          <div class="stat-label">불합격 (70점 미만)</div>
+          <div class="stat-value" id="fail-count">0명</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /*
+        [To. 개발팀]
+        디자인팀입니다. 아래 기능 구현 부탁드립니다.
+
+        1. students 배열 데이터를 화면에 렌더링해주세요
+           - 각 학생마다 이름, 과목별 점수, 평균, +5/-5 버튼, 삭제 버튼을 표시해주세요
+           - 평균 70점 이상이면 배경색 초록색(pass), 미만이면 빨간색(fail)
+           - 구조: <li class="student-item pass/fail">
+                    <div class="student-info">
+                      <div class="student-name">이름</div>
+                      <div class="student-scores">국어: 0 | 영어: 0 | 수학: 0</div>
+                      <div class="student-average pass/fail">평균: 0점</div>
+                    </div>
+                    <div class="student-controls">
+                      <button class="score-btn plus" onclick="increaseScore(인덱스)">+5</button>
+                      <button class="score-btn minus" onclick="decreaseScore(인덱스)">-5</button>
+                      <button class="remove-btn" onclick="removeStudent(인덱스)">삭제</button>
+                    </div>
+                  </li>
+
+        2. +5 버튼을 클릭하면
+           - 해당 학생의 국어, 영어, 수학 점수를 각각 5점씩 증가시켜주세요
+           - 단, 각 과목은 100점을 초과할 수 없게 해주세요
+           - 화면을 다시 렌더링해주세요
+
+        3. -5 버튼을 클릭하면
+           - 해당 학생의 국어, 영어, 수학 점수를 각각 5점씩 감소시켜주세요
+           - 단, 각 과목은 0점 미만이 될 수 없게 해주세요
+           - 화면을 다시 렌더링해주세요
+
+        4. 삭제 버튼을 클릭하면
+           - 해당 학생을 students 배열에서 제거해주세요
+           - 화면을 다시 렌더링해주세요
+
+        5. 통계를 계산해서 표시해주세요
+           - 전체 평균: 모든 학생의 평균 점수
+           - 합격: 평균 70점 이상인 학생 수
+           - 불합격: 평균 70점 미만인 학생 수
+
+        힌트: 
+        - 평균 = (국어 + 영어 + 수학) / 3
+        - Math.min(score, 100) → 100 초과 방지
+        - Math.max(score, 0) → 0 미만 방지
+      */
+
+      const students = [
+        { name: "김철수", korean: 85, english: 90, math: 78 },
+        { name: "이영희", korean: 92, english: 88, math: 95 },
+        { name: "박민수", korean: 65, english: 70, math: 60 },
+        { name: "정수진", korean: 78, english: 82, math: 88 },
+      ];
+
+      const render = () => {
+        const html = students.map((item, index) => {
+          // 평균 계산
+          const average = Math.round(
+            (item.korean + item.english + item.math) / 3,
+          );
+
+          // 70점 이상이면 pass, 아니면 fail
+          const passOrFail = average >= 70 ? "pass" : "fail";
+
+          return `<li class="student-item ${passOrFail}">
+              <div class="student-info">
+                <div class="student-name">${item.name}</div>
+                <div class="student-scores">국어: ${item.korean} | 영어: ${item.english} | 수학: ${item.math}</div>
+                <div class="student-average ${passOrFail}">평균: ${average}점</div>
+              </div>
+              <div class="student-controls">
+                <button class="score-btn plus" onclick="increaseScore(${index})">+5</button>
+                <button class="score-btn minus" onclick="decreaseScore(${index})">-5</button>
+                <button class="remove-btn" onclick="removeStudent(${index})">삭제</button>
+              </div>
+            </li>`;
+        });
+        document.getElementById("student-list").innerHTML = html.join("");
+
+        // 통계 계산
+        updateStats();
+      };
+
+      // +5 버튼
+      function increaseScore(index) {
+        students[index].korean = Math.min(students[index].korean + 5, 100);
+        students[index].english = Math.min(students[index].english + 5, 100);
+        students[index].math = Math.min(students[index].math + 5, 100);
+        render();
+      }
+
+      // -5 버튼
+      function decreaseScore(index) {
+        students[index].korean = Math.max(students[index].korean - 5, 0);
+        students[index].english = Math.max(students[index].english - 5, 0);
+        students[index].math = Math.max(students[index].math - 5, 0);
+        render();
+      }
+
+      // 삭제 버튼
+      function removeStudent(index) {
+        students.splice(index, 1);
+        render();
+      }
+
+      // 통계 계산
+      function updateStats() {
+        if (students.length === 0) {
+          document.getElementById("class-average").textContent = "0점";
+          document.getElementById("pass-count").textContent = "0명";
+          document.getElementById("fail-count").textContent = "0명";
+          return;
+        }
+
+        // 전체 평균
+        let totalSum = 0;
+        let passCount = 0;
+        let failCount = 0;
+
+        students.forEach((student) => {
+          const average = (student.korean + student.english + student.math) / 3;
+          totalSum += average;
+
+          if (average >= 70) {
+            passCount++;
+          } else {
+            failCount++;
+          }
+        });
+
+        const classAverage = Math.round(totalSum / students.length);
+
+        document.getElementById("class-average").textContent =
+          `${classAverage}점`;
+        document.getElementById("pass-count").textContent = `${passCount}명`;
+        document.getElementById("fail-count").textContent = `${failCount}명`;
+      }
+
+      render();
+    </script>
+  </body>
+</html>
