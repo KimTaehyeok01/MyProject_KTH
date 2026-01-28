@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Todo List - 삭제 기능</title>
+    <style>
+      body {
+        background-color: #f5f5f5;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+      }
+      .container {
+        width: 500px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .input-box {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+      input {
+        flex-grow: 1;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+      .add-btn {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .add-btn:hover {
+        background-color: #45a049;
+      }
+
+      .todo-list {
+        list-style: none;
+        padding: 0;
+      }
+      .todo-item {
+        background: #fafafa;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #e0e0e0;
+      }
+      .todo-text {
+        font-size: 16px;
+        color: #333;
+      }
+      .delete-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .delete-btn:hover {
+        background-color: #d32f2f;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>✅ Todo List</h1>
+
+      <div class="input-box">
+        <input
+          type="text"
+          id="todo-input"
+          placeholder="할 일을 입력하세요..."
+        />
+        <button class="add-btn" onclick="addTodo()">추가</button>
+      </div>
+
+      <ul class="todo-list" id="todo-list"></ul>
+    </div>
+
+    <script>
+      const todos = [
+        "JavaScript 공부하기",
+        "React 프로젝트 완성",
+        "운동 30분",
+        "저녁 약속",
+      ];
+      /*
+        [To. 개발팀]
+        디자인팀입니다. 아래 기능 구현 부탁드립니다.
+
+        1. todos 배열 데이터를 화면에 렌더링해주세요
+           - 각 할 일마다 텍스트와 삭제 버튼을 표시해주세요
+           - 구조: <li class="todo-item">
+                    <span class="todo-text">할일내용</span>
+                    <button class="delete-btn" onclick="deleteTodo(인덱스)">삭제</button>
+                  </li>
+
+        2. 추가 버튼을 클릭하면
+           - input에 입력한 내용을 todos 배열에 추가해주세요
+           - 화면을 다시 렌더링해주세요
+           - input을 비워주세요
+
+        3. 삭제 버튼을 클릭하면 (⭐ 핵심!)
+           - 해당 인덱스의 할 일을 todos 배열에서 제거해주세요
+           - 화면을 다시 렌더링해주세요
+           
+        힌트: 배열에서 요소 제거는 splice(인덱스, 개수) 메서드 사용
+      */
+
+      const render = () => {
+        const html = todos.map((item, index) => {
+          return `<li class="todo-item">
+                    <span class="todo-text">${item}</span>
+                    <button class="delete-btn" onclick="deleteTodo(${index})">삭제</button>
+                  </li>`;
+        });
+        document.getElementById("todo-list").innerHTML = html.join("");
+      };
+
+      function addTodo() {
+        let textinput = document.getElementById("todo-input").value;
+        todos.push(textinput);
+        render(todos);
+      }
+
+      function deleteTodo(index) {
+        todos.splice(index, 1);
+        render(todos);
+      }
+      render();
+    </script>
+  </body>
+</html>
