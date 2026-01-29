@@ -32,11 +32,16 @@
         }
 
         // 리액트 함수형 컴퍼넌트 정의
-        const Greeting1 = <h1 className="greeting">hello world2!</h1>;
+        const Greeting2 = <h1 className="greeting">hello world2!</h1>;
+        // Greeting2 : JSX.Element 타입
 
         const root = ReactDOM.createRoot(document.getElementById("root"));
+
+        // 클래스형 컴퍼넌트 렌더링
         root.render(React.createElement(Greeting));
-        root.render(Greeting1);
+
+        // 함수형 컴퍼넌트 렌더링
+        root.render(Greeting2);
       </script>
     </div>
   </body>
