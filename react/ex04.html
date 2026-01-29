@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSX를 이용한 html요소 생성하기</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- JSX문법을 JS로 변환해주는 바벨(Babel.js) -->
+    <!-- min.js : 소스 용량을 줄이기 위해서 공벡, 줄바꿈을 제거 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <p>JSX를 이용한 html요소 생성하기(클래스형)</p>
+    <div id="root">
+      <!-- 바벨이 번역하는 스크립트임을 알려줌 -->
+      <script type="text/babel">
+        // 리액트 클레스형 컴퍼넌트 정의
+        class Greeting extends React.Component {
+          render() {
+            return (
+              // JSX문법으로 반환해준다.
+              <h1 className="greeting">hello world!</h1>
+            );
+          }
+        }
+
+        // 리액트 함수형 컴퍼넌트 정의
+        const Greeting1 = <h1 className="greeting">hello world2!</h1>;
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(React.createElement(Greeting));
+        root.render(Greeting1);
+      </script>
+    </div>
+  </body>
+</html>
