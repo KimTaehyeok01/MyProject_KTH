@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>게임 인벤토리 시스템</title>
+    <style>
+      body {
+        background-color: #1a1a2e;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+        color: white;
+      }
+      .container {
+        width: 850px;
+        background: #16213e;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      }
+      h1 {
+        color: #f39c12;
+        margin-bottom: 20px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .item-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+      }
+      .item-card {
+        background: #0f3460;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 2px solid #1a1a2e;
+        transition: all 0.3s;
+      }
+      .item-card:hover {
+        border-color: #f39c12;
+        transform: translateY(-2px);
+      }
+      .item-card.legendary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #ffd700;
+      }
+      .item-card.epic {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-color: #ff00ff;
+      }
+      .item-card.rare {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        border-color: #00bfff;
+      }
+      .item-card.common {
+        background: #0f3460;
+        border-color: #95a5a6;
+      }
+      .item-info {
+        flex-grow: 1;
+      }
+      .item-name {
+        font-size: 20px;
+        font-weight: bold;
+        color: #f39c12;
+        margin-bottom: 8px;
+      }
+      .item-rarity {
+        font-size: 14px;
+        color: #ecf0f1;
+        margin-bottom: 5px;
+        font-style: italic;
+      }
+      .item-stats {
+        font-size: 14px;
+        color: #bdc3c7;
+      }
+      .item-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .durability-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .durability-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .durability-btn:hover {
+        background-color: #2980b9;
+      }
+      .durability-btn.repair {
+        background-color: #27ae60;
+      }
+      .durability-btn.repair:hover {
+        background-color: #229954;
+      }
+      .durability-btn.damage {
+        background-color: #e74c3c;
+      }
+      .durability-btn.damage:hover {
+        background-color: #c0392b;
+      }
+      .durability-bar {
+        width: 100px;
+        height: 20px;
+        background: #34495e;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      .durability-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
+        transition: width 0.3s;
+      }
+      .durability-fill.low {
+        background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+      }
+      .durability-fill.medium {
+        background: linear-gradient(90deg, #f39c12 0%, #e67e22 100%);
+      }
+      .durability-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      }
+      .sell-btn {
+        background-color: #f39c12;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .sell-btn:hover {
+        background-color: #e67e22;
+      }
+
+      .stats-section {
+        border-top: 2px solid #f39c12;
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+      .stat-box {
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        background: rgba(243, 156, 18, 0.1);
+        border: 2px solid #f39c12;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: #bdc3c7;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+      }
+      .stat-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #f39c12;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚔️ 게임 인벤토리</h1>
+
+      <ul class="item-list" id="item-list"></ul>
+
+      <div class="stats-section">
+        <div class="stat-box">
+          <div class="stat-label">총 아이템</div>
+          <div class="stat-value" id="total-items">0개</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">총 가치</div>
+          <div class="stat-value" id="total-value">0G</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">평균 내구도</div>
+          <div class="stat-value" id="avg-durability">0%</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">레전더리</div>
+          <div class="stat-value" id="legendary-count">0개</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /*
+        [To. 개발팀]
+        게임 기획팀입니다. 아래 기능 구현 부탁드립니다.
+
+        2. 수리(+10) 버튼을 클릭하면
+           - 해당 아이템의 durability를 10 증가시켜주세요
+           - 단, 100을 초과할 수 없게 해주세요
+           - 내구도바 색상: 0-30% 빨강(low), 31-60% 주황(medium), 61-100% 초록
+           - 화면을 다시 렌더링해주세요
+
+        3. 손상(-10) 버튼을 클릭하면
+           - 해당 아이템의 durability를 10 감소시켜주세요
+           - 단, 0 미만이 될 수 없게 해주세요
+           - 화면을 다시 렌더링해주세요
+
+        4. 판매 버튼을 클릭하면
+           - 해당 아이템을 inventory 배열에서 제거해주세요
+           - 화면을 다시 렌더링해주세요
+
+        5. 통계를 계산해서 표시해주세요
+           - 총 아이템: 전체 아이템 개수
+           - 총 가치: 모든 아이템의 value 합계 (예: 1500G)
+           - 평균 내구도: 모든 아이템의 durability 평균 (예: 75%)
+           - 레전더리: rarity가 "legendary"인 아이템 개수
+
+        힌트:
+        - 내구도 색상 클래스: durability <= 30 → "low", <= 60 → "medium", 그 외 → ""
+      */
+
+      // prettier-ignore
+      const inventory = [
+        { name: "드래곤 슬레이어", rarity: "legendary", attack: 150, defense: 50, value: 5000, durability: 80 },
+        { name: "미스릴 갑옷", rarity: "epic", attack: 0, defense: 120, value: 3000, durability: 65 },
+        { name: "마법 지팡이", rarity: "rare", attack: 80, defense: 10, value: 1500, durability: 45 },
+        { name: "철검", rarity: "common", attack: 50, defense: 5, value: 300, durability: 90 },
+      ];
+
+      const render = () => {
+        const html = inventory.map((item, index) => {
+          return `<li class="item-card ${item.rarity}">
+                    <div class="item-info">
+                      <div class="item-name">${item.name}</div>
+                      <div class="item-rarity">${item.rarity}</div>
+                      <div class="item-stats">공격력: ${item.attack} | 방어력: ${item.defense} | 가치: ${item.value}</div>
+                    </div>
+                    <div class="item-controls">
+                      <div class="durability-control">
+                        <button class="durability-btn damage" onclick="damageItem(${index})">-10</button>
+                        <div class="durability-bar">
+                          <div class="durability-fill" style="width: ${item.durability}%"></div>
+                          <div class="durability-text">${item.durability}%</div>
+                        </div>
+                        <button class="durability-btn repair" onclick="repairItem(${index})">+10</button>
+                      </div>
+                      <button class="sell-btn" onclick="sellItem(${index})">판매</button>
+                    </div>
+                  </li>`;
+        });
+        document.getElementById("item-list").innerHTML = html.join(" ");
+        totalList();
+      };
+
+      // 수리도 10 추가
+      const repairItem = (index) => {
+        // prettier-ignore
+        inventory[index].durability = Math.min(inventory[index].durability+10, 100);
+        render(inventory);
+      };
+
+      // 수리도 10 감소
+      const damageItem = (index) => {
+        // prettier-ignore
+        inventory[index].durability = Math.max(inventory[index].durability-5, 0);
+        render(inventory);
+      };
+
+      // 판매
+      const sellItem = (index) => {
+        inventory.splice(index, 1);
+        render(inventory);
+      };
+
+      //결과 리스트
+      /*  
+           - 총 아이템: 전체 아이템 개수
+           - 총 가치: 모든 아이템의 value 합계 (예: 1500G)
+           - 평균 내구도: 모든 아이템의 durability 평균 (예: 75%)
+           - 레전더리: rarity가 "legendary"인 아이템 개수
+           */
+      function totalList() {
+        if (inventory.length === 0) {
+          document.getElementById("total-items").textContent = "0개";
+          document.getElementById("total-value").textContent = "0G";
+          document.getElementById("avg-durability").textContent = "0%";
+          document.getElementById("legendary-count").textContent = "0개";
+        }
+        const totalCount = inventory.length;
+        let totalValue = 0;
+        let totaldurability = 0;
+        let legendaryCount = 0;
+
+        inventory.forEach((item) => {
+          const values = item.value;
+          totalValue += values;
+          const durabilityAvg = item.durability;
+          totaldurability += durabilityAvg;
+        });
+        const values = totalValue;
+        const durabilityAvg = Math.round(totaldurability / inventory.length);
+
+        inventory.forEach((item) => {
+          if (item.rarity === "legendary") {
+            legendaryCount++;
+          }
+        });
+
+        document.getElementById("total-items").textContent = `${totalCount}개`;
+        document.getElementById("total-value").textContent = `${values}개`;
+        // prettier-ignore
+        document.getElementById("avg-durability").textContent =`${durabilityAvg}%`;
+        document.getElementById("legendary-count").textContent =
+          `${legendaryCount}개`;
+      }
+
+      render();
+    </script>
+  </body>
+</html>
