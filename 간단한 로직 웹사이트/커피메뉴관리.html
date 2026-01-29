@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>카페 메뉴 관리</title>
+    <style>
+      body {
+        background-color: #f8f3e8;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+      }
+      .container {
+        width: 800px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #6f4e37;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .menu-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+      }
+      .menu-item {
+        background: #fff8e1;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 2px solid #d7ccc8;
+      }
+      .menu-item.hot {
+        background: linear-gradient(135deg, #ffccbc 0%, #ff8a65 100%);
+        border-color: #ff5722;
+      }
+      .menu-item.ice {
+        background: linear-gradient(135deg, #b3e5fc 0%, #4fc3f7 100%);
+        border-color: #0288d1;
+      }
+      .menu-item.dessert {
+        background: linear-gradient(135deg, #f8bbd0 0%, #f06292 100%);
+        border-color: #e91e63;
+      }
+      .menu-info {
+        flex-grow: 1;
+      }
+      .menu-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #3e2723;
+        margin-bottom: 5px;
+      }
+      .menu-type {
+        font-size: 14px;
+        color: #5d4037;
+        margin-bottom: 3px;
+      }
+      .menu-details {
+        font-size: 14px;
+        color: #6d4c41;
+      }
+      .menu-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .temp-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .temp-btn {
+        background-color: #795548;
+        color: white;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .temp-btn:hover {
+        background-color: #5d4037;
+      }
+      .temp-btn.hot {
+        background-color: #ff5722;
+      }
+      .temp-btn.hot:hover {
+        background-color: #e64a19;
+      }
+      .temp-btn.cold {
+        background-color: #2196f3;
+      }
+      .temp-btn.cold:hover {
+        background-color: #1976d2;
+      }
+      .temp-bar {
+        width: 100px;
+        height: 20px;
+        background: #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      .temp-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #2196f3 0%, #03a9f4 100%);
+        transition: width 0.3s;
+      }
+      .temp-fill.hot {
+        background: linear-gradient(90deg, #ff5722 0%, #ff7043 100%);
+      }
+      .temp-fill.warm {
+        background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+      }
+      .temp-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      }
+      .remove-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .remove-btn:hover {
+        background-color: #d32f2f;
+      }
+
+      .stats-section {
+        border-top: 2px solid #6f4e37;
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+      .stat-item {
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        background: #fff8e1;
+        border: 2px solid #d7ccc8;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: #5d4037;
+        margin-bottom: 5px;
+      }
+      .stat-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #6f4e37;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>☕ 카페 메뉴 관리</h1>
+
+      <ul class="menu-list" id="menu-list"></ul>
+
+      <div class="stats-section">
+        <div class="stat-item">
+          <div class="stat-label">총 메뉴</div>
+          <div class="stat-value" id="total-menu">0개</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">총 매출</div>
+          <div class="stat-value" id="total-sales">0원</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">평균 온도</div>
+          <div class="stat-value" id="avg-temp">0°C</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">아이스 메뉴</div>
+          <div class="stat-value" id="ice-count">0개</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /*
+        [To. 개발팀]
+        카페 운영팀입니다. 아래 기능 구현 부탁드립니다.
+
+        1. menu 배열 데이터를 화면에 렌더링해주세요
+           - 각 메뉴마다 이름, 종류, 가격/온도, 온도 조절 버튼, 삭제 버튼을 표시해주세요
+           - 종류별로 다른 배경색 (hot, ice, dessert)
+
+        2. 온도 올리기 (+5) 버튼을 클릭하면
+           - 해당 메뉴의 temperature를 5 증가시켜주세요
+           - 단, 100을 초과할 수 없게 해주세요
+           - 온도바 색상: 0-30도 파랑(cold), 31-60도 주황(warm), 61-100도 빨강(hot)
+           - 화면을 다시 렌더링해주세요
+
+        3. 온도 내리기 (-5) 버튼을 클릭하면
+           - 해당 메뉴의 temperature를 5 감소시켜주세요
+           - 단, 0 미만이 될 수 없게 해주세요
+           - 화면을 다시 렌더링해주세요
+
+        4. 삭제 버튼을 클릭하면
+           - 해당 메뉴를 menu 배열에서 제거해주세요
+           - 화면을 다시 렌더링해주세요
+
+        5. 통계를 계산해서 표시해주세요
+           - 총 메뉴: 전체 메뉴 개수
+           - 총 매출: 모든 메뉴의 price 합계
+           - 평균 온도: 모든 메뉴의 temperature 평균 (반올림)
+           - 아이스 메뉴: type이 "ice"인 메뉴 개수
+      */
+
+      const menu = [
+        { name: "아메리카노", type: "hot", price: 4500, temperature: 75 },
+        { name: "아이스 라떼", type: "ice", price: 5000, temperature: 5 },
+        { name: "카푸치노", type: "hot", price: 5500, temperature: 65 },
+        { name: "티라미수", type: "dessert", price: 6500, temperature: 15 },
+      ];
+
+      const render = () => {
+        const html = menu.map((item, index) => {
+          let colorClass = "";
+          if (item.temperature <= 30) {
+            colorClass = "cold";
+          } else if (item.temperature <= 60) {
+            colorClass = "warm";
+          } else {
+            colorClass = "hot";
+          }
+          return `<li class="menu-item ${item.type}">
+          <div class="menu-info">
+            <div class="menu-name">${item.name}</div>
+            <div class="menu-type">${item.type}</div>
+            <div class="menu-details">가격: ${item.price}원 | 온도: ${item.temperature}°C</div>
+          </div>
+          <div class="menu-controls">
+            <div class="temp-control">
+              <button class="temp-btn cold" onclick="decreaseTemp(${index})">-5</button>
+              <div class="temp-bar">
+                <div class="temp-fill ${colorClass}" style="width: ${item.temperature}%"></div>
+                <div class="temp-text">${item.temperature}°C</div>
+              </div>
+              <button class="temp-btn hot" onclick="increaseTemp(${index})">+5</button>
+            </div>
+            <button class="remove-btn" onclick="removeMenu(${index})">삭제</button>
+          </div>
+        </li>`;
+        });
+
+        document.getElementById("menu-list").innerHTML = html.join("");
+        totalList();
+      };
+
+      // 온도 5도 추가버튼
+      const increaseTemp = (index) => {
+        menu[index].temperature = Math.min(menu[index].temperature + 5, 100);
+        render();
+      };
+
+      // 온도 -5도 추가버튼
+      const decreaseTemp = (index) => {
+        menu[index].temperature = Math.max(menu[index].temperature - 5, 0);
+        render();
+      };
+
+      // 삭제버튼
+      const removeMenu = (index) => {
+        menu.splice(index, 1);
+        render();
+      };
+
+      // 최종 결과화면
+      const totalList = () => {
+        if (menu.length === 0) {
+          document.getElementById("total-menu").textContent = "0개";
+          document.getElementById("total-sales").textContent = "0원";
+          document.getElementById("avg-temp").textContent = "0°C";
+          document.getElementById("ice-count").textContent = "0개";
+        }
+        const totalCount = menu.length;
+        let totalMoney = 0;
+        let totalTemperature = 0;
+        let iceCount = 0;
+
+        menu.forEach((item) => {
+          const money = item.price;
+          totalMoney += money;
+          const temperature = item.temperature;
+          totalTemperature += temperature;
+          if (item.type == "ice") {
+            iceCount++;
+          }
+        });
+        const temperature = Math.round(totalTemperature / menu.length);
+
+        document.getElementById("total-menu").textContent = `${totalCount}개`;
+        document.getElementById("total-sales").textContent = `${totalMoney}원`;
+        document.getElementById("avg-temp").textContent = `${temperature}°C`;
+        document.getElementById("ice-count").textContent = `${iceCount}개`;
+      };
+
+      render();
+    </script>
+  </body>
+</html>
