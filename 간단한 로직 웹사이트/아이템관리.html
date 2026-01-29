@@ -256,28 +256,41 @@
 
       const render = () => {
         const html = inventory.map((item, index) => {
+          let colorClass = "";
+          if (item.durability <= 30) {
+            colorClass = "low"; // 0-30%: 빨강
+          } else if (item.durability <= 60) {
+            colorClass = "medium"; // 31-60%: 주황
+          }
+
           return `<li class="item-card ${item.rarity}">
-                    <div class="item-info">
-                      <div class="item-name">${item.name}</div>
-                      <div class="item-rarity">${item.rarity}</div>
-                      <div class="item-stats">공격력: ${item.attack} | 방어력: ${item.defense} | 가치: ${item.value}</div>
-                    </div>
-                    <div class="item-controls">
-                      <div class="durability-control">
-                        <button class="durability-btn damage" onclick="damageItem(${index})">-10</button>
-                        <div class="durability-bar">
-                          <div class="durability-fill" style="width: ${item.durability}%"></div>
-                          <div class="durability-text">${item.durability}%</div>
-                        </div>
-                        <button class="durability-btn repair" onclick="repairItem(${index})">+10</button>
-                      </div>
-                      <button class="sell-btn" onclick="sellItem(${index})">판매</button>
-                    </div>
-                  </li>`;
+              <div class="item-info">
+                <div class="item-name">${item.name}</div>
+                <div class="item-rarity">${item.rarity}</div>
+                <div class="item-stats">공격력: ${item.attack} | 방어력: ${item.defense} | 가치: ${item.value}G</div>
+              </div>
+              <div class="item-controls">
+                <div class="durability-control">
+                  <button class="durability-btn damage" onclick="damageItem(${index})">-10</button>
+                  <div class="durability-bar">
+                    <div class="durability-fill ${colorClass}" style="width: ${item.durability}%"></div>
+                    <div class="durability-text">${item.durability}%</div>
+                  </div>
+                  <button class="durability-btn repair" onclick="repairItem(${index})">+10</button>
+                </div>
+                <button class="sell-btn" onclick="sellItem(${index})">판매</button>
+              </div>
+            </li>`;
         });
         document.getElementById("item-list").innerHTML = html.join(" ");
         totalList();
       };
+      /*
+      2. 수리(+10) 버튼을 클릭하면
+           - 해당 아이템의 durability를 10 증가시켜주세요
+           - 단, 100을 초과할 수 없게 해주세요
+           - 내구도바 색상: 0-30% 빨강(low), 31-60% 주황(medium), 61-100% 초록
+           - 화면을 다시 렌더링해주세요*/
 
       // 수리도 10 추가
       const repairItem = (index) => {
@@ -289,7 +302,7 @@
       // 수리도 10 감소
       const damageItem = (index) => {
         // prettier-ignore
-        inventory[index].durability = Math.max(inventory[index].durability-5, 0);
+        inventory[index].durability = Math.max(inventory[index].durability-10, 0);
         render(inventory);
       };
 
@@ -299,13 +312,6 @@
         render(inventory);
       };
 
-      //결과 리스트
-      /*  
-           - 총 아이템: 전체 아이템 개수
-           - 총 가치: 모든 아이템의 value 합계 (예: 1500G)
-           - 평균 내구도: 모든 아이템의 durability 평균 (예: 75%)
-           - 레전더리: rarity가 "legendary"인 아이템 개수
-           */
       function totalList() {
         if (inventory.length === 0) {
           document.getElementById("total-items").textContent = "0개";
@@ -334,11 +340,11 @@
         });
 
         document.getElementById("total-items").textContent = `${totalCount}개`;
-        document.getElementById("total-value").textContent = `${values}개`;
+        document.getElementById("total-value").textContent = `${values}G`;
         // prettier-ignore
         document.getElementById("avg-durability").textContent =`${durabilityAvg}%`;
-        document.getElementById("legendary-count").textContent =
-          `${legendaryCount}개`;
+        // prettier-ignore
+        document.getElementById("legendary-count").textContent = `${legendaryCount}개`;
       }
 
       render();
