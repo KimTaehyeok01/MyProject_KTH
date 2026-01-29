@@ -237,10 +237,7 @@
           document.getElementById("class-average").textContent = "0점";
           document.getElementById("pass-count").textContent = "0명";
           document.getElementById("fail-count").textContent = "0명";
-          return;
         }
-
-        // 전체 평균
         let totalSum = 0;
         let passCount = 0;
         let failCount = 0;
@@ -249,19 +246,18 @@
           const average = (student.korean + student.english + student.math) / 3;
           totalSum += average;
 
+          // 합격 불합격 판단 후 인원 수 체크
           if (average >= 70) {
             passCount++;
           } else {
             failCount++;
           }
         });
+        const average = Math.round(totalSum / students.length);
 
-        const classAverage = Math.round(totalSum / students.length);
-
-        document.getElementById("class-average").textContent =
-          `${classAverage}점`;
-        document.getElementById("pass-count").textContent = `${passCount}명`;
-        document.getElementById("fail-count").textContent = `${failCount}명`;
+        document.getElementById("class-average").textContent = average;
+        document.getElementById("pass-count").textContent = passCount;
+        document.getElementById("fail-count").textContent = failCount;
       }
 
       render();
