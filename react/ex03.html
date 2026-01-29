@@ -4,6 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>리액트함수를 이용해서 html요소 생성하기</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
   </head>
-  <body></body>
+  <body>
+    <p>리액트함수를 이용해서 html요소 생성하기</p>
+    <div id="root">
+      <script>
+        //<h1 class="greeting">hello world!</h1>
+        const elementH1 = React.createElement(
+          "h1",
+          { className: "greeting" },
+          "hello world",
+        );
+
+        //root 요소를 지정한다.
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        // root요소에 h1요소를 추가한다.
+        root.render(elementH1);
+      </script>
+    </div>
+  </body>
 </html>
