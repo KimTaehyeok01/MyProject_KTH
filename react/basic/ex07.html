@@ -23,9 +23,14 @@ useState 훅 사용 예제 코드를 포함합니다.
     <p>컴퍼넌트 상태값 관리하기(useState 훅(Hook) 이용)</p>
 
     <div id="root"></div>
-
-    <button onclick="setIsClicked(true)">Click Here!</button>
-    <script></script>
+    <!-- 
+    <button>Click Here!</button>
+    <script>
+        let buttons = document.getElementsByTagName("button");
+        buttons[0].onclick = function(){
+            this.innerText = "Clicked!"
+        }
+    </script> -->
 
     <script type="text/babel">
       function MyButton() {
@@ -40,7 +45,7 @@ useState 훅 사용 예제 코드를 포함합니다.
         return React.createElement(
           "button",
           {
-            onClick: () => setIsClicked(true),
+            onClick: () => setIsClicked(true), // isClicked ? setIsClicked(false) : setIsClicked(true)도 가능.
           },
           isClicked ? "Clicked!" : "Click Here!",
         );
