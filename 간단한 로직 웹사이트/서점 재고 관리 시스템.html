@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>서점 재고 관리 시스템</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        padding: 50px 20px;
+        min-height: 100vh;
+      }
+      .container {
+        width: 1000px;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+      }
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 36px;
+      }
+
+      /* 필터 섹션 */
+      .filter-section {
+        background: #ecf0f1;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+      .filter-btn {
+        padding: 10px 20px;
+        border: 2px solid #3498db;
+        background: white;
+        color: #3498db;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        transition: all 0.3s;
+      }
+      .filter-btn:hover {
+        background: #3498db;
+        color: white;
+      }
+      .filter-btn.active {
+        background: #3498db;
+        color: white;
+      }
+
+      /* 책 리스트 */
+      .book-list {
+        list-style: none;
+        margin-bottom: 30px;
+      }
+      .book-card {
+        background: #f8f9fa;
+        margin-bottom: 20px;
+        padding: 25px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 3px solid #e0e0e0;
+        transition: all 0.3s;
+      }
+      .book-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+      .book-card.bestseller {
+        background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+        border-color: #fdcb6e;
+      }
+      .book-card.new {
+        background: linear-gradient(135deg, #81ecec 0%, #00cec9 100%);
+        border-color: #00cec9;
+      }
+      .book-card.classic {
+        background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+        border-color: #6c5ce7;
+      }
+      .book-card.soldout {
+        background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
+        border-color: #636e72;
+        opacity: 0.6;
+      }
+      .book-info {
+        flex-grow: 1;
+      }
+      .book-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #2d3436;
+        margin-bottom: 8px;
+      }
+      .book-author {
+        font-size: 14px;
+        color: #636e72;
+        margin-bottom: 8px;
+        font-style: italic;
+      }
+      .book-details {
+        font-size: 14px;
+        color: #636e72;
+      }
+      .book-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      /* 재고 컨트롤 */
+      .stock-control {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 15px;
+        border-radius: 10px;
+      }
+      .stock-buttons {
+        display: flex;
+        gap: 10px;
+      }
+      .stock-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .stock-btn:hover {
+        background-color: #2980b9;
+      }
+      .stock-btn.sell {
+        background-color: #e74c3c;
+      }
+      .stock-btn.sell:hover {
+        background-color: #c0392b;
+      }
+      .stock-info {
+        font-size: 13px;
+        color: #2d3436;
+        font-weight: bold;
+      }
+
+      /* 할인율 컨트롤 */
+      .discount-control {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 15px;
+        border-radius: 10px;
+      }
+      .discount-buttons {
+        display: flex;
+        gap: 10px;
+      }
+      .discount-btn {
+        background-color: #e67e22;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .discount-btn:hover {
+        background-color: #d35400;
+      }
+      .discount-bar {
+        width: 100px;
+        height: 20px;
+        background: #ecf0f1;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      .discount-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
+        transition: width 0.3s;
+      }
+      .discount-fill.medium {
+        background: linear-gradient(90deg, #f39c12 0%, #e67e22 100%);
+      }
+      .discount-fill.high {
+        background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+      }
+      .discount-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      }
+
+      /* 삭제 버튼 */
+      .remove-btn {
+        background-color: #95a5a6;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .remove-btn:hover {
+        background-color: #7f8c8d;
+      }
+
+      /* 통계 섹션 */
+      .stats-section {
+        border-top: 3px solid #2c3e50;
+        padding-top: 25px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+      }
+      .stat-card {
+        text-align: center;
+        padding: 20px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+      .stat-label {
+        font-size: 12px;
+        margin-bottom: 8px;
+        opacity: 0.9;
+      }
+      .stat-value {
+        font-size: 26px;
+        font-weight: bold;
+      }
+
+      /* 빈 상태 메시지 */
+      .empty-message {
+        text-align: center;
+        padding: 60px 20px;
+        color: #95a5a6;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📚 서점 재고 관리 시스템</h1>
+
+      <!-- 필터 버튼 -->
+      <div class="filter-section">
+        <div style="margin-right: 10px; font-weight: bold; color: #2c3e50">
+          필터:
+        </div>
+        <button class="filter-btn active" onclick="filterBooks('all')">
+          전체
+        </button>
+        <button class="filter-btn" onclick="filterBooks('bestseller')">
+          베스트셀러
+        </button>
+        <button class="filter-btn" onclick="filterBooks('new')">신간</button>
+        <button class="filter-btn" onclick="filterBooks('classic')">
+          스테디셀러
+        </button>
+        <button class="filter-btn" onclick="filterBooks('soldout')">
+          품절
+        </button>
+      </div>
+
+      <ul class="book-list" id="book-list"></ul>
+
+      <div class="stats-section">
+        <div class="stat-card">
+          <div class="stat-label">총 책</div>
+          <div class="stat-value" id="total-books">0권</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">총 재고</div>
+          <div class="stat-value" id="total-stock">0권</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">총 가치</div>
+          <div class="stat-value" id="total-value">0원</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">평균 할인율</div>
+          <div class="stat-value" id="avg-discount">0%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">베스트셀러</div>
+          <div class="stat-value" id="bestseller-count">0권</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const books = [
+        {
+          title: "자바스크립트 완벽 가이드",
+          author: "데이비드 플래너건",
+          category: "bestseller",
+          price: 45000,
+          stock: 8,
+          maxStock: 10,
+          discount: 15,
+        },
+        {
+          title: "클린 코드",
+          author: "로버트 마틴",
+          category: "bestseller",
+          price: 33000,
+          stock: 5,
+          maxStock: 8,
+          discount: 20,
+        },
+        {
+          title: "리액트를 다루는 기술",
+          author: "김민준",
+          category: "new",
+          price: 38000,
+          stock: 12,
+          maxStock: 15,
+          discount: 10,
+        },
+        {
+          title: "오브젝트",
+          author: "조영호",
+          category: "classic",
+          price: 36000,
+          stock: 0,
+          maxStock: 6,
+          discount: 25,
+        },
+        {
+          title: "모던 자바스크립트 Deep Dive",
+          author: "이웅모",
+          category: "bestseller",
+          price: 45000,
+          stock: 3,
+          maxStock: 10,
+          discount: 30,
+        },
+        {
+          title: "리팩터링",
+          author: "마틴 파울러",
+          category: "classic",
+          price: 35000,
+          stock: 7,
+          maxStock: 10,
+          discount: 5,
+        },
+      ];
+
+      let currentFilter = "all";
+
+      // 렌더링 함수
+      const render = (bookList = books) => {
+        // 빈 배열 체크
+        if (bookList.length === 0) {
+          document.getElementById("book-list").innerHTML =
+            '<div class="empty-message">해당하는 책이 없습니다.</div>';
+          updateStats(bookList);
+          return;
+        }
+
+        const html = bookList
+          .map((item, index) => {
+            let discountClass = "";
+            if (item.discount <= 20) {
+              discountClass = "";
+            } else if (item.discount <= 35) {
+              discountClass = "medium";
+            } else {
+              discountClass = "high";
+            }
+
+            return `<li class="book-card ${item.category}${
+              item.stock === 0 ? " soldout" : ""
+            }">
+        <div class="book-info">
+          <div class="book-title">${item.title}</div>
+          <div class="book-author">${item.author}</div>
+          <div class="book-details">가격: ${item.price.toLocaleString()}원 | 재고: ${
+            item.stock
+          }권 | 할인율: ${item.discount}%</div>
+        </div>
+        <div class="book-controls">
+          <div class="stock-control">
+            <div class="stock-buttons">
+              <button class="stock-btn sell" onclick="sellBook(${books.indexOf(
+                item,
+              )})">-1</button>
+              <button class="stock-btn" onclick="restockBook(${books.indexOf(
+                item,
+              )})">+1</button>
+            </div>
+            <div class="stock-info">재고: ${item.stock}권</div>
+          </div>
+          <div class="discount-control">
+            <div class="discount-buttons">
+              <button class="discount-btn" onclick="decreaseDiscount(${books.indexOf(
+                item,
+              )})">-5%</button>
+              <button class="discount-btn" onclick="increaseDiscount(${books.indexOf(
+                item,
+              )})">+5%</button>
+            </div>
+            <div class="discount-bar">
+              <div class="discount-fill ${discountClass}" style="width: ${
+                item.discount * 2
+              }%"></div>
+              <div class="discount-text">${item.discount}%</div>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeBook(${books.indexOf(
+            item,
+          )})">삭제</button>
+        </div>
+      </li>`;
+          })
+          .join("");
+
+        document.getElementById("book-list").innerHTML = html;
+        updateStats(bookList);
+      };
+
+      // 필터 함수
+      const filterBooks = (category) => {
+        currentFilter = category;
+
+        // 필터 버튼 active 클래스 관리
+        const buttons = document.querySelectorAll(".filter-btn");
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        let filteredBooks;
+        if (category === "all") {
+          filteredBooks = books;
+        } else if (category === "soldout") {
+          filteredBooks = books.filter((item) => item.stock === 0);
+        } else {
+          filteredBooks = books.filter((item) => item.category === category);
+        }
+
+        render(filteredBooks);
+      };
+
+      // 판매 함수
+      const sellBook = (index) => {
+        books[index].stock = Math.max(books[index].stock - 1, 0);
+        filterBooks(currentFilter);
+      };
+
+      // 입고 함수
+      const restockBook = (index) => {
+        books[index].stock = Math.min(
+          books[index].stock + 1,
+          books[index].maxStock,
+        );
+        filterBooks(currentFilter);
+      };
+
+      // 할인율 증가
+      const increaseDiscount = (index) => {
+        books[index].discount = Math.min(books[index].discount + 5, 50);
+        filterBooks(currentFilter);
+      };
+
+      // 할인율 감소
+      const decreaseDiscount = (index) => {
+        books[index].discount = Math.max(books[index].discount - 5, 0);
+        filterBooks(currentFilter);
+      };
+
+      // 삭제 함수
+      const removeBook = (index) => {
+        books.splice(index, 1);
+        filterBooks(currentFilter);
+      };
+
+      // 통계 업데이트
+      const updateStats = (bookList) => {
+        if (bookList.length === 0) {
+          document.getElementById("total-books").textContent = "0권";
+          document.getElementById("total-stock").textContent = "0권";
+          document.getElementById("total-value").textContent = "0원";
+          document.getElementById("avg-discount").textContent = "0%";
+          document.getElementById("bestseller-count").textContent = "0권";
+          return;
+        }
+
+        const totalBooks = bookList.length;
+        const totalStock = bookList.reduce((sum, book) => sum + book.stock, 0);
+        const totalValue = bookList.reduce(
+          (sum, book) => sum + book.price * book.stock,
+          0,
+        );
+        const totalDiscount = bookList.reduce(
+          (sum, book) => sum + book.discount,
+          0,
+        );
+        const avgDiscount = Math.round(totalDiscount / bookList.length);
+        const bestsellerCount = books.filter(
+          (book) => book.category === "bestseller",
+        ).length;
+
+        document.getElementById("total-books").textContent = `${totalBooks}권`;
+        document.getElementById("total-stock").textContent = `${totalStock}권`;
+        document.getElementById("total-value").textContent =
+          `${totalValue.toLocaleString()}원`;
+        document.getElementById("avg-discount").textContent = `${avgDiscount}%`;
+        document.getElementById("bestseller-count").textContent =
+          `${bestsellerCount}권`;
+      };
+
+      // 초기 렌더링
+      render();
+    </script>
+  </body>
+</html>
