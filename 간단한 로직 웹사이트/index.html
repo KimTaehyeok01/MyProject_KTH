@@ -321,121 +321,146 @@
     </div>
 
     <script>
-      /*
-              [To. 개발팀]
-              서점 운영팀입니다. 지금까지 배운 모든 것을 활용해서 아래 기능을 구현해주세요!
-
-              1. books 배열 데이터를 화면에 렌더링해주세요
-                 - 각 책마다 제목, 저자, 가격/재고/할인율, 컨트롤 버튼을 표시
-                 - 카테고리별로 다른 배경색 (bestseller, new, classic)
-                 - stock이 0이면 category 클래스 + soldout 클래스 둘 다 적용!
-
-              2. 판매(-1) 버튼을 클릭하면
-                 - 해당 책의 stock을 1 감소시켜주세요
-                 - 단, 0 미만이 될 수 없게 해주세요
-                 - stock이 0이 되면 soldout 클래스를 추가해주세요
-                 - 화면을 다시 렌더링해주세요
-
-              3. 입고(+1) 버튼을 클릭하면
-                 - 해당 책의 stock을 1 증가시켜주세요
-                 - 단, maxStock(최대 재고)을 초과할 수 없게 해주��요
-                 - 화면을 다시 렌더링해주세요
-
-              4. 할인율 증가(+5%) 버튼을 클릭하면
-                 - 해당 책의 discount를 5 증가시켜주세요
-                 - 단, 50을 초과할 수 없게 해주세요
-                 - 할인율바 색상: 0-20% 초록(low), 21-35% 주황(medium), 36-50% 빨강(high)
-                 - 화면을 다시 렌더링해주세요
-
-              5. 할인율 감소(-5%) 버튼을 클릭하면
-                 - 해당 책의 discount를 5 감소시켜주세요
-                 - 단, 0 미만이 될 수 없게 해주세요
-                 - 화면을 다시 렌더링해주세요
-
-              6. 삭제 버튼을 클릭하면
-                 - 해당 책을 books 배열에서 제거해주세요
-                 - 화면을 다시 렌더링해주세요
-
-              7. 필터 버튼을 클릭하면
-                 - 현재 필터 상태(currentFilter)를 업데이트하고
-                 - 해당 카테고리의 책만 표시해주세요
-                 - "전체"를 클릭하면 모든 책을 표시
-                 - "품절"을 클릭하면 stock이 0인 책만 표시
-                 - 클릭한 버튼에 active 클래스 추가
-                 - 다른 버튼들의 active 클래스 제거
-
-              8. 통계를 계산해서 표시해주세요
-                 - 총 책: 현재 표시 중인 책 개수 (필터 적용됨!)
-                 - 총 재고: 현재 표시 중인 책들의 stock 합계
-                 - 총 가치: 현재 표시 중인 책들의 (price * stock) 합계
-                 - 평균 할인율: 현재 표시 중인 책들의 discount 평균 (반올림)
-                 - 베스트셀러: 전체 책 중 category가 "bestseller"인 책 개수
-
-              9. 필터 결과가 비어있으면
-                 - "해당하는 책이 없습니다." 메시지를 표시해주세요
-
-              힌트:
-              - 클래스 2개 적용: `${item.category}${item.stock === 0 ? ' soldout' : ''}`
-              - 필터링: books.filter(book => currentFilter === 'all' || ...)
-              - 품절 필터: stock === 0
-              - 총 가치: price * stock
-            */
-
-      //prettier-ignore
       const books = [
-              { title: "자바스크립트 완벽 가이드", author: "데이비드 플래너건", category: "bestseller", price: 45000, stock: 8, maxStock: 10, discount: 15 },
-              { title: "클린 코드", author: "로버트 마틴", category: "bestseller", price: 33000, stock: 5, maxStock: 8, discount: 20 },
-              { title: "리액트를 다루는 기술", author: "김민준", category: "new", price: 38000, stock: 12, maxStock: 15, discount: 10 },
-              { title: "오브젝트", author: "조영호", category: "classic", price: 36000, stock: 0, maxStock: 6, discount: 25 },
-              { title: "모던 자바스크립트 Deep Dive", author: "이웅모", category: "bestseller", price: 45000, stock: 3, maxStock: 10, discount: 30 },
-              { title: "리팩터링", author: "마틴 파울러", category: "classic", price: 35000, stock: 7, maxStock: 10, discount: 5 },
-            ];
+        {
+          title: "자바스크립트 완벽 가이드",
+          author: "데이비드 플래너건",
+          category: "bestseller",
+          price: 45000,
+          stock: 8,
+          maxStock: 10,
+          discount: 15,
+        },
+        {
+          title: "클린 코드",
+          author: "로버트 마틴",
+          category: "bestseller",
+          price: 33000,
+          stock: 5,
+          maxStock: 8,
+          discount: 20,
+        },
+        {
+          title: "리액트를 다루는 기술",
+          author: "김민준",
+          category: "new",
+          price: 38000,
+          stock: 12,
+          maxStock: 15,
+          discount: 10,
+        },
+        {
+          title: "오브젝트",
+          author: "조영호",
+          category: "classic",
+          price: 36000,
+          stock: 0,
+          maxStock: 6,
+          discount: 25,
+        },
+        {
+          title: "모던 자바스크립트 Deep Dive",
+          author: "이웅모",
+          category: "bestseller",
+          price: 45000,
+          stock: 3,
+          maxStock: 10,
+          discount: 30,
+        },
+        {
+          title: "리팩터링",
+          author: "마틴 파울러",
+          category: "classic",
+          price: 35000,
+          stock: 7,
+          maxStock: 10,
+          discount: 5,
+        },
+      ];
 
-      const render = (book) => {
-        const html = book.map((item, index) => {
-          let discountClass = "";
-          if (item.discount <= 20) {
-            discountClass = "";
-          } else if (item.discount <= 35) {
-            discountClass = "medium";
-          } else {
-            discountClass = "high";
-          }
+      let currentFilter = "all";
 
-          return `<li class="book-card ${item.category}${item.stock === 0 ? " soldout" : ""}">
+      // 렌더링 함수
+      const render = (bookList = books) => {
+        // 빈 배열 체크
+        if (bookList.length === 0) {
+          document.getElementById("book-list").innerHTML =
+            '<div class="empty-message">해당하는 책이 없습니다.</div>';
+          updateStats(bookList);
+          return;
+        }
+
+        const html = bookList
+          .map((item, index) => {
+            let discountClass = "";
+            if (item.discount <= 20) {
+              discountClass = "";
+            } else if (item.discount <= 35) {
+              discountClass = "medium";
+            } else {
+              discountClass = "high";
+            }
+
+            return `<li class="book-card ${item.category}${
+              item.stock === 0 ? " soldout" : ""
+            }">
         <div class="book-info">
           <div class="book-title">${item.title}</div>
           <div class="book-author">${item.author}</div>
-          <div class="book-details">가격: ${item.price.toLocaleString()}원 | 재고: ${item.stock}권 | 할인율: ${item.discount}%</div>
+          <div class="book-details">가격: ${item.price.toLocaleString()}원 | 재고: ${
+            item.stock
+          }권 | 할인율: ${item.discount}%</div>
         </div>
         <div class="book-controls">
           <div class="stock-control">
             <div class="stock-buttons">
-              <button class="stock-btn sell" onclick="sellBook(${index})">-1</button>
-              <button class="stock-btn" onclick="restockBook(${index})">+1</button>
+              <button class="stock-btn sell" onclick="sellBook(${books.indexOf(
+                item,
+              )})">-1</button>
+              <button class="stock-btn" onclick="restockBook(${books.indexOf(
+                item,
+              )})">+1</button>
             </div>
             <div class="stock-info">재고: ${item.stock}권</div>
           </div>
           <div class="discount-control">
             <div class="discount-buttons">
-              <button class="discount-btn" onclick="decreaseDiscount(${index})">-5%</button>
-              <button class="discount-btn" onclick="increaseDiscount(${index})">+5%</button>
+              <button class="discount-btn" onclick="decreaseDiscount(${books.indexOf(
+                item,
+              )})">-5%</button>
+              <button class="discount-btn" onclick="increaseDiscount(${books.indexOf(
+                item,
+              )})">+5%</button>
             </div>
             <div class="discount-bar">
-              <div class="discount-fill ${discountClass}" style="width: ${item.discount * 2}%"></div>
+              <div class="discount-fill ${discountClass}" style="width: ${
+                item.discount * 2
+              }%"></div>
               <div class="discount-text">${item.discount}%</div>
             </div>
           </div>
-          <button class="remove-btn" onclick="removeBook(${index})">삭제</button>
+          <button class="remove-btn" onclick="removeBook(${books.indexOf(
+            item,
+          )})">삭제</button>
         </div>
       </li>`;
-        });
-        document.getElementById("book-list").innerHTML = html.join("");
+          })
+          .join("");
+
+        document.getElementById("book-list").innerHTML = html;
+        updateStats(bookList);
       };
 
-      let filteredBooks;
-
+      // 필터 함수
       const filterBooks = (category) => {
+        currentFilter = category;
+
+        // 필터 버튼 active 클래스 관리
+        const buttons = document.querySelectorAll(".filter-btn");
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        let filteredBooks;
         if (category === "all") {
           filteredBooks = books;
         } else if (category === "soldout") {
@@ -447,12 +472,76 @@
         render(filteredBooks);
       };
 
-      //   const decreaseDiscount = (index) => {
-      //     books[index].stock = Math.max(books[index].stock - 1, 0);
-      //     render();
-      //   };
+      // 판매 함수
+      const sellBook = (index) => {
+        books[index].stock = Math.max(books[index].stock - 1, 0);
+        filterBooks(currentFilter);
+      };
 
-      render(books);
+      // 입고 함수
+      const restockBook = (index) => {
+        books[index].stock = Math.min(
+          books[index].stock + 1,
+          books[index].maxStock,
+        );
+        filterBooks(currentFilter);
+      };
+
+      // 할인율 증가
+      const increaseDiscount = (index) => {
+        books[index].discount = Math.min(books[index].discount + 5, 50);
+        filterBooks(currentFilter);
+      };
+
+      // 할인율 감소
+      const decreaseDiscount = (index) => {
+        books[index].discount = Math.max(books[index].discount - 5, 0);
+        filterBooks(currentFilter);
+      };
+
+      // 삭제 함수
+      const removeBook = (index) => {
+        books.splice(index, 1);
+        filterBooks(currentFilter);
+      };
+
+      // 통계 업데이트
+      const updateStats = (bookList) => {
+        if (bookList.length === 0) {
+          document.getElementById("total-books").textContent = "0권";
+          document.getElementById("total-stock").textContent = "0권";
+          document.getElementById("total-value").textContent = "0원";
+          document.getElementById("avg-discount").textContent = "0%";
+          document.getElementById("bestseller-count").textContent = "0권";
+          return;
+        }
+
+        const totalBooks = bookList.length;
+        const totalStock = bookList.reduce((sum, book) => sum + book.stock, 0);
+        const totalValue = bookList.reduce(
+          (sum, book) => sum + book.price * book.stock,
+          0,
+        );
+        const totalDiscount = bookList.reduce(
+          (sum, book) => sum + book.discount,
+          0,
+        );
+        const avgDiscount = Math.round(totalDiscount / bookList.length);
+        const bestsellerCount = books.filter(
+          (book) => book.category === "bestseller",
+        ).length;
+
+        document.getElementById("total-books").textContent = `${totalBooks}권`;
+        document.getElementById("total-stock").textContent = `${totalStock}권`;
+        document.getElementById("total-value").textContent =
+          `${totalValue.toLocaleString()}원`;
+        document.getElementById("avg-discount").textContent = `${avgDiscount}%`;
+        document.getElementById("bestseller-count").textContent =
+          `${bestsellerCount}권`;
+      };
+
+      // 초기 렌더링
+      render();
     </script>
   </body>
 </html>
