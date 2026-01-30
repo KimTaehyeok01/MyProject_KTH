@@ -1,0 +1,54 @@
+폴더 하이라이트 리액트 기초 학습 자료로, HTML 요소 생성, 컴포넌트, props,
+useState 훅 사용 예제 코드를 포함합니다.
+
+<!doctype html>
+<html lang="en">
+  <!-- ex07.html -->
+  <head>
+    <!-- 리액트 훅(Hook)  -->
+    <!-- 훅 : 꼬챙이, SW에서는 끼여들어가서 수행하는 기능 -->
+    <!-- 훅의 종류 : useState, useEffect, useContext, useReducer, ... -->
+    <title>컴퍼넌트 상태값 관리하기(useState 훅(Hook) 이용)</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <p>컴퍼넌트 상태값 관리하기(useState 훅(Hook) 이용)</p>
+
+    <div id="root"></div>
+
+    <button onclick="setIsClicked(true)">Click Here!</button>
+    <script></script>
+
+    <script type="text/babel">
+      function MyButton() {
+        // 구조분해할당 : [state상태값, 상태변경함수]를 반환함.
+        // isClicked = false기본값으로 초기화되므로 boolean타입이다.
+        const [isClicked, setIsClicked] = React.useState(false);
+
+        // React.createElement( type, props, children )
+        // type : 생성할 React 엘리먼트의 타입
+        // props : 해당 엘리먼트에 전달할 속성(props)
+        // children : 자식요소 즉 태그 사이에 들어갈 내용
+        return React.createElement(
+          "button",
+          {
+            onClick: () => setIsClicked(true),
+          },
+          isClicked ? "Clicked!" : "Click Here!",
+        );
+      } //MyButton
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      // root.render(MyButton);
+      // MyButton함수 안에서 리엑트 훅을 사용하면, JSX 컴퍼넌트 형태로 호출해야됨.
+      root.render(<MyButton />);
+    </script>
+  </body>
+</html>
