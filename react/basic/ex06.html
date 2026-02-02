@@ -26,7 +26,13 @@
       }
 
       const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(React.createElement(Greeting, { sayWhat: "Good Night~" }));
+      // root.render(React.createElement(Greeting, { sayWhat: "Good Night~" }));
+
+      root.render(
+        <div>
+          <Greeting sayWhat="Good Night~" />
+        </div>,
+      );
     </script>
   </body>
 </html>
