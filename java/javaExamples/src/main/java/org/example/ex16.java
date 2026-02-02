@@ -52,7 +52,6 @@ public class ex16 {
             }
         }
 
-
     }
 
 }
