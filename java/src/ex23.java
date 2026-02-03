@@ -17,6 +17,9 @@ public class ex23 {
     static void echo(int i, int j){
         System.out.println("echo" + i+j);
     }
+    static String echo(int age, String name){
+        return name+age;
+    }
 
     public static void main(String[] args) {
 
@@ -24,6 +27,7 @@ public class ex23 {
         echo("야호~");
         echo(10);
         echo(10,20);
+        echo(20,"김태혁");
 
         // 메소드 오버로딩
         // 과적(적정한 부하 이상으로 짐을 실는 것)
@@ -37,6 +41,9 @@ public class ex23 {
         // 메소드 오버라이딩
         // : 상속 관계에서 자식클래스의 메소드가
         //   부모클래스의 메소드를 재정의 하는 것.
+
+        // 오버로딩은 컴파일 시점에 결정되는 정적 바인딩이고, 오버라이딩은 실행 시점(Runtime)에 결정되는 동적 바인딩입니다.
+        // 그래서 오버라이딩은 자바의 핵심인 다형성을 구현하는 가장 중요한 기술입니다.
 
         // 자바 기술면접
         // 1. 오버로딩 vs 오버라이딩 공통점과 차이점
