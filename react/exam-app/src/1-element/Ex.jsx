@@ -10,12 +10,12 @@ const user = {
   age: 26,
 };
 
-export const UserInfo = () => {
+export const Namecard = () => {
   return (
-    <h1>
-      <span>{user.name}</span>
-      <span>{user.age}</span>
-    </h1>
+    <div>
+      <h3>이름: {user.name}</h3>
+      <h3>나이: {user.age}</h3>
+    </div>
   );
 };
 
@@ -29,8 +29,13 @@ export const UserInfo = () => {
 export const Greeting = (props) => {
   return (
     <>
-      <p>
+      {/* <p>
         안녕하세요, {props.name}님! 당신의 나이는 {props.age}살입니다.
+      </p> */}
+
+      {/* JSX에서 백틱을 사용한 문자열 보기 */}
+      <p>
+        {`안녕하세요, ${props.name}님! 당신의 나이는 ${props.age}살입니다.`}
       </p>
     </>
   );
@@ -43,23 +48,40 @@ export const Greeting = (props) => {
 // 출력 예) 1. 노트북 - 8000원
 //          2. 스마트폰 - 4000원
 
-const lectronicDevices = [
-  { name: "노트북", price: 8000 },
-  { name: "스마트폰", price: 4000 },
+const electronicDevices = [
+  { id: 1, name: "노트북", price: 8000 },
+  { id: 2, name: "스마트폰", price: 4000 },
 ];
 
-export const Digital = () => {
+// 1번방식
+export const DigitalDevices = () => {
   return (
     <>
-      <ul>
-        {lectronicDevices.map((item, index) => {
+      <div>
+        {electronicDevices.map((item, index) => {
           return (
-            <li key={index}>
-              {index + 1}. {item.name} - {item.price}원
-            </li>
+            <p key={index}>
+              {/* 혹은 <p key={item.id}>로 해도 됨  */}
+              {item.id}. {item.name} - {item.price}원
+            </p>
           );
         })}
-      </ul>
+      </div>
     </>
+  );
+};
+
+// 2번방식
+export const ProductList = (props) => {
+  return (
+    <ul>
+      {props.products.map((item) => {
+        return (
+          <li key={item.id}>
+            {item.id}. {item.name} - {item.price}원
+          </li>
+        );
+      })}
+    </ul>
   );
 };
