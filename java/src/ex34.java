@@ -40,11 +40,19 @@ public class ex34 {
 
         // 2. 강제 형변환 연산자(명시적 형변환)
         Parent p3 = (Parent)c1;
-        System.out.println(p3.name);
+        System.out.println(p3.name); // Parent 타입
 
-        // 2. 다운 캐스팅(Down Casting) : 부모객체가 자식클래스의 타입을 갖는 것.
+        // 2. 다운 캐스팅(Down Casting) : 부모클래스를 가르키는 자식객체가 자식클래스의 타입을 갖는 것.
+        Child c2 = (Child)p2;
+        System.out.println(c2.name); // Child 타입
 
+        // 4가지 패턴 - 요약
+        Parent a = new Parent();
+        Child b = new Child();
+        Parent c = new Child(); // UpCasting
+        Child d = (Child)c; // DownCasting
 
+        // Child e = new Parent(); // 이건 불가하다.
     }
 
 }
