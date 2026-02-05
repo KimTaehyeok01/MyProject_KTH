@@ -24,7 +24,7 @@ function App() {
       <E.Namecard />
       <E.Greeting name="김태혁" age="26" />
       <E.DigitalDevices />
-      <E.ProductList products={[]} />
+      <ProductListProps products={plist} />
     </>
   );
 }

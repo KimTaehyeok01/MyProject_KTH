@@ -4,7 +4,7 @@
 // 1. Namecard 함수형 컴포넌트를 만들고, user 객체의 정보(이름,나이)를 JSX에 넣어서
 //   표현한다.
 // 2. props는 사용안함.
-
+import React from "react";
 const user = {
   name: "김태혁",
   age: 26,
@@ -48,7 +48,7 @@ export const Greeting = (props) => {
 // 출력 예) 1. 노트북 - 8000원
 //          2. 스마트폰 - 4000원
 
-const electronicDevices = [
+const plist = [
   { id: 1, name: "노트북", price: 8000 },
   { id: 2, name: "스마트폰", price: 4000 },
 ];
@@ -58,7 +58,7 @@ export const DigitalDevices = () => {
   return (
     <>
       <div>
-        {electronicDevices.map((item, index) => {
+        {plist.map((item, index) => {
           return (
             <p key={index}>
               {/* 혹은 <p key={item.id}>로 해도 됨  */}
@@ -72,13 +72,13 @@ export const DigitalDevices = () => {
 };
 
 // 2번방식
-export const ProductList = (props) => {
+export const ProductListProps = ({ products }) => {
   return (
     <ul>
-      {props.products.map((item) => {
+      {products.map((item, index) => {
         return (
-          <li key={item.id}>
-            {item.id}. {item.name} - {item.price}원
+          <li>
+            {item.id}. {item.name} - {item.price}
           </li>
         );
       })}
