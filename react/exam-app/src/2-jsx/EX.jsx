@@ -50,8 +50,18 @@ export const DrinkMachine = (props) => {
   return (
     <h2>
       {(function () {
-        if (props.price === 1000) return <div>콜라</div>;
-        else if (props.price === 2000) return <div>사이다</div>;
+        if (props.price === 1000)
+          return (
+            <div>
+              <span>음료의 이름은 </span>콜라
+            </div>
+          );
+        else if (props.price === 2000)
+          return (
+            <div>
+              <span>음료의 이름은 </span>사이다
+            </div>
+          );
         else return <div>물</div>;
       })()}
     </h2>
