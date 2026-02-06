@@ -95,3 +95,85 @@ export const Greeting = (props) => {
     </h2>
   );
 };
+
+// 문제: ProductCard 컴포넌트를 만드세요.
+//
+// props로 받을 데이터:
+// - name: 상품명 (string)
+// - price: 가격 (number)
+// - stock: 재고 수량 (number)
+//
+// 요구사항:
+// 1. 상품명을 <h2> 태그로 표시
+// 2. 가격을 <p> 태그로 표시하고 뒤에 "원"을 붙이기
+// 3. 재고 상태 표시:
+//    - stock이 0이면 "품절"
+//    - stock이 5개 이하면 "재고 부족 (남은 수량: {stock}개)"
+//    - stock이 5개 초과면 "구매 가능"
+export const ProductCard = (props) => {
+  return (
+    <>
+      {(function () {
+        if (props.stock === 0) {
+          return (
+            <h3>
+              {props.name}의 가격은 {props.price}원 입니다. 남은 재고는{" "}
+              {props.stock}개 입니다. 품절되었습니다.
+            </h3>
+          );
+        } else if (props.stock <= 5) {
+          return (
+            <h3>
+              {props.name}의 가격은 {props.price}원 입니다. 남은 재고는{" "}
+              {props.stock}개 입니다. 재고 부족입니다.
+            </h3>
+          );
+        } else {
+          return (
+            <h3>
+              {props.name}의 가격은 {props.price}원 입니다. 남은 재고는{" "}
+              {props.stock}개 입니다. 구매 가능하십니다.
+            </h3>
+          );
+        }
+      })()}
+    </>
+  );
+};
+
+// 문제: UserProfile 컴포넌트를 만드세요.
+//
+// props로 받을 데이터:
+// - username: 사용자 이름 (string)
+// - age: 나이 (number)
+// - isOnline: 온라인 상태 (boolean)
+// - role: 역할 (string: "admin", "user", "guest")
+//
+// 요구사항:
+// 1. 사용자 이름을 <h2> 태그로 표시
+// 2. 나이 표시 (예: "나이: 25세")
+// 3. 온라인 상태 표시:
+//    - isOnline이 true면 "온라인"
+//    - isOnline이 false면 "오프라인"
+// 4. 역할에 따른 뱃지 표시:
+//    - "admin" → "관리자"
+//    - "user" → "일반 회원"
+//    - "guest" → "게스트"
+//
+
+export const UserProfile = (props) => {
+  const roleMap = {
+    admin: "관리자",
+    user: "일반 회원",
+    guest: "게스트",
+  };
+
+  return (
+    <>
+      <h2>{props.username}</h2>
+      <p>나이: {props.age}세</p>
+      <p>{props.isOnline ? "온라인" : "오프라인"}</p>
+      <p>{roleMap[props.role]}</p>
+    </>
+  );
+};

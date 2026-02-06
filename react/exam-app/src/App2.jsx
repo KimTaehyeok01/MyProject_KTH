@@ -23,6 +23,9 @@ function App() {
       <E.calc num1={10} num2={20} />
       <E.DrinkMachine price={2000} />
       <E.Greeting hour={21} />
+      <E.ProductCard name="맥북" price="1700000" stock="4" />
+      <E.UserProfile username="김태혁" age={25} isOnline={true} role="admin" />
+      <E.UserProfile username="익명" age={20} isOnline={true} role="guest" />
     </>
   );
 }
