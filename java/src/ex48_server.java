@@ -21,6 +21,8 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+// 192.168.0.61 서버IP, server/client 동일하게
+
 public class ex48_server {
     public static void main(String[] args) {
         //C언어(제대로된 Lib제공x) -> Java

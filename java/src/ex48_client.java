@@ -3,6 +3,8 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+// 192.168.0.61
+
 public class ex48_client {
     public static void main(String[] args) {
         Socket socket = new Socket();
