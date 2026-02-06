@@ -12,6 +12,6 @@ public class ex44 {
     }
 
     static void myFunc() throws Exception{
-        System.out.println(10/0);
+        System.out.println(10 / 0);
     }
 }
