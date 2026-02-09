@@ -10,14 +10,14 @@
 //    환영합니다, 김민수님!
 //    환영합니다, 이영희님!
 
-const Greeting = ({ name = "김민수" }) => {
-  return <h1>환영합니다. {name}님!</h1>;
+const Greeting = (props) => {
+  return <h1>환영합니다. {props.name}님!</h1>;
 };
 export const Ex1 = () => {
   return (
     <div>
       <Greeting name="홍길동" />
-      <Greeting />
+      <Greeting name="김민수" />
       <Greeting name="이영희" />
     </div>
   );
