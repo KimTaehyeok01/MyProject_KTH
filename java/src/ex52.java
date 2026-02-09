@@ -14,6 +14,12 @@ class Student {
         this.eng = eng;
         this.math = math;
     }
+    void print(){
+        int total = kor + eng + math;
+        double avg = total / 3.0;
+        System.out.printf("이름: %s 국어: %d 영어: %d 수학: %d 총점: %d 평균: %.1f\n",
+                name, kor, eng, math, total, avg);
+    }
 }
 
 public class ex52 {
@@ -53,9 +59,9 @@ public class ex52 {
         while (true) {
             System.out.println("-----------성적 관리 프로그램-------------");
             System.out.printf("1.입력 2.전체출력 3.검색 4.수정 5.삭제 6.종료 : ");
-            int choi = sc.nextInt();
+            int menu = sc.nextInt();
 
-            if (choi == 1) {
+            if (menu == 1) {
                 System.out.printf("이름 입력: ");
                 String stdName = sc.next();
 
@@ -71,28 +77,21 @@ public class ex52 {
                 System.out.println(stdName + "님의 정보를 추가하였습니다.");
             }
 
-            else if (choi == 2) {
+            else if (menu == 2) {
                 for (int i = 0; i < list.size(); i++) {
                     Student s = list.get(i);
-                    int total = s.kor + s.eng + s.math;
-                    double avg = total / 3.0;
-                    System.out.printf("이름: %s 국어: %d 영어: %d 수학: %d 총점: %d 평균: %.1f\n",
-                            s.name, s.kor, s.eng, s.math, total, avg);
+                    s.print();
                 }
             }
 
-            else if (choi == 3) {
+            else if (menu == 3) {
                 System.out.printf("이름 검색: ");
                 String stdName = sc.next();
                 boolean found = false;
 
                 for(Student s : list){
                     if(s.name.equals(stdName)){
-                        int total = s.kor + s.eng + s.math;
-                        double avg = total / 3.0;
-                        System.out.printf("이름: %s 국어: %d 영어: %d 수학: %d 총점: %d 평균: %.1f\n",
-                                s.name, s.kor, s.eng, s.math, total, avg);
-                        found = true;
+                       s.print();
                     }
                 }
                 if (!found) {
@@ -100,7 +99,7 @@ public class ex52 {
                 }
             }
 
-            else if (choi == 4) {
+            else if (menu == 4) {
                 System.out.printf("이름 검색: ");
                 String stdName = sc.next();
                 boolean found = false;
@@ -116,6 +115,7 @@ public class ex52 {
                         s.eng = sc.nextInt();
                         found = true;
                         System.out.println(stdName +"님의 정보가 수정되었습니다.");
+                        break;
                     }
                 }
                 if (!found) {
@@ -123,7 +123,7 @@ public class ex52 {
                 }
             }
 
-            else if (choi == 5) {
+            else if (menu == 5) {
                 System.out.printf("이름 검색: ");
                 String stdName = sc.next();
                 boolean found = false;
@@ -135,6 +135,7 @@ public class ex52 {
                         list.remove(i);
                         found = true;
                         System.out.println(stdName + "님의 정보를 삭제하였습니다.");
+                        break;
                     }
                 }
                 if (!found) {
@@ -142,7 +143,7 @@ public class ex52 {
                 }
             }
 
-            else if(choi == 6){
+            else if(menu == 6){
                 System.out.println("성적관리 프로그램을 종료합니다.");
                 break;
             }
@@ -151,6 +152,7 @@ public class ex52 {
                 System.out.println("잘못된 번호를 입력하셨습니다. 다시 입력하세요.");
             }
         }
+        sc.close();
 
     }
 }
