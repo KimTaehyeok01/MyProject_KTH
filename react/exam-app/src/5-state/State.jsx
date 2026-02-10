@@ -66,11 +66,48 @@ export const TextMirror = () => {
         type="text"
         value={text}
         placeholder="텍스트를 입력허세요."
+        // 이벤트함수는 매개변수로 이벤트 객체로 받을 수 있다.
+        // e는 이벤트 객체 - 이벤트에 대한 정보를 담고 있다.
+        // e.target : 이벤트가 발생한 객체(현재는 input)
         onChange={(e) => {
           setText(e.target.value);
         }}
       />
       <p>입력된 텍스트 : {text}</p>
     </div>
+  );
+};
+/**
+ * [문제: 이름과 나이 실시간 업데이트]
+ * 1. 'UserForm'이라는 컴포넌트를 만드세요.
+ * 2. 상태(State)를 두 개 만드세요.
+ * - name (초기값 "")
+ * - age (초기값 "")
+ * 3. 화면에 다음 요소들을 배치하세요.
+ * - 이름을 입력하는 <input> (onChange를 통해 name 상태 업데이트)
+ * - 나이를 입력하는 <input> (onChange를 통해 age 상태 업데이트)
+ * - 입력된 값을 보여주는 <p> 태그: "정보: 김태혁(26세)" 형식으로 출력
+ * 4. root.render()로 화면에 보여주세요.
+ */
+export const UserForm = () => {
+  const [user, setUser] = useState({ name: "", age: "" });
+
+  const changeName = (e) => {
+    const newValue = e.target.value;
+    setUser({ ...user, name: newValue });
+  };
+
+  return (
+    <>
+      <input type="text" value={user.name} onChange={changeName} />
+      <input
+        type="text"
+        value={user.age}
+        onChange={(e) => setUser({ ...user, age: e.target.value })}
+      />
+      <p>
+        이름:{user.name} 나이:{user.age}
+      </p>
+    </>
   );
 };
