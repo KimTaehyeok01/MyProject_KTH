@@ -11,9 +11,11 @@ function App() {
   // return <E.Props5 />;
   return (
     <>
-      <E.Ex1 />
+      {/* <E.Ex1 />
       <E.Ex2 />
-      <E.Ex3 />
+      <E.Ex3 /> */}
+      <E.Ex4 />
+      <E.Ex5 />
     </>
   );
 }

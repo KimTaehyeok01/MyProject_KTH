@@ -88,3 +88,63 @@ export const Ex3 = () => {
     </>
   );
 };
+
+// 4. 문제 4: 이벤트 Props 전달하기
+// 목표: 버튼을 클릭했을 때 이벤트를 처리하는 컴포넌트를 작성하세요.
+// 요구사항:
+// - `ClickButton`이라는 자식 컴포넌트를 작성하세요.
+// - 부모 컴포넌트에서 클릭 시 경고창이 뜨도록 이벤트 핸들러를 전달하세요.
+
+const ClickButton = (props) => {
+  return <button onClick={props.onClick}>버튼을 클릭하세요.</button>;
+};
+
+export function Ex4() {
+  function handleClick() {
+    // 상태변경함수로 차환할 수 있다.
+    alert("버튼이 클릭되었습니다.");
+  }
+  return (
+    <div>
+      <h2>이벤트 핸들링</h2>
+      <ClickButton
+        onClick={() => {
+          handleClick();
+        }}
+      />
+      <ClickButton onClick={handleClick} />
+    </div>
+  );
+}
+
+// 5. 문제 5: children을 이용한 컴포넌트 구성
+// 목표: `children`을 활용하여 컴포넌트 내부에서 콘텐츠를 자유롭게 구성하는 연습을 합니다.
+// 요구사항:
+// - `InfoCard`라는 자식 컴포넌트를 작성하세요.
+// - `title`이라는 `props`와 `children`을 사용하여
+//     제목과 본문 콘텐츠를 렌더링합니다.
+// - 부모 컴포넌트에서 두 개의 카드를 렌더링하세요.
+
+const InfoCard = (props) => {
+  return (
+    <div
+      style={{ border: "1px solid #ccc", padding: "10px", margin: "10px 0" }}
+    >
+      <h3>{props.title}</h3>
+      {props.children}
+    </div>
+  );
+};
+
+export const Ex5 = () => {
+  return (
+    <>
+      <InfoCard title="카드 1">
+        <p>이것은 첫 번째 카드의 내용입니다.</p>
+      </InfoCard>
+      <InfoCard title="카드 2">
+        <p>이것은 두 번째 카드의 내용입니다.</p>
+      </InfoCard>
+    </>
+  );
+};
