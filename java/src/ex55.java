@@ -26,6 +26,7 @@ public class ex55 {
         // 문자열로 날짜 변경(yyyy-mm-dd)
         LocalDate xmax = LocalDate.parse("2026-12-25");
         System.out.println("크리스마스: " + xmax);
+        System.out.println(xmax.plusDays(5));
 
         // 안되는 표현 방식
         // 2026/12/25 2026.12.25 2026 12 25 20261225 2026:12:25 -> 오직 2026-12-25만 가능
