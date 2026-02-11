@@ -101,29 +101,29 @@ public class listStoretestexam {
     static void updateProduct() {
         boolean found = false;
         System.out.print("삼품명 입력: ");
-       try{
-           String snackName = sc.next();
-           for (Store s : list) {
-               if (snackName.equals(s.name)) {
-                   System.out.print("가격 입력: ");
-                   int snackprice = sc.nextInt();
-                   System.out.print("재고 입력: ");
-                   int snackstock = sc.nextInt();
-                   s.price = snackprice;
-                   s.stock = snackstock;
-                   System.out.println("상품 수정 완료!");
-                   found = true;
-                   break;
-               }
-           }
-           if (!found) {
-               System.out.println("검색하신 상품명이 없습니다.");
-           }
-       }
-       catch (InputMismatchException e){
-           System.out.println("숫자만 입력해야 합니다! 다시 시도하세요.");
-           sc.nextLine();
-       }
+        try{
+            String snackName = sc.next();
+            for (Store s : list) {
+                if (snackName.equals(s.name)) {
+                    System.out.print("가격 입력: ");
+                    int snackprice = sc.nextInt();
+                    System.out.print("재고 입력: ");
+                    int snackstock = sc.nextInt();
+                    s.price = snackprice;
+                    s.stock = snackstock;
+                    System.out.println("상품 수정 완료!");
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                System.out.println("검색하신 상품명이 없습니다.");
+            }
+        }
+        catch (InputMismatchException e){
+            System.out.println("숫자만 입력해야 합니다! 다시 시도하세요.");
+            sc.nextLine();
+        }
     }
 
     static void removeProduct() {
