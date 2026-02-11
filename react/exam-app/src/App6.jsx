@@ -5,7 +5,9 @@ import * as E from "./6-effect/Effect";
 function App() {
   return (
     <>
-      <E.LifeCycleClass />
+      {/* <E.LifeCycleClass /> */}
+      {/* <E.LifeCycleFunc /> */}
+      <E.LifeCycle />
     </>
   );
 }
