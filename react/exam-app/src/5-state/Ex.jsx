@@ -14,13 +14,23 @@ export const ColorButton = () => {
   }
 
   return (
-    <div className="card" style={{ backgroundColor: color }}>
+    <div
+      style={{
+        backgroundColor: color,
+        width: "300px",
+        height: "100px",
+        position: "relative",
+      }}
+    >
       <div>
-        <button className="red" onClick={handleColorChange}>
+        <button
+          onClick={handleColorChange}
+          style={{ position: "absolute", top: "75px", left: "110px" }}
+        >
           색상변경
         </button>
       </div>
-      <p style={{ color: "white" }}>현재 색상: {color}</p>
+      <p style={{ color: "white", textAlign: "center" }}>현재 색상: {color}</p>
     </div>
   );
 };
@@ -53,6 +63,9 @@ export const NumberCount = () => {
   const [count, setCount] = useState(0);
 
   function numCount() {
+    if (count == 10) {
+      return;
+    }
     setCount(count + 1);
   }
 
@@ -60,7 +73,7 @@ export const NumberCount = () => {
     <>
       <p>현재 숫자: {count}</p>
       <button onClick={numCount}>증가</button>
-      <p>{count >= 10 ? "최대 숫자의 도달했습니다." : ""}</p>
+      {count >= 10 && "최대 숫자에 도달했습니다."}
       <br />
       <br />
     </>
@@ -88,7 +101,12 @@ export const ListAdd = () => {
     <>
       <input type="text" value={text} onChange={textInput} />
       <button onClick={listAdd}>항목 추가</button>
-      <p>추가된 항목 : {list}</p>
+      <p>추가된 항목:</p>
+      <ul>
+        {list.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </>
   );
 };
