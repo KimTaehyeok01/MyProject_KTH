@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ex62 {
@@ -34,5 +35,36 @@ public class ex62 {
         List<String> sorted = names.stream().sorted().collect(Collectors.toList());
         System.out.println(sorted);
 
+        // limit 개수 제한
+        List<Integer> num2 = Arrays.asList(1,2,3,4,5);
+        List<Integer> firstThree = num2.stream().limit(3).collect(Collectors.toList());
+        System.out.println(firstThree);
+
+        // anyMatch : 조건에 만족하는 요소가 하나라도 있으면 true를 반환함.
+        List<String> tech = Arrays.asList("Java", "Spring", "Python");
+        boolean hasPython = tech.stream().allMatch(s-> s.equals("Python"));
+        System.out.println(hasPython);
+
+        // collect(groupBy) 그룹화
+        List<String> items = Arrays.asList("Apple", "Ant", "Banana", "Box", "Car");
+        // 첫글자를 기준으로 그룹 묶기
+        Map<Character, List<String>> groupResult = items.stream().
+                collect(Collectors.groupingBy(s-> s.charAt(0)));
+        System.out.println(groupResult);
+        System.out.println(groupResult.get('A'));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
