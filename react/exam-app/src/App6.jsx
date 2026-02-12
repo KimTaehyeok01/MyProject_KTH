@@ -11,7 +11,7 @@ function App() {
       {/* <E.DataFetchJS /> */}
       {/* <E.DataFetchAxios /> */}
       {/* <E.WindowSizeTracker /> */}
-      <E.Timer />
+      {/* <E.Timer /> */}
     </>
   );
 }
