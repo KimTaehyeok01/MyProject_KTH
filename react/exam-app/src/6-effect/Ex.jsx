@@ -148,16 +148,24 @@ export function WindowSizeTracker() {
 export const Timer = () => {
   const [seconds, setSeconds] = useState(0);
 
+  // 일반 : 현재 렌더링 시점의 변수 값
+  //      : 비동기 상황이나 클로저(화살표함수) 내부에서 위험함.
+  //      : 어러번 호출해도 한번만 반영되는 경우가 발생함.
+  // setSeconds(seconds + 1);
+
   useEffect(() => {
     // 마운트시 타이머 설정
     const timer = setInterval(() => {
-      // setSeconds(seconds + 1); -> 이건 안됨.
-      // prev는 이전 상태 값을 가지는 예약어.
+      // prevState는 이전 상태 값을 가지는 변수.
+      // useState 상태변경 함수 안에서 화살표함수의 매개변수로 사용가능함.
       // 왜? 필요한가?
       // prev를 사용하면, 리액트가 보장하는 최신 상태 값에 기반해
       // 안전하게 상태를 업데이트 할 수 있다.
-      setSeconds((prev) => {
-        return prev + 1;
+      // 사용 예) 카운터, 타이머, 체크박스, 토글
+      //          useEffect, setTimeOut, setInterval 비동기함수(선언, 실행)에서
+      //          한 함수 내에서 여러번 호출항 때.
+      setSeconds((prevState) => {
+        return prevState + 1;
       });
     }, 1000);
     // 언마운트시 타이머 제거
