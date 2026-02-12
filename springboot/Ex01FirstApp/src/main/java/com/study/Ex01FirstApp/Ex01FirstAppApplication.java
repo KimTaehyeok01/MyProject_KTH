@@ -18,9 +18,7 @@ public class Ex01FirstAppApplication {
 
 		// SpringApplication.run : 스프링 앱 실행
 		// Ex01FirstAppApplication.class : 클래스 정보를 담은 객체
-//		SpringApplication.run(Ex01FirstAppApplication.class, args);
-
-		System.out.println("메인함수 실행됨.");
+		SpringApplication.run(Ex01FirstAppApplication.class, args);
 
 	}
 
