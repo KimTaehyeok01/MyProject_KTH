@@ -8,7 +8,10 @@ function App() {
       {/* <E.LifeCycleClass /> */}
       {/* <E.LifeCycleFunc /> */}
       {/* <E.LifeCycle /> */}
-      <E.DataFetchJS />
+      {/* <E.DataFetchJS /> */}
+      {/* <E.DataFetchAxios /> */}
+      {/* <E.WindowSizeTracker /> */}
+      <E.Timer />
     </>
   );
 }
