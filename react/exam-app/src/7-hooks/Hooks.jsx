@@ -186,6 +186,13 @@ export function CounterRefInput() {
 
   const handleClick = () => {
     setCount((prev) => prev + 1);
+    clickCountRef.current += 1;
+    // 버튼 클릭시 입력창에 포커스 설정
+    if (inputRef.current) {
+      // getElementById로 객체를 얻어오지 않고, useRef로 접근한다.
+      inputRef.current.value = `현재 카운트 ${count + 1}`;
+      inputRef.current.focus();
+    }
   };
 
   return (
@@ -193,6 +200,7 @@ export function CounterRefInput() {
       <h2>Counter : {count}</h2>
       <h2>버튼 클릭 횟수 : {clickCountRef.current}</h2>
       <input type="text" ref={inputRef} placeholder="텍스트를 입력하세요." />
+      <br />
       <button onClick={handleClick}>증가 밎 입력창 포커스</button>
     </>
   );
