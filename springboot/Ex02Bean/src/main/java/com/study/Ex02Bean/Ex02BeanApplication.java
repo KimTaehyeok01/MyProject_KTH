@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Ex02BeanApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(Ex02BeanApplication.class, args);
     }
 
