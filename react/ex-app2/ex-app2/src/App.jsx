@@ -9,26 +9,20 @@ function App() {
   const [inputNumber2, setInputNumber2] = useState(0);
   const [input, setInput] = useState(0);
 
-  const handleAdd = () => {
-    setInput(inputNumber1 + inputNumber2);
-  };
-
-  const handlesubStr = () => {
-    setInput(inputNumber1 - inputNumber2);
-  };
-
-  const handleMa = () => {
-    setInput(inputNumber1 * inputNumber2);
-  };
-
-  const handleMu = () => {
-    setInput(inputNumber1 / inputNumber2);
-  };
-
-  const handleDelete = () => {
-    setInputNumber1("");
-    setInputNumber2("");
-    setInput("");
+  const handleResult = (op) => {
+    if (op === "+") {
+      setInput(inputNumber1 + inputNumber2);
+    } else if (op === "-") {
+      setInput(inputNumber1 - inputNumber2);
+    } else if (op === "*") {
+      setInput(inputNumber1 * inputNumber2);
+    } else if (op === "/") {
+      setInput(inputNumber1 / inputNumber2);
+    } else if (op === "delete") {
+      setInputNumber1(0);
+      setInputNumber2(0);
+      setInput(0);
+    }
   };
 
   return (
@@ -67,20 +61,23 @@ function App() {
       </div>
 
       <div className="btn-clac">
-        <button type="button" className="btn" onClick={handleAdd}>
+        <button type="button" className="btn" onClick={() => handleResult("+")}>
           덧셈
         </button>
-        <button type="button" className="btn" onClick={handlesubStr}>
+        <button type="button" className="btn" onClick={() => handleResult("-")}>
           뺄셈
         </button>
-        <button type="button" className="btn" onClick={handleMa}>
+        <button type="button" className="btn" onClick={() => handleResult("*")}>
           곱셈
         </button>
-        <button type="button" className="btn" onClick={handleMu}>
+        <button type="button" className="btn" onClick={() => handleResult("/")}>
           나눗셈
         </button>
-
-        <button type="button" className="delete" onClick={handleDelete}>
+        <button
+          type="button"
+          className="delete"
+          onClick={() => handleResult("delete")}
+        >
           지우기
         </button>
       </div>
