@@ -5,24 +5,24 @@ import "./App.css";
 // 계산기 프로그램 만들기
 
 function App() {
-  const [inputNumber1, setInputNumber1] = useState();
-  const [inputNumber2, setInputNumber2] = useState();
-  const [input, setInput] = useState("");
+  const [inputNumber1, setInputNumber1] = useState(0);
+  const [inputNumber2, setInputNumber2] = useState(0);
+  const [input, setInput] = useState(0);
 
   const handleAdd = () => {
-    setInput(Number(inputNumber1) + Number(inputNumber2));
+    setInput(inputNumber1 + inputNumber2);
   };
 
   const handlesubStr = () => {
-    setInput(Number(inputNumber1) - Number(inputNumber2));
+    setInput(inputNumber1 - inputNumber2);
   };
 
   const handleMa = () => {
-    setInput(Number(inputNumber1) * Number(inputNumber2));
+    setInput(inputNumber1 * inputNumber2);
   };
 
   const handleMu = () => {
-    setInput(Number(inputNumber1) / Number(inputNumber2));
+    setInput(inputNumber1 / inputNumber2);
   };
 
   const handleDelete = () => {
@@ -41,8 +41,8 @@ function App() {
         <input
           type="number"
           id="input-num1"
-          value={inputNumber1}
-          onChange={(e) => setInputNumber1(e.target.value)}
+          value={inputNumber1 || ""}
+          onChange={(e) => setInputNumber1(Number(e.target.value))}
         />
       </div>
 
@@ -51,14 +51,19 @@ function App() {
         <input
           type="number"
           id="input-num2"
-          value={inputNumber2}
-          onChange={(e) => setInputNumber2(e.target.value)}
+          value={inputNumber2 || ""}
+          onChange={(e) => setInputNumber2(Number(e.target.value))}
         />
       </div>
 
       <div className="input-result">
         <p className="num-result">연산 결과 </p>
-        <input type="number" id="input-num-result" value={input} disabled />
+        <input
+          type="number"
+          id="input-num-result"
+          value={input || ""}
+          disabled
+        />
       </div>
 
       <div className="btn-clac">
