@@ -32,8 +32,8 @@ import java.util.stream.Collectors;
 
 // @ComponentScan : @Component가 붙은 클래스를 찾아서 Bean으로 등록한다.
 // @EnableAutoConfiguration : 스프링 프레임워크의 기본적인 기능을 활성화하는 어노테이션
-// @SpringBootConfiguration : @Configuration이 붙은 클래스를 찾아서 사용자 설정 클래스
-//                             로 등록한다. 주로 부가적인 기능을 추가할 때 사용.
+// @SpringBootConfiguration :현재 클래스가 스프링 부트의 메인 설정 클래스(@Configuration)임을
+//                              선언하여 Bean 설정을 정의한다.
 
 
 // Bean : 스프링 프레임워크에서 관리하는 자바 클래스 객체를 의미한다. 싱글톤(Singleton)이며,
