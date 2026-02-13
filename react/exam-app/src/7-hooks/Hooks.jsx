@@ -143,3 +143,57 @@ export function ConuterCallback2() {
     </div>
   );
 }
+
+// useRef 훅
+// 개념 : useRef는 리액트에서 변경 가능한 참조 객체를 제공하는 훅이다.
+//      : useRef로 생성한 객체는 컴포넌트가 리렌더링되더라도 값이 유지됨.
+// 사용용도 :
+//     1. DOM 요소에 접근하기 위해(예: 포커스, 스크롤 제어)
+//     2. 상태값과 다르게 리렌더링 없이 값 유지가 필요한 경우
+//         예) 이전 값 저장, 타이머 등
+//     3. 성능 최적화에 유리함. 값이 변하더라도 불필요한 리렌더링을 방지함.
+export function CounterRef() {
+  const [count, setCount] = useState(0);
+  let ClickCount = 0; // 일반 변수는 리렌더링 되면 초기화되어 버린다.
+  const countRef = useRef(0);
+  // countRef는 컴포넌트가 리렌더링될 때, 값이 초기화되지 않는다.
+  // countRef는 값이 변경되더라도, 리렌더링을 발생시키지 않는다.
+  // count 상태변수는 값이 변경되면, 즉시 화면을 갱신한다.
+
+  const handleClick = () => {
+    ClickCount++;
+    countRef.current += 1;
+    setCount((prev) => prev + 1);
+  };
+
+  console.log("리렌더링됨1.", count);
+  console.log("리렌더링됨2.", ClickCount);
+  console.log("리렌더링됨3.", countRef);
+
+  return (
+    <>
+      <h2>Counter : {count}</h2>
+      <h2>버튼 클릭 횟수 : {countRef.current}</h2>
+      <button onClick={handleClick}>버튼</button>
+    </>
+  );
+}
+
+export function CounterRefInput() {
+  const [count, setCount] = useState(0);
+  const clickCountRef = useRef(0);
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    setCount((prev) => prev + 1);
+  };
+
+  return (
+    <>
+      <h2>Counter : {count}</h2>
+      <h2>버튼 클릭 횟수 : {clickCountRef.current}</h2>
+      <input type="text" ref={inputRef} placeholder="텍스트를 입력하세요." />
+      <button onClick={handleClick}>증가 밎 입력창 포커스</button>
+    </>
+  );
+}

@@ -7,7 +7,9 @@ function App() {
     <>
       {/* <E.CounterMemo /> */}
       {/* <E.ConterCallback /> */}
-      <E.ConuterCallback2 />
+      {/* <E.ConuterCallback2 /> */}
+      {/* <E.CounterRef /> */}
+      <E.CounterRefInput />
     </>
   );
 }
