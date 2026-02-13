@@ -12,9 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MianController {
     // HTTP URL : "localhost:8080/"
+    //  @GetMapping("/") or  @GetMapping이렇게 해도 됨. -> HTTP URL : "localhost:8080"
     @GetMapping("/") // "/"를 Root 경로라고 함. @GetMapping은 Get요청을 처리하는 메소드를 선언한다.
     @ResponseBody // 응답을 html파일로 하지않고, Body데이터(문자열)로 한다는 뜻.
     public String main(){
         return "스프링부트 웹서버가 준비되었습니다.";
+    }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public String test(){
+        // URL : localhost:8080/test
+        return "테스트 경로입니다.";
     }
 }
