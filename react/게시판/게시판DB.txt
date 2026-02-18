@@ -1,0 +1,22 @@
+-- 1. 데이터베이스 생성
+CREATE DATABASE noticeboard;
+
+-- 2. 해당 데이터베이스 사용 설정
+USE noticeboard;
+
+-- 3. 게시판(board) 테이블 생성
+CREATE TABLE board (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 고유 번호 (자바의 Long과 매칭)
+    title VARCHAR(200) NOT NULL,          -- 제목
+    content TEXT NOT NULL,                 -- 내용
+    writer VARCHAR(50) NOT NULL,           -- 작성자
+    reg_date DATETIME DEFAULT CURRENT_TIMESTAMP, -- 작성 시간 (자동)
+    view_cnt INT DEFAULT 0                 -- 조회수 (기본값 0)
+);
+
+-- 4. 테스트용 데이터 삽입 (하나 넣어두어야 리액트 화면에 바로 뜹니다)
+INSERT INTO board (title, content, writer) 
+VALUES ('노트북 연동 테스트', '노트북에서도 잘 돌아가네요!', '태혁');
+
+-- 5. 데이터 잘 들어갔는지 확인
+SELECT * FROM board;
