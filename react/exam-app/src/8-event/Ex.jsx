@@ -52,58 +52,55 @@ export function Event1() {
 // 2.폼이 제출되면 입력값을 콘솔에 출력하고 입력 필드를 비웁니다.
 // 3.기본 폼 제출 동작을 방지하세요 (e.preventDefault() 사용).
 
-export const Event2 = () => {
-  const [age, setAge] = useState("");
-  const [name, setName] = useState("");
-  const style = { textAlign: "center", marginTop: "50px" };
+export function Event2() {
+  const [formData, setFormData] = useState({ name: "", age: "" }); //상태2개 -> 10개
 
-  const handleClick = (e) => {
-    console.log(`이름은 ${name}, 나이는 ${age}`);
-    alert(`이름은 ${name} 나이는 ${age}`);
+  const handleChange = (e) => {
+    //Input태그의 name속성과 value속성의 값을 가져온다.
+    const { name, value } = e.target;
+    setFormData((prev) => {
+      // 문자열을 KV객체의 키로 설정하려면, []대괄호 사용한다.
+      return { ...prev, [name]: value };
+    });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("이름:", formData.name, "나이:", formData.age);
+    alert(`이름:${formData.name} 나이:${formData.age}`);
+    setFormData({ name: "", age: "" });
   };
 
   return (
-    <div style={style}>
-      <hr />
-      <h1>폼 제출 예제</h1>
-      <form action="https://myserver.com">
-        <input
-          style={{ width: "200px", height: "30px" }}
-          type="text"
-          value={name}
-          placeholder="이름을 입력하시오."
-          onChange={(e) => setName(e.target.value)}
-        />
-        <br />
-        <input
-          style={{ marginTop: "10px", width: "200px", height: "30px" }}
-          type="text"
-          value={age}
-          placeholder="나이를 입력하시오."
-          onChange={(e) => setAge(e.target.value)}
-        />
-        <br />
-        <button
-          style={{
-            margin: "20px",
-            width: "200px",
-            height: "30px",
-            borderRadius: "5px",
-            border: "none",
-            border: "1px solid black",
-            backgroundColor: "skyblue",
-            cursor: "pointer",
-          }}
-          type="submit"
-          onClick={handleClick}
-        >
-          클릭
-        </button>
-      </form>
-    </div>
+    <form
+      onSubmit={handleSubmit}
+      style={{ textAlign: "center", marginTop: "30px" }}
+    >
+      <h2>폼 제출 예제</h2>
+      <input
+        type="text"
+        name="name"
+        placeholder="이름"
+        value={formData.name}
+        onChange={handleChange}
+        style={{ margin: "10px", padding: "5px" }}
+      />
+      <br />
+      <input
+        type="number"
+        name="age"
+        placeholder="나이"
+        value={formData.age}
+        onChange={handleChange}
+        style={{ margin: "10px", padding: "5px" }}
+      />
+      <br />
+      <button type="submit" style={{ padding: "10px 20px" }}>
+        제출하기
+      </button>
+    </form>
   );
-};
+}
 
 // 연습문제 3: 입력 필드에서 글자 수 제한하기
 // 목표: 입력 필드의 입력값을 상태로 관리하고 글자 수 제한하는 방법을 학습합니다.
@@ -115,10 +112,10 @@ export const Event2 = () => {
 export const Event3 = () => {
   const [input, setInput] = useState("");
   const style = { textAlign: "center", marginTop: "50px" };
-  const MaxLength = 10;
+  const maxLength = useRef(10);
 
   const handleChange = (e) => {
-    if (e.target.value.length <= MaxLength) {
+    if (e.target.value.length <= maxLength.current) {
       setInput(e.target.value);
     }
   };
@@ -136,7 +133,7 @@ export const Event3 = () => {
           placeholder="최대 10자 입력 가능"
         />
       </form>
-      <h2>남은 글자 수 : {MaxLength - input.length}</h2>
+      <h2>남은 글자 수 : {maxLength.current - input.length}</h2>
     </div>
   );
 };
