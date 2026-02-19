@@ -7,10 +7,11 @@ package com.study.Ex03SpringDI;
 //      : Plain Old Java Object의 약자.
 
 import org.springframework.stereotype.Component;
-@Component
-// 스프링 빈으로 자동 생성됨. "member"라는 이름으로.
+
+@Component // 스프링 빈으로 자동 생성됨. "member"라는 이름으로.
 public class Member {
     private String name = "강감찬";
+    private int age = 20;
 
     // 기본 생성자
     // 스프링 프레임워크는 @Component가 붙은 클래스가 있으면,
@@ -21,12 +22,24 @@ public class Member {
     // 이때, NotSuchMethodException이 발생한다.
     // -- 결론은 필드가 있는 생성자를 하나라도 만들면, @Component + 기본 생성자를 만들어줘야 한다. --
 
-    public Member(){
+    public Member() {
 
     }
 
+    public Member(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     // 필드가 있는 생성자
-    public Member(String name){
+    public Member(String name) {
         this.name = name;
     }
 
