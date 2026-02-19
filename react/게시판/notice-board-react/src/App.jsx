@@ -83,7 +83,7 @@ function App() {
 
   return (
     <div className="board-container">
-      <h2>전공자 태혁의 풀스택 게시판</h2>
+      <h2>태혁의 풀스택 게시판</h2>
 
       {/* 폼: 글쓰기 영역 */}
       <div
