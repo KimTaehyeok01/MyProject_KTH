@@ -8,7 +8,7 @@
 // 상태로 관리되는 메시지를 화면에 출력하세요.
 //    (예: "마우스가 들어왔습니다", "마우스가 나갔습니다")
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export function Event1() {
   const [message, setMessage] = useState("박스에 마우스를 올려보세요.");
@@ -113,14 +113,13 @@ export const Event2 = () => {
 // 3.입력값의 길이에 따라 남은 글자 수를 화면에 표시하세요.
 
 export const Event3 = () => {
-  const [count, setCount] = useState(10);
   const [input, setInput] = useState("");
   const style = { textAlign: "center", marginTop: "50px" };
+  const MaxLength = 10;
 
   const handleChange = (e) => {
-    if (e.target.value.length <= 10) {
+    if (e.target.value.length <= MaxLength) {
       setInput(e.target.value);
-      setCount(10 - e.target.value.length);
     }
   };
 
@@ -137,7 +136,7 @@ export const Event3 = () => {
           placeholder="최대 10자 입력 가능"
         />
       </form>
-      <h2>남은 글자 수 : {count}</h2>
+      <h2>남은 글자 수 : {MaxLength - input.length}</h2>
     </div>
   );
 };
