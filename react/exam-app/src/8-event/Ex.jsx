@@ -114,6 +114,7 @@ export const Event2 = () => {
 
 export const Event3 = () => {
   const [count, setCount] = useState(10);
+  const [input, setInput] = useState("");
   const style = { textAlign: "center", marginTop: "50px" };
 
   const handleChange = (e) => {
@@ -131,11 +132,12 @@ export const Event3 = () => {
         <input
           style={{ width: "200px", height: "30px" }}
           type="text"
+          value={input}
           onChange={handleChange}
           placeholder="최대 10자 입력 가능"
         />
       </form>
-      <h2>남은글자 수 : {count}</h2>
+      <h2>남은 글자 수 : {count}</h2>
     </div>
   );
 };
