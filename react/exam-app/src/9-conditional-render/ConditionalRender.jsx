@@ -32,7 +32,7 @@ const styles = {
 };
 
 function Toolbar(props) {
-  const { isLoggedIn, onClickLogin, onClickLogout } = props;
+  const { isLoggedIn, onClickLogin, onClickLogout, userName } = props;
 
   return (
     <div style={styles.wrapper}>
@@ -45,6 +45,8 @@ function Toolbar(props) {
       ) : (
         <button onClick={onClickLogin}>로그인</button>
       )}
+      {/* 4. 논리연산자 || - 기본값 설정 */}
+      <span style={{ marginRight: 8 }}>{userName || "방문자"}</span>
     </div>
   );
 }
