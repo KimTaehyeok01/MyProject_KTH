@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 //@AllArgsConstructor : 모든 필드를 파라미터로 받는 생성자 자동생성
 //@RequiredArgsConstructor : final이나 @NonNull인 필드만
 //                     매개변수로 받는 생성자 자동생성
-//   : 생성자 주입에 사용
+//                    : 생성자 주입에 사용
+// 용도 : 1. 생성자 주입할 때 -> 여기서는 MainController
+//       2. final 필드 생성자 함수 생성할 때 -> 여기서는 Member
 
 @Component // Bean으로 설정하기 위해서는
           // 기본생성자,필드생성자,Getter/Setter를 넣어야함.
