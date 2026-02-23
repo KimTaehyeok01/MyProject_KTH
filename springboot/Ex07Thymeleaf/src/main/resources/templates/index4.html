@@ -1,0 +1,35 @@
+<!Doctype html>
+<!-- xmlns : xml name space XML의 태그와 속성을 정의하는 곳 -->
+<!-- th : 타임리프 관련 태그나 속성은 th로 시작함. -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>index.html</title>
+</head>
+<body>
+<h2>타임리프의 조건적인 출력 - if,switch</h2>
+    <p th:if="${role} == 'admin'" th:text="|사용자는 관리자입니다.|"></p>
+    <p th:unless="${role} == 'admin'" th:text="|사용자는 관리자가 아닙니다.|"></p>
+
+    <th:block th:if="${role} == 'admin'">
+        <a href="/admin-main">관리자 페이지 링크</a>
+    </th:block>
+
+    <div th:switch="${role}">
+        <p th:case="'admin'">사용자는 관리자입니다.</p>
+        <p th:case="'guest'">사용자는 손님입니다.</p>
+        <p th:case="'*'">사용자는 그외 권한입니다.</p>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
