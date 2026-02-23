@@ -7,13 +7,24 @@
     <title>index.html</title>
 </head>
 <body>
-    <h2>테스트</h2>
-    <p th:text="${name_test}">이름</p>
-    <p th:utext="${name_test}">이름</p>
-    <p th:text="${age_test}">나이</p>
+<h2>타임리프의 형식화된 출력</h2>
+    <p th:text="${#dates.format(standardDate, 'yyyy/MM/dd HH:mm:ss')}"></p>
+    <p th:text="${#temporals.format(localDate,'yyyy/MM/dd')}"></p>
+    <p th:text="${#temporals.format(localDateTime,'yyyy/MM/dd HH:mm:ss')}"></p>
 
-    <th:block th:if="${address_null == null}">
-        <p>address_null</p>
-    </th:block>
+    <p th:text="${#numbers.formatInteger(number1,3,'COMMA')}"></p>
+    <p th:text="|${#numbers.formatInteger(number1,3,'COMMA')}원|"></p>
+    <p th:text="${#numbers.formatDecimal(number1,3,'COMMA',2,'POINT')}"></p>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
