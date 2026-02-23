@@ -10,10 +10,44 @@
     <h2>타임리프의 널 체크(조건적인 렌더링)</h2>
 
       <!-- 조건적 렌더링 -->
-    th:if <br/>
+    th:if : true면 렌더링한다.<br/>
    <!-- th:block : 자체적인 로직을 위한 빈 블록(스코프, 리액트에서 쓰는 <></>같은 것임 >-->
     <th:block th:if="${address_null == null}">
         <p>address_null은 null입니다.</p>
     </th:block>
+
+    th:unless : false면 렌더링한다.<br>
+    <!--  unless는 if의 반대. if가 true일때 수행한다면, unless는 false일때 수행함.  -->
+    <th:block th:unless="${address_null != null}">
+        <p>address_null은 null이 아닙니다.</p>
+    </th:block>
+
+    삼항연산자 ?: : true(null)이면 대체문구로 대입되고, 아니면 원래값으로 들어감<br>
+    <!--  타임리프에서 삼항연산자는 ?:로 서로 붙어있다.  -->
+    <p th:text="${address_null ?: 'address_null은 null입니다.' }">삼항연산자</p>
+
+    defaultString함수 : null이면 기본값으로 대체한다. <br>
+    <!--  타임리프 내장 함수(lib)를 사용할 때 #을 사용한다.  -->
+    <p th:text="${#strings.defaultString(address_null, 'address_null은 null입니다.')}">
+        defaultString함수 결과
+    </p>
+
+    isEmpty함수 : th:if가 true가 되면, th:text가 innerText로 들어간다.<br>
+                 th:if가 false가 되면, th:text는 무시됨.
+    <p th:if="${#strings.isEmpty(address_empty)}" th:text="|address_empty은 empty입니다.|">
+    </p>
+    <!-- ${} : 변수표현식(출력문) 안에 not 연산자 -->
+    <p th:if="${not #strings.isEmpty(address)}" th:text="|address는 empty가 아님.|"></p>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
