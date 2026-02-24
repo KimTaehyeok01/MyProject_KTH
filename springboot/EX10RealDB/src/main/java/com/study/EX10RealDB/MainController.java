@@ -10,7 +10,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor // 생성자 주입으로 Repository 객체 가져오기
 public class MainController {
-    
+
     private final MemberRepository memberRepository;
 
     @GetMapping("/")
