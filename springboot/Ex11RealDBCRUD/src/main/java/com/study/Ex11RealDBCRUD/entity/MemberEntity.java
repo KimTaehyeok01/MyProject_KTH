@@ -1,7 +1,9 @@
 package com.study.Ex11RealDBCRUD.entity;
 
+import com.study.Ex11RealDBCRUD.dto.MemberSaveDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "member")
 @Getter
 // @Setter : 넣지 않는다. 개발자의 실수나 자동으로 호출되는 경우를 제거
+@Builder
 @NoArgsConstructor // 기본 생성자는 필수. @ModelAttribute @RequestBody에 필요!
 @AllArgsConstructor
 public class MemberEntity {
@@ -30,17 +33,19 @@ public class MemberEntity {
     private String userRole;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
-}
 
-// MySQL              Java
-// BIGINT             LONG
-// INT                Integer
-// Varchar            String
-// Text               String
-// Date               LocalDate
-// DateTime           LocalDateTime
-// BLOB               byte[]
-// TinyInt(1)         Boolean
+    // Entity -> DTO
+    public MemberSaveDto toSaveDto(){
+        return MemberSaveDto.builder()
+                .id(id)
+                .userId(userId)
+                .userPw(userPw)
+                .userName(userName)
+                .userRole(userRole)
+                .joinDate(joinDate)
+                .build();
+    }
+}
 
 
 
