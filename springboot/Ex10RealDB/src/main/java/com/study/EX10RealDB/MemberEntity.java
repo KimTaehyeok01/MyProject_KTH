@@ -17,8 +17,8 @@ import java.time.LocalDate;
 public class MemberEntity {
     // @Id : 기본키 id열로 사용한다는 의미
     // GeneratedValue : id값을 어떻게 생성할지 전략을 선택
-    // 1. IDENTITY : MySQL, MariaDB, ProstreDB, H2DB
-    // 2. SEQUENCE : Oracle, PrestreSQL
+    // 1. IDENTITY : MySQL, MariaDB, PostgreSQL, H2DB
+    // 2. SEQUENCE : Oracle, PostgreSQL
     // 3. AUTO : 자동으로 선택
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,3 +31,27 @@ public class MemberEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
 }
+
+// MySQL              Java
+// BIGINT             LONG
+// INT                Integer
+// Varchar            String
+// Text               String
+// Date               LocalDate
+// DateTime           LocalDateTime
+// BLOB               byte[]
+// TinyInt(1)         Boolean
+
+
+
+
+
+
+
+
+
+
+
+
+
+
