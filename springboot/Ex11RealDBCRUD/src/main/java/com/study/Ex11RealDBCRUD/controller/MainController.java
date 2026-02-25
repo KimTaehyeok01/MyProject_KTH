@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-
 @Controller
 @RequiredArgsConstructor
 public class MainController {
@@ -88,18 +87,3 @@ public class MainController {
         return "redirect:/";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
