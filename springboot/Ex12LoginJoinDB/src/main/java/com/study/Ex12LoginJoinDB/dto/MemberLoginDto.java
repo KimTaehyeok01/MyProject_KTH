@@ -39,9 +39,9 @@ public class MemberLoginDto {
 
     @NotBlank(message = "userPw에 null, 빈 문자열, 스페이스문자만 넣을 수 없음.")
     @Size(min = 4, max = 20)
-    @Pattern(
-            regexp = "^(?=.*[a-z])(?=.*\\d)[a-z\\d]{8,}$",
-            message = "비밀번호는 8자 이상이며, 영문 소문자와 숫자를 모두 포함해야 합니다."
-    )
+//    @Pattern(
+//            regexp = "^(?=.*[a-z])(?=.*\\d)[a-z\\d]{8,}$",
+//            message = "비밀번호는 8자 이상이며, 영문 소문자와 숫자를 모두 포함해야 합니다."
+//    )
     private String userPw;
 }

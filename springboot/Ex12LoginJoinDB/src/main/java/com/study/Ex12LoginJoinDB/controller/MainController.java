@@ -1,10 +1,11 @@
 package com.study.Ex12LoginJoinDB.controller;
 
-
 import com.study.Ex12LoginJoinDB.dto.MemberLoginDto;
 import com.study.Ex12LoginJoinDB.dto.MemberSaveDto;
 import com.study.Ex12LoginJoinDB.entity.MemberEntity;
 import com.study.Ex12LoginJoinDB.entity.MemberRepository;
+import com.study.Ex12LoginJoinDB.service.LoginService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MainController {
     private final MemberRepository memberRepository;
+    private final LoginService loginService;
 
     @GetMapping("/")
     public String index() {
+        // session 객체의 정보는 유효하다.
         return "index";
     }
 
@@ -39,7 +42,7 @@ public class MainController {
     @PostMapping("/loginAction")
     @ResponseBody // 문자열로 반환
     public String loginAction(@Valid @ModelAttribute MemberLoginDto dto
-            , BindingResult bindingResult) {
+            , BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors()) { // 바인딩 오류 발생
             //DTO에 설정한 message값을 가져온다.
             String detail = bindingResult.getFieldError().getDefaultMessage();
@@ -48,7 +51,31 @@ public class MainController {
             // 웹브라우저가 이 자바스크립트를 수행해준다.
             return "<script>alert('" + detail + "'); history.back();</script>";
         }
-        return "<script>alert('로그인 성공!'); location.href='/';</script>";
+        // 로그인 성공 로직
+        session.setAttribute("isLogin", true);
+        session.setAttribute("userId", dto.getUserId());
+        // 프론트 컨트롤러의 코드가 길어지면 -> Service클래스(MVC)로 코드를 분리한다.
+        String userRole = loginService.getUserRole(dto.getUserId());
+        session.setAttribute("userRole", userRole);
+        System.out.println("userRole = " + userRole);
+
+        if(userRole.equals("ROLE_ADMIN")){
+            return "<script>alert('로그인 성공!'); location.href='/admin';</script>";
+        }
+        else{
+            return "<script>alert('로그인 성공!'); location.href='/';</script>";
+        }
+    }
+    // 리다이렉트 : a태그, location.href, meta refresh
+    //     - request, model에 데이터가 날라감.
+
+    // 비회원 : 로그인 안한 사용자(단순 방문) - 쿠키에 사용자의 정보를 담는다.
+    // 회원 : 로그인(회원가입)한 사용자 - DB, 세션객체에 데이터를 담는다.
+
+    @GetMapping("/loginoutAction")
+    public String logoutAction(HttpSession session){
+        session.invalidate(); // 로그아웃
+        return "redirect:/";
     }
 
     @RequestMapping("/admin")
