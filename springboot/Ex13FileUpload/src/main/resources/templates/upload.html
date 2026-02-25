@@ -1,0 +1,16 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>파일 업로드</title>
+  </head>
+  <body>
+    <h1>file upload</h1>
+    <!-- enctype="multipart/form-data" : 이미지를 업로드할거면 반드시 필요한 속성 -->
+    <form method="post" action="/upload" enctype="multipart/form-data">
+      <!-- multiple : 여러 파일 선택 가능 -->
+      <input type="file" name="uploadfile" multiple="multiple" />
+      <input type="submit" value="Upload" />
+    </form>
+  </body>
+</html>
