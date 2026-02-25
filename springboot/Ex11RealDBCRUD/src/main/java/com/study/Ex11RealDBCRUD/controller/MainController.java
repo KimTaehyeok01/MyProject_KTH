@@ -4,7 +4,6 @@ import com.study.Ex11RealDBCRUD.dto.MemberSaveDto;
 import com.study.Ex11RealDBCRUD.entity.MemberEntity;
 import com.study.Ex11RealDBCRUD.entity.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static javax.swing.text.html.HTML.Tag.OL;
 
 @Controller
 @RequiredArgsConstructor
