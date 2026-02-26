@@ -19,7 +19,7 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="board_idx", nullable = false) // 실제 컬럼이름과 null 허용을 설정함.
-    private Long board_idx; // 인덱스
+    private Long boardIdx; // 인덱스
     @Column(name="board_name", nullable = false)
     private String boardName; // 글쓴이
     @Column(name="board_title", nullable = false)
