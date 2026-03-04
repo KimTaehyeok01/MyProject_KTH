@@ -3,12 +3,10 @@ package com.example.Ex14LoginJoinDB;
 import com.example.Ex14LoginJoinDB.Dto.MemberLoginDto;
 import com.example.Ex14LoginJoinDB.Dto.MemberRequestDto;
 import com.example.Ex14LoginJoinDB.Dto.MemberResponseDto;
-import com.example.Ex14LoginJoinDB.Entity.MemberEntity;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

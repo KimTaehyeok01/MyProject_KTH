@@ -2,7 +2,6 @@ package com.example.Ex14LoginJoinDB.Dto;
 
 import com.example.Ex14LoginJoinDB.Entity.MemberEntity;
 import lombok.*;
-import org.hibernate.engine.spi.ManagedEntity;
 
 import java.time.LocalDate;
 
