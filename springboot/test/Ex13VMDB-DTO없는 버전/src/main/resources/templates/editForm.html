@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 정보 수정</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 등록 페이지와 동일한 스타일 유지 */
+        body { background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .form-card { width: 500px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        h2 { color: #1a73e8; margin-bottom: 30px; text-align: center; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: bold; }
+        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; background-color: #fff; }
+        input:read-only { background-color: #f9f9f9; color: #999; }
+        .btn-group { margin-top: 30px; display: flex; gap: 10px; }
+        button { flex: 1; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .btn-update { background-color: #34a853; color: white; }
+        .btn-cancel { background-color: #eee; color: #555; }
+    </style>
+</head>
+<body>
+<div class="form-card">
+    <h2>✎ 상품 정보 수정</h2>
+    <form th:action="@{/editProduct}" method="post">
+        <input type="hidden" name="id" th:value="${product.productNo}">
+
+        <div class="input-group">
+            <label>상품 번호</label>
+            <input type="text" th:value="${product.productNo}" readonly>
+        </div>
+        <div class="input-group">
+            <label>상품명</label>
+            <input type="text" name="productName" th:value="${product.productName}" required>
+        </div>
+        <div class="input-group">
+            <label>판매 가격 (원)</label>
+            <input type="number" name="productPrice" th:value="${product.productPrice}" required>
+        </div>
+        <div class="input-group">
+            <label>유통 기한</label>
+            <input type="date" name="productLimitDate" th:value="${product.productLimitDate}" required>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn-cancel" onclick="location.href='/'">취소</button>
+            <button type="submit" class="btn-update">수정 완료</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+USE mydb;
+DROP TABLE IF EXISTS count;
+
+CREATE TABLE Tcount(
+	count_no BIGINT PRIMARY KEY AUTO_INCREMENT,
+	count int DEFAULT(0)
+);

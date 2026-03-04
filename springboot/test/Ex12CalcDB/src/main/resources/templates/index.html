@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>계산기 with DB</title>
+    <style>
+        body { background-color: #f8f9fa; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; }
+        .calc-container { background-color: white; padding: 30px; border: 1px solid #333; width: 380px; text-align: center; }
+        h2 { margin-bottom: 25px; color: #333; font-weight: normal; }
+        .input-group { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; padding: 0 10px; }
+        .input-group label { font-size: 18px; color: #333; }
+        .input-group input { width: 220px; padding: 8px; border: 1px solid #999; background-color: #dcdcdc; text-align: center; font-size: 18px; }
+        .input-group input#result { background-color: #666; color: white; border: none; }
+        .btn-group { margin-top: 30px; display: flex; flex-direction: column; gap: 10px; padding: 0 10px; }
+        button { width: 100%; padding: 10px; font-size: 16px; cursor: pointer; border: none; color: white; transition: opacity 0.2s; }
+        button:hover { opacity: 0.8; }
+        .btn-op { background-color: #1a73e8; }
+        .btn-clear { background-color: #f44336; }
+    </style>
+</head>
+<body>
+
+<div class="calc-container">
+    <h2>계산기</h2>
+
+    <form th:action="@{/calculate}" method="post">
+
+        <div class="input-group">
+            <label>숫자 1</label>
+            <input type="number" name="num1" th:value="${num1 != null ? num1 : 0}" required>
+        </div>
+
+        <div class="input-group">
+            <label>숫자 2</label>
+            <input type="number" name="num2" th:value="${num2 != null ? num2 : 0}" required>
+        </div>
+
+        <div class="input-group">
+            <label>연산 결과</label>
+            <input type="text" id="result" name="result" th:value="${result != null ? result : 0}" readonly>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" name="op" value="add" class="btn-op">덧셈</button>
+            <button type="submit" name="op" value="sub" class="btn-op">뺄셈</button>
+            <button type="submit" name="op" value="mul" class="btn-op">곱셈</button>
+            <button type="submit" name="op" value="div" class="btn-op">나눗셈</button>
+
+            <button type="button" class="btn-clear" onclick="location.href='/calc'">지우기</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

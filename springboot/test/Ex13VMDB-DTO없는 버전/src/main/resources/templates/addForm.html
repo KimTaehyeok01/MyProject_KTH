@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>새 상품 등록</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body { background-color: #f0f2f5; font-family: 'Noto Sans KR', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .form-card { width: 500px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    h2 { color: #1a73e8; margin-bottom: 30px; text-align: center; }
+    .input-group { margin-bottom: 20px; text-align: left; }
+    label { display: block; margin-bottom: 8px; color: #555; font-weight: bold; }
+    input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+    input:focus { outline: none; border-color: #1a73e8; box-shadow: 0 0 5px rgba(26,115,232,0.2); }
+    .btn-group { margin-top: 30px; display: flex; gap: 10px; }
+    button { flex: 1; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
+    .btn-submit { background-color: #1a73e8; color: white; }
+    .btn-cancel { background-color: #eee; color: #555; }
+    button:hover { opacity: 0.9; transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+<div class="form-card">
+  <h2>+ 새 상품 등록</h2>
+  <form th:action="@{/addProduct}" method="post">
+    <div class="input-group">
+      <label>상품명</label>
+      <input type="text" name="productName" placeholder="예: 아이스 아메리카노" required>
+    </div>
+    <div class="input-group">
+      <label>판매 가격 (원)</label>
+      <input type="number" name="productPrice" placeholder="예: 3000" required>
+    </div>
+    <div class="input-group">
+      <label>유통 기한</label>
+      <input type="date" name="productLimitDate" th:value="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}" required>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn-cancel" onclick="history.back()">취소</button>
+      <button type="submit" class="btn-submit">등록하기</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
