@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 관리 리스트</title>
+    <style>
+        .container { max-width: 1000px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); font-family: sans-serif; }
+
+        /* 헤더 부분 레이아웃 */
+        .header-flex { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f8f9fa; padding-bottom: 15px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: center; }
+        th { background-color: #f8f9fa; color: #666; }
+
+        .role-badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; color: white; }
+        .role-admin { background-color: #ea4335; }
+        .role-user { background-color: #34a853; }
+
+        /* 버튼 공통 스타일 */
+        .btn { padding: 8px 15px; text-decoration: none; border-radius: 6px; color: white; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .btn:hover { opacity: 0.8; }
+
+        .btn-edit { background-color: #4c7cf5; }
+        .btn-delete { background-color: #6c757d; }
+
+        /* 로그아웃 버튼 스타일 */
+        .btn-logout { background-color: #ff4d4d; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-flex">
+        <h2 style="margin: 0;">전체 회원 관리 목록</h2>
+        <div>
+            <span th:text="${session.member_username}" style="font-weight: bold; margin-right: 10px; color: #555;">관리자님</span>
+            <a th:href="@{/logout}" class="btn btn-logout" onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>아이디</th>
+            <th>이메일</th>
+            <th>권한</th>
+            <th>가입일</th>
+            <th>관리</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m : ${memberList}">
+            <td th:text="${m.memberNo}">1</td>
+            <td th:text="${m.memberUserName}" style="font-weight: bold;">taehyeok</td>
+            <td th:text="${m.memberEmail}">test@test.com</td>
+            <td>
+                <span th:classappend="${m.memberRole == 'ROLE_ADMIN' ? 'role-admin' : 'role-user'}"
+                      class="role-badge" th:text="${m.memberRole}">ROLE_USER</span>
+            </td>
+            <td th:text="${m.memberJoinDate}">2026-03-04</td>
+            <td>
+                <a th:href="@{/memberEditForm(id=${m.memberNo})}" class="btn btn-edit">수정</a>
+                <a th:href="@{/memberDelete(id=${m.memberNo})}" class="btn btn-delete"
+                   onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

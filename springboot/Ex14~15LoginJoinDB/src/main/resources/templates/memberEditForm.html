@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>회원 정보 상세 수정</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8fafc;
+        font-family: "Noto Sans KR", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .edit-card {
+        width: 480px;
+        background: white;
+        padding: 40px;
+        border-radius: 24px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+      }
+      h2 {
+        color: #1e293b;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .input-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #64748b;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      input {
+        width: 100%;
+        padding: 14px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 12px;
+        box-sizing: border-box;
+        font-size: 15px;
+        transition: 0.3s;
+      }
+      input:focus {
+        border-color: #34a853;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(52, 168, 83, 0.1);
+      }
+
+      /* 수정 가능한 상태의 강조 스타일 */
+      input:not([readonly]) {
+        background-color: #ffffff;
+      }
+
+      .role-group {
+        display: flex;
+        gap: 12px;
+        margin-top: 5px;
+      }
+      .role-item {
+        flex: 1;
+      }
+      .role-item input[type="radio"] {
+        display: none;
+      }
+      .role-label {
+        display: block;
+        text-align: center;
+        padding: 12px;
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 14px;
+        color: #64748b;
+      }
+      .role-item input[type="radio"]:checked + .role-label {
+        background: #ecfdf5;
+        border-color: #34a853;
+        color: #065f46;
+        font-weight: 700;
+      }
+
+      .btn-update {
+        width: 100%;
+        padding: 16px;
+        background-color: #34a853;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+      }
+      .btn-update:hover {
+        background-color: #2d8f47;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(52, 168, 83, 0.2);
+      }
+      .btn-cancel {
+        display: block;
+        text-align: center;
+        width: 100px;
+        height: 30px;
+        margin-right: 200px;
+        margin-top: 20px;
+        color: white;
+        border-radius: 8px;
+        border: none;
+        text-decoration: none;
+        font-size: 14px;
+        background-color: #ebd3d5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="edit-card">
+      <h2>회원 정보 수정</h2>
+      <form th:action="@{/memberUpdate}" method="post">
+        <input type="hidden" name="memberNo" th:value="${member.memberNo}" />
+
+        <div class="input-group">
+          <label>아이디</label>
+          <input
+            type="text"
+            name="memberUserName"
+            th:value="${member.memberUserName}"
+            placeholder="변경할 아이디를 입력하세요"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>새 비밀번호</label>
+          <input
+            type="password"
+            name="memberPassword"
+            placeholder="변경할 경우에만 입력하세요"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>회원 권한</label>
+          <div class="role-group">
+            <div class="role-item">
+              <input
+                type="radio"
+                name="memberRole"
+                value="ROLE_USER"
+                id="u"
+                th:checked="${member.memberRole == 'ROLE_USER'}"
+              />
+              <label for="u" class="role-label">일반 회원</label>
+            </div>
+            <div class="role-item">
+              <input
+                type="radio"
+                name="memberRole"
+                value="ROLE_ADMIN"
+                id="a"
+                th:checked="${member.memberRole == 'ROLE_ADMIN'}"
+              />
+              <label for="a" class="role-label">관리자</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>이메일 주소</label>
+          <input
+            type="email"
+            name="memberEmail"
+            th:value="${member.memberEmail}"
+            placeholder="example@mail.com"
+          />
+        </div>
+
+        <button type="submit" class="btn-update">수정 내용 저장하기</button>
+        <button
+          type="button"
+          class="btn-cancel"
+          onclick="location.href = '/main'"
+        >
+          취소
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <style>
+        .signup-card { width: 450px; margin: 50px auto; padding: 40px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: sans-serif; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="password"], input[type="email"], input[type="date"] {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box;
+        }
+        .role-group { display: flex; gap: 20px; padding: 10px 0; }
+        .btn-submit { width: 100%; padding: 15px; background-color: #4c7cf5; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<div class="signup-card">
+    <h1>Sign up</h1>
+    <form th:action="@{/joinAction}" method="post">
+        <div class="input-group">
+            <label>아이디</label>
+            <input type="text" name="memberUserName" required>
+        </div>
+        <div class="input-group">
+            <label>비밀번호</label>
+            <input type="password" name="memberPassword" required>
+        </div>
+        <div class="input-group">
+            <label>이메일</label>
+            <input type="email" name="memberEmail">
+        </div>
+
+        <div class="input-group">
+            <label>회원 권한</label>
+            <div class="role-group">
+                <input type="radio" name="memberRole" value="ROLE_USER" id="user" checked>
+                <label for="user" style="display:inline; font-weight:normal;">일반회원</label>
+
+                <input type="radio" name="memberRole" value="ROLE_ADMIN" id="admin">
+                <label for="admin" style="display:inline; font-weight:normal;">관리자</label>
+            </div>
+        </div>
+        <button type="submit" class="btn-submit">회원가입 완료</button>
+    </form>
+</div>
+</body>
+</html>
