@@ -52,7 +52,7 @@ public class MemberLoginService {
 
     // 수정
     @Transactional
-    public void update(Integer id, MemberRequestDto dto) {
+    public void update(final Integer id, final MemberRequestDto dto) {
         MemberEntity entity = repository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("수정 실패"));
         entity.update(dto.getMemberUserName(), dto.getMemberPassword(), dto.getMemberEmail(),
@@ -61,8 +61,8 @@ public class MemberLoginService {
 
     // 삭제
     @Transactional
-    public void delete(final Integer id) {
-        MemberEntity entity = repository.findById(id).orElseThrow(() ->
+    public void delete(final Integer id){
+        MemberEntity entity = repository.findById(id).orElseThrow(()->
                 new IllegalArgumentException("삭제 실패"));
         repository.delete(entity);
     }
