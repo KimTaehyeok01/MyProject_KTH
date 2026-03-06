@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>블로그 게시판</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+      }
+      .wrap {
+        width: 900px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 24px;
+        border-radius: 10px;
+      }
+      .searchBar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 25px;
+      }
+      #search {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #222;
+        margin-left: 18px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border-bottom: 1px solid #eee;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background: #fafafa;
+      }
+
+      th:last-child,
+      td:last-child {
+        text-align: center !important;
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      a.btn {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #222;
+        display: inline-block;
+        margin: 0 2px;
+      }
+      a.btn.primary {
+        background: #007bff;
+        color: #fff;
+        border-color: #007bff;
+      }
+      .search-btn {
+        padding: 5px 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #222;
+      }
+
+      .no-data {
+        text-align: center !important;
+        padding: 80px 0 !important;
+        color: #888;
+        font-size: 16px;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+        gap: 5px;
+      }
+      .page-item {
+        display: inline-block;
+      }
+      .page-link {
+        display: block;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: #444;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      .page-item.active .page-link {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+      }
+      .page-item.disabled .page-link {
+        color: #ccc;
+        pointer-events: none;
+        background-color: #fafafa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <h2>블로그 게시판</h2>
+        <a class="btn primary" th:href="@{/articles/new}">글 작성</a>
+      </div>
+
+      <div class="searchBar">
+        <form th:action="@{/articles/search}" method="get">
+          <input
+            type="text"
+            name="title"
+            id="search"
+            placeholder="제목을 입력하세요..."
+          />
+          <button type="submit" class="search-btn">
+            <span>검색</span>
+          </button>
+        </form>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 10%">ID</th>
+            <th style="width: 45%">제목</th>
+            <th style="width: 20%">이름</th>
+            <th style="width: 25%">관리</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="a : ${articles}">
+            <td th:text="${a.id}"></td>
+            <td>
+              <a
+                th:href="@{/articles/{id}(id=${a.id})}"
+                th:text="${a.title}"
+              ></a>
+            </td>
+            <td th:text="${a.userName}"></td>
+            <td>
+              <a class="btn" th:href="@{/articles/{id}/edit(id=${a.id})}"
+                >수정</a
+              >
+              <a class="btn" th:href="@{/articles/{id}/delete(id=${a.id})}"
+                >삭제</a
+              >
+            </td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(articles)}">
+            <td colspan="4" class="no-data">게시글이 없습니다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div th:if="${!paging.isEmpty()}">
+        <ul class="pagination">
+          <li
+            class="page-item"
+            th:classappend="${!paging.hasPrevious} ? 'disabled'"
+          >
+            <a class="page-link" th:href="@{|?page=${paging.number-1}|}"
+              >이전</a
+            >
+          </li>
+          <li
+            th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+            th:if="${page >= paging.number-2 and page <= paging.number+2}"
+            th:classappend="${page == paging.number} ? 'active'"
+            class="page-item"
+          >
+            <a
+              th:text="${page + 1}"
+              class="page-link"
+              th:href="@{|?page=${page}|}"
+            ></a>
+          </li>
+          <li
+            class="page-item"
+            th:classappend="${!paging.hasNext} ? 'disabled'"
+          >
+            <a class="page-link" th:href="@{|?page=${paging.number+1}|}"
+              >다음</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
