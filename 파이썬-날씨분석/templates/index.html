@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>날씨 분석 대시보드</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+        background: #0b1120;
+        color: #cbd5e1;
+        min-height: 100vh;
+        padding: 32px 48px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #7dd3fc;
+        letter-spacing: 2px;
+      }
+      .subtitle {
+        text-align: center;
+        color: #475569;
+        margin-bottom: 32px;
+        font-size: 0.78rem;
+        letter-spacing: 0.5px;
+      }
+
+      /* ── 통계 카드 ── */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .stat-card {
+        background: #131e30;
+        border: 1px solid #1e2d45;
+        border-radius: 10px;
+        padding: 12px 10px;
+        text-align: center;
+      }
+      .stat-card .label {
+        font-size: 0.68rem;
+        color: #4b6082;
+        margin-bottom: 5px;
+        letter-spacing: 0.3px;
+      }
+      .stat-card .value {
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+      .red {
+        color: #f87171;
+      }
+      .blue {
+        color: #60a5fa;
+      }
+      .green {
+        color: #34d399;
+      }
+      .yellow {
+        color: #fbbf24;
+      }
+
+      /* ── 차트 그리드 ── */
+      .charts-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .chart-card {
+        background: #131e30;
+        border: 1px solid #1e2d45;
+        border-radius: 10px;
+        padding: 16px 18px;
+      }
+      .chart-card h2 {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #4b6082;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      canvas {
+        width: 100% !important;
+      }
+
+      /* ── 테이블 ── */
+      .table-card {
+        background: #131e30;
+        border: 1px solid #1e2d45;
+        border-radius: 10px;
+        padding: 16px 18px;
+        overflow-x: auto;
+      }
+      .table-card h2 {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #4b6082;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+      }
+      th {
+        color: #334e6e;
+        padding: 6px 10px;
+        text-align: center;
+        font-weight: 500;
+        border-bottom: 1px solid #1e2d45;
+      }
+      td {
+        padding: 5px 10px;
+        text-align: center;
+        color: #94a3b8;
+      }
+      tr:hover td {
+        background: #16243a;
+        color: #cbd5e1;
+      }
+
+      /* ── 전국 날씨 ── */
+      .section-label {
+        font-size: 0.7rem;
+        color: #334e6e;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 8px;
+      }
+      .cities-grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .city-card {
+        background: #0f1a2e;
+        border: 1px solid #1a2a40;
+        border-radius: 8px;
+        padding: 10px 6px;
+        text-align: center;
+        transition: border-color 0.2s;
+      }
+      .city-card:hover {
+        border-color: #2d4a6e;
+      }
+      .city-name {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #7dd3fc;
+        margin-bottom: 5px;
+      }
+      .city-icon {
+        font-size: 1.5rem;
+        line-height: 1;
+        margin-bottom: 5px;
+      }
+      .city-temps {
+        font-size: 0.72rem;
+      }
+      .city-temps .hi {
+        color: #f87171;
+      }
+      .city-temps .sep {
+        color: #334e6e;
+        margin: 0 2px;
+      }
+      .city-temps .lo {
+        color: #60a5fa;
+      }
+      .city-rain {
+        font-size: 0.65rem;
+        color: #334e6e;
+        margin-top: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>☁️ 날씨 분석 대시보드</h1>
+    <p class="subtitle" id="subtitle">
+      데이터 로딩 중... · Flask + Chart.js · 서울
+    </p>
+
+    <!-- 전국 날씨 -->
+    <p class="section-label">전국 날씨 — 오늘</p>
+    <div class="cities-grid" id="citiesGrid"></div>
+
+    <!-- 통계 카드: JS로 채움 -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">평균 최고기온</div>
+        <div class="value red" id="avgHigh">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">평균 최저기온</div>
+        <div class="value blue" id="avgLow">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">평균 기온</div>
+        <div class="value yellow" id="avgTemp">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">기간 최고기온</div>
+        <div class="value red" id="maxTemp">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">기간 최저기온</div>
+        <div class="value blue" id="minTemp">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">총 강수량</div>
+        <div class="value green" id="totalRain">--</div>
+      </div>
+    </div>
+
+    <!-- 차트 -->
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h2>일별 기온 추이</h2>
+        <canvas id="tempChart" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <h2>일별 강수량</h2>
+        <canvas id="rainChart" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <h2>일별 습도</h2>
+        <canvas id="humidChart" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <h2>일별 풍속</h2>
+        <canvas id="windChart" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- 데이터 테이블 -->
+    <div class="table-card">
+      <h2>상세 데이터</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>최고기온 (°C)</th>
+            <th>최저기온 (°C)</th>
+            <th>평균기온 (°C)</th>
+            <th>강수량 (mm)</th>
+            <th>습도 (%)</th>
+            <th>풍속 (m/s)</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <script>
+      function weatherEmoji(code) {
+        if (code === 0) return "☀️";
+        if (code <= 2) return "🌤️";
+        if (code <= 3) return "☁️";
+        if (code <= 48) return "🌫️";
+        if (code <= 57) return "🌦️";
+        if (code <= 67) return "🌧️";
+        if (code <= 77) return "❄️";
+        if (code <= 82) return "🌦️";
+        if (code <= 94) return "🌨️";
+        return "⛈️";
+      }
+
+      // 전국 도시 날씨
+      fetch("http://127.0.0.1:5000/api/cities")
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (cities) {
+          var grid = document.getElementById("citiesGrid");
+          cities.forEach(function (c) {
+            var rainText = c.rain > 0 ? c.rain + "mm" : "―";
+            var card = document.createElement("div");
+            card.className = "city-card";
+            card.innerHTML =
+              "<div class='city-name'>" +
+              c.name +
+              "</div>" +
+              "<div class='city-icon'>" +
+              weatherEmoji(c.code) +
+              "</div>" +
+              "<div class='city-temps'><span class='hi'>" +
+              c.high +
+              "°</span>" +
+              "<span class='sep'>/</span><span class='lo'>" +
+              c.low +
+              "°</span></div>" +
+              "<div class='city-rain'>💧 " +
+              rainText +
+              "</div>";
+            grid.appendChild(card);
+          });
+        })
+        .catch(function (err) {
+          console.error("전국 날씨 로드 실패:", err);
+        });
+
+      const gridColor = "rgba(148,163,184,0.15)";
+      const baseOpts = () => ({
+        responsive: true,
+        plugins: { legend: { labels: { color: "#cbd5e1" } } },
+        scales: {
+          x: {
+            ticks: { color: "#94a3b8", maxRotation: 45 },
+            grid: { color: gridColor },
+          },
+          y: { ticks: { color: "#94a3b8" }, grid: { color: gridColor } },
+        },
+      });
+
+      fetch("http://127.0.0.1:5000/api/weather")
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (d) {
+          // subtitle 날짜 업데이트
+          document.getElementById("subtitle").textContent =
+            "최근 7일 (" +
+            d.stats.period_start +
+            " ~ " +
+            d.stats.period_end +
+            ") · 실시간 · 서울";
+
+          // 통계 카드
+          document.getElementById("avgHigh").textContent =
+            d.stats.avg_high + "°C";
+          document.getElementById("avgLow").textContent =
+            d.stats.avg_low + "°C";
+          document.getElementById("avgTemp").textContent =
+            d.stats.avg_temp + "°C";
+          document.getElementById("maxTemp").textContent =
+            d.stats.max_temp + "°C";
+          document.getElementById("minTemp").textContent =
+            d.stats.min_temp + "°C";
+          document.getElementById("totalRain").textContent =
+            d.stats.total_rain + "mm";
+
+          // 테이블
+          var tbody = document.getElementById("tableBody");
+          for (var i = 0; i < d.dates.length; i++) {
+            var tr = document.createElement("tr");
+            tr.innerHTML =
+              "<td>" +
+              d.dates[i] +
+              "</td>" +
+              "<td class='red'>" +
+              d.high_temp[i] +
+              "</td>" +
+              "<td class='blue'>" +
+              d.low_temp[i] +
+              "</td>" +
+              "<td class='yellow'>" +
+              d.avg_temp[i] +
+              "</td>" +
+              "<td class='green'>" +
+              d.rainfall[i] +
+              "</td>" +
+              "<td>" +
+              d.humidity[i] +
+              "</td>" +
+              "<td>" +
+              d.wind_speed[i] +
+              "</td>";
+            tbody.appendChild(tr);
+          }
+
+          // 차트
+          new Chart(document.getElementById("tempChart"), {
+            type: "line",
+            data: {
+              labels: d.dates,
+              datasets: [
+                {
+                  label: "최고기온",
+                  data: d.high_temp,
+                  borderColor: "#f87171",
+                  backgroundColor: "rgba(248,113,113,0.08)",
+                  tension: 0.3,
+                  pointRadius: 2,
+                },
+                {
+                  label: "평균기온",
+                  data: d.avg_temp,
+                  borderColor: "#fbbf24",
+                  backgroundColor: "rgba(251,191,36,0.08)",
+                  tension: 0.3,
+                  pointRadius: 2,
+                },
+                {
+                  label: "최저기온",
+                  data: d.low_temp,
+                  borderColor: "#60a5fa",
+                  backgroundColor: "rgba(96,165,250,0.08)",
+                  tension: 0.3,
+                  pointRadius: 2,
+                },
+              ],
+            },
+            options: baseOpts(),
+          });
+
+          new Chart(document.getElementById("rainChart"), {
+            type: "bar",
+            data: {
+              labels: d.dates,
+              datasets: [
+                {
+                  label: "강수량 (mm)",
+                  data: d.rainfall,
+                  backgroundColor: "rgba(56,189,248,0.7)",
+                  borderRadius: 4,
+                },
+              ],
+            },
+            options: baseOpts(),
+          });
+
+          new Chart(document.getElementById("humidChart"), {
+            type: "line",
+            data: {
+              labels: d.dates,
+              datasets: [
+                {
+                  label: "습도 (%)",
+                  data: d.humidity,
+                  borderColor: "#34d399",
+                  backgroundColor: "rgba(52,211,153,0.1)",
+                  fill: true,
+                  tension: 0.3,
+                  pointRadius: 2,
+                },
+              ],
+            },
+            options: baseOpts(),
+          });
+
+          new Chart(document.getElementById("windChart"), {
+            type: "line",
+            data: {
+              labels: d.dates,
+              datasets: [
+                {
+                  label: "풍속 (m/s)",
+                  data: d.wind_speed,
+                  borderColor: "#a78bfa",
+                  backgroundColor: "rgba(167,139,250,0.1)",
+                  fill: true,
+                  tension: 0.3,
+                  pointRadius: 2,
+                },
+              ],
+            },
+            options: baseOpts(),
+          });
+        })
+        .catch(function (err) {
+          console.error("데이터 로드 실패:", err);
+        });
+    </script>
+  </body>
+</html>
