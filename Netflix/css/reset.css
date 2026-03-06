@@ -1,0 +1,71 @@
+/* 모든 요소의 바깥여백, 안쪽여백 제거하기 */
+h1,h2,h3,h4,h5,p,ol,li,dl,dt,dd,p,* {margin:0; padding: 0;}
+
+/* 글자 선명하게 */
+h1,h2,h3,h4,h5,h6,p,span,small,address{
+    /* transform: rotate(0.04deg); */
+}
+
+/* li 장식제거 */
+li {
+    list-style: none;
+}
+
+/* a의 글자색 밑줄 */
+a {
+    color:#fff;
+    text-decoration: none;
+}
+
+/* img */
+img {
+    vertical-align: top;
+    border: 0;
+}
+
+/* 기울기 address, em, i */
+address,i,em {
+    font-style: normal;
+}
+
+/* .blind section 제목이 필수사항이지만 화면에서는 사라지고,
+사이트 목차로는 읽혀야 됨*/
+.blind {
+    position: absolute;
+    top: -9999px;
+}
+
+/* hr */
+hr{
+    display: none;
+}
+
+/* 글자크기, 글씨체, 기본 글자색, 줄간격, 자간 */
+body {
+    font-family: 'Noto Sans KR', "돋움", dotum ,sans-serif;
+    font-size: 14px;
+    color: #111;
+    line-height: 1;
+}
+
+/* .clearFix float된 자식을 가지는 부모의 높이 찾아주기*/
+.clearFix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* skipMenu */
+.skipMenu a{
+    display: block;
+    background: black;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    position: absolute;
+    width: 100%;
+    top: -999px;
+}
+.skipMenu a:focus {
+    top:0;
+}

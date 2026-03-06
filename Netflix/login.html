@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix login</title>
+    <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico"/>
+    <meta property="og:description" content="스마트 TV, 태블릿, 스마트폰, PC, 게임 콘솔 등 다양한 디바이스에서 영화와 시리즈를 마음껏 즐기세요."/>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Netflix">
+    <meta property="og:url"	content="https://www.netflix.com/kr/">
+    <meta property="og:image" content="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+    <ul class="skipMenu">
+        <li><a href="#container">로그인 박스 바로가기</a></li>
+    </ul>
+    <div id="container">
+        <div class="logo"><a href="index.html"><img src="img/Netflix_Logo.png" alt="Netflix_Logo"></a></div>
+        <div class="logInnerBox">
+            <form action="#void" method="post">
+                <h1>로그인</h1>
+                <div class="input-box">
+                    <input type="text" id="username" name="username" placeholder="아이디를 입력해주세요.">
+                </div>
+                <div class="input-box">
+                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요.">
+                </div>
+                <div class="remember">
+                    <div class="switch clearFix">
+                        <input id="switch-1" type="checkbox" class="switch-input" />
+                        <label for="switch-1" class="switch-label">로그인 상태 유지</label>
+                    </div>
+                    <span><a href="#void">도움이 필요하신가요?</a></span>
+                </div>
+                <div class="submit">
+                    <input type="reset" value="로그인">
+                </div>
+            </form>
+            <ul class="login_search">
+                <li><a href="signup.html">회원가입</a></li>
+                <li><a href="Idsearch.html">아이디 찾기</a></li>
+                <li><a href="password.html">비밀번호 찾기</a></li>
+            </ul>
+            <div class="advertise"><a href="#void"><img src="img/cont_info.jpg" alt="cont_info"></a></div>
+            <ul class="login_promise">
+                <li><a href="signup.html">이용약관</a></li>
+                <li><a href="Idsearch.html">개인정보처리방침</a></li>
+                <li><a href="password.html">책임의 한계와 법적고지</a></li>
+                <li><a href="password.html">회원정보 고객센터</a></li>
+            </ul>
+            <div class="last_word"><img src="img/Netflix_Logo.png" alt="Netflix_Logo">Copyright © <strong>Netflix</strong> Corp. All Rights Reserved.</div>
+        </div>
+    </div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+</body>
+</html>

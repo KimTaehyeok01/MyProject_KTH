@@ -1,0 +1,270 @@
+html {
+  background-color: #000;
+}
+
+body {
+  background-image: url(../img/netflix-background-black.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#container {
+  padding-top: 30px;
+  padding-bottom: 10%;
+}
+@media screen and (max-width: 767px) {
+  #container {
+    padding-top: 25px;
+    padding-bottom: 20%;
+  }
+}
+#container .logo {
+  width: 250px;
+  margin: 0 auto;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+#container .logo:hover {
+  opacity: 0.7;
+}
+#container .logo a img {
+  width: 100%;
+}
+#container .logInnerBox {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 20px 0;
+  background-color: #000;
+  color: #fff;
+  border-radius: 20px;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox {
+    width: 80%;
+  }
+}
+#container .logInnerBox form {
+  width: 80%;
+  margin: 0 auto;
+}
+#container .logInnerBox form h1 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2em;
+  padding: 10px 0;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox form h1 {
+    font-size: 1.75em;
+  }
+}
+#container .logInnerBox form .input-box {
+  margin-top: 20px;
+}
+#container .logInnerBox form .input-box input {
+  width: 100%;
+  padding: 12.5px 10px;
+  border: none;
+  border-radius: 3px;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox form .input-box input {
+    font-size: 0.75em;
+  }
+}
+#container .logInnerBox form .remember {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 0 10px;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox form .remember {
+    font-size: 0.8em;
+  }
+}
+#container .logInnerBox form .remember span:hover > a {
+  color: red;
+  text-decoration: underline;
+}
+#container .logInnerBox form .remember span a {
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+#container .logInnerBox form .submit {
+  padding: 20px 0 30px;
+}
+#container .logInnerBox form .submit:hover > input {
+  opacity: 0.5;
+  text-decoration: underline;
+}
+#container .logInnerBox form .submit input {
+  font-size: 1.1em;
+  font-weight: 700;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  width: 100%;
+  padding: 10px 0;
+  background-color: red;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox form .submit input {
+    padding: 5px 0;
+    font-size: 1em;
+  }
+}
+#container .logInnerBox .login_search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 80%;
+  margin: 0 auto;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .login_search {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding: 0px;
+  }
+}
+#container .logInnerBox .login_search li {
+  text-align: center;
+}
+#container .logInnerBox .login_search li::after {
+  content: "|";
+  float: right;
+  color: #fff;
+  margin-right: -30px;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .login_search li::after {
+    display: none;
+  }
+}
+#container .logInnerBox .login_search li:last-child::after {
+  content: "";
+}
+#container .logInnerBox .login_search li:hover > a {
+  color: red;
+  text-decoration: underline;
+}
+#container .logInnerBox .login_search li a {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .login_search li a {
+    font-size: 14px;
+  }
+}
+#container .logInnerBox .advertise {
+  width: 80%;
+  height: 150px;
+  margin: 30px auto 0px auto;
+  overflow: hidden;
+  border: 0.1px solid #fff;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .advertise {
+    margin: 20px auto;
+  }
+}
+#container .logInnerBox .advertise a img {
+  width: 100%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+#container .logInnerBox .advertise a img:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+#container .logInnerBox .login_promise {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding-top: 30px;
+  padding-left: 5px;
+}
+@media screen and (max-width: 540px) {
+  #container .logInnerBox .login_promise {
+    display: none;
+  }
+}
+#container .logInnerBox .login_promise li {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+#container .logInnerBox .login_promise li::after {
+  content: "|";
+  float: right;
+  color: #fff;
+  padding-left: 12.5px;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .login_promise li::after {
+    display: none;
+  }
+}
+#container .logInnerBox .login_promise li:last-child::after {
+  content: "";
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .login_promise li:last-child::after {
+    display: none;
+  }
+}
+#container .logInnerBox .login_promise li:hover > a {
+  color: red;
+  text-decoration: underline;
+}
+#container .logInnerBox .login_promise li a {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .login_promise li a {
+    font-size: 13px;
+  }
+}
+#container .logInnerBox .last_word {
+  margin-top: -10px;
+  font-size: 0.8em;
+  color: #999;
+  text-align: center;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .last_word {
+    font-size: 0.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}
+#container .logInnerBox .last_word img {
+  width: 100px;
+}
+@media screen and (max-width: 767px) {
+  #container .logInnerBox .last_word img {
+    width: 75px;
+  }
+}

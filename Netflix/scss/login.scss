@@ -1,0 +1,242 @@
+$pc1700: 1700px;
+$pc1420: 1420px;
+$pc1024: 1024px;
+$mobile767: 767px;
+$mobile540: 540px;
+$mobile480: 480px;
+
+@mixin respond($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
+html {
+  background-color: #000;
+}
+body {
+  background-image: url(../img/netflix-background-black.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#container {
+  padding-top: 30px;
+  padding-bottom: 10%;
+  @include respond($mobile767) {
+    padding-top: 25px;
+    padding-bottom: 20%;
+  }
+  .logo {
+    width: 250px;
+    margin: 0 auto;
+    transition: 0.5s;
+    &:hover {
+      opacity: 0.7;
+    }
+    a {
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .logInnerBox {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 20px 0;
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    @include respond($mobile767) {
+      width: 80%;
+    }
+    form {
+      width: 80%;
+      margin: 0 auto;
+      h1 {
+        text-align: center;
+        font-weight: 700;
+        font-size: 2em;
+        padding: 10px 0;
+        @include respond($mobile767) {
+          font-size: 1.75em;
+        }
+      }
+      .input-box {
+        margin-top: 20px;
+        input {
+          width: 100%;
+          padding: 12.5px 10px;
+          border: none;
+          border-radius: 3px;
+          @include respond($mobile767) {
+            font-size: 0.75em;
+          }
+        }
+      }
+      .remember {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0 10px;
+        @include respond($mobile767) {
+          font-size: 0.8em;
+        }
+        .switch {
+          input {
+          }
+        }
+        span {
+          &:hover > a {
+            color: red;
+            text-decoration: underline;
+          }
+          a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.5s;
+          }
+        }
+      }
+      .submit {
+        padding: 20px 0 30px;
+        &:hover > input {
+          opacity: 0.5;
+          text-decoration: underline;
+        }
+        input {
+          font-size: 1.1em;
+          font-weight: 700;
+          transition: 0.5s;
+          width: 100%;
+          padding: 10px 0;
+          background-color: red;
+          border: none;
+          border-radius: 3px;
+          color: #fff;
+          @include respond($mobile767) {
+            padding: 5px 0;
+            font-size: 1em;
+          }
+        }
+      }
+    }
+    .login_search {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      margin: 0 auto;
+      @include respond($mobile767) {
+        flex-wrap: wrap;
+        padding: 0px;
+      }
+      li {
+        text-align: center;
+        &::after {
+          content: "|";
+          float: right;
+          color: #fff;
+          margin-right: -30px;
+          @include respond($mobile767) {
+            display: none;
+          }
+        }
+        &:last-child::after {
+          content: "";
+        }
+        &:hover > a {
+          color: red;
+          text-decoration: underline;
+        }
+        a {
+          transition: 0.5s;
+          color: #fff;
+          text-decoration: none;
+          font-size: 16px;
+          @include respond($mobile767) {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .advertise {
+      width: 80%;
+      height: 150px;
+      margin: 30px auto 0px auto;
+      overflow: hidden;
+      border: 0.1px solid #fff;
+      @include respond($mobile767) {
+        margin: 20px auto;
+      }
+      a {
+        img {
+          width: 100%;
+          transition: 0.5s;
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+    .login_promise {
+      display: flex;
+      justify-content: space-around;
+      padding: {
+        top: 30px;
+        left: 5px;
+      }
+      @include respond($mobile540) {
+        display: none;
+      }
+      li {
+        transition: 0.5s;
+        &::after {
+          content: "|";
+          float: right;
+          color: #fff;
+          padding-left: 12.5px;
+          @include respond($mobile767) {
+            display: none;
+          }
+        }
+
+        &:last-child::after {
+          content: "";
+          @include respond($mobile767) {
+            display: none;
+          }
+        }
+        &:hover > a {
+          color: red;
+          text-decoration: underline;
+        }
+        a {
+          transition: 0.5s;
+          color: #fff;
+          text-decoration: none;
+          font-size: 15px;
+          @include respond($mobile767) {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    .last_word {
+      margin-top: -10px;
+      font-size: 0.8em;
+      color: #999;
+      text-align: center;
+      @include respond($mobile767) {
+        font-size: 0.5em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+      img {
+        width: 100px;
+        @include respond($mobile767) {
+          width: 75px;
+        }
+      }
+    }
+  }
+}

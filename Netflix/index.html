@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <meta property="og:description" content="스마트 TV, 태블릿, 스마트폰, PC, 게임 콘솔 등 다양한 디바이스에서 영화와 시리즈를 마음껏 즐기세요." />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Netflix">
+    <meta property="og:url" content="https://www.netflix.com/kr/">
+    <meta property="og:image" content="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
+    <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+
+    <!-- ======== skipMenu ======== -->
+    <ul class="skipMenu">
+        <li><a href="#nav">메인메뉴 바로가기</a></li>
+    </ul>
+
+    <!-- ======== wrapper ======== -->
+    <div class="wrapper">
+        <div class="content">
+            <aside>
+                <a class="close" href="#void"><i class="fa-solid fa-circle-xmark"></i></a>
+                <a class="mobileLogo" href="index.html"><img src="img/Netflix_Logo.png" alt="Netflix_Logo"></a>
+                <div class="signBox">
+                    <a class="login" href="login.html"><span>로그인</span></a>
+                    <a class="signUp" href="#void"><span>회원가입</span></a>
+                </div>
+                <form class="controls">
+                    <input type="search" id="search" name="search" />
+                    <label for="search"><i class="fa fa-search"></i></label>
+                </form>
+                <nav class='site-nav'>
+                    <a href="#void">
+                        <span><i class="fa fa-home"></i></span>
+                        <span>Home</span>
+                    </a>
+                    <a href="#void">
+                        <span><i class="fa fa-gears"></i></span>
+                        <span>About</span>
+                    </a>
+                    <a href="#void">
+                        <span><i class="fa-solid fa-tv"></i></span>
+                        <span>TV Program</span>
+                    </a>
+                    <a href="#void">
+                        <span><i class="fa-solid fa-clapperboard"></i></span>
+                        <span>Movies</span>
+                    </a>
+                    <a href="#void">
+                        <span><i class="fa-brands fa-bilibili"></i></span>
+                        <span>Drama</span>
+                    </a>
+                    <a href="#void">
+                        <span><i class="fa-solid fa-coins"></i></span>
+                        <span>Content</span>
+                    </a>
+                    <a href="#void">
+                        <span><i class="fa-solid fa-newspaper"></i></span>
+                        <span>News</span>
+                    </a>
+                </nav>
+                <footer><a href="#void"><i class="fa fa-sign-out fa-rotate-180"></i> <span>Logout</span></a></footer>
+            </aside>
+        </div>
+    </div>
+
+    <!-- ======== header ======== -->
+    <header>
+        <div class="innerBox">
+
+            <!-- ======== logo ======== -->
+            <a href="index.html"><img src="img/Netflix_Logo.png" alt="Netflix_Logo"></a>
+
+            <!-- ======== nav ======== -->
+            <nav>
+                <ul id="nav">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="#void">ABOUT</a>
+                        <ul class="sub small_sub">
+                            <li><a href="#void">넷플릭스 소개</a></li>
+                            <li><a href="#void">TV 프로그램 및 영화</a></li>
+                            <li><a href="#void">지원되는 디바이스</a></li>
+                            <li><a href="#void">멤버십 및 요금</a></li>
+                            <li><a href="#void">지금 시작하세요.</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#void">TV PROGRAM</a>
+                        <ul class="sub">
+                            <li><a href="#void">미국 TV 프로그램</a></li>
+                            <li><a href="#void">아니메 시리즈</a></li>
+                            <li><a href="#void">리얼리티, 버라이어티 & 토크쇼</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#void">MOVIES</a>
+                        <ul class="sub small_sub">
+                            <li><a href="#void">Netflix 인기 콘텐츠</a></li>
+                            <li><a href="#void">한국 코미디</a></li>
+                            <li><a href="#void">SF & 판타지</a></li>
+                            <li><a href="#void">호러 영화</a></li>
+                            <li><a href="#void">코미디</a></li>
+                            <li><a href="#void">스릴러 영화</a></li>
+                            <li><a href="#void">어린이 & 가족 영화</a></li>
+                            <li><a href="#void">실화 바탕 영화</a></li>
+                            <li><a href="#void">SF 스릴러</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#void">DRAMA</a>
+                        <ul class="sub">
+                            <li><a href="#void">Netflix 인기 콘텐츠</a></li>
+                            <li><a href="#void">보고 또 봐도 좋은 인기 시리즈</a></li>
+                            <li><a href="#void">독립 에피소드 해외 시리즈</a></li>
+                            <li><a href="#void">SF & 호러 시리즈</a></li>
+                            <li><a href="#void">한국 드라마</a></li>
+                            <li><a href="#void">미국 드라마</a></li>
+                            <li><a href="#void">새로 올라온 콘텐츠</a></li>
+                            <li><a href="#void">중국 시리즈</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#void">CONTENT</a>
+                        <ul class="sub">
+                            <li><a href="#void">주말엔 몰아보기!</a></li>
+                            <li><a href="#void">아시아 영화 & 시리즈</a></li>
+                            <li><a href="#void">로맨틱한 시리즈</a></li>
+                            <li><a href="#void">보고 또 봐도 좋은 인기 시리즈</a></li>
+                            <li><a href="#void">실제 범죄·다큐시리즈</a></li>
+                            <li><a href="#void">평단의 찬사를 받은 시리즈</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#void">NEWS</a>
+                        <ul class="sub very_small_sub">
+                            <li><a href="#void">뉴스룸</a></li>
+                            <li><a href="#void">대한민국 뉴스</a></li>
+                            <li><a href="#void">글로벌 뉴스</a></li>
+                            <li><a href="#void">추가정보</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- ======== language ======== -->
+            <div class="language">
+                <a href="#void" class="current">KR</a>
+                <a href="#void">EN</a>
+            </div>
+
+            <!-- ======== btns ======== -->
+            <div class="btns">
+                <a href="#void" class="btn open-search">
+                    <svg class="search" xmlns="http://www.w3.org/2000/svg" width="28.35" height="28.094"
+                        viewBox="0 0 28.35 28.094">
+                        <circle cx="11.39" cy="11.375" r="10.39"></circle>
+                        <path d="M3219.93,46.23l7.97,7.971-1.41,1.414-7.97-7.971Z"
+                            transform="translate(-3199.56 -27.531)"></path>
+                    </svg>
+                </a>
+                <a href="#void" class="btn hamburger" title="menu open">
+                    <svg id="icoBars" xmlns="http://www.w3.org/2000/svg" width="33" height="22" viewBox="0 0 33 22">
+                        <rect class="bar" width="33" height="3"></rect>
+                        <rect class="bar" y="10" width="33" height="3"></rect>
+                        <rect class="bar" y="20" width="33" height="3"></rect>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ======== fullpage ======== -->
+    <div id="fullpage">
+
+        <!-- ======== section0 ======== -->
+        <div class="section" id="section0">
+
+            <!-- ======== video ======== -->\
+            <video id="myVideo" playsinline="" loop muted data-autoplay>
+                <source src="img/GIANTSTEP.mp4" type="video/mp4">
+            </video>
+
+            <!-- ======== layer ======== -->
+            <div class="layer second">
+                <h1 class="is-animated"><span>Netflix</span>에 오신 것을 환영합니다<br />
+                    영화와 시리즈를 무제한으로 감상하세요.</h1>
+                <span>
+                    <a href="#void">
+                        <img src="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" alt="icon">
+                        새로워진 넷플릭스를 지금 만나보세요.
+                    </a>
+                </span>
+            </div>
+
+            <!-- ======== scrollDown ======== -->
+            <div class="scrollDown">
+                <p class="scroll">
+                    <img src="img/icon_mouse.png" alt="scroll down">
+                    <span>SCROLL DOWN</span>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ======== section1 ======== -->
+        <div class="section" id="section1">
+
+            <!-- ======== section1_title ======== -->
+            <div>
+                <h1><span>Netflix</span>에만 있는 혜택</h1>
+                <p>넷플릭스 가입 후 다양한 콘텐츠, <br>
+                    스트리밍, 저장 기능을 활용해보세요.</p>
+            </div>
+
+            <div class="innerBox">
+                <div>
+                    <img src="img/original_1.png" alt="original_1">
+                    <h3>취향에 따라 골라보는 다양한 콘텐츠</h3>
+                    <p>넷플릭스의 콘텐츠를 다 함께 즐겨보세요. 인기 영화, 몰아보기 시리즈, 넷플릭스에서 독점 공개하는 오리지널까지, 원하는 만큼 볼 수 있습니다. 완결 시리즈는 물론 오리지널
+                        신작과 최신 히트작도 언제든지 시청하세요.</p>
+                </div>
+                <div>
+                    <img src="img/original_2.png" alt="original_2">
+                    <h3>최대 4대의 기기에서 동시 스트리밍</h3>
+                    <p>하나의 스트리밍 서비스로 모두가 각자 취향에 맞는 콘텐츠를 즐길 수 있습니다. 원하는 기기에서 원하는 방식으로 시청하세요. 최대 4대의 기기에서 동시 스트리밍하는 그 시간,
+                        모두가 행복해집니다.</p>
+                </div>
+                <div>
+                    <img src="img/original_3.svg" alt="original_3">
+                    <h3>다양한 콘텐츠 마음껏 저장 가능</h3>
+                    <p>최대 10대의 기기에서 원하는 콘텐츠를 자유롭게 저장하세요. 여러 작품들을 고화질 4K UHD 및 HDR로 시청할 수 있습니다. 강력한 시청 제한 기능으로 온 가족이 안전하게
+                        이용할 수 있으며, 서로 떨어져 있을 때에도 함께 스트리밍할 수 있습니다.</p>
+                </div>
+            </div>
+
+            <!-- ======== scrollDown ======== -->
+            <div class="scrollDown">
+                <p class="scroll">
+                    <img src="img/icon_mouse.png" alt="scroll down">
+                    <span>SCROLL DOWN</span>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ======== section2 ======== -->
+        <div class="section" id="section2">
+            <div class="swiper section2_mySwiper">
+                <h1><span>N</span> 시리즈 예고편</h1>
+
+                <!-- ======== swiper-wrapper ======== -->
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/_stX5qaJl_4" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">수리남 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/2JomSAO_TGo" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">20세기 소녀 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/rHnqJ8gEZZo" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">이브가 노래하는 아담: 라이브 인 애니메이션 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/n11UetlDalQ" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">SPYxFAMILY 스파이 패밀리 파트 2 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/igxszthKCv4" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">야차 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/LwvbEfiMKOk" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">버블 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/rYQlXG9xGZU" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">인터셉터 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/Ryb-euRN5lA" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">1899 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/CCFGfbA3omw" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">애덤 프로젝트 | 공식 예고편</a></p>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe src="https://www.youtube.com/embed/VJQVnpyfJwg" title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <p><a href="#void">바이오 하자드: 더 시리즈 | 공식 예고편</a></p>
+                    </div>
+                </div>
+
+                <!-- ======== preview prev, next ======== -->
+                <nav>
+                    <span class="preview-prev jc-left"><svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                        </svg></span>
+                    <span class="preview-next jc-right"><svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                        </svg></span>
+                </nav>
+
+                <!-- ======== preview-pagination ======== -->
+                <div class="preview-pagination"></div>
+            </div>
+
+            <!-- ======== scrollDown ======== -->
+            <div class="scrollDown">
+                <p class="scroll">
+                    <img src="img/icon_mouse.png" alt="scroll down">
+                    <span>SCROLL DOWN</span>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ======== section3 ======== -->
+        <div class="section" id="section3">
+
+            <!-- ======== mobile N 시리즈 ======== -->
+            <div class="section3_left1">
+                <h1><span>N</span> 시리즈 영화</h1>
+                <p>드넓은 세상, 그곳에 숨은 위대한 이야기.<br> 전 세계 모든 장르의 영화가 다 모였다.<br> 드라마, 코미디, 스릴러, 로맨스, 액션!<br> 무엇이든 다 찾아보세요. 없는 게
+                    없답니다.</p>
+                <p class="more"><a href="#void">자세히 보기</a></p>
+            </div>
+
+            <!-- ======== pc N 시리즈 ======== -->
+            <div class="section3_left2">
+                <h1><span>N</span> 시리즈 영화</h1>
+                <p>드넓은 세상, 그곳에 숨은 위대한 이야기.<br> 전 세계 모든 장르의 영화가 다 모였다.<br> 드라마, 코미디, 스릴러, 로맨스, 액션!<br> 무엇이든 다 찾아보세요. 없는 게
+                    없답니다.</p>
+                <p class="more"><a href="#void">자세히 보기</a></p>
+            </div>
+
+            <!-- ======== mySwiper ======== -->
+            <section class="hero-section mySwiper">
+
+                <h2 class="blind">카테고리</h2>
+
+                <!-- ======== card-grid ======== -->
+                <div class="card-grid swiper-wrapper">
+                    <a class="card swiper-slide" href="#void">
+                        <div class="card__background" style="background-image: url(img/main_work_img_1.jpg)"></div>
+                        <div class="card__content">
+                            <p class="card__category">Movie Title</p>
+                            <h3 class="card__heading">Spaceship Victory</h3>
+                        </div>
+                    </a>
+                    <a class="card swiper-slide" href="#void">
+                        <div class="card__background" style="background-image: url(img/main_work_img4.jpg)"></div>
+                        <div class="card__content">
+                            <p class="card__category">Movie Title</p>
+                            <h3 class="card__heading">Along with The Gods</h3>
+                        </div>
+                    </a>
+                    <a class="card swiper-slide" href="#void">
+                        <div class="card__background" style="background-image: url(img/main_work_img5.jpg)"></div>
+                        <div class="card__content">
+                            <p class="card__category">Movie Title</p>
+                            <h3 class="card__heading">Escape from Mogadishu</h3>
+                        </div>
+                    </a>
+                    <a class="card swiper-slide" href="#void">
+                        <div class="card__background" style="background-image: url(img/main_work_img2.jpg)"></div>
+                        <div class="card__content">
+                            <p class="card__category">Movie Title</p>
+                            <h3 class="card__heading">The AshFall</h3>
+                        </div>
+                    </a>
+                    <a class="card swiper-slide" href="#void">
+                        <div class="card__background" style="background-image: url(img/main_work_img3.jpg)"></div>
+                        <div class="card__content">
+                            <p class="card__category">Movie Title</p>
+                            <h3 class="card__heading">The Divine Fury</h3>
+                        </div>
+                    </a>
+                    <a class="card swiper-slide" href="#void">
+                        <div class="card__background" style="background-image: url(img/main_work_img.jpg)"></div>
+                        <div class="card__content">
+                            <p class="card__category">Movie Title</p>
+                            <h3 class="card__heading">The Parasite</h3>
+                        </div>
+                    </a>
+                </div>
+
+            </section>
+
+            <!-- ======== swiper prev, next ======== -->
+            <nav>
+                <span class="swiper-button-prev jc-left"><svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                    </svg></span>
+                <span class="swiper-button-next jc-right"><svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                    </svg></span>
+            </nav>
+
+            <!-- ======== swiper-pagination ======== -->
+            <div class="swiper-pagination"></div>
+
+            <!-- ======== scrollDown ======== -->
+            <div class="scrollDown">
+                <p class="scroll">
+                    <img src="img/icon_mouse.png" alt="scroll down">
+                    <span>SCROLL DOWN</span>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ======== section4 ======== -->
+        <div class="section" id="section4">
+
+            <!-- ======== slide1 ======== -->
+            <div class="slide" id="slide1">
+                <div class="inner">
+                    <a href="#void"><img src="img/witcher.jpg" alt="witcher"></a>
+                    <p class="slide_title"><a href="#void">위쳐</a></p>
+                    <ul class="introduce">
+                        <li>2019</li>
+                        <li><span>청불</span></li>
+                        <li>시즌 2개</li>
+                        <li>도서 원작 시리즈</li>
+                    </ul>
+                    <p class="slide_text">세계적인 판타지 대작이 넷플릭스 시리즈로 다시 태어난다.<br>
+                        어둠과 위험의 세계, 진실은 어디에 있을까. 운명으로 묶인 그들.<br>
+                        위쳐와 마법사, 홀로 남은 공주의 싸움이 시작된다.</p>
+                    <p class="slide_Main"><span>주연</span> : 헨리 카빌, 애니아 철로트라, 프레이아 앨런</p>
+                    <p class="slide_Main second"><span>크리에이터</span> : 로런 슈미트 히스릭</p>
+                </div>
+            </div>
+
+            <!-- ======== slide2 ======== -->
+            <div class="slide" id="slide2">
+                <div class="inner">
+                    <a href="#void"><img src="img/silent.jpg" alt="silent"></a>
+                    <p class="slide_title"><a href="#void">고요의 바다</a></p>
+                    <ul class="introduce">
+                        <li>2021</li>
+                        <li><span>15+</span></li>
+                        <li>시즌 1개</li>
+                        <li>SF 시리즈</li>
+                    </ul>
+                    <p class="slide_text">각계 전문가들이 한 팀이 되어 달 탐사선에 오른다.<br>
+                        임무는 폐쇄된 연구기지에서 24시간 안에 중요 샘플을 회수하는 것.<br>
+                        대원들은 비밀에 잠긴 이 위험천만한 기밀 미션을 완수할 수 있을까.</p>
+                    <p class="slide_Main"><span>주연</span> : 배두나, 공유, 이준</p>
+                    <p class="slide_Main second"><span>크리에이터</span> : 박은교, 최항용</p>
+                </div>
+            </div>
+
+            <!-- ======== slide3 ======== -->
+            <div class="slide" id="slide3">
+                <div class="inner">
+                    <a href="#void"><img src="img/squid.jpg" alt="squid"></a>
+                    <p class="slide_title"><a href="#void">오징어 게임</a></p>
+                    <ul class="introduce">
+                        <li>2021</li>
+                        <li><span>청불</span></li>
+                        <li>시즌 1개</li>
+                        <li>스릴러 시리즈</li>
+                    </ul>
+                    <p class="slide_text">빚에 쫓기는 수백 명의 사람들이 서바이벌 게임에 뛰어든다.<br>
+                        거액의 상금으로 새로운 삶을 시작하기 위해. 하지만 모두 승자가 될 순 없는 법.<br>
+                        탈락하는 이들은 치명적인 결과를 각오해야 한다.</p>
+                    <p class="slide_Main"><span>주연</span> : 이정재, 박해수, 위하준</p>
+                    <p class="slide_Main second"><span>크리에이터</span> : 황동혁</p>
+                </div>
+            </div>
+
+            <!-- ======== scrollDown ======== -->
+            <div class="scrollDown">
+                <p class="scroll">
+                    <img src="img/icon_mouse.png" alt="scroll down">
+                    <span>SCROLL DOWN</span>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ======== section5 ======== -->
+        <div class="section fp-auto-height-responsive" id="section5">
+
+            <div class="container">
+
+                <!-- ======== g-scrolling-carousel1 ======== -->
+                <div class="g-scrolling-carousel g-scrolling-carousel1">
+                    <h2><span>Netflix</span> 인기 콘텐츠</h2>
+                    <p class="explain">스크롤하시면 화면이 움직입니다.</p>
+                    <div class="items">
+                        <a href="#void">
+                            <img src="img/popular_01.jpg" alt="popular_01">
+                            <p>그래비티</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_02.jpg" alt="popular_02">
+                            <p>하울의 움직이는 성</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_03.jpg" alt="popular_03">
+                            <p>기묘한 이야기</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_04.jpg" alt="popular_04">
+                            <p>버진 리버</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_05.jpg" alt="popular_05">
+                            <p>딥워터 호라이즌</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_06.jpg" alt="popular_06">
+                            <p>극한직업</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_07.jpg" alt="popular_07">
+                            <p>바스타즈 거친 녀석들</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_08.jpg" alt="popular_08">
+                            <p>엣지 오브 투모로우</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_09.jpg" alt="popular_09">
+                            <p>헝거 게임 캣칭파이어</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_10.jpg" alt="popular_10">
+                            <p>날씨의 아이</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_11.jpg" alt="popular_11">
+                            <p>라이언 일병 구하기</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_12.jpg" alt="popular_12">
+                            <p>마루 밑 아리에티</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_13.jpg" alt="popular_13">
+                            <p>터미네이터2</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_14.jpg" alt="popular_14">
+                            <p>감시자들</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_15.jpg" alt="popular_15">
+                            <p>쿵푸팬더2</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_16.jpg" alt="popular_16">
+                            <p>벤자민 버튼의 시간은 거꾸로 간다</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/popular_17.jpg" alt="popular_17">
+                            <p>시카리오 암살자의 도시</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ======== g-scrolling-carousel2 ======== -->
+                <div class="g-scrolling-carousel g-scrolling-carousel2">
+                    <h2><span>영화</span> | Movies</h2>
+                    <p class="explain">스크롤하시면 화면이 움직입니다.</p>
+                    <div class="items">
+                        <a href="#void">
+                            <img src="img/movie_01.jpg" alt="movie_01">
+                            <p>승리호</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_02.jpg" alt="movie_02">
+                            <p>고스트 워</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_03.jpg" alt="movie_03">
+                            <p>너의 이름은</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_04.jpg" alt="movie_04">
+                            <p>DARK</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_05.jpg" alt="movie_05">
+                            <p>어바웃 타임</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_06.jpg" alt="movie_06">
+                            <p>인턴</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_07.jpg" alt="movie_07">
+                            <p>신세계</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_08.jpg" alt="movie_08">
+                            <p>국가부도의 날</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_09.jpg" alt="movie_09">
+                            <p>2012</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_10.jpg" alt="movie_10">
+                            <p>덩케르크</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_11.jpg" alt="movie_11">
+                            <p>구조견 루비</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_12.jpg" alt="movie_12">
+                            <p>암살</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_13.jpg" alt="movie_13">
+                            <p>미션 임파서블 : 로그네이션</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_14.jpg" alt="movie_14">
+                            <p>미션 임파서블 : 고스트 프로토콜</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_15.jpg" alt="movie_15">
+                            <p>애덤 프로젝트</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_16.jpg" alt="movie_16">
+                            <p>블랙 크랩</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/movie_17.jpg" alt="movie_17">
+                            <p>익스트랙션</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ======== g-scrolling-carousel3 ======== -->
+                <div class="g-scrolling-carousel g-scrolling-carousel3">
+                    <h2><span>드라마</span> | Drama</h2>
+                    <p class="explain">스크롤하시면 화면이 움직입니다.</p>
+                    <div class="items">
+                        <a href="#void">
+                            <img src="img/drama_01.jpg" alt="drama_01">
+                            <p>야차</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_02.jpg" alt="drama_02">
+                            <p>소년심판</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_03.jpg" alt="drama_03">
+                            <p>위쳐</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_04.jpg" alt="drama_04">
+                            <p>오징어 게임</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_05.jpg" alt="drama_05">
+                            <p>마이네임</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_06.jpg" alt="drama_06">
+                            <p>더 크라운</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_07.jpg" alt="drama_07">
+                            <p>인간 수업</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_08.jpg" alt="drama_08">
+                            <p>킹덤</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_09.jpg" alt="drama_09">
+                            <p>지정생존자</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_10.jpg" alt="drama_10">
+                            <p>지옥</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_11.jpg" alt="drama_11">
+                            <p>스위트홈</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_12.jpg" alt="drama_12">
+                            <p>THE RAIN</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_13.jpg" alt="drama_13">
+                            <p>브리저튼</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_14.jpg" alt="drama_14">
+                            <p>D.P.</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_15.jpg" alt="drama_15">
+                            <p>HOUSE OF CARD</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_16.jpg" alt="drama_16">
+                            <p>지금 우리 학교는</p>
+                        </a>
+                        <a href="#void">
+                            <img src="img/drama_17.jpg" alt="drama_17">
+                            <p>루머의 루머의 루머</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ======== scrollDown ======== -->
+            <div class="scrollDown">
+                <p class="scroll">
+                    <img src="img/icon_mouse.png" alt="scroll down">
+                    <span>SCROLL DOWN</span>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ======== section6 ======== -->
+        <div class="section" id="section6">
+            <h1 class="title"><span>Netflix</span> 뉴스룸</h1>
+            <div class="container">
+                <a href="#void">
+                    <div class="content">
+                        <span>NEWS 1</span>
+                        <p>세상이 뒤집히는 순간: 《기묘한 이야기》<br>
+                            시즌 4의 균열이 전 세계 랜드마크를 휩쓸다</p>
+                    </div>
+                </a>
+                <a href="#void">
+                    <div class="content">
+                        <span>NEWS 2</span>
+                        <p>넷플릭스가 선보이는<br>
+                            모바일 게임 5월 신작</p>
+                    </div>
+                </a>
+                <a href="#void">
+                    <div class="content">
+                        <span>NEWS 3</span>
+                        <p>Geeked Week 2022의<br>
+                            시청 방법과 일정을 공개합니다</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="section6_more">
+                <a href="#void">
+                    자세히 보기
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="bi bi-arrow-right"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- ======== scrollDown ======== -->
+            <div class="scrollDown">
+                <p class="scroll">
+                    <img src="img/icon_mouse.png" alt="scroll down">
+                    <span>SCROLL DOWN</span>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ======== footer ======== -->
+        <footer class="section fp-auto-height" id="section7">
+            <div class="innerBox">
+                <img src="img/Netflix_Logo.png" alt="Netflix_Logo">
+
+                <!-- ======== footTop ======== -->
+                <div class="footTop">
+                    <ul>
+                        <li><a href="#void">자주 묻는 질문</a></li>
+                        <li><a href="#void">투자 정보(IR)</a></li>
+                        <li><a href="#void">개인정보</a></li>
+                        <li><a href="#void">속도 테스트</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#void">고객 센터</a></li>
+                        <li><a href="#void">입사 정보</a></li>
+                        <li><a href="#void">쿠키 설정</a></li>
+                        <li><a href="#void">법적 고지</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#void">계정</a></li>
+                        <li><a href="#void">Netflix 지원 디바이스</a></li>
+                        <li><a href="#void">회사 정보</a></li>
+                        <li><a href="#void">오직 넷플릭스에서</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#void">미디어 센터</a></li>
+                        <li><a href="#void">이용 약관</a></li>
+                        <li><a href="#void">문의하기</a></li>
+                    </ul>
+                </div>
+
+                <!-- ======== footBottom ======== -->
+                <div class="footBottom">
+                    <ul class="footer_icon">
+                        <li><a href="#void"><i class="fa-brands fa-facebook"></i></a></li>
+                        <li><a href="#void"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="#void"><i class="fa-brands fa-youtube"></i></a></li>
+                        <li><a href="#void"><i class="fa-brands fa-twitter"></i></a></li>
+                    </ul>
+                    <ul class="footer_menu">
+                        <li><a href="#void">넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 080-001-9587</a></li>
+                        <li><a href="#void">대표: 레지널드 숀 톰프슨</a></li>
+                        <li><a href="#void">이메일 주소: korea@netflix.com</a></li>
+                        <li><a href="#void">주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161</a></li>
+                        <li><a href="#void">COPYRIGHT© NETFLIX. ALL RIGHTS RESERVED.</a></li>
+                    </ul>
+                    <ul class="footer_icon">
+                        <li><a href="#void"><i class="fa-brands fa-facebook"></i></a></li>
+                        <li><a href="#void"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="#void"><i class="fa-brands fa-youtube"></i></a></li>
+                        <li><a href="#void"><i class="fa-brands fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ======== script ======== -->
+    <script src="js/fullpage.js"></script>
+    <script src="js/examples.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/style.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="js/jquery.gScrollingCarousel.js"></script>
+    <script src="js/carrousel.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+</body>
+
+</html>
