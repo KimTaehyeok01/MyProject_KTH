@@ -1,0 +1,898 @@
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원정보 수정 — My Blog</title>
+    <style>
+      /* ── CSS 변수 ── */
+      :root {
+        --bg: #f0f2f5;
+        --surface: #ffffff;
+        --surface-alt: #f8f9fa;
+        --border: #e4e7ec;
+        --text-primary: #1a1d23;
+        --text-secondary: #5c6370;
+        --text-muted: #9399a6;
+        --accent: #4f6ef7;
+        --accent-hover: #3a57e0;
+        --accent-soft: #eef1fe;
+        --danger: #e84545;
+        --danger-hover: #c93030;
+        --danger-soft: #fdf0f0;
+        --success: #22c55e;
+        --success-soft: #f0fdf4;
+        --shadow-sm:
+          0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.09);
+        --radius: 12px;
+        --radius-sm: 8px;
+        --transition: 0.18s ease;
+      }
+      body.dark {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface-alt: #22263a;
+        --border: #2e3347;
+        --text-primary: #e8eaf0;
+        --text-secondary: #9399a6;
+        --text-muted: #5c6370;
+        --accent-soft: #1e2548;
+        --danger-soft: #2a1515;
+        --success-soft: #0d2a1a;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text-primary);
+        min-height: 100vh;
+        transition:
+          background var(--transition),
+          color var(--transition);
+      }
+
+      /* ── 네비 바 ── */
+      .nav-bar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .nav-logo {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: -0.3px;
+      }
+      .nav-logo span {
+        color: var(--text-primary);
+      }
+      .nav-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .nav-breadcrumb a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+      .nav-breadcrumb a:hover {
+        color: var(--accent);
+      }
+      .nav-breadcrumb .sep {
+        color: var(--border);
+      }
+      .nav-breadcrumb .current {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      /* 네비 우측 */
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-user-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 4px 12px 4px 8px;
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+      .nav-user-name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .btn-nav {
+        padding: 6px 14px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid transparent;
+        display: inline-flex;
+        align-items: center;
+        transition:
+          background var(--transition),
+          border-color var(--transition),
+          color var(--transition);
+      }
+      .btn-nav-logout {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border-color: var(--border);
+      }
+      .btn-nav-logout:hover {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border-color: var(--danger);
+      }
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface-alt);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--text-secondary);
+        transition:
+          background var(--transition),
+          border-color var(--transition);
+      }
+      .theme-toggle:hover {
+        background: var(--accent-soft);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* ── 메인 ── */
+      .wrap {
+        max-width: 540px;
+        margin: 44px auto;
+        padding: 0 16px 60px;
+      }
+
+      /* ── 페이지 헤더 ── */
+      .page-header {
+        margin-bottom: 24px;
+        text-align: center;
+      }
+      .page-header .icon {
+        font-size: 36px;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .page-header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.4px;
+        margin-bottom: 5px;
+      }
+      .page-header p {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      /* ── 알림 ── */
+      .alert {
+        padding: 12px 16px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .alert-error {
+        background: var(--danger-soft);
+        border: 1px solid rgba(232, 69, 69, 0.25);
+        color: var(--danger);
+      }
+      .alert-success {
+        background: var(--success-soft);
+        border: 1px solid rgba(34, 197, 94, 0.25);
+        color: var(--success);
+      }
+
+      /* ── 카드 ── */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+      }
+
+      /* 섹션 헤더 */
+      .section-head {
+        padding: 18px 28px;
+        background: var(--surface-alt);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .section-head .section-icon {
+        font-size: 20px;
+      }
+      .section-head h2 {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      .section-head p {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      /* 섹션 바디 */
+      .section-body {
+        padding: 24px 28px 28px;
+      }
+
+      /* 섹션 구분 */
+      .card-section + .card-section {
+        border-top: 1px solid var(--border);
+      }
+
+      /* ── 폼 요소 ── */
+      .form-group {
+        margin-bottom: 18px;
+      }
+      .form-group:last-of-type {
+        margin-bottom: 0;
+      }
+      .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 7px;
+        letter-spacing: 0.2px;
+      }
+      .form-label .required {
+        color: var(--danger);
+        margin-left: 2px;
+      }
+
+      .input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .input-icon {
+        position: absolute;
+        left: 13px;
+        font-size: 15px;
+        color: var(--text-muted);
+        pointer-events: none;
+        line-height: 1;
+      }
+      .form-input {
+        width: 100%;
+        padding: 11px 14px 11px 38px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        font-family: inherit;
+        color: var(--text-primary);
+        background: var(--surface);
+        outline: none;
+        transition:
+          border-color var(--transition),
+          box-shadow var(--transition),
+          background var(--transition);
+      }
+      .form-input::placeholder {
+        color: var(--text-muted);
+      }
+      .form-input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.15);
+      }
+      .form-input.error {
+        border-color: var(--danger);
+        box-shadow: 0 0 0 3px rgba(232, 69, 69, 0.12);
+      }
+      .form-input.success {
+        border-color: var(--success);
+      }
+      .form-input:disabled {
+        background: var(--surface-alt);
+        color: var(--text-muted);
+        cursor: not-allowed;
+        border-color: var(--border);
+      }
+
+      /* 비밀번호 눈 아이콘 */
+      .toggle-pw {
+        position: absolute;
+        right: 12px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        color: var(--text-muted);
+        padding: 2px;
+        line-height: 1;
+        transition: color var(--transition);
+      }
+      .toggle-pw:hover {
+        color: var(--text-primary);
+      }
+
+      /* 에러 메시지 */
+      .form-error {
+        font-size: 12px;
+        color: var(--danger);
+        margin-top: 5px;
+        display: none;
+      }
+      .form-error.visible {
+        display: block;
+      }
+
+      /* 비밀번호 강도 바 */
+      .pw-strength {
+        margin-top: 7px;
+        display: none;
+      }
+      .pw-strength.visible {
+        display: block;
+      }
+      .pw-strength-bar {
+        height: 4px;
+        border-radius: 4px;
+        background: var(--border);
+        overflow: hidden;
+        margin-bottom: 4px;
+      }
+      .pw-strength-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition:
+          width 0.3s ease,
+          background 0.3s ease;
+        width: 0%;
+      }
+      .pw-strength-label {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+
+      /* ── 버튼 ── */
+      .btn-row {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid transparent;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          background var(--transition),
+          border-color var(--transition),
+          color var(--transition),
+          box-shadow var(--transition);
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+        box-shadow: 0 2px 8px rgba(79, 110, 247, 0.25);
+      }
+      .btn-primary:hover {
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
+        box-shadow: 0 4px 14px rgba(79, 110, 247, 0.35);
+      }
+      .btn-ghost {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border-color: var(--border);
+      }
+      .btn-ghost:hover {
+        background: var(--surface-alt);
+        color: var(--text-primary);
+        border-color: var(--text-muted);
+      }
+      .btn-danger-outline {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border-color: rgba(232, 69, 69, 0.25);
+      }
+      .btn-danger-outline:hover {
+        background: var(--danger);
+        color: #fff;
+        border-color: var(--danger);
+      }
+
+      /* ── 반응형 ── */
+      @media (max-width: 600px) {
+        .wrap {
+          margin: 20px auto;
+          padding: 0 8px 40px;
+        }
+        .section-head {
+          padding: 14px 18px;
+        }
+        .section-body {
+          padding: 18px 18px 22px;
+        }
+        .nav-breadcrumb {
+          display: none;
+        }
+        .nav-bar {
+          padding: 0 12px;
+        }
+        .btn-row {
+          justify-content: stretch;
+        }
+        .btn {
+          flex: 1;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 네비게이션 바 -->
+    <nav class="nav-bar">
+      <div class="nav-left">
+        <a class="nav-logo" th:href="@{/mainBlogPage}"
+          >✦ <span>My Blog</span></a
+        >
+        <div class="nav-breadcrumb">
+          <span class="sep">›</span>
+          <a th:href="@{/mainBlogPage}">게시판</a>
+          <span class="sep">›</span>
+          <span class="current">회원정보 수정</span>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-user-chip" sec:authorize="isAuthenticated()">
+          <span>🙍</span>
+          <span class="nav-user-name" th:text="${#authentication.name}"
+            >사용자</span
+          >
+        </div>
+        <form
+          th:action="@{/logout}"
+          method="post"
+          style="margin: 0"
+          sec:authorize="isAuthenticated()"
+        >
+          <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"
+          />
+          <button type="submit" class="btn-nav btn-nav-logout">로그아웃</button>
+        </form>
+        <button class="theme-toggle" id="themeToggle" title="다크모드 전환">
+          🌙
+        </button>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <!-- 페이지 헤더 -->
+      <div class="page-header">
+        <span class="icon">⚙️</span>
+        <h1>회원정보 수정</h1>
+        <p>이름과 비밀번호를 변경할 수 있습니다.</p>
+      </div>
+
+      <!-- 서버 메시지 -->
+      <div
+        class="alert alert-error"
+        th:if="${errorMessage}"
+        th:text="${errorMessage}"
+      ></div>
+      <div
+        class="alert alert-success"
+        th:if="${successMessage}"
+        th:text="${successMessage}"
+      ></div>
+
+      <div class="card">
+        <!-- ─ 섹션 1: 이름 변경 ─ -->
+        <div class="card-section">
+          <div class="section-head">
+            <span class="section-icon">🙍</span>
+            <div>
+              <h2>이름 변경</h2>
+              <p>표시될 이름(닉네임)을 수정합니다.</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <form th:action="@{/user/update/name}" method="post" id="nameForm">
+              <input
+                type="hidden"
+                th:name="${_csrf.parameterName}"
+                th:value="${_csrf.token}"
+              />
+
+              <!-- 현재 아이디 (읽기 전용) -->
+              <div class="form-group">
+                <label class="form-label" for="currentId">아이디</label>
+                <div class="input-wrap">
+                  <span class="input-icon">👤</span>
+                  <input
+                    type="text"
+                    id="currentId"
+                    class="form-input"
+                    th:value="${#authentication.name}"
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <!-- 새 이름 -->
+              <div class="form-group">
+                <label class="form-label" for="userName">
+                  새 이름 <span class="required">*</span>
+                </label>
+                <div class="input-wrap">
+                  <span class="input-icon">✏️</span>
+                  <input
+                    type="text"
+                    id="userName"
+                    name="userName"
+                    class="form-input"
+                    th:value="${userInfo != null ? userInfo.userName : ''}"
+                    placeholder="변경할 이름을 입력하세요"
+                    maxlength="20"
+                    required
+                  />
+                </div>
+                <span class="form-error" id="userNameError"
+                  >이름을 입력해 주세요.</span
+                >
+              </div>
+
+              <div class="btn-row">
+                <button type="submit" class="btn btn-primary">
+                  💾 이름 저장
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ─ 섹션 2: 비밀번호 변경 ─ -->
+        <div class="card-section">
+          <div class="section-head">
+            <span class="section-icon">🔒</span>
+            <div>
+              <h2>비밀번호 변경</h2>
+              <p>현재 비밀번호 확인 후 새 비밀번호로 변경합니다.</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <form
+              th:action="@{/user/update/password}"
+              method="post"
+              id="pwForm"
+              novalidate
+            >
+              <input
+                type="hidden"
+                th:name="${_csrf.parameterName}"
+                th:value="${_csrf.token}"
+              />
+
+              <!-- 현재 비밀번호 -->
+              <div class="form-group">
+                <label class="form-label" for="currentPassword">
+                  현재 비밀번호 <span class="required">*</span>
+                </label>
+                <div class="input-wrap">
+                  <span class="input-icon">🔑</span>
+                  <input
+                    type="password"
+                    id="currentPassword"
+                    name="currentPassword"
+                    class="form-input"
+                    placeholder="현재 비밀번호를 입력하세요"
+                    autocomplete="current-password"
+                    maxlength="64"
+                    required
+                  />
+                  <button type="button" class="toggle-pw" id="toggleCurPw">
+                    👁️
+                  </button>
+                </div>
+                <span class="form-error" id="currentPasswordError"
+                  >현재 비밀번호를 입력해 주세요.</span
+                >
+              </div>
+
+              <!-- 새 비밀번호 -->
+              <div class="form-group">
+                <label class="form-label" for="userPassword">
+                  새 비밀번호 <span class="required">*</span>
+                </label>
+                <div class="input-wrap">
+                  <span class="input-icon">🔒</span>
+                  <input
+                    type="password"
+                    id="userPassword"
+                    name="userPassword"
+                    class="form-input"
+                    placeholder="8자 이상, 영문+숫자 조합"
+                    autocomplete="new-password"
+                    maxlength="64"
+                    required
+                  />
+                  <button type="button" class="toggle-pw" id="toggleNewPw">
+                    👁️
+                  </button>
+                </div>
+                <!-- 강도 바 -->
+                <div class="pw-strength" id="pwStrength">
+                  <div class="pw-strength-bar">
+                    <div class="pw-strength-fill" id="pwStrengthFill"></div>
+                  </div>
+                  <span class="pw-strength-label" id="pwStrengthLabel"
+                    >강도: -</span
+                  >
+                </div>
+                <span class="form-error" id="userPasswordError"
+                  >비밀번호는 8자 이상, 영문과 숫자를 포함해야 합니다.</span
+                >
+              </div>
+
+              <!-- 새 비밀번호 확인 -->
+              <div class="form-group">
+                <label class="form-label" for="userPasswordConfirm">
+                  새 비밀번호 확인 <span class="required">*</span>
+                </label>
+                <div class="input-wrap">
+                  <span class="input-icon">✅</span>
+                  <input
+                    type="password"
+                    id="userPasswordConfirm"
+                    name="userPasswordConfirm"
+                    class="form-input"
+                    placeholder="새 비밀번호를 다시 입력하세요"
+                    autocomplete="new-password"
+                    maxlength="64"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="toggle-pw"
+                    id="toggleNewPwConfirm"
+                  >
+                    👁️
+                  </button>
+                </div>
+                <span class="form-error" id="userPasswordConfirmError"
+                  >새 비밀번호가 일치하지 않습니다.</span
+                >
+              </div>
+
+              <div class="btn-row">
+                <a class="btn btn-ghost" th:href="@{/mainBlogPage}">✕ 취소</a>
+                <button type="submit" class="btn btn-primary">
+                  🔐 비밀번호 변경
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ─ 섹션 3: 회원 탈퇴 ─ -->
+        <div class="card-section">
+          <div class="section-head">
+            <span class="section-icon">⚠️</span>
+            <div>
+              <h2>회원 탈퇴</h2>
+              <p>탈퇴 시 모든 데이터가 삭제되며 복구할 수 없습니다.</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <form th:action="@{/user/delete}" method="post" id="deleteForm">
+              <div class="btn-row" style="margin-top: 0">
+                <button
+                  type="submit"
+                  class="btn btn-danger-outline"
+                  id="deleteBtn"
+                >
+                  🗑️ 회원 탈퇴
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- /card -->
+    </div>
+    <!-- /wrap -->
+
+    <script>
+      /* ── 다크모드 ── */
+      const toggleBtn = document.getElementById("themeToggle");
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+        toggleBtn.textContent = "☀️";
+      }
+      toggleBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark");
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+
+      /* ── 비밀번호 눈 토글 ── */
+      function makePwToggle(btnId, inputId) {
+        document.getElementById(btnId).addEventListener("click", () => {
+          const input = document.getElementById(inputId);
+          const isText = input.type === "text";
+          input.type = isText ? "password" : "text";
+          document.getElementById(btnId).textContent = isText ? "👁️" : "🙈";
+        });
+      }
+      makePwToggle("toggleCurPw", "currentPassword");
+      makePwToggle("toggleNewPw", "userPassword");
+      makePwToggle("toggleNewPwConfirm", "userPasswordConfirm");
+
+      /* ── 비밀번호 강도 ── */
+      const pwInput = document.getElementById("userPassword");
+      const pwStrengthWrap = document.getElementById("pwStrength");
+      const pwStrengthFill = document.getElementById("pwStrengthFill");
+      const pwStrengthLabel = document.getElementById("pwStrengthLabel");
+      pwInput.addEventListener("input", () => {
+        const val = pwInput.value;
+        if (!val) {
+          pwStrengthWrap.classList.remove("visible");
+          return;
+        }
+        pwStrengthWrap.classList.add("visible");
+        let score = 0;
+        if (val.length >= 8) score++;
+        if (val.length >= 12) score++;
+        if (/[A-Za-z]/.test(val)) score++;
+        if (/[0-9]/.test(val)) score++;
+        if (/[^A-Za-z0-9]/.test(val)) score++;
+        const levels = [
+          { label: "매우 약함", color: "#e84545", width: "20%" },
+          { label: "약함", color: "#f97316", width: "40%" },
+          { label: "보통", color: "#eab308", width: "60%" },
+          { label: "강함", color: "#22c55e", width: "80%" },
+          { label: "매우 강함", color: "#16a34a", width: "100%" },
+        ];
+        const level = levels[Math.min(score - 1, 4)] || levels[0];
+        pwStrengthFill.style.width = level.width;
+        pwStrengthFill.style.background = level.color;
+        pwStrengthLabel.textContent = "강도: " + level.label;
+      });
+
+      /* ── 에러 표시 헬퍼 ── */
+      function showErr(id, show) {
+        const el = document.getElementById(id);
+        if (el)
+          show ? el.classList.add("visible") : el.classList.remove("visible");
+      }
+      function setInputState(inp, state) {
+        inp.classList.remove("error", "success");
+        if (state) inp.classList.add(state);
+      }
+
+      /* ── 이름 폼 유효성 ── */
+      document.getElementById("nameForm").addEventListener("submit", (e) => {
+        const userName = document.getElementById("userName");
+        const ok = userName.value.trim().length > 0;
+        setInputState(userName, ok ? "success" : "error");
+        showErr("userNameError", !ok);
+        if (!ok) e.preventDefault();
+      });
+
+      /* ── 비밀번호 폼 유효성 ── */
+      document.getElementById("pwForm").addEventListener("submit", (e) => {
+        let valid = true;
+
+        const curPw = document.getElementById("currentPassword");
+        const curOk = curPw.value.length > 0;
+        setInputState(curPw, curOk ? "success" : "error");
+        showErr("currentPasswordError", !curOk);
+        if (!curOk) valid = false;
+
+        const newPw = document.getElementById("userPassword");
+        const newOk =
+          newPw.value.length >= 8 &&
+          /[A-Za-z]/.test(newPw.value) &&
+          /[0-9]/.test(newPw.value);
+        setInputState(newPw, newOk ? "success" : "error");
+        showErr("userPasswordError", !newOk);
+        if (!newOk) valid = false;
+
+        const confirmPw = document.getElementById("userPasswordConfirm");
+        const confirmOk =
+          confirmPw.value === newPw.value && confirmPw.value !== "";
+        setInputState(confirmPw, confirmOk ? "success" : "error");
+        showErr("userPasswordConfirmError", !confirmOk);
+        if (!confirmOk) valid = false;
+
+        if (!valid) e.preventDefault();
+      });
+
+      /* ── 회원 탈퇴 확인 ── */
+      document.getElementById("deleteBtn").addEventListener("click", (e) => {
+        if (
+          !confirm(
+            "정말 탈퇴하시겠습니까?\n탈퇴 후 모든 데이터는 복구할 수 없습니다.",
+          )
+        ) {
+          e.preventDefault();
+        }
+      });
+
+      /* ── 실시간 에러 제거 ── */
+      [
+        "userName",
+        "currentPassword",
+        "userPassword",
+        "userPasswordConfirm",
+      ].forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("input", function () {
+          this.classList.remove("error");
+          const err = document.getElementById(id + "Error");
+          if (err) err.classList.remove("visible");
+        });
+      });
+    </script>
+  </body>
+</html>

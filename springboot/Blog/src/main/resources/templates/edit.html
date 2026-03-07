@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시글 수정</title>
+    <style>
+      :root {
+        --bg: #f0f2f5;
+        --surface: #ffffff;
+        --surface-alt: #f8f9fa;
+        --border: #e4e7ec;
+        --text-primary: #1a1d23;
+        --text-secondary: #5c6370;
+        --text-muted: #9399a6;
+        --accent: #4f6ef7;
+        --accent-hover: #3a57e0;
+        --accent-soft: #eef1fe;
+        --danger: #e84545;
+        --danger-hover: #c93030;
+        --danger-soft: #fdf0f0;
+        --shadow-sm:
+          0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.09);
+        --radius: 12px;
+        --radius-sm: 8px;
+        --transition: 0.18s ease;
+      }
+      body.dark {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface-alt: #22263a;
+        --border: #2e3347;
+        --text-primary: #e8eaf0;
+        --text-secondary: #9399a6;
+        --text-muted: #5c6370;
+        --accent-soft: #1e2548;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Pretendard", sans-serif;
+        background: var(--bg);
+        color: var(--text-primary);
+        min-height: 100vh;
+        transition:
+          background var(--transition),
+          color var(--transition);
+      }
+      .nav-bar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .nav-logo {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .nav-logo span {
+        color: var(--text-primary);
+      }
+      .nav-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .nav-breadcrumb a {
+        color: var(--text-secondary);
+        text-decoration: none;
+      }
+      .nav-breadcrumb .sep {
+        color: var(--border);
+      }
+      .nav-breadcrumb .current {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface-alt);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-user-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-size: 13px;
+      }
+      .nav-user-name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .btn-nav-logout {
+        padding: 6px 14px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-secondary);
+      }
+      .wrap {
+        max-width: 760px;
+        margin: 40px auto;
+        padding: 0 16px 60px;
+      }
+      .page-header {
+        margin-bottom: 24px;
+      }
+      .page-header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        padding: 36px;
+      }
+      .form-group {
+        margin-bottom: 22px;
+      }
+      .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+      }
+      .required {
+        color: var(--danger);
+      }
+      .form-input,
+      .form-textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-size: 15px;
+        color: var(--text-primary);
+        background: var(--surface);
+        outline: none;
+        transition:
+          border-color var(--transition),
+          box-shadow var(--transition);
+      }
+      .form-input {
+        padding: 11px 14px;
+      }
+      .form-textarea {
+        padding: 12px 14px;
+        height: 320px;
+        resize: vertical;
+        line-height: 1.7;
+      }
+      .form-input:focus,
+      .form-textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.15);
+      }
+      .input-footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 5px;
+      }
+      .char-count {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 28px 0;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        border: 1px solid var(--accent);
+        padding: 10px 20px;
+        border-radius: var(--radius-sm);
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-ghost {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+        padding: 10px 20px;
+        border-radius: var(--radius-sm);
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <div class="nav-left">
+        <a class="nav-logo" th:href="@{/mainBlogPage}"
+          >✦ <span>My Blog</span></a
+        >
+        <div class="nav-breadcrumb">
+          <span class="sep">›</span>
+          <a th:href="@{/mainBlogPage}">게시판</a>
+          <span class="sep">›</span>
+          <span class="current" th:text="${blog.userTitle}">게시글</span>
+          <span class="sep">›</span>
+          <span class="current">수정</span>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-user-chip" th:if="${session.userId != null}">
+          <span>🙍</span>
+          <span class="nav-user-name" th:text="${session.userName}"
+            >사용자</span
+          >
+        </div>
+        <a
+          th:href="@{/logout}"
+          class="btn-nav-logout"
+          th:if="${session.userId != null}"
+          >로그아웃</a
+        >
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <div class="page-header">
+        <h1>✏️ 게시글 수정</h1>
+        <p>내용을 수정한 뒤 저장 버튼을 누르세요.</p>
+      </div>
+
+      <div class="card">
+        <form
+          th:action="@{/blog/{id}/edit(id=${blog.id})}"
+          method="post"
+          id="editForm"
+        >
+          <input type="hidden" name="id" th:value="${blog.id}" />
+          <div class="form-group">
+            <label class="form-label" for="title"
+              >제목 <span class="required">*</span></label
+            >
+            <input
+              type="text"
+              id="title"
+              name="userTitle"
+              class="form-input"
+              th:value="${blog.userTitle}"
+              maxlength="100"
+              required
+            />
+            <div class="input-footer">
+              <span class="char-count" id="titleCount">0 / 100</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="content"
+              >내용 <span class="required">*</span></label
+            >
+            <textarea
+              id="content"
+              name="userContent"
+              class="form-textarea"
+              maxlength="5000"
+              required
+              th:text="${blog.userContent}"
+            ></textarea>
+            <div class="input-footer">
+              <span class="char-count" id="contentCount">0 / 5000</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="actions">
+            <a class="btn btn-ghost" th:href="@{/mainBlogPage}">✕ 취소</a>
+            <button type="submit" class="btn btn-primary">💾 수정 저장</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById("themeToggle");
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+        toggleBtn.textContent = "☀️";
+      }
+      toggleBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark");
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+
+      function updateCount(inputId, countId, max) {
+        const input = document.getElementById(inputId);
+        const counter = document.getElementById(countId);
+        function update() {
+          const len = input.value.length;
+          counter.textContent = len + " / " + max;
+        }
+        input.addEventListener("input", update);
+        update();
+      }
+      updateCount("title", "titleCount", 100);
+      updateCount("content", "contentCount", 5000);
+    </script>
+  </body>
+</html>

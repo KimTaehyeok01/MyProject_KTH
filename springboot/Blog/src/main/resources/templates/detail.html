@@ -1,0 +1,505 @@
+<!doctype html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${blog.userTitle} + ' — My Blog'">게시글 상세</title>
+    <style>
+      /* ── CSS 변수 ── */
+      :root {
+        --bg: #f0f2f5;
+        --surface: #ffffff;
+        --surface-alt: #f8f9fa;
+        --border: #e4e7ec;
+        --text-primary: #1a1d23;
+        --text-secondary: #5c6370;
+        --text-muted: #9399a6;
+        --accent: #4f6ef7;
+        --accent-hover: #3a57e0;
+        --accent-soft: #eef1fe;
+        --danger: #e84545;
+        --danger-hover: #c93030;
+        --danger-soft: #fdf0f0;
+        --shadow-sm:
+          0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.09);
+        --radius: 12px;
+        --radius-sm: 8px;
+        --transition: 0.18s ease;
+      }
+      body.dark {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface-alt: #22263a;
+        --border: #2e3347;
+        --text-primary: #e8eaf0;
+        --text-secondary: #9399a6;
+        --text-muted: #5c6370;
+        --accent-soft: #1e2548;
+        --danger-soft: #2a1515;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text-primary);
+        min-height: 100vh;
+        transition:
+          background var(--transition),
+          color var(--transition);
+      }
+
+      /* ── 네비 바 ── */
+      .nav-bar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .nav-logo {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: -0.3px;
+      }
+      .nav-logo span {
+        color: var(--text-primary);
+      }
+      .nav-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .nav-breadcrumb a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+      .nav-breadcrumb a:hover {
+        color: var(--accent);
+      }
+      .nav-breadcrumb .sep {
+        color: var(--border);
+      }
+      .nav-breadcrumb .current {
+        color: var(--text-primary);
+        font-weight: 600;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface-alt);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--text-secondary);
+        transition:
+          background var(--transition),
+          border-color var(--transition);
+      }
+      .theme-toggle:hover {
+        background: var(--accent-soft);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* ── 네비 유저 영역 ── */
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-user-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 4px 12px 4px 8px;
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+      .nav-user-name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .btn-nav {
+        padding: 6px 14px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid transparent;
+        display: inline-flex;
+        align-items: center;
+        transition:
+          background var(--transition),
+          border-color var(--transition),
+          color var(--transition);
+      }
+      .btn-nav-login {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .btn-nav-login:hover {
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
+      }
+      .btn-nav-logout {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border-color: var(--border);
+      }
+      .btn-nav-logout:hover {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border-color: var(--danger);
+      }
+
+      /* ── 메인 ── */
+      .wrap {
+        max-width: 820px;
+        margin: 40px auto;
+        padding: 0 16px 60px;
+      }
+
+      /* ── 아티클 카드 ── */
+      .blog-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+      }
+
+      /* 제목 영역 */
+      .blog-head {
+        padding: 32px 36px 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .blog-badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border: 1px solid rgba(79, 110, 247, 0.2);
+        border-radius: 20px;
+        padding: 3px 10px;
+        margin-bottom: 14px;
+      }
+      .blog-title {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        line-height: 1.35;
+        margin-bottom: 18px;
+        color: var(--text-primary);
+      }
+      .blog-meta {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .meta-item .meta-icon {
+        font-size: 14px;
+      }
+      .meta-item strong {
+        color: var(--text-secondary);
+        font-weight: 600;
+      }
+      .meta-divider {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--border);
+      }
+
+      /* 본문 영역 */
+      .blog-body {
+        padding: 32px 36px;
+        min-height: 200px;
+      }
+      .blog-content {
+        font-size: 15px;
+        line-height: 1.85;
+        color: var(--text-primary);
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      /* ── 구분선 ── */
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 0 36px;
+      }
+
+      /* 하단 액션 영역 */
+      .blog-foot {
+        padding: 20px 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        background: var(--surface-alt);
+      }
+
+      /* ── 버튼 ── */
+      .btn {
+        padding: 9px 18px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid transparent;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          background var(--transition),
+          border-color var(--transition),
+          color var(--transition),
+          box-shadow var(--transition);
+      }
+      .btn-ghost {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border-color: var(--border);
+      }
+      .btn-ghost:hover {
+        background: var(--bg);
+        color: var(--text-primary);
+        border-color: var(--text-muted);
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+        box-shadow: 0 2px 8px rgba(79, 110, 247, 0.25);
+      }
+      .btn-primary:hover {
+        background: var(--accent-hover);
+        box-shadow: 0 4px 14px rgba(79, 110, 247, 0.35);
+      }
+
+      .btn-danger {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border-color: rgba(232, 69, 69, 0.2);
+      }
+      .btn-danger:hover {
+        background: var(--danger);
+        color: #fff;
+        border-color: var(--danger);
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* ── 반응형 ── */
+      @media (max-width: 620px) {
+        .wrap {
+          margin: 16px auto;
+          padding: 0 8px 40px;
+        }
+        .blog-head {
+          padding: 24px 20px 18px;
+        }
+        .blog-body {
+          padding: 24px 20px;
+        }
+        .divider {
+          margin: 0 20px;
+        }
+        .blog-foot {
+          padding: 16px 20px;
+        }
+        .blog-title {
+          font-size: 20px;
+        }
+        .nav-breadcrumb {
+          display: none;
+        }
+        .nav-bar {
+          padding: 0 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 네비게이션 바 -->
+    <nav class="nav-bar">
+      <div class="nav-left">
+        <a class="nav-logo" th:href="@{/mainBlogPage}"
+          >✦ <span>My Blog</span></a
+        >
+        <div class="nav-breadcrumb">
+          <span class="sep">›</span>
+          <a th:href="@{/mainBlogPage}">게시판</a>
+          <span class="sep">›</span>
+          <span class="current" th:text="${blog.userTitle}">게시글 제목</span>
+        </div>
+      </div>
+      <div class="nav-right">
+        <!-- 로그인 상태 -->
+        <div class="nav-user-chip" sec:authorize="isAuthenticated()">
+          <span>🙍</span>
+          <span class="nav-user-name" th:text="${#authentication.name}"
+            >사용자</span
+          >
+        </div>
+        <form
+          th:action="@{/logout}"
+          method="post"
+          style="margin: 0"
+          sec:authorize="isAuthenticated()"
+        >
+          <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"
+          />
+          <button type="submit" class="btn-nav btn-nav-logout">로그아웃</button>
+        </form>
+        <!-- 비로그인 상태 -->
+        <a
+          class="btn-nav btn-nav-login"
+          th:href="@{/login}"
+          sec:authorize="isAnonymous()"
+          >로그인</a
+        >
+        <button class="theme-toggle" id="themeToggle" title="다크모드 전환">
+          🌙
+        </button>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <div class="blog-card">
+        <!-- 헤더: 제목 + 메타 정보 -->
+        <div class="blog-head">
+          <span class="blog-badge"
+            >게시글 #<span th:text="${blog.id}">1</span></span
+          >
+          <h1 class="blog-title" th:text="${blog.userTitle}">제목</h1>
+          <div class="blog-meta">
+            <div class="meta-item">
+              <span class="meta-icon">🙍</span>
+              <strong th:text="${blog.userName}">작성자</strong>
+            </div>
+            <div class="meta-divider"></div>
+            <div class="meta-item">
+              <span class="meta-icon">📅</span>
+              <span
+                th:text="${#temporals.format(blog.createdAt, 'yyyy년 MM월 dd일')} ?: '-'"
+                >작성일</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- 본문 -->
+        <div class="blog-body">
+          <p class="blog-content" th:text="${blog.userContent}">내용</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 하단 버튼 -->
+        <div class="blog-foot">
+          <a class="btn btn-ghost" th:href="@{/mainBlogPage}"> ← 목록으로 </a>
+          <div class="btn-group">
+            <a
+              class="btn btn-primary"
+              th:href="@{/blog/{id}/edit(id=${blog.id})}"
+            >
+              ✏️ 수정
+            </a>
+            <a
+              class="btn btn-danger"
+              th:href="@{/blog/{id}/delete(id=${blog.id})}"
+              id="deleteBtn"
+            >
+              🗑️ 삭제
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ── 다크모드 ── */
+      const toggleBtn = document.getElementById("themeToggle");
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+        toggleBtn.textContent = "☀️";
+      }
+      toggleBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark");
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+
+      /* ── 삭제 확인 ── */
+      document.getElementById("deleteBtn").addEventListener("click", (e) => {
+        if (!confirm("정말 이 게시글을 삭제하시겠습니까?")) e.preventDefault();
+      });
+    </script>
+  </body>
+</html>

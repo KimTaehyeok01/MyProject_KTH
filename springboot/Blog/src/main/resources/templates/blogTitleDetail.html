@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${blog.userTitle} + ' — My Blog'">블로그 상세</title>
+    <style>
+      :root {
+        --bg: #f7f8fa;
+        --surface: #ffffff;
+        --surface-alt: #f3f4f6;
+        --border: #e5e7eb;
+        --text-primary: #111827;
+        --text-secondary: #6b7280;
+        --text-muted: #9ca3af;
+        --accent: #4f6ef7;
+        --accent-hover: #3a57e0;
+        --accent-soft: #eef1fe;
+        --danger: #ef4444;
+        --danger-soft: #fef2f2;
+        --radius: 14px;
+        --radius-sm: 8px;
+        --transition: 0.15s ease;
+      }
+      body.dark {
+        --bg: #0d0f14;
+        --surface: #171923;
+        --surface-alt: #1e2130;
+        --border: #2d3148;
+        --text-primary: #f1f3f9;
+        --text-secondary: #9ca3af;
+        --text-muted: #4b5563;
+        --accent-soft: #1a2040;
+        --danger-soft: #1f1010;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Pretendard", "Noto Sans KR", sans-serif;
+        background: var(--bg);
+        color: var(--text-primary);
+        min-height: 100vh;
+        transition:
+          background var(--transition),
+          color var(--transition);
+      }
+
+      /* ── 네비 ── */
+      .nav-bar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        height: 54px;
+        padding: 0 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .nav-logo {
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: -0.5px;
+      }
+      .nav-logo span {
+        color: var(--text-primary);
+      }
+      .nav-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .nav-breadcrumb a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+      .nav-breadcrumb a:hover {
+        color: var(--accent);
+      }
+      .nav-breadcrumb .current {
+        color: var(--text-primary);
+        font-weight: 600;
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-user-chip {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+      .nav-user-name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .btn-nav-logout {
+        padding: 5px 14px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-secondary);
+        transition:
+          background var(--transition),
+          color var(--transition);
+      }
+      .btn-nav-logout:hover {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border-color: var(--danger);
+      }
+      .theme-toggle {
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        transition: background var(--transition);
+      }
+      .theme-toggle:hover {
+        background: var(--surface-alt);
+      }
+
+      /* ── 본문 레이아웃 ── */
+      .wrap {
+        max-width: 760px;
+        margin: 48px auto;
+        padding: 0 16px 80px;
+      }
+
+      /* ── 블로그 카드 ── */
+      .blog-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+
+      /* 헤더 영역 */
+      .blog-head {
+        padding: 40px 44px 32px;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(
+          135deg,
+          var(--accent-soft) 0%,
+          var(--surface) 60%
+        );
+      }
+      .blog-num {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--accent);
+        background: rgba(79, 110, 247, 0.1);
+        border: 1px solid rgba(79, 110, 247, 0.2);
+        border-radius: 20px;
+        padding: 3px 12px;
+        margin-bottom: 16px;
+      }
+      .blog-title {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.6px;
+        line-height: 1.3;
+        margin-bottom: 20px;
+        color: var(--text-primary);
+      }
+      .blog-meta {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+      .meta-item strong {
+        color: var(--text-secondary);
+        font-weight: 600;
+      }
+      .meta-dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--border);
+      }
+
+      /* 본문 영역 */
+      .blog-body {
+        padding: 40px 44px;
+        min-height: 220px;
+      }
+      .blog-content {
+        font-size: 16px;
+        line-height: 1.9;
+        color: var(--text-primary);
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      /* 하단 버튼 */
+      .blog-foot {
+        padding: 20px 44px;
+        border-top: 1px solid var(--border);
+        background: var(--surface-alt);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .btn-group {
+        display: flex;
+        gap: 8px;
+      }
+
+      /* ── 버튼 ── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 18px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        font-family: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition:
+          background var(--transition),
+          color var(--transition),
+          box-shadow var(--transition);
+      }
+      .btn-ghost {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border-color: var(--border);
+      }
+      .btn-ghost:hover {
+        background: var(--bg);
+        color: var(--text-primary);
+      }
+      .btn-edit {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-color: rgba(79, 110, 247, 0.2);
+      }
+      .btn-edit:hover {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(79, 110, 247, 0.3);
+      }
+      .btn-delete {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border-color: rgba(239, 68, 68, 0.2);
+      }
+      .btn-delete:hover {
+        background: var(--danger);
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
+      }
+
+      /* ── 반응형 ── */
+      @media (max-width: 600px) {
+        .wrap {
+          margin: 20px auto;
+          padding: 0 8px 60px;
+        }
+        .blog-head {
+          padding: 28px 20px 22px;
+        }
+        .blog-title {
+          font-size: 22px;
+        }
+        .blog-body {
+          padding: 28px 20px;
+        }
+        .blog-foot {
+          padding: 16px 20px;
+        }
+        .nav-breadcrumb {
+          display: none;
+        }
+        .nav-bar {
+          padding: 0 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 네비게이션 바 -->
+    <nav class="nav-bar">
+      <div class="nav-left">
+        <a class="nav-logo" th:href="@{/mainBlogPage}"
+          >✦ <span>My Blog</span></a
+        >
+        <div class="nav-breadcrumb">
+          <span>›</span>
+          <a th:href="@{/mainBlogPage}">게시판</a>
+          <span>›</span>
+          <span class="current" th:text="${blog.userTitle}">게시글 제목</span>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-user-chip" th:if="${session.userId != null}">
+          <span>🙍</span>
+          <span class="nav-user-name" th:text="${session.userName}"
+            >사용자</span
+          >
+        </div>
+        <a
+          class="btn-nav-logout"
+          th:href="@{/logout}"
+          th:if="${session.userId != null}"
+          >로그아웃</a
+        >
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </div>
+    </nav>
+
+    <!-- 본문 -->
+    <div class="wrap">
+      <div class="blog-card">
+        <!-- 헤더: 번호 + 제목 + 메타 -->
+        <div class="blog-head">
+          <span class="blog-num"
+            >글 번호 #<span th:text="${blog.id}">1</span></span
+          >
+          <h1 class="blog-title" th:text="${blog.userTitle}">제목</h1>
+          <div class="blog-meta">
+            <div class="meta-item">
+              <span>🙍</span>
+              <strong th:text="${session.userName}">작성자</strong>
+            </div>
+            <div class="meta-dot"></div>
+            <div class="meta-item">
+              <span>📅</span>
+              <span th:text="${blog.dateOfWrite}">작성일</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 본문 -->
+        <div class="blog-body">
+          <p class="blog-content" th:text="${blog.userContent}">내용</p>
+        </div>
+
+        <!-- 하단 버튼 -->
+        <div class="blog-foot">
+          <a class="btn btn-ghost" th:href="@{/mainBlogPage}">← 목록으로</a>
+          <div class="btn-group">
+            <a class="btn btn-edit" th:href="@{/blog/{id}/edit(id=${blog.id})}"
+              >✏ 수정</a
+            >
+            <a
+              class="btn btn-delete"
+              th:href="@{/blog/{id}/delete(id=${blog.id})}"
+              onclick="return confirm('정말 삭제하시겠습니까?');"
+              >🗑 삭제</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById("themeToggle");
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+        toggleBtn.textContent = "☀️";
+      }
+      toggleBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark");
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+    </script>
+  </body>
+</html>

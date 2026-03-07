@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>블로그 게시판</title>
+    <style>
+      /* ── CSS 변수 (라이트 모드 기본) ── */
+      :root {
+        --bg: #f0f2f5;
+        --surface: #ffffff;
+        --surface-alt: #f8f9fa;
+        --border: #e4e7ec;
+        --text-primary: #1a1d23;
+        --text-secondary: #5c6370;
+        --text-muted: #9399a6;
+        --accent: #4f6ef7;
+        --accent-hover: #3a57e0;
+        --accent-soft: #eef1fe;
+        --danger: #e84545;
+        --danger-hover: #c93030;
+        --danger-soft: #fdf0f0;
+        --success: #22c55e;
+        --shadow-sm:
+          0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+        --radius: 10px;
+        --radius-sm: 6px;
+        --transition: 0.18s ease;
+      }
+
+      /* ── 다크 모드 ── */
+      body.dark {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface-alt: #22263a;
+        --border: #2e3347;
+        --text-primary: #e8eaf0;
+        --text-secondary: #9399a6;
+        --text-muted: #5c6370;
+        --accent-soft: #1e2548;
+        --danger-soft: #2a1515;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text-primary);
+        min-height: 100vh;
+        transition:
+          background var(--transition),
+          color var(--transition);
+      }
+
+      /* ── 네비 바 ── */
+      .nav-bar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-logo {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .nav-logo span {
+        color: var(--text-primary);
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface-alt);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+
+      .nav-user {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+      }
+      .nav-user-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 4px 12px;
+      }
+      .nav-user-name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .btn-nav-logout {
+        padding: 6px 14px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-secondary);
+      }
+
+      .wrap {
+        max-width: 1000px;
+        margin: 36px auto;
+        padding: 0 16px 60px;
+      }
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 24px;
+      }
+      .blog-count {
+        font-size: 13px;
+        color: var(--text-secondary);
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 4px 12px;
+      }
+      .blog-count strong {
+        color: var(--accent);
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        gap: 12px;
+      }
+      .search-form {
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+      }
+      .search-form input {
+        border: none;
+        outline: none;
+        padding: 9px 12px;
+        width: 260px;
+        background: transparent;
+        color: var(--text-primary);
+      }
+      .search-submit {
+        padding: 9px 16px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .btn-primary {
+        padding: 8px 14px;
+        border-radius: var(--radius-sm);
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .table-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        padding: 12px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        background: var(--surface-alt);
+        text-align: center;
+      }
+      td {
+        padding: 13px 16px;
+        font-size: 14px;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+      }
+
+      /* 제목 왼쪽 정렬 로직 추가 */
+      .td-title {
+        text-align: center !important;
+      }
+      .td-title a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .btn-edit,
+      .btn-delete {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        padding: 4px 10px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+          background var(--transition),
+          color var(--transition),
+          box-shadow var(--transition);
+      }
+      .btn-edit {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border: 1px solid transparent;
+      }
+      .btn-edit:hover {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(79, 110, 247, 0.25);
+      }
+      .btn-delete {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border: 1px solid transparent;
+      }
+      .btn-delete:hover {
+        background: var(--danger);
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(232, 69, 69, 0.25);
+      }
+
+      .pagination-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 28px;
+      }
+      .pagination {
+        display: flex;
+        list-style: none;
+        gap: 4px;
+      }
+      .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        text-decoration: none;
+        color: var(--text-secondary);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+      }
+      .page-item.active .page-link {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <a class="nav-logo" th:href="@{/mainBlogPage}">✦ <span>My Blog</span></a>
+      <div class="nav-actions">
+        <div class="nav-user" th:if="${session.userId != null}">
+          <div class="nav-user-chip">
+            <span>🙍</span>
+            <span class="nav-user-name" th:text="${session.userName}"
+              >사용자</span
+            >
+          </div>
+          <a th:href="@{/logout}" class="btn-nav-logout">로그아웃</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1>블로그 게시판</h1>
+          <p class="subtitle">모든 게시글을 확인하고 관리하세요.</p>
+        </div>
+        <span class="blog-count" th:if="${paging != null}">
+          전체 <strong th:text="${paging.totalElements}">0</strong>개
+        </span>
+      </div>
+
+      <div class="toolbar">
+        <form class="search-form" action="#" method="get">
+          <input
+            type="text"
+            name="keyword"
+            placeholder="제목으로 검색..."
+            autocomplete="off"
+          />
+          <button type="submit" class="search-submit">검색</button>
+        </form>
+        <a class="btn-primary" th:href="@{/blog/new}"> ✏️ 글 작성 </a>
+      </div>
+
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 8%"># ID</th>
+              <th style="width: 45%">제목</th>
+              <th style="width: 15%">작성자</th>
+              <th style="width: 15%">작성일</th>
+              <th style="width: 17%">관리</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="a : ${paging.content}">
+              <td th:text="${a.id}"></td>
+              <td class="td-title">
+                <a
+                  th:href="@{/blog/{id}(id=${a.id})}"
+                  th:text="${a.userTitle}"
+                ></a>
+              </td>
+              <td th:text="${session.userName}"></td>
+              <td th:text="${a.dateOfWrite}"></td>
+              <td>
+                <a class="btn-edit" th:href="@{/blog/{id}/edit(id=${a.id})}"
+                  >✏ 수정</a
+                >
+                <a
+                  class="btn-delete"
+                  th:href="@{/blog/{id}/delete(id=${a.id})}"
+                  onclick="return confirm('정말 삭제하시겠습니까?');"
+                  >🗑 삭제</a
+                >
+              </td>
+            </tr>
+            <tr th:if="${paging.isEmpty()}">
+              <td colspan="5" style="padding: 60px; color: var(--text-muted)">
+                게시글이 없습니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        class="pagination-wrap"
+        th:if="${paging != null and !paging.isEmpty()}"
+      >
+        <ul class="pagination">
+          <li
+            class="page-item"
+            th:classappend="${!paging.hasPrevious} ? 'disabled'"
+          >
+            <a
+              class="page-link"
+              th:href="@{/mainBlogPage(page=${paging.number - 1})}"
+              >‹</a
+            >
+          </li>
+          <li
+            th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"
+            th:if="${page >= paging.number - 2 and page <= paging.number + 2}"
+            th:classappend="${page == paging.number} ? 'active'"
+            class="page-item"
+          >
+            <a
+              th:text="${page + 1}"
+              class="page-link"
+              th:href="@{/mainBlogPage(page=${page})}"
+            ></a>
+          </li>
+          <li
+            class="page-item"
+            th:classappend="${!paging.hasNext} ? 'disabled'"
+          >
+            <a
+              class="page-link"
+              th:href="@{/mainBlogPage(page=${paging.number + 1})}"
+              >›</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById("themeToggle");
+      const body = document.body;
+      if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark");
+        toggleBtn.textContent = "☀️";
+      }
+      toggleBtn.addEventListener("click", () => {
+        const isDark = body.classList.toggle("dark");
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+    </script>
+  </body>
+</html>
