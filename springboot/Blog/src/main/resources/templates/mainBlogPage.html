@@ -331,12 +331,13 @@
       </div>
 
       <div class="toolbar">
-        <form class="search-form" action="#" method="get">
+        <form class="search-form" th:action="@{/mainBlogPage/search}" method="get">
           <input
-            type="text"
-            name="keyword"
-            placeholder="제목으로 검색..."
-            autocomplete="off"
+                  type="text"
+                  name="keyword"
+                  th:value="${keyword}"
+                  placeholder="제목으로 검색..."
+                  autocomplete="off"
           />
           <button type="submit" class="search-submit">검색</button>
         </form>
@@ -355,26 +356,41 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="a : ${paging.content}">
+          <!-- 검색 결과 -->
+          <th:block th:if="${searchList != null}">
+            <tr th:each="a : ${searchList}">
               <td th:text="${a.id}"></td>
               <td class="td-title">
-                <a
-                  th:href="@{/blog/{id}(id=${a.id})}"
-                  th:text="${a.userTitle}"
-                ></a>
+                <a th:href="@{/blog/{id}(id=${a.id})}" th:text="${a.userTitle}"></a>
               </td>
               <td th:text="${session.userName}"></td>
               <td th:text="${a.dateOfWrite}"></td>
               <td>
-                <a class="btn-edit" th:href="@{/blog/{id}/edit(id=${a.id})}"
-                  >✏ 수정</a
-                >
-                <a
-                  class="btn-delete"
-                  th:href="@{/blog/{id}/delete(id=${a.id})}"
-                  onclick="return confirm('정말 삭제하시겠습니까?');"
-                  >🗑 삭제</a
-                >
+                <a class="btn-edit" th:href="@{/blog/{id}/edit(id=${a.id})}">✏ 수정</a>
+                <a class="btn-delete" th:href="@{/blog/{id}/delete(id=${a.id})}"
+                   onclick="return confirm('정말 삭제하시겠습니까?');">🗑 삭제</a>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(searchList)}">
+              <td colspan="5" style="padding: 60px; color: var(--text-muted)">
+                검색 결과가 없습니다.
+              </td>
+            </tr>
+          </th:block>
+
+          <!-- 기본 목록 (검색 아닐 때) -->
+          <th:block th:if="${searchList == null}">
+            <tr th:each="a : ${paging.content}">
+              <td th:text="${a.id}"></td>
+              <td class="td-title">
+                <a th:href="@{/blog/{id}(id=${a.id})}" th:text="${a.userTitle}"></a>
+              </td>
+              <td th:text="${session.userName}"></td>
+              <td th:text="${a.dateOfWrite}"></td>
+              <td>
+                <a class="btn-edit" th:href="@{/blog/{id}/edit(id=${a.id})}">✏ 수정</a>
+                <a class="btn-delete" th:href="@{/blog/{id}/delete(id=${a.id})}"
+                   onclick="return confirm('정말 삭제하시겠습니까?');">🗑 삭제</a>
               </td>
             </tr>
             <tr th:if="${paging.isEmpty()}">
@@ -382,6 +398,7 @@
                 게시글이 없습니다.
               </td>
             </tr>
+          </th:block>
           </tbody>
         </table>
       </div>

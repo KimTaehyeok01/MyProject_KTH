@@ -96,4 +96,11 @@ public class BlogService {
         Page<BlogEntity> entities = repository.findAll(pageable);
         return entities.map(entity -> new BlogResponseDto(entity));
     }
+
+    // 검색
+    @Transactional(readOnly = true)
+    public List<BlogResponseDto> findByTitle(String userTitle){
+        List<BlogEntity> list = repository.findByUserTitleContaining(userTitle);
+        return list.stream().map(BlogResponseDto :: new).collect(Collectors.toList());
+    }
 }

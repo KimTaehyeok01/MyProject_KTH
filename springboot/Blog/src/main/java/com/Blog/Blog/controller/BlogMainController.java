@@ -4,11 +4,15 @@ import com.Blog.Blog.dto.BlogRequestDto;
 import com.Blog.Blog.dto.BlogResponseDto;
 import com.Blog.Blog.entity.AddUserRequest;
 import com.Blog.Blog.service.BlogService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,9 +55,6 @@ public class BlogMainController {
         return "redirect:/";
     }
 
-    // 로그인
-    // 로그인 폼 제출은 Spring Security가 자동 처리 (/login POST)
-    // 로그인 성공 시 CustomAuthenticationSuccessHandler에서 세션 설정
 
     // 메인 페이지
     @GetMapping("/mainBlogPage")
@@ -70,6 +71,29 @@ public class BlogMainController {
     public String blogTitleDetail(@PathVariable Long id, Model model){
         model.addAttribute("blog", service.findById(id));
         return "blogTitleDetail";
+    }
+
+    // 검색 
+    @GetMapping("/mainBlogPage/search")
+    public String mainBlogPage(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            Model model) {
+
+        int safePage = Math.max(page, 0);
+
+        if (keyword != null && !keyword.isBlank()) {
+            // 검색
+            List<BlogResponseDto> searchList = service.findByTitle(keyword);
+            model.addAttribute("searchList", searchList);
+            model.addAttribute("keyword", keyword);
+        } else {
+            // 기본 페이징
+            Page<BlogResponseDto> paging = service.getList(safePage);
+            model.addAttribute("paging", paging);
+        }
+
+        return "mainBlogPage";
     }
 
     // 글작성 페이지로 이동
