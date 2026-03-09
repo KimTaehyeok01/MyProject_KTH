@@ -45,7 +45,9 @@ public class MemoService {
     // 삭제
     @Transactional
     public void delete(Long id) {
-        repository.deleteById(id);
+        MemoEntity entity = repository.findById(id).orElseThrow(()-> 
+                        new IllegalArgumentException("삭제 실패"));
+        repository.delete(entity);
     }
 
     // 전체 삭제
