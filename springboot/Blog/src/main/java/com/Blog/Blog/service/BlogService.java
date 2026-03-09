@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor // Autowired 대신 생성자 주입 방식 (권장)
+@RequiredArgsConstructor
 public class BlogService {
 
     private final BlogRepository repository;
