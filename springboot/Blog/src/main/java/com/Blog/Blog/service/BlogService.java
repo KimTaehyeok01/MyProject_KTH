@@ -39,10 +39,7 @@ public class BlogService {
         return new BlogResponseDto(entity);
     }
 
-    /**
-     * 로그인 확인용 (수정됨)
-     * 암호화된 비밀번호는 equals로 비교할 수 없습니다.
-     */
+    // 로그인 체크
     @Transactional(readOnly = true)
     public BlogUserInfo loginCheck(final String userId, final String userPassword) {
         BlogUserInfo user = blogUserInfoRepository.findByUserId(userId)
@@ -60,12 +57,11 @@ public class BlogService {
         repository.save(dto.toSaveEntity());
     }
 
-    // 회원가입 (비밀번호 암호화 포함)
+    // 회원가입 
     @Transactional
     public void save(AddUserRequest dto) {
         BlogUserInfo userInfo = BlogUserInfo.builder()
                 .userId(dto.getUserId())
-                // 회원가입 시점에 암호화 처리
                 .userPassword(passwordEncoder.encode(dto.getUserPassword()))
                 .userName(dto.getUserName())
                 .userEmail(dto.getUserEmail())

@@ -5,6 +5,5 @@ import java.util.Optional;
 
 public interface BlogUserInfoRepository extends JpaRepository<BlogUserInfo, Long> {
 
-    // 로그인할 때 아이디로 회원을 찾는 기능이 꼭 필요합니다!
     Optional<BlogUserInfo> findByUserId(String userId);
 }

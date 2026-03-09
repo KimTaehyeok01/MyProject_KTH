@@ -21,7 +21,6 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        // Spring Security 인증이 성공하면 userId로 DB에서 유저 정보를 가져와 세션에 저장
         String userId = authentication.getName();
 
         blogUserInfoRepository.findByUserId(userId).ifPresent(user -> {

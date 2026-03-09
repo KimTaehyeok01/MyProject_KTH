@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "blog") // catalog 제거하고 이름만 명시
+@Table(name = "blog")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
