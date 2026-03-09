@@ -40,7 +40,7 @@ public class BlogMainController {
             return "<script>alert('비밀번호를 입력해주세요.'); history.back();</script>";
         }
         try {
-            service.save(request);
+            service.signUp(request);
             return "<script>alert('회원가입이 완료되었습니다! 로그인 해주세요.'); location.href='/';</script>";
         } catch (Exception e) {
             return "<script>alert('가입 실패: " + e.getMessage() + "'); history.back();</script>";

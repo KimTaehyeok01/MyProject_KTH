@@ -59,7 +59,7 @@ public class BlogService {
 
     // 회원가입 
     @Transactional
-    public void save(AddUserRequest dto) {
+    public void signUp(AddUserRequest dto) {
         BlogUserInfo userInfo = BlogUserInfo.builder()
                 .userId(dto.getUserId())
                 .userPassword(passwordEncoder.encode(dto.getUserPassword()))
