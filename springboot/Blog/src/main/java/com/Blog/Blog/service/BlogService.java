@@ -1,6 +1,6 @@
 package com.Blog.Blog.service;
 
-import com.Blog.Blog.entity.AddUserRequest;
+import com.Blog.Blog.dto.AddUserRequest;
 import com.Blog.Blog.dto.BlogRequestDto;
 import com.Blog.Blog.dto.BlogResponseDto;
 import com.Blog.Blog.entity.*;

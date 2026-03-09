@@ -1,5 +1,6 @@
-package com.Blog.Blog.entity;
+package com.Blog.Blog.dto;
 
+import com.Blog.Blog.entity.BlogUserInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
