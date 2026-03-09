@@ -9,13 +9,13 @@ create table blog(
 	id bigint AUTO_INCREMENT PRIMARY KEY,
 	user_title varchar(255) not null,
 	user_content varchar(255) not null,
-	 date_of_write DATE DEFAULT (CURRENT_DATE)
+	date_of_write DATE DEFAULT (CURRENT_DATE)
 );
 select *from blog;
 
 CREATE TABLE blogUserInfo (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 고유 번호 (PK)
-    user_id VARCHAR(255) NOT NULL UNIQUE,  -- 로그인 아이디 (중복 불가!)
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL UNIQUE,
     user_password VARCHAR(255) NOT NULL,
     user_email VARCHAR(255),
     user_name VARCHAR(255) NOT NULL
