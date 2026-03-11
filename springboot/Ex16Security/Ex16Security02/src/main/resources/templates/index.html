@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>메인화면</title>
+</head>
+<body>
+
+<h3>메인화면</h3>
+로그인여부(isAuthenticated()) <br>
+isAuthenticated() 함수가 true면 span text가 표시된다. false면 사라짐. <br>
+<hr>
+로그인여부(isAnonymous()) <br>
+isAnonymous()함수가 true면 span text가 표시된다. false면 사라짐.<br>
+<hr>
+
+로그인여부(isAuthenticated()) : <span sec:authorize="isAuthenticated()" style="color:red">인증 후 - 로그인 상태</span><br>
+로그인여부(isAnonymous()) : <span sec:authorize="isAnonymous()" style="color:red">인증 전 - 로그아웃 상태</span> <br>
+<hr>
+
+<th:block sec:authorize="isAuthenticated()">
+  <a th:href="@{/logoutAction}">로그아웃</a>
+</th:block>
+
+<th:block sec:authorize="isAnonymous()">
+  <a th:href="@{/loginForm}">로그인</a>
+</th:block>
+<hr>
+
+권한/역할(hasRole('USER')) : <br>
+권한/역할(hasRole('ADMIN')) :
+<hr>
+
+
+</body>
+</html>
