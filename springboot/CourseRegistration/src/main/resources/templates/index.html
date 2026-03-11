@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>수강신청</title>
+    <link rel="stylesheet" th:href="@{/index.css}" href="../static/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="title">수강신청</h1>
+        <p class="subtitle">2026학년도 1학기</p>
+      </header>
+
+      <div class="content">
+        <section class="section">
+          <h2 class="sectionTitle">개설 강좌</h2>
+          <div class="courseList">
+            <div class="courseCard" th:each="course : ${courses}">
+              <div class="courseHeader">
+                <div class="courseInfo">
+                  <h3 class="courseName">
+                    <span th:text="${course.courseName}"></span>
+                    <span
+                      class="badge"
+                      th:text="${course.credits} + '학점'"
+                    ></span>
+                  </h3>
+                  <p
+                    class="courseInstructor"
+                    th:text="${course.instructor}"
+                  ></p>
+                  <div class="courseDetails">
+                    <span class="courseDetail"
+                      >📅 <span th:text="${course.courseTime}"></span
+                    ></span>
+                    <span class="courseDetail"
+                      >🏫 <span th:text="${course.room}"></span
+                    ></span>
+                    <span class="courseDetail"
+                      >👥
+                      <span
+                        th:text="${course.enrolled} + '/' + ${course.capacity}"
+                      ></span
+                    ></span>
+                  </div>
+                </div>
+                <form th:action="@{/enroll}" method="post">
+                  <input
+                    type="hidden"
+                    name="courseId"
+                    th:value="${course.courseId}"
+                  />
+                  <button
+                    class="enrollButton"
+                    th:disabled="${course.enrolled >= course.capacity or #sets.contains(enrolledCourseIds, course.courseId)}"
+                    th:text="${#sets.contains(enrolledCourseIds, course.courseId)} ? '신청완료' : (${course.enrolled >= course.capacity} ? '마감' : '신청')"
+                  >
+                    신청
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="section">
+          <h2 class="sectionTitle">내 수강 목록</h2>
+          <div th:if="${#lists.isEmpty(enrolledCourses)}" class="emptyState">
+            신청한 강좌가 없습니다
+          </div>
+          <div
+            th:unless="${#lists.isEmpty(enrolledCourses)}"
+            class="enrolledCourses"
+          >
+            <div class="enrolledCard" th:each="enrollment : ${enrolledCourses}">
+              <div class="enrolledHeader">
+                <div>
+                  <h4
+                    class="enrolledName"
+                    th:text="${enrollment.course.courseName}"
+                  ></h4>
+                  <p
+                    class="enrolledInstructor"
+                    th:text="${enrollment.course.instructor}"
+                  ></p>
+                  <p
+                    class="enrolledTime"
+                    th:text="${enrollment.course.courseTime}"
+                  ></p>
+                </div>
+                <form th:action="@{/cancel}" method="post">
+                  <input
+                    type="hidden"
+                    name="enrollmentId"
+                    th:value="${enrollment.enrollmentId}"
+                  />
+                  <button class="cancelButton">취소</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="creditInfo">
+            <span class="creditLabel">총 학점</span>
+            <span class="creditValue" th:text="${totalCredits} + '학점'"
+              >0학점</span
+            >
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
