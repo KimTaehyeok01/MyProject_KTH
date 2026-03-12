@@ -42,10 +42,10 @@ public class SecurityConfig {
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())) // csrf 활성화
 
                 .authorizeHttpRequests((auth)->
-                        auth.requestMatchers("/loginForm").permitAll()
+                                auth.requestMatchers("/loginForm").permitAll()
 //                                .requestMatchers("/").authenticated()
-                                .requestMatchers("/").permitAll()
-                                .anyRequest().authenticated()
+                                        .requestMatchers("/").permitAll()
+                                        .anyRequest().authenticated()
                 )
 
 
@@ -65,11 +65,11 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout-> logout
-                        .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET,"/logoutAction"))
+                                .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET,"/logoutAction"))
 //                        .logoutUrl("/logoutAction")
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true) // 세션 객체 해제
-                        .deleteCookies("JSESSIONID") // 쿠기 삭제
+                                .logoutSuccessUrl("/")
+                                .invalidateHttpSession(true) // 세션 객체 해제
+                                .deleteCookies("JSESSIONID") // 쿠기 삭제
 
                 );
 
