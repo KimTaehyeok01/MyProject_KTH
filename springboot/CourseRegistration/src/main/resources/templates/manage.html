@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>수강과목 관리</title>
+    <link rel="stylesheet" th:href="@{/index.css}" href="../static/index.css" />
+    <link rel="stylesheet" th:href="@{/manage.css}" href="../static/manage.css" />
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1 class="title">수강과목 관리</h1>
+        <a th:href="@{/}" href="index.html" class="manageBtn">← 수강신청으로</a>
+    </header>
+
+    <!-- 추가 / 수정 폼 -->
+    <section class="section" style="margin-bottom: 24px">
+        <h2
+                class="sectionTitle"
+                th:text="${editCourse != null} ? '과목 수정' : '과목 추가'"
+        >
+            과목 추가
+        </h2>
+        <form
+                class="courseForm"
+                th:action="${editCourse != null} ? @{/manage/edit} : @{/manage/add}"
+                method="post"
+        >
+            <!-- 수정 시 PK 전달 -->
+            <input
+                    th:if="${editCourse != null}"
+                    type="hidden"
+                    name="id"
+                    th:value="${editCourse.id}"
+            />
+
+            <div class="formGrid">
+                <div class="formGroup">
+                    <label>과목 코드</label>
+                    <input
+                            type="text"
+                            name="courseId"
+                            th:value="${editCourse?.courseId}"
+                            th:readonly="${editCourse != null}"
+                            required
+                            placeholder="예: CS101"
+                    />
+                </div>
+                <div class="formGroup">
+                    <label>과목명</label>
+                    <input
+                            type="text"
+                            name="courseName"
+                            th:value="${editCourse?.courseName}"
+                            required
+                            placeholder="과목명"
+                    />
+                </div>
+                <div class="formGroup">
+                    <label>교수명</label>
+                    <input
+                            type="text"
+                            name="instructor"
+                            th:value="${editCourse?.instructor}"
+                            required
+                            placeholder="교수명"
+                    />
+                </div>
+                <div class="formGroup">
+                    <label>학점</label>
+                    <input
+                            type="number"
+                            name="credits"
+                            th:value="${editCourse?.credits}"
+                            required
+                            min="1"
+                            max="6"
+                            placeholder="학점"
+                    />
+                </div>
+                <div class="formGroup">
+                    <label>강의시간</label>
+                    <input
+                            type="text"
+                            name="courseTime"
+                            th:value="${editCourse?.courseTime}"
+                            required
+                            placeholder="예: 월/수 10:00-11:30"
+                    />
+                </div>
+                <div class="formGroup">
+                    <label>강의실</label>
+                    <input
+                            type="text"
+                            name="room"
+                            th:value="${editCourse?.room}"
+                            required
+                            placeholder="강의실"
+                    />
+                </div>
+                <div class="formGroup">
+                    <label>수강정원</label>
+                    <input
+                            type="number"
+                            name="capacity"
+                            th:value="${editCourse?.capacity}"
+                            required
+                            min="1"
+                            placeholder="수강정원"
+                    />
+                </div>
+            </div>
+
+            <div class="formActions">
+                <button
+                        type="submit"
+                        class="enrollButton"
+                        th:text="${editCourse != null} ? '수정' : '추가'"
+                >
+                    추가
+                </button>
+                <a
+                        th:if="${editCourse != null}"
+                        th:href="@{/manage}"
+                        href="manage.html"
+                        class="cancelButton"
+                        style="line-height: 1.5"
+                >취소</a
+                >
+            </div>
+        </form>
+    </section>
+
+    <!-- 과목 목록 -->
+    <section class="section">
+        <h2 class="sectionTitle">과목 목록</h2>
+        <div th:if="${#lists.isEmpty(courses)}" class="emptyState">
+            등록된 과목이 없습니다
+        </div>
+        <div th:unless="${#lists.isEmpty(courses)}" class="courseList">
+            <div class="courseCard" th:each="course : ${courses}">
+                <div class="courseHeader">
+                    <div class="courseInfo">
+                        <h3 class="courseName">
+                            <span th:text="${course.courseName}"></span>
+                            <span
+                                    class="badge"
+                                    th:text="${course.credits} + '학점'"
+                            ></span>
+                        </h3>
+                        <p class="courseInstructor" th:text="${course.instructor}"></p>
+                        <div class="courseDetails">
+                  <span class="courseDetail"
+                  >🔑 <span th:text="${course.courseId}"></span
+                  ></span>
+                            <span class="courseDetail"
+                            >📅 <span th:text="${course.courseTime}"></span
+                            ></span>
+                            <span class="courseDetail"
+                            >🏫 <span th:text="${course.room}"></span
+                            ></span>
+                            <span class="courseDetail"
+                            >👥
+                    <span
+                            th:text="${course.enrolled} + '/' + ${course.capacity}"
+                    ></span>
+                  </span>
+                        </div>
+                    </div>
+                    <div class="manageActions">
+                        <!-- 수정: GET으로 편집 폼 불러오기 -->
+                        <a
+                                th:href="@{/manage/edit/{id}(id=${course.id})}"
+                                class="enrollButton"
+                        >수정</a
+                        >
+                        <!-- 삭제: POST -->
+                        <form
+                                th:action="@{/manage/delete/{id}(id=${course.id})}"
+                                method="post"
+                        >
+                            <button type="submit" class="cancelButton">삭제</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

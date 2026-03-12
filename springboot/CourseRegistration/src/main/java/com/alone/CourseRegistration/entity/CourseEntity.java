@@ -58,4 +58,14 @@ public class CourseEntity {
     public void decreaseEnrolled() {
         if (this.enrolled != null && this.enrolled > 0) this.enrolled--;
     }
+
+    public void update(String courseName, String instructor, Integer credits,
+                       String courseTime, String room, Integer capacity) {
+        this.courseName = courseName;
+        this.instructor = instructor;
+        this.credits = credits;
+        this.courseTime = courseTime;
+        this.room = room;
+        this.capacity = capacity;
+    }
 }

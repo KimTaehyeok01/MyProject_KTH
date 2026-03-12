@@ -1,4 +1,4 @@
-CREATE DATABASE CourseRegistration;
+
 
 -- 강좌 테이블
 CREATE TABLE course (

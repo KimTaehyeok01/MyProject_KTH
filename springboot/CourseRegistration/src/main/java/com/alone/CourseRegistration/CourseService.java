@@ -1,5 +1,6 @@
 package com.alone.CourseRegistration;
 
+import com.alone.CourseRegistration.dto.CourseRequestDto;
 import com.alone.CourseRegistration.dto.CourseResponseDto;
 import com.alone.CourseRegistration.dto.EnrollmentResponseDto;
 import com.alone.CourseRegistration.entity.CourseEntity;
@@ -38,7 +39,9 @@ public class CourseService {
         StudentEntity student = studentRepository.findByStudentId(studentId).orElse(null);
         if (student == null) return Collections.emptyList();
         return enrollmentRepository.findByStudentAndStatus(student, "ENROLLED")
-                .stream().map(EnrollmentResponseDto::new).collect(Collectors.toList());
+                .stream()
+                .filter(e -> e.getCourse() != null)
+                .map(EnrollmentResponseDto::new).collect(Collectors.toList());
     }
 
     // 신청한 강좌
@@ -46,7 +49,9 @@ public class CourseService {
         StudentEntity student = studentRepository.findByStudentId(studentId).orElse(null);
         if (student == null) return Collections.emptySet();
         return enrollmentRepository.findByStudentAndStatus(student, "ENROLLED")
-                .stream().map(e -> e.getCourse().getCourseId()).collect(Collectors.toSet());
+                .stream()
+                .filter(e -> e.getCourse() != null)
+                .map(e -> e.getCourse().getCourseId()).collect(Collectors.toSet());
     }
 
     // 총 학점 계산
@@ -54,7 +59,9 @@ public class CourseService {
         StudentEntity student = studentRepository.findByStudentId(studentId).orElse(null);
         if (student == null) return 0;
         return enrollmentRepository.findByStudentAndStatus(student, "ENROLLED")
-                .stream().mapToInt(e -> e.getCourse().getCredits()).sum();
+                .stream()
+                .filter(e -> e.getCourse() != null)
+                .mapToInt(e -> e.getCourse().getCredits()).sum();
     }
 
     // 수강신청
@@ -66,7 +73,7 @@ public class CourseService {
                 .orElseThrow(() -> new IllegalArgumentException("강좌를 찾을 수 없습니다: " + courseId));
 
         if (enrollmentRepository.existsByStudentAndCourse(student, course)) return;
-        if (course.getEnrolled() >= course.getCapacity()) return;
+        if (course.getEnrolled() != null && course.getEnrolled() >= course.getCapacity()) return;
 
         EnrollmentEntity enrollment = EnrollmentEntity.builder()
                 .student(student)
@@ -85,5 +92,36 @@ public class CourseService {
                 .orElseThrow(() -> new IllegalArgumentException("수강신청 내역을 찾을 수 없습니다."));
         enrollment.getCourse().decreaseEnrolled();
         enrollmentRepository.delete(enrollment);
+    }
+
+    // 저장
+    @Transactional
+    public void save(CourseRequestDto dto){
+        courseRepository.save(dto.toSaveEntity());
+    }
+
+    // 단건 조회
+    public CourseResponseDto findById(Long id){
+        CourseEntity entity = courseRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("강좌를 찾을 수 없습니다."));
+        return new CourseResponseDto(entity);
+    }
+
+    // 수정
+    @Transactional
+    public void update(Long id, CourseRequestDto dto) {
+        CourseEntity entity = courseRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("강좌를 찾을 수 없습니다."));
+        entity.update(dto.getCourseName(), dto.getInstructor(), dto.getCredits(),
+                dto.getCourseTime(), dto.getRoom(), dto.getCapacity());
+        courseRepository.save(entity);
+    }
+
+    // 삭제
+    @Transactional
+    public void delete(final Long courseId){
+        CourseEntity entity = courseRepository.findById(courseId).orElseThrow(()->
+                new IllegalArgumentException("삭제할 수 없습니다."));
+        courseRepository.delete(entity);
     }
 }

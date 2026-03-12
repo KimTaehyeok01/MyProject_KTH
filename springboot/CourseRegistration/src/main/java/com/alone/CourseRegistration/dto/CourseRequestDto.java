@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseRequestDto {
+    private Long id;
     private String courseId;
     private String courseName;
     private String instructor;
@@ -20,7 +21,20 @@ public class CourseRequestDto {
     private Integer enrolled;
     private LocalDate createdAt;
 
-    @Builder
+    public CourseRequestDto(Long id, String courseId, String instructor, Integer credits, String courseName,
+                            String room, String courseTime, Integer capacity, Integer enrolled, LocalDate createdAt) {
+        this.id = id;
+        this.courseId = courseId;
+        this.instructor = instructor;
+        this.credits = credits;
+        this.courseName = courseName;
+        this.room = room;
+        this.courseTime = courseTime;
+        this.capacity = capacity;
+        this.enrolled = enrolled;
+        this.createdAt = createdAt;
+    }
+
     public CourseEntity toSaveEntity(){
         return CourseEntity.builder()
                 .courseId(this.courseId)
@@ -30,7 +44,7 @@ public class CourseRequestDto {
                 .courseTime(this.courseTime)
                 .room(this.room)
                 .capacity(this.capacity)
-                .enrolled(this.enrolled)
+                .enrolled(this.enrolled != null ? this.enrolled : 0)
                 .createdAt(LocalDateTime.now())
                 .build();
     }

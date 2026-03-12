@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과목 수정</title>
+    <link rel="stylesheet" th:href="@{/index.css}" href="../static/index.css" />
+    <link
+      rel="stylesheet"
+      th:href="@{/manage.css}"
+      href="../static/manage.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="title">과목 수정</h1>
+        <a th:href="@{/manage/edit}" href="manage.html" class="manageBtn"
+          >← 과목 관리로</a
+        >
+      </header>
+
+      <section class="section" style="max-width: 700px; margin: 0 auto">
+        <!-- 현재 과목 정보 요약 -->
+        <div
+          style="
+            background: #f9fafb;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+          "
+        >
+          <p style="font-size: 13px; color: #888; margin-bottom: 4px">
+            수정 대상 과목
+          </p>
+          <h2
+            style="
+              font-size: 20px;
+              font-weight: 700;
+              color: #1a1a1a;
+              margin-bottom: 4px;
+            "
+            th:text="${course.courseName}"
+          >
+            과목명
+          </h2>
+          <span
+            style="font-size: 13px; color: #4f46e5; font-weight: 500"
+            th:text="'🔑 ' + ${course.courseId}"
+            >과목코드</span
+          >
+        </div>
+
+        <h2 class="sectionTitle">수정 정보 입력</h2>
+
+        <form
+          class="courseForm"
+          th:action="@{/manage/edit/{id}(id=${course.id})}"
+          method="post"
+        >
+          <div class="formGrid">
+            <div class="formGroup">
+              <label>과목명</label>
+              <input
+                type="text"
+                name="courseName"
+                th:value="${course.courseName}"
+                required
+                placeholder="과목명"
+              />
+            </div>
+            <div class="formGroup">
+              <label>교수명</label>
+              <input
+                type="text"
+                name="instructor"
+                th:value="${course.instructor}"
+                required
+                placeholder="교수명"
+              />
+            </div>
+            <div class="formGroup">
+              <label>학점</label>
+              <input
+                type="number"
+                name="credits"
+                th:value="${course.credits}"
+                required
+                min="1"
+                max="6"
+                placeholder="학점"
+              />
+            </div>
+            <div class="formGroup">
+              <label>강의시간</label>
+              <input
+                type="text"
+                name="courseTime"
+                th:value="${course.courseTime}"
+                required
+                placeholder="예: 월/수 10:00-11:30"
+              />
+            </div>
+            <div class="formGroup">
+              <label>강의실</label>
+              <input
+                type="text"
+                name="room"
+                th:value="${course.room}"
+                required
+                placeholder="강의실"
+              />
+            </div>
+            <div class="formGroup">
+              <label>수강정원</label>
+              <input
+                type="number"
+                name="capacity"
+                th:value="${course.capacity}"
+                required
+                min="1"
+                placeholder="수강정원"
+              />
+            </div>
+          </div>
+
+          <div class="formActions">
+            <button type="submit" class="enrollButton">수정 완료</button>
+            <a
+              th:href="@{/manage/edit}"
+              class="cancelButton"
+              style="line-height: 1.5; text-decoration: none"
+              >취소</a
+            >
+          </div>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
