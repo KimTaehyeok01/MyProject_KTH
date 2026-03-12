@@ -5,6 +5,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.crypto.password4j.Argon2Password4jPasswordEncoder;
+import org.springframework.security.crypto.password4j.Pbkdf2Password4jPasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
@@ -14,6 +24,23 @@ import org.springframework.security.web.servlet.util.matcher.PathPatternRequestM
 @Configuration // 환경설정 클래스로 등록한다.
 @EnableWebSecurity // 웹 보안 활성화 어노테이션
 public class SecurityConfig {
+
+    // 시큐리티 기본암호화 객체
+    // BCrypt 암호화 엔코더
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        // 스프링 시큐리티 6.4.x에서 공식 지원하는 PasswordEncoder 구현 클래스들
+        // BCrypt, Argon2, Pbkdf2, SCrypt
+        // 암호화 강도는 4 ~ 31까지 지정 가능. (몇 번 섞는가?) 기본 강도는 10이다.
+
+         return new BCryptPasswordEncoder(12);
+         // return Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+        // return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+        // return SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8();
+
+        // return new Pbkdf2Password4jPasswordEncoder();
+        // Password4j는 외부라이브러리를 이용한다. 공식이 아니므로 비추천. 시큐리티 7에 추가.
+    }
 
     // authorizeHttpRequests() : HTTP 요청에 대한 접근 제어(인가)를 설정하는 핵심 메서드
     // requestMatchers() : 특정 경로에 대한 접근 규칙을 설정
@@ -38,18 +65,27 @@ public class SecurityConfig {
                 // 2. CookieToken 방식 : (자바스크립트 기반 앱 제작시 쿠키에 csrfToken을 저장해야함)
 
                 // 이 코드는 2번 방식임.
-                .csrf(auth->auth
+                // csrf 설정 : 람다매개변수 타입은 생략 가능함. 타입추정
+                // CsrfConfigurer<HttpSecurity>가 생략된것임.
+                .csrf((CsrfConfigurer<HttpSecurity> csrf)->csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())) // csrf 활성화
 
-                .authorizeHttpRequests((auth)->
-                                auth.requestMatchers("/loginForm").permitAll()
+                // 경로별 인가 설정
+                // authz : Authorization(인가), authn : Authentication
+                // AuthorizationManagerRequestMatcherRegistry 타입이다.
+                .authorizeHttpRequests((authz)->
+                                authz.requestMatchers("/loginForm").permitAll()
 //                                .requestMatchers("/").authenticated()
+                                        // hasRole("ADMIN")은 ROLE_ADMIN이 아닌 ADMIN만 써야함.
+                                        .requestMatchers("/admin").hasRole("ADMIN") // 권한이 없다면 403 포비든
+                                        .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
                                         .requestMatchers("/").permitAll()
                                         .anyRequest().authenticated()
                 )
 
-
-                .formLogin((formLogin)-> formLogin
+                // 로그인 페이지/액션 설정
+                // 매개변수 타입 : FormLoginConfigurer<HttpSecurity>
+                .formLogin((FormLoginConfigurer<HttpSecurity> login)-> login
                         .loginPage("/loginForm")
                         .usernameParameter("username")
                         .passwordParameter("password")
@@ -64,7 +100,9 @@ public class SecurityConfig {
                         .failureUrl("/loginForm?error=error")
                         .permitAll()
                 )
-                .logout(logout-> logout
+
+                // 로그아웃 URL/세션 설정
+                .logout((LogoutConfigurer<HttpSecurity> logout) -> logout
                                 .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET,"/logoutAction"))
 //                        .logoutUrl("/logoutAction")
                                 .logoutSuccessUrl("/")
