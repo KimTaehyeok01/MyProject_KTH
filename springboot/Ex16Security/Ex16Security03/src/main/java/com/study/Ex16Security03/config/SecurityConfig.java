@@ -23,13 +23,13 @@ public class SecurityConfig {
     // 시큐리티 기본암호화 객체
     // BCrypt 암호화 엔코더
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         // 스프링 시큐리티 6.4.x에서 공식 지원하는 PasswordEncoder 구현 클래스들
         // BCrypt, Argon2, Pbkdf2, SCrypt
         // 암호화 강도는 4 ~ 31까지 지정 가능. (몇 번 섞는가?) 기본 강도는 10이다.
 
-         return new BCryptPasswordEncoder(12);
-         // return Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+        return new BCryptPasswordEncoder(12);
+        // return Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
         // return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
         // return SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8();
 
@@ -50,7 +50,7 @@ public class SecurityConfig {
     //쉽게 말해: "건물 입구에 보안 규칙을 설정하는 것"
 
     @Bean // 메소드 반환 객체를 빈으로 등록한다.
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 // csrf 보안 설정을 비활성화(개발편의시)/활성화(기본)
                 // .csrf(auth->auth.disable()) // csrf 비활성화
@@ -62,32 +62,36 @@ public class SecurityConfig {
                 // 이 코드는 2번 방식임.
                 // csrf 설정 : 람다매개변수 타입은 생략 가능함. 타입추정
                 // CsrfConfigurer<HttpSecurity>가 생략된것임.
-                .csrf((CsrfConfigurer<HttpSecurity> csrf)->csrf
+                .csrf((CsrfConfigurer<HttpSecurity> csrf) -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())) // csrf 활성화
 
                 // 경로별 인가 설정
                 // authz : Authorization(인가), authn : Authentication
                 // AuthorizationManagerRequestMatcherRegistry 타입이다.
-                .authorizeHttpRequests((authz)->
-                                authz.requestMatchers("/loginForm").permitAll()
+                .authorizeHttpRequests((authz) -> authz
+//                                .requestMatchers("/", "/loginForm").permitAll()
+                                .requestMatchers("/", "/loginForm", "/joinForm", "/joinAction").permitAll()
+
+                                .requestMatchers("/loginForm").permitAll()
+                                .requestMatchers("/joinForm").permitAll()
+                                .requestMatchers("/joinAction").permitAll()
 //                                .requestMatchers("/").authenticated()
-                                        // hasRole("ADMIN")은 ROLE_ADMIN이 아닌 ADMIN만 써야함.
-                                        .requestMatchers("/admin").hasRole("ADMIN") // 권한이 없다면 403 포비든
-                                        .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
-                                        .requestMatchers("/").permitAll()
-                                        .anyRequest().authenticated()
+                                // hasRole("ADMIN")은 ROLE_ADMIN이 아닌 ADMIN만 써야함.
+                                 .requestMatchers("/admin").hasRole("ADMIN") // 권한이 없다면 403 포비든
+                                // .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                                .anyRequest().authenticated()
                 )
 
                 // 로그인 페이지/액션 설정
                 // 매개변수 타입 : FormLoginConfigurer<HttpSecurity>
-                .formLogin((FormLoginConfigurer<HttpSecurity> login)-> login
+                .formLogin((FormLoginConfigurer<HttpSecurity> login) -> login
                         .loginPage("/loginForm")
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .loginProcessingUrl("/loginAction")
                         .defaultSuccessUrl("/")
                         // 로그인 성공 커스텀 핸들러
-                        .successHandler((request, response, auth)->{
+                        .successHandler((request, response, auth) -> {
                             System.out.println("로그인 성공했습니다.");
                             response.sendRedirect("/");
                         })
@@ -98,7 +102,7 @@ public class SecurityConfig {
 
                 // 로그아웃 URL/세션 설정
                 .logout((LogoutConfigurer<HttpSecurity> logout) -> logout
-                                .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET,"/logoutAction"))
+                                .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/logoutAction"))
 //                        .logoutUrl("/logoutAction")
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true) // 세션 객체 해제

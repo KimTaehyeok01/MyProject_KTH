@@ -2,6 +2,7 @@ package com.study.Ex16Security03.service;
 
 import com.study.Ex16Security03.entity.Member;
 import com.study.Ex16Security03.entity.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -41,26 +42,22 @@ import java.util.Optional;
 //}
 
 @Service
+@RequiredArgsConstructor
 public class SecurityService implements UserDetailsService{
-    @Autowired
-    private MemberRepository repository;
+    private final MemberRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        Optional<Member> optional = repository.findByUserName(username);
-
-        if(optional.isEmpty()){
-            throw new UsernameNotFoundException("사용자를 찾을 수 없습니다.");
-        }
-        Member member = optional.get();
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Member member = repository.findByUserName(username).orElseThrow(()->
+                new UsernameNotFoundException("사용자를 찾을 수 업습니다."));
 
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority(member.getUserRole()));
+        System.out.println("사용자 정보를 조회함 " + member.getUsername());
 
         return new User(member.getUsername(), member.getPassword(), authorityList);
     }
 }
-
 
 
 
