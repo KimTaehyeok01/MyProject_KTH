@@ -72,9 +72,9 @@ public class SecurityConfig {
 //                                .requestMatchers("/", "/loginForm").permitAll()
                                 .requestMatchers("/", "/loginForm", "/joinForm", "/joinAction").permitAll()
 
-                                .requestMatchers("/loginForm").permitAll()
-                                .requestMatchers("/joinForm").permitAll()
-                                .requestMatchers("/joinAction").permitAll()
+//                                .requestMatchers("/loginForm").permitAll()
+//                                .requestMatchers("/joinForm").permitAll()
+//                                .requestMatchers("/joinAction").permitAll()
 //                                .requestMatchers("/").authenticated()
                                 // hasRole("ADMIN")은 ROLE_ADMIN이 아닌 ADMIN만 써야함.
                                  .requestMatchers("/admin").hasRole("ADMIN") // 권한이 없다면 403 포비든
