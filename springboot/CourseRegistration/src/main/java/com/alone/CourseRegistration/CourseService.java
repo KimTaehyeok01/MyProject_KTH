@@ -29,15 +29,23 @@ public class CourseService {
     private final StudentRepository studentRepository;
 
     // 전체 강좌 목록 조회
+    @Transactional(readOnly = true)
     public List<CourseResponseDto> findAll() {
         return courseRepository.findAll()
                 .stream().map(CourseResponseDto::new).collect(Collectors.toList());
     }
 
+    // 학생 조회
+    @Transactional(readOnly = true)
+    private StudentEntity getStudent(String studentId) {
+        return studentRepository.findByStudentId(studentId)
+                .orElseThrow(() -> new IllegalArgumentException("학생을 찾을 수 없습니다: " + studentId));
+    }
+
     // 내 수강 목록 조회
+    @Transactional(readOnly = true)
     public List<EnrollmentResponseDto> findEnrolledCourses(String studentId) {
-        StudentEntity student = studentRepository.findByStudentId(studentId).orElse(null);
-        if (student == null) return Collections.emptyList();
+        StudentEntity student = getStudent(studentId);
         return enrollmentRepository.findByStudentAndStatus(student, "ENROLLED")
                 .stream()
                 .filter(e -> e.getCourse() != null)
@@ -45,9 +53,9 @@ public class CourseService {
     }
 
     // 신청한 강좌
+    @Transactional(readOnly = true)
     public Set<String> findEnrolledCourseIds(String studentId) {
-        StudentEntity student = studentRepository.findByStudentId(studentId).orElse(null);
-        if (student == null) return Collections.emptySet();
+        StudentEntity student = getStudent(studentId);
         return enrollmentRepository.findByStudentAndStatus(student, "ENROLLED")
                 .stream()
                 .filter(e -> e.getCourse() != null)
@@ -55,9 +63,9 @@ public class CourseService {
     }
 
     // 총 학점 계산
+    @Transactional(readOnly = true)
     public int getTotalCredits(String studentId) {
-        StudentEntity student = studentRepository.findByStudentId(studentId).orElse(null);
-        if (student == null) return 0;
+        StudentEntity student = getStudent(studentId);
         return enrollmentRepository.findByStudentAndStatus(student, "ENROLLED")
                 .stream()
                 .filter(e -> e.getCourse() != null)
@@ -101,6 +109,7 @@ public class CourseService {
     }
 
     // 단건 조회
+    @Transactional(readOnly = true)
     public CourseResponseDto findById(Long id){
         CourseEntity entity = courseRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("강좌를 찾을 수 없습니다."));
@@ -114,7 +123,7 @@ public class CourseService {
                 .orElseThrow(() -> new IllegalArgumentException("강좌를 찾을 수 없습니다."));
         entity.update(dto.getCourseName(), dto.getInstructor(), dto.getCredits(),
                 dto.getCourseTime(), dto.getRoom(), dto.getCapacity());
-        courseRepository.save(entity);
+        // @Transactional에 의해 자동으로 저장됨
     }
 
     // 삭제
