@@ -1,5 +1,6 @@
 package com.study.Ex16Security03.entity;
 
+import com.study.Ex16Security03.dto.MemberRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,12 +38,26 @@ public class Member {
     // 그런데 엔티티를 HTML폼 매핑에 직접 사용하지 않는다. DTO에 사용하는게 좋다.
     // 엔티티 객체를 잘못 사용하면, 테이블에 직접 write될 여지가 있다.
     // @Transactional 서비스 클래스에서 setter함수 사용시 바로 db에 적용됨.
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    // @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "join_date", nullable = false)
     private LocalDate joinDate;
 
-//    @Builder
-//    public Member(Long id, ...){
-//
-//    }
+    public MemberRequest toUpdate(){
+        return MemberRequest.builder()
+                .id(id)
+                .username(username)
+                .password(password)
+                .nickName(nickName)
+                .userRole(userRole)
+                .joinDate(LocalDate.now())
+                .build();
+    }
+
+
+    public void update(String username, String password, String nickName, LocalDate joinDate){
+        this.username = username;
+        this.password = password;
+        this.nickName = nickName;
+        this.joinDate = joinDate;
+    }
 }

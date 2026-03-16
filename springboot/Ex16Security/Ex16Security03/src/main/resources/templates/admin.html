@@ -34,7 +34,12 @@
             <button type="submit" th:onclick="|location.href='@{viewDTO(id=${member.id})}'|">단건조회</button>
         </td>
         <td>
-            <button type="submit" th:onclick="|location.href='@{deleteDTO(id=${member.id})}'|">삭제</button>
+            <form th:action="@{/delete(id=${member.id})}" method="post">
+                <button type="submit">삭제하기</button>
+            </form>
+
+            <!-- get방식 코드 -->
+            <!-- <button type="submit" th:onclick="|location.href='@{deleteDTO(id=${member.id})}'|">삭제</button> -->
         </td>
     </tr>
 </table>

@@ -46,6 +46,7 @@ import java.util.Optional;
 public class SecurityService implements UserDetailsService{
     private final MemberRepository repository;
 
+    // 시큐리티에서 로그인에서 사용자 정보를 가져오는 메서드
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = repository.findByUserName(username).orElseThrow(()->

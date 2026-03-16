@@ -2,7 +2,6 @@ package com.study.Ex16Security03.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 
 // 시큐리티 관련 설정 클래스
@@ -88,7 +86,7 @@ public class SecurityConfig {
                         .loginPage("/loginForm")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .loginProcessingUrl("/loginAction")
+                        .loginProcessingUrl("/loginAction") // 시큐리티가 자동처리
                         .defaultSuccessUrl("/")
                         // 로그인 성공 커스텀 핸들러
                         .successHandler((request, response, auth) -> {
@@ -102,8 +100,8 @@ public class SecurityConfig {
 
                 // 로그아웃 URL/세션 설정
                 .logout((LogoutConfigurer<HttpSecurity> logout) -> logout
-                                .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/logoutAction")) // 추천 안함
-                        //.logoutUrl("/logoutAction") // post방식 추천
+                                // .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/logoutAction")) // 추천 안함
+                        .logoutUrl("/logoutAction") // post방식 추천
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true) // 세션 객체 해제
                                 .deleteCookies("JSESSIONID") // 쿠기 삭제
