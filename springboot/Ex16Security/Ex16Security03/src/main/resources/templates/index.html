@@ -28,6 +28,7 @@
     <hr />
 
     <th:block sec:authorize="isAuthenticated()">
+    <!-- <form th:action="@{/logoutAction}" method="post"> <button type="submit">로그아웃</button></form> -->
       <a th:href="@{/logoutAction}">로그아웃</a>
     </th:block>
 
