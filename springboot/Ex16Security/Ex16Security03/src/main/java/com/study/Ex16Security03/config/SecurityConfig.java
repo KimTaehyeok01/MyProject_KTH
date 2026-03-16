@@ -102,8 +102,8 @@ public class SecurityConfig {
 
                 // 로그아웃 URL/세션 설정
                 .logout((LogoutConfigurer<HttpSecurity> logout) -> logout
-                                .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/logoutAction"))
-                        //.logoutUrl("/logoutAction") // post 방식
+                                .logoutRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.GET, "/logoutAction")) // 추천 안함
+                        //.logoutUrl("/logoutAction") // post방식 추천
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true) // 세션 객체 해제
                                 .deleteCookies("JSESSIONID") // 쿠기 삭제

@@ -28,8 +28,15 @@
     <hr />
 
     <th:block sec:authorize="isAuthenticated()">
-    <!-- <form th:action="@{/logoutAction}" method="post"> <button type="submit">로그아웃</button></form> -->
-      <a th:href="@{/logoutAction}">로그아웃</a>
+
+    <!-- logoutUrl("/logoutAction")인 post방식일 때 아래 코드 -->
+      <form th:action="@{/logoutAction}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <button type="submit">로그아웃</button></form>
+
+    <!-- GET방식일 때 아래 코드 -->
+    <!-- <a th:href="@{/logoutAction}">로그아웃</a> -->
+      
     </th:block>
 
     <th:block sec:authorize="isAnonymous()">
