@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>로그인화면</title>
+  </head>
+  <body>
+    <h3>로그인화면</h3>
+    <p>CSRF(Cross-Site Request Forgery) <br>
+       사이트간 요청 위조 - 해커가 사용자 몰래 악의적인 요청을 보내는 공격
+        1. 정상적인 요청을 해서 인증을 획득하고 웹브라우저는 인증을 간직한다.
+        2. 해커가 만든 악의적인 사이트 접속
+        3. 악성 사이트의 숨겨진 폼으로 접속해서 비정상적인 권한을 획득한다.
+       보안방법<br>
+        1. 서버가 로그인 페이지 응답시 -> 고유한 CSRF 토큰(문자열)발급
+        2. 인증토큰이 발급된 로그인 폼에서 유저가 요청하게 한다.
+        3. 서버가 토큰을 검증한다. 발급한 토큰과 일치하면 -> 정상처리
+    </p>
+
+    <form action="/loginAction" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <table border="1" style="width: 300px">
+        <tr>
+          <td>아이디</td>
+          <td>
+            <!-- 시큐리티에서 아이디는 username, 비밀번호는 password이므로 -->
+            <!-- 예약어처럼 고정해야 시큐리티가 인식한다. -->
+            <input type="text" name="username" id="username" value="" />
+          </td>
+        </tr>
+        <tr>
+          <td>비밀번호</td>
+          <td>
+            <input type="password" name="password" id="password" value="" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center">
+            <button type="submit">로그인하기</button>
+            <button type="button" onclick="location.href = '/joinForm'">
+              회원가입하기
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" style="text-align: center;">
+            <button type="button" onclick="location.href='/oauth2/authorization/google'">구글 로그인</button>
+            <button type="button" onclick="location.href='/oauth2/authorization/kakao'">카카오 로그인</button>
+          </td>
+        </tr>
+
+      </table>
+    </form>
+  </body>
+</html>
