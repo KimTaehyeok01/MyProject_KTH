@@ -30,13 +30,18 @@ CREATE TABLE sns_user(
     id      BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name    VARCHAR(255) NOT NULL, -- 닉네임(별명)
     email   VARCHAR(255) NOT NULL, -- 이메일(계정)
+    provider    VARCHAR(50) NOT NULL, -- oauth provider (google/kakao/naver)
+    provider_id VARCHAR(100) NOT NULL, -- provider user id
     picture VARCHAR(255) NOT NULL, -- 프로필이미지 경로
     user_role   VARCHAR(255) DEFAULT 'ROLE_USER',
-    created_date  DATE DEFAULT (current_date)
+    created_date  DATE DEFAULT (current_date),
+    UNIQUE KEY uq_sns_user_provider (provider, provider_id)
 );
 
-INSERT INTO sns_user VALUES (0, 'hong', 'hong@gmail.com', '', 'USER', default );
-INSERT INTO sns_user VALUES (0, 'tom', 'tom@gmail.com', '', 'USER', default );
+INSERT INTO sns_user(name, email, provider, provider_id, picture, user_role, created_date)
+VALUES ('hong', 'hong@gmail.com', 'google', 'google_1001', '', 'USER', default );
+INSERT INTO sns_user(name, email, provider, provider_id, picture, user_role, created_date)
+VALUES ('tom', 'tom@gmail.com', 'kakao', 'kakao_1001', '', 'USER', default );
 
 SELECT * FROM sns_user;
 
@@ -66,13 +71,18 @@ CREATE TABLE sns_user(
     id      BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name    VARCHAR(255) NOT NULL, -- 닉네임(별명)
     email   VARCHAR(255) NOT NULL, -- 이메일(계정)
+    provider    VARCHAR(50) NOT NULL, -- oauth provider (google/kakao/naver)
+    provider_id VARCHAR(100) NOT NULL, -- provider user id
     picture VARCHAR(255) NOT NULL, -- 프로필이미지 경로
     user_role   VARCHAR(255) DEFAULT 'ROLE_USER',
-    created_date  DATE DEFAULT (current_date)
+    created_date  DATE DEFAULT (current_date),
+    UNIQUE KEY uq_sns_user_provider (provider, provider_id)
 );
 
-INSERT INTO sns_user VALUES (0, 'hong', 'hong@gmail.com', '', 'ROLE_USER', default );
-INSERT INTO sns_user VALUES (0, 'tom', 'tom@gmail.com', '', 'ROLE_USER', default );
+INSERT INTO sns_user(name, email, provider, provider_id, picture, user_role, created_date)
+VALUES ('hong', 'hong@gmail.com', 'google', 'google_1001', '', 'ROLE_USER', default );
+INSERT INTO sns_user(name, email, provider, provider_id, picture, user_role, created_date)
+VALUES ('tom', 'tom@gmail.com', 'kakao', 'kakao_1001', '', 'ROLE_USER', default );
 
 SELECT * FROM sns_user;
 

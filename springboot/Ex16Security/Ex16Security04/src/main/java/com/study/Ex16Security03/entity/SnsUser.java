@@ -20,6 +20,12 @@ public class SnsUser {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "provider", nullable = false, length = 50)
+    private String provider;
+
+    @Column(name = "provider_id", nullable = false, length = 100)
+    private String providerId;
+
     @Column(name = "picture", nullable = false)
     private String picture; // 프로필 이미지 url
 
@@ -28,16 +34,19 @@ public class SnsUser {
     private UserRole role;
 
     @Builder // 일부 필드만 가진 생성자 필드 필터
-    public SnsUser(String name, String email, String picture, UserRole role){
+    public SnsUser(String name, String email, String picture, String provider, String providerId, UserRole role){
         this.name = name;
         this.email = email;
         this.picture = picture;
+        this.provider = provider;
+        this.providerId = providerId;
         this.role = role;
     }
 
-    public SnsUser update(String name, String picture){
+    public SnsUser update(String name, String picture, String email){
         this.name = name;
         this.picture = picture;
+        this.email = email;
         return this;
     }
 

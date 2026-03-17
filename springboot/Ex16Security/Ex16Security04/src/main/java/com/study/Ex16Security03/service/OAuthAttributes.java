@@ -11,14 +11,18 @@ import java.util.Map;
 public class OAuthAttributes {
     private Map<String, Object> attributes;
     private String nameAttributeKey;
+    private String registrationId;
+    private String providerId;
     private String name;
     private String email;
     private String picture;
 
     @Builder
-    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture) {
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String registrationId, String providerId, String name, String email, String picture) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
+        this.registrationId = registrationId;
+        this.providerId = providerId;
         this.name = name;
         this.email = email;
         this.picture = picture;
@@ -26,18 +30,21 @@ public class OAuthAttributes {
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
 
-        if("kakao".equals(registrationId)){
+        if ("kakao".equals(registrationId)) {
             return ofKakao("id", attributes);
         }
-        if("naver".equals(registrationId)) {
+        if ("naver".equals(registrationId)) {
             return ofNaver("id", attributes);
         }
+        // 추가되는 프로바이더를 여기에 추가(깃허브, MS, Apple, 메타 등)
 
         return ofGoogle(userNameAttributeName, attributes);
     }
 
     private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
+                .registrationId("google")
+                .providerId(String.valueOf(attributes.get(userNameAttributeName)))
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .picture((String) attributes.get("picture"))
@@ -47,9 +54,11 @@ public class OAuthAttributes {
     }
 
     public static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
-        Map<String,Object> response = (Map<String, Object>)attributes.get("kakao_account");
-        Map<String,Object> profile = (Map<String, Object>) response.get("profile");
+        Map<String, Object> response = (Map<String, Object>) attributes.get("kakao_account");
+        Map<String, Object> profile = (Map<String, Object>) response.get("profile");
         return OAuthAttributes.builder()
+                .registrationId("kakao")
+                .providerId(String.valueOf(attributes.get(userNameAttributeName)))
                 .name((String) profile.get("nickname"))
                 .email((String) response.get("email"))
                 .picture((String) profile.get("profile_image_url"))
@@ -62,6 +71,8 @@ public class OAuthAttributes {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
         return OAuthAttributes.builder()
+                .registrationId("naver")
+                .providerId(String.valueOf(response.get(userNameAttributeName)))
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
                 .picture((String) response.get("profile_image"))
@@ -75,6 +86,8 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .picture(picture)
+                .provider(registrationId)
+                .providerId(providerId)
                 .role(UserRole.USER)
                 .build();
     }

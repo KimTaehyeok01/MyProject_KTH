@@ -2,6 +2,7 @@ package com.study.Ex16Security03.service;
 
 import com.study.Ex16Security03.entity.SnsUser;
 import com.study.Ex16Security03.entity.SnsUserRepository;
+import com.study.Ex16Security03.enumeration.UserRole;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 
@@ -23,7 +25,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        OAuth2UserService delegate = new DefaultOAuth2UserService();
+        OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
         // registrationId : Google, Kakao, Naver, GitHub, Apple
@@ -48,9 +50,44 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     private SnsUser saveOrUpdate(OAuthAttributes authAttributes) {
-        SnsUser snsUser = repository.findByEmail(authAttributes.getEmail())
-                .map(entity -> entity.update(authAttributes.getName(), authAttributes.getPicture()))
-                .orElse(authAttributes.toEntity());
+        String provider = authAttributes.getRegistrationId();
+        String providerId = authAttributes.getProviderId();
+        String email = resolveEmail(authAttributes);
+        String name = resolveName(authAttributes, email);
+        String picture = resolvePicture(authAttributes);
+
+        SnsUser snsUser = repository.findByProviderAndProviderId(provider, providerId)
+                .map(entity -> entity.update(name, picture, email))
+                .orElse(SnsUser.builder()
+                        .name(name)
+                        .email(email)
+                        .picture(picture)
+                        .provider(provider)
+                        .providerId(providerId)
+                        .role(UserRole.USER)
+                        .build());
+
         return repository.save(snsUser);
     }
+
+        private String resolveEmail(OAuthAttributes authAttributes) {
+                if (StringUtils.hasText(authAttributes.getEmail())) {
+                        return authAttributes.getEmail();
+                }
+                return authAttributes.getRegistrationId() + "_" + authAttributes.getProviderId() + "@no-email.local";
+        }
+
+        private String resolveName(OAuthAttributes authAttributes, String email) {
+                if (StringUtils.hasText(authAttributes.getName())) {
+                        return authAttributes.getName();
+                }
+                return email;
+        }
+
+        private String resolvePicture(OAuthAttributes authAttributes) {
+                if (StringUtils.hasText(authAttributes.getPicture())) {
+                        return authAttributes.getPicture();
+                }
+                return "";
+        }
 }

@@ -11,7 +11,6 @@ public interface SnsUserRepository extends JpaRepository<SnsUser, Long> {
     // @Query(value = "select u from SnsUser u where u.email = :email")
     // @Query(value = "select * from sns_user where email = :email")
 
-    // SNS 로그인으로 반환되는 값 중에서 email을 통해
-    // 이미 가입돤 유저인지, 처음 가입하는 유저인지 구분하는 쿼리 메서드가 필요.
-    Optional<SnsUser> findByEmail(String email);
+    // provider + providerId 기준으로 같은 SNS 계정인지 구분한다.
+    Optional<SnsUser> findByProviderAndProviderId(String provider, String providerId);
 }
