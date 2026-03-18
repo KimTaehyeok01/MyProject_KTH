@@ -1,0 +1,41 @@
+배포환경 : 리눅스(배포판이름 - 우분투 v22.0) - 가볍다. 편리성.
+                  배포판: CentOS, AWS배포, ...
+ 
+         프론트엔드 배포
+         리액트 : 개발자PC -> Github -> Vercel(Build, Deploy, 
+                        Publish)(도메인 : IP주소를 문자주소로 변환해주는 것)
+
+          데이터분석 : Python(분석,AI,머신러닝,시각화) 
+                            + Streamlit(웹배포) streamlit.io 무료배포 가능.
+ 
+          Vercel : React.js => 페북, Next.js(서버사이드), 
+                            Svelt(Vue.js확장판)          =>SupaBase       
+
+          CI/CD(지속적 통합/지속적 배포)
+
+          백엔드 배포
+
+          VPS(Virtual Private Server : 가상사설서버 - PC대여)
+          개발자PC(윈도우즈) -> Github -> 
+           AWS(GCP) 리눅스(VPS) -> 직접배포(java -jar myproj.jar)
+           (환경설정 : 포트설정,방화벽,날짜설정...)
+             
+           ->  Docker(컨테이너)기반 배포 
+                환경독립적 실행 : 실행환경,서버설정,실행파일 한 묶음.
+
+                       Github Action 서비스 + AWS 연동
+          리눅스배포PC -> git clone명령어 소스 pull 
+         -> 소스 + applicaton.properties -> 빌드 -> 실행(도커빌드&실행)
+                        application-secret.pro 어떻게? 개발자가 직접 
+                        (FTP-파일전송프로토콜, 콘솔에서 CTRL+V, 
+                            배포환경-환경설정)
+         PaaS( Platform as a Service) 
+                 플랫폼 서비스 : 인프라 관리없이 코드만 올리면 실행되는
+                                      서비스들을 통칭.
+          Saas( Software as a Sevice)
+                 Gmail, Notion, Slack : 설치없이 브라우저나 앱으로 바로
+                           사용하는 모든 서비스
+          IaaS( Infrastructure as a Service)
+                 VPS(PC대여), AWS EC2, AWS Lightsail
+                   : 가상 서버, 네트워크, 스토리지 등 인프라를 인터넷으로
+                  빌려쓰는 것
