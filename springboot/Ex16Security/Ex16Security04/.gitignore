@@ -5,6 +5,13 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Spring
+application-secret.properties
+application-secret.yml
+
+# Java Script / Python 쪽 보안 정보
+.env
+
 ### STS ###
 .apt_generated
 .classpath
