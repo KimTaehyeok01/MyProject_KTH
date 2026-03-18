@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JWT api 폼</title>
+  </head>
+  <body>
+    <h2>JWT 토큰 테스트</h2>
+    <p>1. postman으로 api 테스트 한다.</p>
+    <p>2. JS fetch함수로 테스트 한다.</p>
+
+    회원가입 <br />
+    post localhost:8080/api/users/signup <br />
+    <button type="button" id="btn-signup" onclick="signup()">회원가입</button>
+    <br /><br />
+
+    로그인 <br />
+    post localhost:8080/api/users/login <br />
+    <button type="button" id="btn-login" onclick="login()">로그인</button>
+    <br /><br />
+
+    마이페이지 <br />
+    post localhost:8080/api/users/my <br />
+    <button type="button" id="btn-my" onclick="myPage()">마이페이지</button>
+    <br /><br />
+
+    관리자페이지 <br />
+    post localhost:8080/api/users/admin <br />
+    <button type="button" id="btn-admin" onclick="adminPage()">
+      관리자페이지
+    </button>
+
+    <script>
+      // html을 자바스크립트가 제어하기 때문에 DOM(Document Object Model)
+      // 이 준비되어 있어야 하기 때문에 boyd태그 바로 위에 쓰는 것이 권장된다.
+
+      // key-value객체(number, string, object) - java Map이랑 비슷함.
+      // JSON Key "init" : value "문자열" 숫자
+
+      // 회원가입
+      function signup() {
+        const data = new URLSearchParams();
+        data.append("email", "test@naver.com");
+        data.append("password", "1234");
+        data.append("userRole", "ADMIN");
+
+        // fetch함수는 promise/then 패턴을 사용한다.
+        // 비동기적 실행을 위해서. (async, await)
+        fetch("http://localhost:8080/api/users/signup", {
+          method: "POST",
+          headers: {
+            // 프론트에서 POST로 파라미터를 body에 실어서 보낼 때
+            "Content-Type": "application/json/x-www-form-urlencoded",
+          },
+          body: data,
+        })
+          // response : HTTP 응답 객체, json() : body에 있는 문자열 데이터를 json KV객체로 변환한다.
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json.id);
+            console.log(json.email);
+            console.log(json.password);
+            console.log(json.userRole);
+          });
+      }
+      // 로그인
+      function login() {}
+      // 마이페이지
+      function myPage() {}
+      // 관리자페이지
+      function adminPage() {}
+    </script>
+  </body>
+</html>
