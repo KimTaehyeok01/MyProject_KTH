@@ -50,7 +50,7 @@
           method: "POST",
           headers: {
             // 프론트에서 POST로 파라미터를 body에 실어서 보낼 때
-            "Content-Type": "application/json/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded",
           },
           body: data,
         })
@@ -63,8 +63,35 @@
             console.log(json.userRole);
           });
       }
+
       // 로그인
-      function login() {}
+      function login() {
+        const data = new URLSearchParams();
+        data.append("email", "test@naver.com"); // 인증
+        data.append("password", "1234"); // 인증
+        data.append("userRole", "ADMIN"); // 권한-인가
+
+        // 아이디/비밀번호로 인증하고, 권한을 획득한다.
+        // 이전 버전 : session객체, (스토리지)에 인증객체 저장
+        // JWT 버전 : JWT 토큰(문자열)을 발행(응답)해준다.
+        // 프론트엔트는 토큰을 쿠키에 저장한다.
+        // 다음 번 요청에는 자동으로 토큰이 요청헤더에 들아가서 인증통과/권한통과
+        fetch("http://localhost:8080/api/users/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: data,
+        })
+          .then((response) => response.text()) // JWT 토큰을 문자열로 가져옴
+          .then((text) => {
+            console.log(text);
+
+            // localStorage : JS 내장객체이므로 link(임포트) 안해도 됨.
+            localStorage.setItem("JWT_TOKEN", text);
+          });
+      }
+
       // 마이페이지
       function myPage() {}
       // 관리자페이지
