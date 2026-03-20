@@ -32,7 +32,7 @@ public class UsersServiceImpl implements UsersService {
                 .build();
         Users newEntity = repository.save(users);
 
-        UserDto newDto = UserDto.builder()
+       return UserDto.builder()
                 .id(newEntity.getId())
                 .email(newEntity.getEmail())
                 .password(newEntity.getPassword())
@@ -43,8 +43,6 @@ public class UsersServiceImpl implements UsersService {
         // 엔티티의 set함수를 호출하면 자동으로 db에 저장된다. 2번 이상 동작하는 경우도 있다.
         // 연관관계 매핑시 복수/잘못된 호출이 될 수도 있다.
         // users.setEmail("test@naber.com"); // DB commit됨.
-
-        return newDto;
     }
 
     // 회원정보 단건 조회
@@ -83,16 +81,3 @@ public class UsersServiceImpl implements UsersService {
         return List.of();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
