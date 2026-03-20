@@ -93,9 +93,31 @@
           });
       }
 
-      // 마이페이지
-      function myPage() {}
-      // 관리자페이지
+      // 마이페이지(ROLE_USER)
+      function myPage() {
+        fetch("http://localhost:8080/api/users/mypage", {
+          method: "GET",
+          headers: { JWT_TOKEN: localStorage.getItem("JWT_TOKEN") },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              return response.text().then((text) => {
+                throw new Error(`mypage ${response.status}: ${text}`);
+              });
+            }
+            return response.json();
+          })
+          .then((json) => {
+            console.log(json.id);
+            console.log(json.email);
+            console.log(json.password);
+            console.log(json.userRole);
+          })
+          .catch((error) => {
+            console.error(error.message);
+          });
+      }
+      // 관리자페이지(ROLE_ADMIN)
       function adminPage() {}
     </script>
   </body>

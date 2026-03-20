@@ -14,11 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UsersServiceImpl implements UsersService { // UserDetailsService 추가
+public class UsersServiceImpl implements UsersService, UserDetailsService {
     // final을 쓰는 이유 : 재할당을 막기 위해서. 불변
     private final UsersRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -52,7 +51,14 @@ public class UsersServiceImpl implements UsersService { // UserDetailsService �
     @Override
     @Transactional(readOnly = true)
     public UserDto findUser(String email) {
-        return null;
+        Users entity = repository.findByEmail(email).orElseThrow(() ->
+                new IllegalArgumentException("사용자를 찾을 수가 없습니다."));
+
+        return UserDto.builder()
+                .email(entity.getEmail())
+                .password(entity.getPassword())
+                .userRole(entity.getUserRole())
+                .build();
     }
 
     // 아이디/비번으로 로그인 처리
@@ -60,7 +66,7 @@ public class UsersServiceImpl implements UsersService { // UserDetailsService �
     @Transactional(readOnly = true)
     //                                                                     예외를 던진다.
     public UserDto findByEmailAndPassword(String email, String password) {
-        Users entity = repository.findByEmail(email).orElseThrow(()->
+        Users entity = repository.findByEmail(email).orElseThrow(() ->
                 new IllegalArgumentException("사용자를 찾을 수가 없습니다."));
 
         // DB에 있는 암호화된 버전과 유저가 입력한 암호가 같은지 확인한다.
@@ -89,5 +95,12 @@ public class UsersServiceImpl implements UsersService { // UserDetailsService �
     @Transactional(readOnly = true)
     public List<UserDto> findAll() {
         return List.of();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다. email=" + email));
     }
 }

@@ -2,16 +2,13 @@ package com.study.Ex17JWT.controller;
 
 import com.study.Ex17JWT.dto.UserDto;
 import com.study.Ex17JWT.dto.UserRequestDto;
-import com.study.Ex17JWT.entity.Users;
 import com.study.Ex17JWT.service.impl.UsersServiceImpl;
 import com.study.Ex17JWT.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 // JSON 문자열로 응답하는 컨트롤러 클래스
@@ -67,6 +64,19 @@ public class APIController {
         // 가입된 회원임을 인증함. JWT 토큰을 발행하면 된다.
         return jwtUtil.createToken(foundDto.getEmail()
                 ,Arrays.asList(foundDto.getUserRole().getValue()));
+    }
+
+    @GetMapping("/mypage")
+    // @Secured : Spring Security에서 메소드 기반 권한 제어(Method Security)를 위해 사용하는 어노테이션으로,
+    //     특정 역할(Role)이나 권한을 가진 사용자만 해당 메소드를 호출할 수 있도록 제한합니다.
+//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    //                  시큐리티의 현재 인증 정보를 주입받는다.
+    public UserDto mypage(Authentication authentication){
+        if(authentication == null){
+            throw new BadCredentialsException("회원 인증정보를 찾을 수 없습니다.");
+        }
+        System.out.println("authentication = " + authentication);
+        return usersService.findUser(authentication.getName());
     }
 }
 
