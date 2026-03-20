@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -94,7 +95,14 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public List<UserDto> findAll() {
-        return List.of();
+        return repository.findAll().stream()
+                .map(entity -> UserDto.builder()
+                        .id(entity.getId())
+                        .email(entity.getEmail())
+                        .password(entity.getPassword())
+                        .userRole(entity.getUserRole())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -9,7 +9,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 // JSON 문자열로 응답하는 컨트롤러 클래스
 // REST API Server
@@ -63,7 +64,7 @@ public class APIController {
 
         // 가입된 회원임을 인증함. JWT 토큰을 발행하면 된다.
         return jwtUtil.createToken(foundDto.getEmail()
-                ,Arrays.asList(foundDto.getUserRole().getValue()));
+                , List.of(foundDto.getUserRole().getValue()));
     }
 
     @GetMapping("/mypage")
@@ -72,11 +73,25 @@ public class APIController {
 //    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     //                  시큐리티의 현재 인증 정보를 주입받는다.
     public UserDto mypage(Authentication authentication){
-        if(authentication == null){
+        if(authentication == null || !authentication.isAuthenticated()
+                || "anonymousUser".equals(authentication.getName())){
             throw new BadCredentialsException("회원 인증정보를 찾을 수 없습니다.");
         }
         System.out.println("authentication = " + authentication);
         return usersService.findUser(authentication.getName());
+    }
+
+    @GetMapping("/admin")
+    public Map<String, String> adminPage(Authentication authentication) {
+        return Map.of(
+                "message", "관리자 페이지 접근 성공",
+                "email", authentication.getName()
+        );
+    }
+
+    @GetMapping("/all")
+    public List<UserDto> allUsers() {
+        return usersService.findAll();
     }
 }
 

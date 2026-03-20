@@ -5,6 +5,7 @@ import com.study.Ex17JWT.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,6 +18,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Collections;
 
 // @Configuration : 해당 객체를 설정 클래스로 선언하는 어노테이션
@@ -36,14 +39,22 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // Rest API 서버에서는 주로 비활성화 한다.
-                // 인증을 폼 기반으로 하지 않고, token(JWT)기반으로 하기에, csrf 인증이 필요하다.
                 .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .formLogin(form -> form.disable())
+                .httpBasic(httpBasic -> httpBasic.disable())
                 .authorizeHttpRequests(authz -> authz
-                        // "/**" 하위 경로 포함 모든 루트 경로의 인가를 풀어준다.
-                        .requestMatchers("/**").permitAll());
+                        .requestMatchers("/", "/favicon.ico", "/api/users/signup", "/api/users/login").permitAll()
+                        .requestMatchers("/api/users/admin", "/api/users/all").hasRole("ADMIN")
+                        .requestMatchers("/api/users/mypage").authenticated()
+                        .anyRequest().permitAll())
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint((request, response, e) ->
+                                writeJsonError(response, HttpServletResponse.SC_UNAUTHORIZED, "인증이 필요합니다."))
+                        .accessDeniedHandler((request, response, e) ->
+                                writeJsonError(response, HttpServletResponse.SC_FORBIDDEN, "접근 권한이 없습니다.")));
 
 
         // JWT 토큰 기반 서버는 세션관리 토큰 기반으로 하기 때문에
@@ -55,6 +66,14 @@ public class SecurityConfig {
         http.addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+    private void writeJsonError(HttpServletResponse response, int status, String message) throws IOException {
+        response.setStatus(status);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"status\":" + status + ",\"message\":\"" + message + "\"}");
+    }
+
     //CORS 설정
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
