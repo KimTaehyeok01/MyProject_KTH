@@ -79,11 +79,12 @@
         fetch("http://localhost:8080/api/users/login", {
           method: "POST",
           headers: {
+            // 프론트에서 POST로 파라미터를 body에 실어서 보낼 때
             "Content-Type": "application/x-www-form-urlencoded",
           },
           body: data,
         })
-          .then((response) => response.text()) // JWT 토큰을 문자열로 가져옴
+          .then((response) => response.text())
           .then((text) => {
             console.log(text);
 

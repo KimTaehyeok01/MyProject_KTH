@@ -4,11 +4,15 @@ import com.study.Ex17JWT.dto.UserDto;
 import com.study.Ex17JWT.dto.UserRequestDto;
 import com.study.Ex17JWT.entity.Users;
 import com.study.Ex17JWT.service.impl.UsersServiceImpl;
+import com.study.Ex17JWT.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 // JSON 문자열로 응답하는 컨트롤러 클래스
 // REST API Server
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class APIController {
     private final UsersServiceImpl usersService;
+    private final JwtUtil jwtUtil;
 
     @PostMapping("/signup")
     // HTTP 요청 데이터를 받는 방법 3가지
@@ -60,6 +65,17 @@ public class APIController {
         UserDto foundDto = usersService.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
 
         // 가입된 회원임을 인증함. JWT 토큰을 발행하면 된다.
-        return "JWT_TOKEN_Q312432DS4A";
+        return jwtUtil.createToken(foundDto.getEmail()
+                ,Arrays.asList(foundDto.getUserRole().getValue()));
     }
 }
+
+
+
+
+
+
+
+
+
+
