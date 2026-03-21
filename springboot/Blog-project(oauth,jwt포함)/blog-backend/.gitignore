@@ -1,0 +1,14 @@
+# .env 파일 (민감한 정보)
+.env
+
+# 빌드 결과물
+build/
+out/
+*.jar
+
+# IDE
+.idea/
+*.iml
+
+# 로그
+*.log
