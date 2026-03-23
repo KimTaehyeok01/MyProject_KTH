@@ -18,6 +18,9 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+// 로그인 성공 -> jwt 토큰 발급 -> 프론트에서 토큰 저장 -> 다음 요청에 프론트 해더에 담아 서버에 전송
+// -> 토큰 검증 -> 인증 처리 -> 유효하면 성공/ 실패하면 401에러
+
 @Component
 @RequiredArgsConstructor
 public class JwtUtil {
