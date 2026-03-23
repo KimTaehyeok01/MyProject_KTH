@@ -1,60 +1,99 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <title>JWT api 폼</title>
   </head>
   <body>
-    <h2>JWT 토큰 테스트</h2>
-    <p>1. postman으로 api 테스트 한다.</p>
-    <p>2. JS fetch함수로 테스트 한다.</p>
+    <h3>JWT 토큰 테스트</h3>
+    <p>1. Postman으로 api테스트한다.</p>
+    <p>2. JS fetch함수로 테스트한다.</p>
 
     회원가입 <br />
-    post localhost:8080/api/users/signup <br />
-    <button type="button" id="btn-signup" onclick="signup()">회원가입</button>
+    POST localhost:8080/api/users/signup <br />
+    <button type="button" onclick="signup()" id="btn-signup">회원가입</button>
     <br /><br />
 
     로그인 <br />
-    post localhost:8080/api/users/login <br />
-    <button type="button" id="btn-login" onclick="login()">로그인</button>
+    POST localhost:8080/api/users/login <br />
+    <button type="button" onclick="login()" id="btn-login">로그인</button>
     <br /><br />
 
     마이페이지 <br />
-    get localhost:8080/api/users/mypage <br />
-    <button type="button" id="btn-my" onclick="myPage()">마이페이지</button>
+    POST localhost:8080/api/users/my <br />
+    <button type="button" onclick="mypage()" id="btn-my">마이페이지</button>
     <br /><br />
 
-    관리자페이지 <br />
-    get localhost:8080/api/users/admin <br />
-    <button type="button" id="btn-admin" onclick="adminPage()">
-      관리자페이지
-    </button>
+    관리자 페이지 <br />
+    POST localhost:8080/api/users/admin <br />
+    <button type="button" onclick="admin()" id="btn-admin">관리자페이지</button>
 
     <script>
-      // html을 자바스크립트가 제어하기 때문에 DOM(Document Object Model)
-      // 이 준비되어 있어야 하기 때문에 boyd태그 바로 위에 쓰는 것이 권장된다.
+      // html을 JS 제어하기 위해서는 html이 DOM(Document Objec Model)
+      // 이 로딩되어야 하기 때문에 body태그 바로 앞에 위치한다.
 
-      // key-value객체(number, string, object) - java Map이랑 비슷함.
-      // JSON Key "init" : value "문자열" 숫자
-
-      // 회원가입
+      //회원가입
       function signup() {
         const data = new URLSearchParams();
         data.append("email", "test@naver.com");
         data.append("password", "1234");
         data.append("userRole", "ADMIN");
 
-        // fetch함수는 promise/then 패턴을 사용한다.
-        // 비동기적 실행을 위해서. (async, await)
+        //fetch함수는 promise/then 패턴을 사용한다.
+        //비동기적 실행하기 위해서.(async/await)
         fetch("http://localhost:8080/api/users/signup", {
           method: "POST",
           headers: {
-            // 프론트에서 POST로 파라미터를 body에 실어서 보낼 때
+            // 프론트에서 POST로 파라미터를 body로 실어서 보낼 때
             "Content-Type": "application/x-www-form-urlencoded",
           },
           body: data,
         })
-          // response : HTTP 응답 객체, json() : body에 있는 문자열 데이터를 json KV객체로 변환한다.
+          // response : HTTP 응답 객체,
+          // json() : body에 있는 문자열 데이터를 json KV객체로 변환한다.
+          .then((response) => response.json())
+          // json : json KV객체
+          .then((json) => {
+            console.log(json.id);
+            console.log(json.email);
+            console.log(json.password);
+            console.log(json.userRole);
+          });
+      }
+      //로그인
+      function login() {
+        const data = new URLSearchParams();
+        data.append("email", "test@naver.com"); //인증
+        data.append("password", "1234"); //인증
+        data.append("userRole", "ADMIN"); //권한-인가
+
+        //아이디/비번을 인증하고, 권한을 획득한다.
+        //이전 버전 : session객체(스토리지)에 인증객체 저장
+        //JWT 버전 : JWT 토큰(문자열)을 발행(응답)해준다.
+        //프론트엔드는 토큰을 쿠키에 저장한다.
+        //다음번 요청에는 자동으로 토큰이 요청헤더에 들어가서 인증통과/권한
+        fetch("http://localhost:8080/api/users/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: data,
+        })
+          .then((response) => response.text()) //JTW토큰을 문자열로 가져옴.
+          .then((text) => {
+            console.log(text);
+            //localStorage : JS 내장객체이므로 link(임포트)안해도 됨.
+            localStorage.setItem("JWT_TOKEN", text);
+          });
+      }
+      //마이페이지(ROLE_USER)
+      function mypage() {
+        fetch("http://localhost:8080/api/users/mypage", {
+          method: "GET",
+          headers: {
+            JWT_TOKEN: localStorage.getItem("JWT_TOKEN"),
+          },
+        })
           .then((response) => response.json())
           .then((json) => {
             console.log(json.id);
@@ -63,89 +102,23 @@
             console.log(json.userRole);
           });
       }
-
-      // 로그인
-      function login() {
-        const data = new URLSearchParams();
-        data.append("email", "test@naver.com"); // 인증
-        data.append("password", "1234"); // 인증
-        data.append("userRole", "ADMIN"); // 권한-인가
-
-        // 아이디/비밀번호로 인증하고, 권한을 획득한다.
-        // 이전 버전 : session객체, (스토리지)에 인증객체 저장
-        // JWT 버전 : JWT 토큰(문자열)을 발행(응답)해준다.
-        // 프론트엔트는 토큰을 쿠키에 저장한다.
-        // 다음 번 요청에는 자동으로 토큰이 요청헤더에 들아가서 인증통과/권한통과
-        fetch("http://localhost:8080/api/users/login", {
-          method: "POST",
-          headers: {
-            // 프론트에서 POST로 파라미터를 body에 실어서 보낼 때
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: data,
-        })
-          .then((response) => response.text())
-          .then((text) => {
-            console.log(text);
-
-            // localStorage : JS 내장객체이므로 link(임포트) 안해도 됨.
-            localStorage.setItem("JWT_TOKEN", text);
-          });
-      }
-
-      // 마이페이지(ROLE_USER)
-      function myPage() {
-        fetch("http://localhost:8080/api/users/mypage", {
-          method: "GET",
-          headers: { JWT_TOKEN: localStorage.getItem("JWT_TOKEN") },
-        })
-          .then((response) => {
-            const contentType = response.headers.get("content-type") || "";
-
-            if (!response.ok) {
-              return response.text().then((text) => {
-                throw new Error(`mypage ${response.status}: ${text}`);
-              });
-            }
-
-            if (!contentType.includes("application/json")) {
-              return response.text().then((text) => {
-                throw new Error(`JSON 응답이 아닙니다: ${text}`);
-              });
-            }
-
-            return response.json();
-          })
-          .then((json) => {
-            console.log(json.id);
-            console.log(json.email);
-            console.log(json.password);
-            console.log(json.userRole);
-          })
-          .catch((error) => {
-            console.error(error.message);
-          });
-      }
-      // 관리자페이지(ROLE_ADMIN)
-      function adminPage() {
+      //관리자페이지(ROLE_ADMIN)
+      function admin() {
         fetch("http://localhost:8080/api/users/admin", {
           method: "GET",
-          headers: { JWT_TOKEN: localStorage.getItem("JWT_TOKEN") },
+          headers: {
+            JWT_TOKEN: localStorage.getItem("JWT_TOKEN"),
+          },
         })
-          .then((response) => {
-            if (!response.ok) {
-              return response.text().then((text) => {
-                throw new Error(`admin ${response.status}: ${text}`);
-              });
-            }
-            return response.json();
-          })
+          //json 문자열 배열 : [ { key : value }, {key : value} ]
+          .then((response) => response.json()) //json문자열인데, 배열로 온다.
           .then((json) => {
-            console.log(json.message);
-            console.log(json.email);
-          })
-          .catch((error) => {
-            console.error(error.message);
+            json.forEach((item) => {
+              console.log(item.id);
+              console.log(item.email);
+              console.log(item.password);
+              console.log(item.userRole);
+            });
           });
       }
     </script>

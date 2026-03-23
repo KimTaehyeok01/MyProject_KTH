@@ -1,12 +1,13 @@
 package com.study.Ex17JWT.dto;
 
-import com.study.Ex17JWT.enumration.UserRole;
-import lombok.*;
+import com.study.Ex17JWT.enumeration.UserRole;
+import lombok.Getter;
+import lombok.Setter;
 
-// signUp, login, 데이터 바인딩 용도
+// signup, login 데이터 바인딩 용도
 @Getter @Setter
 public class UserRequestDto {
-    private String email;
-    private String password;
-    private UserRole userRole;
+  private String email;
+  private String password;
+  private UserRole userRole;
 }
