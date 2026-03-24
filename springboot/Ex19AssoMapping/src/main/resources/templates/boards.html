@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 - 댓글 연관관계</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        table { border-collapse: collapse; margin-bottom: 30px; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px 16px; text-align: left; }
+        th { background: #f0f0f0; }
+        h2 { color: #333; }
+        .comments { color: #666; font-size: 14px; }
+        .comment-item { margin: 4px 0; }
+    </style>
+</head>
+<body>
+<h1>JPA 연관관계 매핑 예제 (OneToMany / ManyToOne)</h1>
+
+<h2>게시글 목록</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>댓글</th>
+    </tr>
+    <tr th:each="b : ${boards}">
+        <td th:text="${b.id}"></td>
+        <td th:text="${b.title}"></td>
+        <td th:text="${b.content}"></td>
+        <td class="comments">
+            <div th:each="c : ${b.comments}" class="comment-item">
+                &bull; <span th:text="${c.content}"></span>
+            </div>
+            <div th:if="${#lists.isEmpty(b.comments)}">댓글 없음</div>
+        </td>
+    </tr>
+</table>
+
+<p><a href="/h2-console">H2 Console</a></p>
+</body>
+</html>
