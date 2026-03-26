@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs ls:*)",
+      "Bash(find /tmp/zipfiles -type f -name *.gradle)",
+      "Bash(while read:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/taehy/Desktop/LibraryStie/**)",
+      "Bash(done)",
+      "Bash(/c/Users/taehy/Desktop/LibraryStie/src/main/resources/application.properties:*)",
+      "Bash(/c/Users/taehy/Desktop/LibraryStie/src/main/resources/application-secret.properties:*)",
+      "Bash(/c/Users/taehy/Desktop/LibraryStie/src/main/resources/db.sql:*)",
+      "Bash(BASE=/c/Users/taehy/Desktop/LibraryStie/src/main/java/com/study/LibraryStie)",
+      "Bash(mkdir -p $BASE/enumeration $BASE/entity $BASE/dto $BASE/service $BASE/config $BASE/controller)",
+      "Bash(./gradlew bootRun --info)",
+      "Bash(./gradlew bootRun)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 13880 /F)",
+      "Bash(cmd /c \"taskkill /PID 13880 /F\")",
+      "Bash(powershell -Command \"Stop-Process -Id 11340 -Force\")"
+    ]
+  }
+}
