@@ -22,10 +22,10 @@ public class Loan {
     private Long id;
 
     @Column(name = "userEmail", nullable = false)
-    private String userEmail;           // 대출자 이메일 (공통 식별자)
+    private String userEmail;           // 대출자 이메일
 
     @Column(name = "userName", nullable = false)
-    private String userName;            // 대출자 이름 (화면 표시용)
+    private String userName;            // 대출자 이름
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookId", nullable = false)

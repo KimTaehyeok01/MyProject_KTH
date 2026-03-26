@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-// 일반 로그인 회원 엔티티 (form login)
+// 일반 로그인 회원 엔티티
 @Entity
 @Table(name = "member")
 @Getter
@@ -21,28 +21,27 @@ public class Member {
     private Long id;
 
     @Column(name = "userId", nullable = false, unique = true)
-    private String userId;      // 로그인 아이디
+    private String userId;
 
     @Column(name = "password", nullable = false)
-    private String password;    // BCrypt 암호화된 비밀번호
+    private String password;
 
     @Column(name = "userName", nullable = false)
-    private String userName;    // 이름
+    private String userName;
 
     @Column(name = "email", nullable = false, unique = true)
-    private String email;       // 이메일
+    private String email;
 
     @Column(name = "phone")
-    private String phone;       // 전화번호
+    private String phone;
 
     @Column(name = "userRole", nullable = false)
-    private String userRole;    // 권한 (ROLE_USER, ROLE_ADMIN)
+    private String userRole;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "joinDate", nullable = false)
-    private LocalDate joinDate; // 가입일
+    private LocalDate joinDate;
 
-    // 회원 정보 수정 메서드 (Dirty Checking)
     public void update(String password, String userName, String email, String phone) {
         this.password = password;
         this.userName = userName;

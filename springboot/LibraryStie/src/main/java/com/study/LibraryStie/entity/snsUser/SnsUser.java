@@ -19,28 +19,27 @@ public class SnsUser {
     private Long id;
 
     @Column(name = "name", nullable = false)
-    private String name;        // 닉네임
+    private String name;
 
     @Column(name = "email", nullable = false)
-    private String email;       // 이메일
+    private String email;
 
     @Column(name = "provider", nullable = false, length = 50)
-    private String provider;    // kakao, naver
+    private String provider;
 
     @Column(name = "providerId", nullable = false, length = 100)
-    private String providerId;  // 각 플랫폼 고유 ID
+    private String providerId;
 
     @Column(name = "picture", nullable = false)
-    private String picture;     // 프로필 이미지 URL
+    private String picture;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "userRole", nullable = false)
-    private UserRole userRole;  // 권한 (USER, ADMIN)
+    private UserRole userRole;
 
     @Column(name = "joinDate")
-    private LocalDate joinDate; // 가입일
+    private LocalDate joinDate;
 
-    // 일부 필드만 받는 생성자 (빌더용)
     @Builder
     public SnsUser(String name, String email, String picture,
                    String provider, String providerId, UserRole userRole) {
@@ -53,7 +52,6 @@ public class SnsUser {
         this.joinDate = LocalDate.now();
     }
 
-    // 정보 업데이트 (이름/사진/이메일 변경)
     public SnsUser update(String name, String picture, String email) {
         this.name = name;
         this.picture = picture;
@@ -61,7 +59,6 @@ public class SnsUser {
         return this;
     }
 
-    // 권한 문자열 반환 (ex. "ROLE_USER")
     public String getRoleKey() {
         return this.userRole.getValue();
     }

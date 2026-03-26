@@ -14,7 +14,7 @@ public class BookController {
 
     private final BookService bookService;
 
-    // 도서 목록 조회 (검색 + 페이징) GET /api/books?keyword=&page=0
+    // 도서 목록 조회
     @GetMapping
     public Page<BookResponse> getBooks(@RequestParam(defaultValue = "") String keyword,
                                        @RequestParam(defaultValue = "") String category,
@@ -25,7 +25,7 @@ public class BookController {
         return bookService.search(keyword, page);
     }
 
-    // 도서 단건 조회 GET /api/books/{id}
+    // 도서 단건 조회
     @GetMapping("/{id}")
     public BookResponse getBook(@PathVariable Long id) {
         return bookService.findById(id);

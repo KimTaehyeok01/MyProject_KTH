@@ -25,17 +25,17 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-        // 1. 요청 헤더에서 JWT 토큰 추출
+        // 요청 헤더에서 JWT 토큰 추출
         String token = jwtUtil.resolveToken(httpRequest);
 
-        // 2. 토큰이 있고 유효하면 인증 처리
+        // 토큰이 있고 유효하면 인증 처리
         if (token != null && jwtUtil.validateToken(token)) {
             Authentication authentication = jwtUtil.getAuthentication(token);
             // SecurityContext 에 인증 정보 저장
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
-        // 3. 다음 필터로 요청 전달
+        // 다음 필터로 요청 전달
         filterChain.doFilter(request, response);
     }
 }

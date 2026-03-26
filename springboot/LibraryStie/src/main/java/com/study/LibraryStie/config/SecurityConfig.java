@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -49,49 +48,46 @@ public class SecurityConfig {
 
                 // 일반 로그인 설정
                 .formLogin((FormLoginConfigurer<HttpSecurity> login) -> login
-                        .loginPage("/login")                    // 로그인 페이지
-                        .usernameParameter("userId")            // 아이디 필드명
-                        .passwordParameter("password")          // 비밀번호 필드명
-                        .loginProcessingUrl("/loginAction")     // 시큐리티가 자동 처리
-                        .successHandler(customSuccessHandler)   // 로그인 성공 핸들러 (JWT 발급)
-                        .failureUrl("/login?error=error")       // 로그인 실패 시
+                        .loginPage("/login")
+                        .usernameParameter("userId")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/loginAction")
+                        .successHandler(customSuccessHandler)
+                        .failureUrl("/login?error=error")
                         .permitAll()
                 )
 
                 // 로그아웃 설정
                 .logout((LogoutConfigurer<HttpSecurity> logout) -> logout
-                        .logoutUrl("/logoutAction")             // POST 방식 추천
-                        .logoutSuccessUrl("/")                  // 로그아웃 후 메인으로
-                        .invalidateHttpSession(true)            // 세션 삭제
-                        .deleteCookies("JSESSIONID")            // 쿠키 삭제
+                        .logoutUrl("/logoutAction")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                 )
 
                 // 소셜 로그인 설정 (Kakao, Naver)
                 .oauth2Login((OAuth2LoginConfigurer<HttpSecurity> oauth) -> oauth
                         .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOAuth2UserService) // 커스텀 OAuth2 서비스
+                                .userService(customOAuth2UserService)
                         )
                         .successHandler(snsSuccessHandler())
                         .failureHandler(snsFailureHandler())
                 )
 
-                // JWT 인증 필터 추가 (UsernamePasswordAuthenticationFilter 앞에 실행)
+                // JWT 인증 필터 추가
                 .addFilterBefore(new JwtAuthenticationFilter(jwtUtil),
                         UsernamePasswordAuthenticationFilter.class);
-
-        http.sessionManagement(session->session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }
 
-    // SNS 로그인 성공 시 /snsLoginSuccess 로 이동
+    // SNS 로그인 성공 시
     @Bean
     SimpleUrlAuthenticationSuccessHandler snsSuccessHandler() {
         return new SimpleUrlAuthenticationSuccessHandler("/snsLoginSuccess");
     }
 
-    // SNS 로그인 실패 시 /snsLoginFailure 로 이동
+    // SNS 로그인 실패 시
     @Bean
     SimpleUrlAuthenticationFailureHandler snsFailureHandler() {
         return new SimpleUrlAuthenticationFailureHandler("/snsLoginFailure");
