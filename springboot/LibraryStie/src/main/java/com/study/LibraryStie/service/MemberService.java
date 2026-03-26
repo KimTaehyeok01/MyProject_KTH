@@ -2,8 +2,8 @@ package com.study.LibraryStie.service;
 
 import com.study.LibraryStie.dto.MemberRequest;
 import com.study.LibraryStie.dto.MemberResponse;
-import com.study.LibraryStie.entity.member.Member;
-import com.study.LibraryStie.entity.member.MemberRepository;
+import com.study.LibraryStie.domain.member.Member;
+import com.study.LibraryStie.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

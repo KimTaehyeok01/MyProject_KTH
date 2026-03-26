@@ -1,4 +1,4 @@
-package com.study.LibraryStie.entity.loan;
+package com.study.LibraryStie.domain.loan;
 
 import com.study.LibraryStie.enumeration.LoanStatus;
 import org.springframework.data.domain.Page;

@@ -1,6 +1,6 @@
 package com.study.LibraryStie.config;
 
-import com.study.LibraryStie.entity.member.MemberRepository;
+import com.study.LibraryStie.domain.member.MemberRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

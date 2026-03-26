@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.study.LibraryStie.dto.BookResponse;
 
-// 뷰(HTML 페이지) 라우팅 컨트롤러
+// 뷰(HTML 페이지) 컨트롤러
 @Controller
 @RequiredArgsConstructor
 public class ViewController {
@@ -44,7 +44,6 @@ public class ViewController {
         model.addAttribute("category", category);
         model.addAttribute("totalBooks", bookService.count());
 
-        // JWT 토큰을 템플릿에 전달 (JavaScript fetch 에서 사용)
         String jwtToken = (String) session.getAttribute("JWT_TOKEN");
         model.addAttribute("jwtToken", jwtToken);
 
@@ -94,14 +93,14 @@ public class ViewController {
         return "loan";
     }
 
-    // 현재 로그인 사용자 이메일 조회 (일반 로그인 + SNS 로그인 통합)
+    // 현재 로그인 사용자 이메일 조회
     public String getCurrentUserEmail(Authentication auth, HttpSession session) {
-        // SNS 로그인 사용자 (세션에 SessionUser 있음)
+        // SNS 로그인 사용자
         SessionUser sessionUser = (SessionUser) session.getAttribute("user");
         if (sessionUser != null && sessionUser.getEmail() != null) {
             return sessionUser.getEmail();
         }
-        // 일반 로그인 사용자 (세션에 userEmail 있음)
+        // 일반 로그인 사용자
         String sessionEmail = (String) session.getAttribute("userEmail");
         if (sessionEmail != null) {
             return sessionEmail;

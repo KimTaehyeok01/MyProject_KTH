@@ -1,4 +1,4 @@
-package com.study.LibraryStie.entity.member;
+package com.study.LibraryStie.domain.member;
 
 import jakarta.persistence.*;
 import lombok.*;

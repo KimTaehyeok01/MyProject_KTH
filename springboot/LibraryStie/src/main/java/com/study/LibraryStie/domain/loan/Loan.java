@@ -1,6 +1,6 @@
-package com.study.LibraryStie.entity.loan;
+package com.study.LibraryStie.domain.loan;
 
-import com.study.LibraryStie.entity.book.Book;
+import com.study.LibraryStie.domain.book.Book;
 import com.study.LibraryStie.enumeration.LoanStatus;
 import jakarta.persistence.*;
 import lombok.*;

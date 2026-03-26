@@ -1,4 +1,4 @@
-package com.study.LibraryStie.entity.snsUser;
+package com.study.LibraryStie.domain.snsUser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

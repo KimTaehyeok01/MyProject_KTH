@@ -1,6 +1,6 @@
 package com.study.LibraryStie.service;
 
-import com.study.LibraryStie.entity.snsUser.SnsUser;
+import com.study.LibraryStie.domain.snsUser.SnsUser;
 import com.study.LibraryStie.enumeration.UserRole;
 import lombok.Builder;
 import lombok.Getter;

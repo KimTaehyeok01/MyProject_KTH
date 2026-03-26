@@ -1,6 +1,6 @@
 package com.study.LibraryStie.dto;
 
-import com.study.LibraryStie.entity.book.Book;
+import com.study.LibraryStie.domain.book.Book;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

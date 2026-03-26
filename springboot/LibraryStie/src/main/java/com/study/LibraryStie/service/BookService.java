@@ -2,8 +2,8 @@ package com.study.LibraryStie.service;
 
 import com.study.LibraryStie.dto.BookRequest;
 import com.study.LibraryStie.dto.BookResponse;
-import com.study.LibraryStie.entity.book.Book;
-import com.study.LibraryStie.entity.book.BookRepository;
+import com.study.LibraryStie.domain.book.Book;
+import com.study.LibraryStie.domain.book.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,10 +1,10 @@
 package com.study.LibraryStie.service;
 
 import com.study.LibraryStie.dto.LoanResponse;
-import com.study.LibraryStie.entity.book.Book;
-import com.study.LibraryStie.entity.book.BookRepository;
-import com.study.LibraryStie.entity.loan.Loan;
-import com.study.LibraryStie.entity.loan.LoanRepository;
+import com.study.LibraryStie.domain.book.Book;
+import com.study.LibraryStie.domain.book.BookRepository;
+import com.study.LibraryStie.domain.loan.Loan;
+import com.study.LibraryStie.domain.loan.LoanRepository;
 import com.study.LibraryStie.enumeration.LoanStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

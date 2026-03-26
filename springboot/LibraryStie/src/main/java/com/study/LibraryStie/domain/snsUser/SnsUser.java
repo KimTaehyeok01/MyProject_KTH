@@ -1,4 +1,4 @@
-package com.study.LibraryStie.entity.snsUser;
+package com.study.LibraryStie.domain.snsUser;
 
 import com.study.LibraryStie.enumeration.UserRole;
 import jakarta.persistence.*;

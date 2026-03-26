@@ -1,6 +1,6 @@
 package com.study.LibraryStie.dto;
 
-import com.study.LibraryStie.entity.book.Book;
+import com.study.LibraryStie.domain.book.Book;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

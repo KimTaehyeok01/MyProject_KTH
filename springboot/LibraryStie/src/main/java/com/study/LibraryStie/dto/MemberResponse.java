@@ -1,6 +1,6 @@
 package com.study.LibraryStie.dto;
 
-import com.study.LibraryStie.entity.member.Member;
+import com.study.LibraryStie.domain.member.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.study.LibraryStie.entity.book;
+package com.study.LibraryStie.domain.book;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

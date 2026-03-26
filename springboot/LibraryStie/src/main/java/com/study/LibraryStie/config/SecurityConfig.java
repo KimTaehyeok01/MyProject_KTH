@@ -67,6 +67,7 @@ public class SecurityConfig {
 
                 // 소셜 로그인 설정 (Kakao, Naver)
                 .oauth2Login((OAuth2LoginConfigurer<HttpSecurity> oauth) -> oauth
+                        .loginPage("/login")
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)
                         )

@@ -1,6 +1,6 @@
 package com.study.LibraryStie.dto;
 
-import com.study.LibraryStie.entity.loan.Loan;
+import com.study.LibraryStie.domain.loan.Loan;
 import com.study.LibraryStie.enumeration.LoanStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

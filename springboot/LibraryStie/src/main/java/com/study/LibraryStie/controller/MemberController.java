@@ -31,7 +31,6 @@ public class MemberController {
     @PostMapping("/signupAction")
     @ResponseBody
     public String signupAction(@Valid @ModelAttribute MemberRequest dto, BindingResult bindingResult) {
-        // 유효성 검사 실패 시 에러 메시지 반환
         if (bindingResult.hasErrors()) {
             String message = bindingResult.getFieldError().getDefaultMessage();
             return "<script>alert('입력 오류: " + message + "'); history.back();</script>";
