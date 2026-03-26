@@ -13,21 +13,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// 소셜 로그인(Kakao, Naver) 성공/실패 처리 컨트롤러
 @Controller
 @RequiredArgsConstructor
 public class SnsController {
 
     private final JwtUtil jwtUtil;
 
-    // SNS 로그인 성공 처리
     @GetMapping("/snsLoginSuccess")
     @ResponseBody
     public String snsLoginSuccess(Authentication authentication, HttpSession session) {
         SessionUser user = (SessionUser) session.getAttribute("user");
 
         if (user != null) {
-            // SNS 로그인 사용자도 JWT 토큰 발급
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
@@ -41,7 +38,6 @@ public class SnsController {
         return "<script>alert('" + userName + "님, 소셜 로그인 성공!'); location.href='/';</script>";
     }
 
-    // SNS 로그인 실패 처리
     @GetMapping("/snsLoginFailure")
     @ResponseBody
     public String snsLoginFailure() {

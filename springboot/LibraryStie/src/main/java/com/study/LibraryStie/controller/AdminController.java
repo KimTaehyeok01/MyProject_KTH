@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-// 관리자 전용 컨트롤러
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
@@ -22,7 +21,6 @@ public class AdminController {
     private final BookService bookService;
     private final LoanService loanService;
 
-    // 관리자 대시보드
     @GetMapping
     public String adminMain(Model model) {
         model.addAttribute("totalMembers", memberService.count());
@@ -31,7 +29,6 @@ public class AdminController {
         return "admin/index";
     }
 
-    // 회원 목록 페이지
     @GetMapping("/members")
     public String memberList(Model model) {
         model.addAttribute("memberList", memberService.findAll());
@@ -39,7 +36,6 @@ public class AdminController {
         return "admin/members";
     }
 
-    // 회원 강제 탈퇴 (POST)
     @PostMapping("/members/delete")
     @ResponseBody
     public String deleteMember(@RequestParam Long id) {
@@ -51,7 +47,6 @@ public class AdminController {
         }
     }
 
-    // 대출 현황 페이지
     @GetMapping("/loans")
     public String loanList(Model model) {
         model.addAttribute("loanList", loanService.findAll());
@@ -59,7 +54,6 @@ public class AdminController {
         return "admin/loans";
     }
 
-    // 도서 관리 페이지
     @GetMapping("/books")
     public String bookList(Model model) {
         model.addAttribute("bookList", bookService.findAll());
@@ -67,7 +61,6 @@ public class AdminController {
         return "admin/books";
     }
 
-    // 도서 등록 처리
     @PostMapping("/books/save")
     @ResponseBody
     public String saveBook(@Valid @ModelAttribute BookRequest dto, BindingResult bindingResult) {
@@ -83,7 +76,6 @@ public class AdminController {
         }
     }
 
-    // 도서 수정 처리
     @PostMapping("/books/update")
     @ResponseBody
     public String updateBook(@RequestParam Long id, @ModelAttribute BookRequest dto) {
@@ -95,7 +87,6 @@ public class AdminController {
         }
     }
 
-    // 도서 삭제 처리
     @PostMapping("/books/delete")
     @ResponseBody
     public String deleteBook(@RequestParam Long id) {

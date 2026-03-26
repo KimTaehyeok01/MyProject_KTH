@@ -23,7 +23,7 @@ public class SecurityService implements UserDetailsService {
         return User.builder()
                 .username(member.getUserId())
                 .password(member.getPassword())
-                .roles(member.getUserRole().replace("ROLE_", "")) // "ROLE_USER" -> "USER"
+                .roles(member.getUserRole().replace("ROLE_", ""))
                 .build();
     }
 }

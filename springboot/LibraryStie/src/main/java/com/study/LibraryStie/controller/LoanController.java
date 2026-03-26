@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-// 대출 / 반납 REST API 컨트롤러
 @RestController
 @RequestMapping("/api/loan")
 @RequiredArgsConstructor
@@ -15,7 +14,6 @@ public class LoanController {
     private final LoanService loanService;
     private final ViewController viewController;
 
-    // 도서 대출 신청 (POST /api/loan/{bookId})
     @PostMapping("/{bookId}")
     public String loanBook(@PathVariable Long bookId,
                            Authentication auth, HttpSession session) {
@@ -32,7 +30,6 @@ public class LoanController {
         }
     }
 
-    // 도서 반납 처리 (POST /api/loan/return/{loanId})
     @PostMapping("/return/{loanId}")
     public String returnBook(@PathVariable Long loanId,
                              Authentication auth, HttpSession session) {

@@ -7,17 +7,16 @@ import lombok.Getter;
 
 import java.util.Map;
 
-// 각 OAuth2 플랫폼(카카오, 네이버)의 응답 속성을 통일된 형태로 변환하는 클래스
 @Getter
 public class OAuthAttributes {
 
-    private Map<String, Object> attributes; // OAuth2 원본 속성
-    private String nameAttributeKey;        // 사용자 식별 키
-    private String registrationId;          // 플랫폼 이름 (kakao, naver)
-    private String providerId;              // 플랫폼 고유 ID
-    private String name;                    // 이름
-    private String email;                   // 이메일
-    private String picture;                 // 프로필 이미지
+    private Map<String, Object> attributes;
+    private String nameAttributeKey;
+    private String registrationId;
+    private String providerId;
+    private String name;
+    private String email;
+    private String picture;
 
     @Builder
     public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey,
@@ -32,7 +31,6 @@ public class OAuthAttributes {
         this.picture = picture;
     }
 
-    // 플랫폼 별로 다른 구조의 응답을 통일된 OAuthAttributes 로 변환
     public static OAuthAttributes of(String registrationId,
                                      String userNameAttributeName,
                                      Map<String, Object> attributes) {
@@ -44,14 +42,6 @@ public class OAuthAttributes {
         throw new IllegalArgumentException("지원하지 않는 소셜 로그인입니다: " + registrationId);
     }
 
-    // 카카오 응답 처리
-    // {
-    //   "id": 12345,
-    //   "kakao_account": {
-    //     "email": "user@kakao.com",
-    //     "profile": { "nickname": "홍길동", "profile_image_url": "..." }
-    //   }
-    // }
     @SuppressWarnings("unchecked")
     private static OAuthAttributes ofKakao(String registrationId,
                                            String userNameAttributeName,
@@ -80,15 +70,6 @@ public class OAuthAttributes {
                 .build();
     }
 
-    // 네이버 응답 처리
-    // {
-    //   "response": {
-    //     "id": "abcdef",
-    //     "name": "홍길동",
-    //     "email": "user@naver.com",
-    //     "profile_image": "..."
-    //   }
-    // }
     @SuppressWarnings("unchecked")
     private static OAuthAttributes ofNaver(String registrationId,
                                            String userNameAttributeName,
@@ -115,7 +96,6 @@ public class OAuthAttributes {
                 .build();
     }
 
-    // 신규 SNS 사용자 엔티티 생성
     public SnsUser toEntity() {
         return SnsUser.builder()
                 .name(name)

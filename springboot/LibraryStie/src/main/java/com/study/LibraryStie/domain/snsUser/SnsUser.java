@@ -6,7 +6,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-// SNS 소셜 로그인 회원 엔티티 (Kakao, Naver)
 @Entity
 @Table(name = "sns_user")
 @Getter

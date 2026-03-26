@@ -8,26 +8,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-// 회원 관련 컨트롤러 (로그인 폼, 회원가입)
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
-    // 로그인 페이지
     @GetMapping("/login")
     public String loginForm() {
         return "login";
     }
 
-    // 회원가입 페이지
     @GetMapping("/signup")
     public String signupForm() {
         return "signup";
     }
 
-    // 회원가입 처리
     @PostMapping("/signupAction")
     @ResponseBody
     public String signupAction(@Valid @ModelAttribute MemberRequest dto, BindingResult bindingResult) {

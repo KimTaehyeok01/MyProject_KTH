@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-// 도서 등록/수정 요청 DTO
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +29,6 @@ public class BookRequest {
     private String publishDate;
     private String description;
 
-    // 도서 등록 시 엔티티로 변환
     public Book toSaveEntity() {
         return Book.builder()
                 .title(title)
@@ -39,7 +37,7 @@ public class BookRequest {
                 .isbn(isbn)
                 .category(category)
                 .totalQuantity(totalQuantity)
-                .availableQuantity(totalQuantity) // 처음엔 전체 수량이 가용 수량
+                .availableQuantity(totalQuantity)
                 .publishDate(publishDate)
                 .description(description)
                 .build();

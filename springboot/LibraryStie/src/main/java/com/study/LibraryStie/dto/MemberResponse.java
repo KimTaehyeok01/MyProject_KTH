@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-// 회원 정보 응답 DTO
 @Getter @Setter
 @NoArgsConstructor
 public class MemberResponse {
@@ -20,7 +19,6 @@ public class MemberResponse {
     private String userRole;
     private LocalDate joinDate;
 
-    // Member 엔티티를 DTO로 변환하는 생성자
     public MemberResponse(Member member) {
         this.id = member.getId();
         this.userId = member.getUserId();

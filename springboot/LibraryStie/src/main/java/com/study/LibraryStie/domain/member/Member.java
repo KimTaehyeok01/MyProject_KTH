@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-// 일반 로그인 회원 엔티티
 @Entity
 @Table(name = "member")
 @Getter

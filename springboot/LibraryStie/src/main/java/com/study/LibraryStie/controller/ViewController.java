@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.study.LibraryStie.dto.BookResponse;
 
-// 뷰(HTML 페이지) 컨트롤러
 @Controller
 @RequiredArgsConstructor
 public class ViewController {
@@ -23,7 +22,6 @@ public class ViewController {
     private final LoanService loanService;
     private final MemberService memberService;
 
-    // 메인 페이지
     @GetMapping("/")
     public String main(@RequestParam(defaultValue = "") String keyword,
                        @RequestParam(defaultValue = "") String category,
@@ -50,7 +48,6 @@ public class ViewController {
         return "index";
     }
 
-    // 마이페이지
     @GetMapping("/mypage")
     public String mypage(Model model, Authentication auth, HttpSession session) {
         String userEmail = getCurrentUserEmail(auth, session);
@@ -67,7 +64,6 @@ public class ViewController {
         return "mypage";
     }
 
-    // 대출/반납 전용 페이지
     @GetMapping("/loan")
     public String loanPage(@RequestParam(defaultValue = "") String keyword,
                            @RequestParam(defaultValue = "0") int page,
@@ -93,26 +89,21 @@ public class ViewController {
         return "loan";
     }
 
-    // 현재 로그인 사용자 이메일 조회
     public String getCurrentUserEmail(Authentication auth, HttpSession session) {
-        // SNS 로그인 사용자
         SessionUser sessionUser = (SessionUser) session.getAttribute("user");
         if (sessionUser != null && sessionUser.getEmail() != null) {
             return sessionUser.getEmail();
         }
-        // 일반 로그인 사용자
         String sessionEmail = (String) session.getAttribute("userEmail");
         if (sessionEmail != null) {
             return sessionEmail;
         }
-        // 인증 객체에서 userId 로 이메일 조회
         if (auth != null && auth.isAuthenticated()) {
             return memberService.findEmailByUserId(auth.getName());
         }
         return "anonymous@library.com";
     }
 
-    // 현재 로그인 사용자 이름 조회
     public String getCurrentUserName(Authentication auth, HttpSession session) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("user");
         if (sessionUser != null) {

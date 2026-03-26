@@ -8,7 +8,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-// 회원가입 / 로그인 요청 DTO
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,7 +34,6 @@ public class MemberRequest {
 
     private String phone;
 
-    // 회원가입 시 엔티티로 변환
     public Member toSaveEntity() {
         return Member.builder()
                 .userId(userId)

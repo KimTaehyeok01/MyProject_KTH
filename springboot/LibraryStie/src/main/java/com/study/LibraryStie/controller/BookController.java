@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-// 도서 조회 REST API 컨트롤러
 @RestController
 @RequestMapping("/api/books")
 @RequiredArgsConstructor
@@ -14,7 +13,6 @@ public class BookController {
 
     private final BookService bookService;
 
-    // 도서 목록 조회
     @GetMapping
     public Page<BookResponse> getBooks(@RequestParam(defaultValue = "") String keyword,
                                        @RequestParam(defaultValue = "") String category,
@@ -25,7 +23,6 @@ public class BookController {
         return bookService.search(keyword, page);
     }
 
-    // 도서 단건 조회
     @GetMapping("/{id}")
     public BookResponse getBook(@PathVariable Long id) {
         return bookService.findById(id);

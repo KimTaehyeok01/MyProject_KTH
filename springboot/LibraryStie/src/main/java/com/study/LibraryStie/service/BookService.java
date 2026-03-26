@@ -22,14 +22,12 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
-    // 도서 목록 조회 (페이징)
     @Transactional(readOnly = true)
     public Page<BookResponse> getList(int page) {
         Pageable pageable = PageRequest.of(page, 12, Sort.by("id").descending());
         return bookRepository.findAll(pageable).map(BookResponse::new);
     }
 
-    // 도서 검색 (제목 또는 저자, 페이징)
     @Transactional(readOnly = true)
     public Page<BookResponse> search(String keyword, int page) {
         Pageable pageable = PageRequest.of(page, 12, Sort.by("id").descending());
@@ -40,14 +38,12 @@ public class BookService {
                 .map(BookResponse::new);
     }
 
-    // 카테고리별 조회 (페이징)
     @Transactional(readOnly = true)
     public Page<BookResponse> findByCategory(String category, int page) {
         Pageable pageable = PageRequest.of(page, 12, Sort.by("id").descending());
         return bookRepository.findByCategory(category, pageable).map(BookResponse::new);
     }
 
-    // 도서 단건 조회
     @Transactional(readOnly = true)
     public BookResponse findById(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(() ->
@@ -55,19 +51,16 @@ public class BookService {
         return new BookResponse(book);
     }
 
-    // 전체 도서 조회 (관리자)
     @Transactional(readOnly = true)
     public List<BookResponse> findAll() {
         return bookRepository.findAll().stream().map(BookResponse::new).collect(Collectors.toList());
     }
 
-    // 도서 등록 (관리자)
     @Transactional
     public void save(BookRequest dto) {
         bookRepository.save(dto.toSaveEntity());
     }
 
-    // 도서 수정 (관리자)
     @Transactional
     public void update(Long id, BookRequest dto) {
         Book book = bookRepository.findById(id).orElseThrow(() ->
@@ -79,7 +72,6 @@ public class BookService {
         );
     }
 
-    // 도서 삭제 (관리자)
     @Transactional
     public void delete(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(() ->
@@ -87,7 +79,6 @@ public class BookService {
         bookRepository.delete(book);
     }
 
-    // 전체 도서 수
     @Transactional(readOnly = true)
     public long count() {
         return bookRepository.count();

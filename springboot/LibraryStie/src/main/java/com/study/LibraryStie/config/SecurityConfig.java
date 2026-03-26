@@ -31,12 +31,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // CSRF 설정
                 .csrf((CsrfConfigurer<HttpSecurity> csrf) -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
 
-                // 경로별 인가 설정
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/", "/login", "/loginAction", "/signup", "/signupAction").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
@@ -46,7 +44,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
-                // 일반 로그인 설정
                 .formLogin((FormLoginConfigurer<HttpSecurity> login) -> login
                         .loginPage("/login")
                         .usernameParameter("userId")
@@ -57,7 +54,6 @@ public class SecurityConfig {
                         .permitAll()
                 )
 
-                // 로그아웃 설정
                 .logout((LogoutConfigurer<HttpSecurity> logout) -> logout
                         .logoutUrl("/logoutAction")
                         .logoutSuccessUrl("/")
@@ -65,7 +61,6 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID")
                 )
 
-                // 소셜 로그인 설정 (Kakao, Naver)
                 .oauth2Login((OAuth2LoginConfigurer<HttpSecurity> oauth) -> oauth
                         .loginPage("/login")
                         .userInfoEndpoint(userInfo -> userInfo
@@ -75,7 +70,6 @@ public class SecurityConfig {
                         .failureHandler(snsFailureHandler())
                 )
 
-                // JWT 인증 필터 추가
                 .addFilterBefore(new JwtAuthenticationFilter(jwtUtil),
                         UsernamePasswordAuthenticationFilter.class);
 

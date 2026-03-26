@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-// 대출 정보 응답 DTO
 @Getter @Setter
 @NoArgsConstructor
 public class LoanResponse {
@@ -24,9 +23,8 @@ public class LoanResponse {
     private LocalDate returnDate;
     private LoanStatus loanStatus;
     private String loanStatusValue;
-    private boolean overdue; // 연체 여부
+    private boolean overdue;
 
-    // Loan 엔티티를 DTO로 변환하는 생성자
     public LoanResponse(Loan loan) {
         this.id = loan.getId();
         this.userEmail = loan.getUserEmail();
@@ -39,7 +37,6 @@ public class LoanResponse {
         this.returnDate = loan.getReturnDate();
         this.loanStatus = loan.getLoanStatus();
         this.loanStatusValue = loan.getLoanStatus().getValue();
-        // 반납 예정일이 오늘보다 지났고 아직 반납 안 됐으면 연체
         this.overdue = (loan.getLoanStatus() == LoanStatus.BORROWED)
                 && LocalDate.now().isAfter(loan.getExpectedReturnDate());
     }
