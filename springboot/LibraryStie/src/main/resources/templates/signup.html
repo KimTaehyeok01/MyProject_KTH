@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          #1e3a5f 0%,
+          #2d5a8e 50%,
+          #1a6b8a 100%
+        );
+        font-family: "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+        padding: 20px;
+      }
+      .signup-wrap {
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 20px;
+        padding: 48px 44px;
+        width: 100%;
+        max-width: 460px;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+      }
+      .logo-area {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      .logo-icon {
+        font-size: 44px;
+        display: block;
+        margin-bottom: 8px;
+      }
+      .logo-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1e3a5f;
+      }
+      .logo-sub {
+        font-size: 13px;
+        color: #718096;
+        margin-top: 4px;
+      }
+      .form-group {
+        margin-bottom: 18px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: #4a5568;
+        margin-bottom: 7px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .form-group label .required {
+        color: #e53e3e;
+        margin-left: 3px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 14px;
+        color: #2d3748;
+        background: #f7fafc;
+        outline: none;
+        transition: all 0.25s;
+      }
+      .form-group input:focus {
+        border-color: #1e3a5f;
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.1);
+      }
+      .form-hint {
+        font-size: 11px;
+        color: #a0aec0;
+        margin-top: 5px;
+      }
+      .btn-signup {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 100%);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s;
+        box-shadow: 0 4px 14px rgba(30, 58, 95, 0.35);
+        margin-top: 8px;
+      }
+      .btn-signup:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(30, 58, 95, 0.45);
+      }
+      .login-link {
+        text-align: center;
+        font-size: 14px;
+        color: #718096;
+        margin-top: 18px;
+      }
+      .login-link a {
+        color: #1e3a5f;
+        font-weight: 600;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="signup-wrap">
+      <div class="logo-area">
+        <span class="logo-icon">📝</span>
+        <div class="logo-title">회원가입</div>
+        <div class="logo-sub">도서관 멤버십 등록</div>
+      </div>
+
+      <form th:action="@{/signupAction}" method="post">
+        <input
+          type="hidden"
+          th:name="${_csrf.parameterName}"
+          th:value="${_csrf.token}"
+        />
+
+        <div class="form-group">
+          <label for="userId">아이디 <span class="required">*</span></label>
+          <input
+            type="text"
+            id="userId"
+            name="userId"
+            placeholder="4~20자 영문/숫자"
+            required
+          />
+          <p class="form-hint">4~20자 사이로 입력하세요</p>
+        </div>
+
+        <div class="form-group">
+          <label for="password">비밀번호 <span class="required">*</span></label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="4~20자 비밀번호"
+            required
+          />
+          <p class="form-hint">4~20자 사이로 입력하세요</p>
+        </div>
+
+        <div class="form-group">
+          <label for="userName">이름 <span class="required">*</span></label>
+          <input
+            type="text"
+            id="userName"
+            name="userName"
+            placeholder="실명을 입력하세요"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">이메일 <span class="required">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="example@email.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">전화번호</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            placeholder="010-0000-0000"
+          />
+        </div>
+
+        <button type="submit" class="btn-signup">✅ 회원가입 완료</button>
+      </form>
+
+      <p class="login-link">
+        이미 계정이 있으신가요? <a th:href="@{/login}">로그인</a>
+      </p>
+    </div>
+  </body>
+</html>

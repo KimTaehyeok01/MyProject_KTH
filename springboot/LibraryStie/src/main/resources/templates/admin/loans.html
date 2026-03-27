@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대출 현황 - 관리자</title>
+    <style>
+      :root {
+        --bg: #f0f4f8;
+        --surface: #fff;
+        --surface-alt: #f8f9fa;
+        --border: #e2e8f0;
+        --text-primary: #1a202c;
+        --text-secondary: #4a5568;
+        --text-muted: #9399a6;
+        --primary: #1e3a5f;
+        --primary-light: #2d5a8e;
+        --primary-soft: #e8f0f8;
+        --accent: #e8a020;
+        --accent-soft: #fef3e0;
+        --danger: #e84545;
+        --danger-soft: #fdf0f0;
+        --success: #22c55e;
+        --success-soft: #f0fdf4;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+        --radius: 12px;
+        --radius-sm: 8px;
+        --transition: 0.18s ease;
+      }
+      body.dark {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface-alt: #22263a;
+        --border: #2e3347;
+        --text-primary: #e8eaf0;
+        --text-secondary: #9399a6;
+        --text-muted: #5c6370;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text-primary);
+        min-height: 100vh;
+      }
+      .nav-bar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 28px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-logo {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-logo span {
+        color: var(--text-primary);
+      }
+      .nav-badge {
+        background: var(--accent);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 8px;
+        margin-left: 6px;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .btn-nav {
+        padding: 7px 16px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-secondary);
+        transition: all var(--transition);
+      }
+      .btn-nav:hover {
+        background: var(--surface-alt);
+      }
+      .btn-nav-active {
+        background: var(--primary-soft);
+        color: var(--primary);
+        border-color: var(--primary);
+      }
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface-alt);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 36px 16px 60px;
+      }
+      .page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .page-title {
+        font-size: 24px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .header-badges {
+        display: flex;
+        gap: 10px;
+      }
+      .count-badge {
+        font-size: 13px;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 12px;
+      }
+      .badge-active {
+        background: var(--primary-soft);
+        color: var(--primary);
+      }
+      /* 필터 바 */
+      .filter-bar {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .search-input {
+        flex: 1;
+        min-width: 180px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 9px 14px;
+        font-size: 14px;
+        background: var(--surface-alt);
+        color: var(--text-primary);
+        outline: none;
+      }
+      .search-input:focus {
+        border-color: var(--primary);
+      }
+      .filter-select {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 9px 14px;
+        font-size: 14px;
+        background: var(--surface-alt);
+        color: var(--text-primary);
+        outline: none;
+        cursor: pointer;
+      }
+      .filter-select:focus {
+        border-color: var(--primary);
+      }
+      /* 테이블 */
+      .section-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        padding: 12px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-muted);
+        background: var(--surface-alt);
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+      td {
+        padding: 13px 16px;
+        font-size: 13px;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: var(--surface-alt);
+      }
+      .loan-status {
+        display: inline-block;
+        padding: 3px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .status-borrowed {
+        background: var(--primary-soft);
+        color: var(--primary);
+      }
+      .status-returned {
+        background: var(--success-soft);
+        color: var(--success);
+      }
+      .status-overdue {
+        background: var(--danger-soft);
+        color: var(--danger);
+      }
+      .empty-msg {
+        padding: 60px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 15px;
+      }
+      .td-left {
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <a class="nav-logo" th:href="@{/}"
+        >📚 <span>행복도서관</span><span class="nav-badge">ADMIN</span></a
+      >
+      <div class="nav-actions">
+        <a class="btn-nav" th:href="@{/admin}">대시보드</a>
+        <a class="btn-nav" th:href="@{/admin/members}">회원 관리</a>
+        <a class="btn-nav btn-nav-active" th:href="@{/admin/loans}"
+          >대출 현황</a
+        >
+        <a class="btn-nav" th:href="@{/admin/books}">도서 관리</a>
+        <a class="btn-nav" th:href="@{/}">← 메인</a>
+        <form
+          th:action="@{/logoutAction}"
+          method="post"
+          style="display: inline"
+        >
+          <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"
+          />
+          <button type="submit" class="btn-nav">로그아웃</button>
+        </form>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <div class="page-header">
+        <div class="page-title">📋 대출 현황</div>
+        <div class="header-badges">
+          <span class="count-badge badge-active"
+            >대출 중 <span th:text="${activeCount}">0</span>건</span
+          >
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input
+          class="search-input"
+          id="searchInput"
+          type="text"
+          placeholder="회원명, 도서명, 이메일로 검색..."
+        />
+        <select class="filter-select" id="statusFilter">
+          <option value="">전체 상태</option>
+          <option value="대출중">대출 중</option>
+          <option value="반납완료">반납완료</option>
+          <option value="연체">연체 중</option>
+        </select>
+      </div>
+
+      <div class="section-card">
+        <table id="loanTable" th:if="${!loanList.isEmpty()}">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>회원명</th>
+              <th>이메일</th>
+              <th>도서명</th>
+              <th>대출일</th>
+              <th>반납예정일</th>
+              <th>반납일</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="loan, stat : ${loanList}">
+              <td th:text="${stat.count}">1</td>
+              <td th:text="${loan.userName}">회원명</td>
+              <td th:text="${loan.userEmail}">이메일</td>
+              <td class="td-left" th:text="${loan.bookTitle}">도서명</td>
+              <td th:text="${loan.loanDate}">대출일</td>
+              <td th:text="${loan.expectedReturnDate}">반납예정일</td>
+              <td th:text="${loan.returnDate != null ? loan.returnDate : '-'}">
+                반납일
+              </td>
+              <td>
+                <span
+                  class="loan-status"
+                  th:classappend="${loan.loanStatus.name() == 'BORROWED'} ? (${loan.overdue} ? 'status-overdue' : 'status-borrowed') : 'status-returned'"
+                  th:text="${loan.loanStatus.name() == 'BORROWED'} ? (${loan.overdue} ? '연체 중' : '대출 중') : '반납완료'"
+                  >상태</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="empty-msg" th:if="${loanList.isEmpty()}">
+          📭 대출 이력이 없습니다.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function applyFilter() {
+        const keyword = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const status = document.getElementById("statusFilter").value;
+        const rows = document.querySelectorAll("#loanTable tbody tr");
+        rows.forEach((row) => {
+          const text = row.textContent.toLowerCase();
+          const statusCell = row.querySelector("td:last-child span");
+          const statusText = statusCell ? statusCell.textContent.trim() : "";
+          const keywordMatch = text.includes(keyword);
+          const statusMatch = !status || statusText.includes(status);
+          row.style.display = keywordMatch && statusMatch ? "" : "none";
+        });
+      }
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", applyFilter);
+      document
+        .getElementById("statusFilter")
+        .addEventListener("change", applyFilter);
+
+      const toggleBtn = document.getElementById("themeToggle");
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+        toggleBtn.textContent = "☀️";
+      }
+      toggleBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark");
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+    </script>
+  </body>
+</html>
