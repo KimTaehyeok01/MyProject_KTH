@@ -42,9 +42,6 @@ public class ViewController {
         model.addAttribute("category", category);
         model.addAttribute("totalBooks", bookService.count());
 
-        String jwtToken = (String) session.getAttribute("JWT_TOKEN");
-        model.addAttribute("jwtToken", jwtToken);
-
         return "index";
     }
 
@@ -57,9 +54,6 @@ public class ViewController {
         model.addAttribute("allLoans", loanService.findMyAllLoans(userEmail));
         model.addAttribute("userName", userName);
         model.addAttribute("userEmail", userEmail);
-
-        String jwtToken = (String) session.getAttribute("JWT_TOKEN");
-        model.addAttribute("jwtToken", jwtToken);
 
         return "mypage";
     }
@@ -82,9 +76,6 @@ public class ViewController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("activeLoans", loanService.findMyActiveLoans(userEmail));
         model.addAttribute("userEmail", userEmail);
-
-        String jwtToken = (String) session.getAttribute("JWT_TOKEN");
-        model.addAttribute("jwtToken", jwtToken);
 
         return "loan";
     }

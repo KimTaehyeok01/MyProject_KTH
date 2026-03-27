@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.cli
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
@@ -26,7 +25,6 @@ public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomAuthenticationSuccessHandler customSuccessHandler;
-    private final JwtUtil jwtUtil;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,7 +36,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/", "/login", "/loginAction", "/signup", "/signupAction").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
-                        .requestMatchers("/api/books/**").permitAll()        // 도서 조회 API
+                        .requestMatchers("/api/books/**").permitAll()
                         .requestMatchers("/snsLoginSuccess", "/snsLoginFailure").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
@@ -68,21 +66,16 @@ public class SecurityConfig {
                         )
                         .successHandler(snsSuccessHandler())
                         .failureHandler(snsFailureHandler())
-                )
-
-                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil),
-                        UsernamePasswordAuthenticationFilter.class);
+                );
 
         return http.build();
     }
 
-    // SNS 로그인 성공 시
     @Bean
     SimpleUrlAuthenticationSuccessHandler snsSuccessHandler() {
         return new SimpleUrlAuthenticationSuccessHandler("/snsLoginSuccess");
     }
 
-    // SNS 로그인 실패 시
     @Bean
     SimpleUrlAuthenticationFailureHandler snsFailureHandler() {
         return new SimpleUrlAuthenticationFailureHandler("/snsLoginFailure");
