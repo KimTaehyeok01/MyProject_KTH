@@ -38,8 +38,27 @@ public class OAuthAttributes {
             return ofKakao(registrationId, userNameAttributeName, attributes);
         } else if ("naver".equals(registrationId)) {
             return ofNaver(registrationId, userNameAttributeName, attributes);
+        } else if ("google".equals(registrationId)) {
+            return ofGoogle(registrationId, userNameAttributeName, attributes);
         }
         throw new IllegalArgumentException("지원하지 않는 소셜 로그인입니다: " + registrationId);
+    }
+
+    private static OAuthAttributes ofGoogle(String registrationId,
+                                            String userNameAttributeName,
+                                            Map<String, Object> attributes) {
+        Object providerIdObj = attributes.get(userNameAttributeName);
+        String providerId = providerIdObj != null ? providerIdObj.toString() : "";
+
+        return OAuthAttributes.builder()
+                .registrationId(registrationId)
+                .providerId(providerId)
+                .name((String) attributes.get("name"))
+                .email((String) attributes.get("email"))
+                .picture((String) attributes.get("picture"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
     }
 
     @SuppressWarnings("unchecked")
