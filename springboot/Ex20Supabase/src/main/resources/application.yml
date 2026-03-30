@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Ex20Supabase
+
+  datasource:
+    url: jdbc:postgresql://aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres
+    username: postgres.
+    password: "kosmo123!@#"
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
