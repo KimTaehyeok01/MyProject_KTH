@@ -15,26 +15,136 @@ from datetime import datetime, timedelta
 # ── 설정 ─────────────────────────────────────────────────────────────
 API_KEY = "6VIvLrD5g/6jgPZLjvZp3cyBuD12SAHbfrc3ZvNs7tlmTPUPN/cUD0GsYFjmh8cdWifVA/g9Uj5ig9Zuoy028w=="
 BASE_URL = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
+MID_TA_URL = "https://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa"
+MID_LAND_URL = "https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst"
 
 CITIES = {
-    "서울": {"nx": 60, "ny": 127, "region": "서울특별시"},
-    "인천": {"nx": 55, "ny": 124, "region": "인천광역시"},
-    "수원": {"nx": 60, "ny": 121, "region": "경기도"},
-    "춘천": {"nx": 73, "ny": 134, "region": "강원특별자치도"},
-    "강릉": {"nx": 92, "ny": 131, "region": "강원특별자치도"},
-    "대전": {"nx": 67, "ny": 100, "region": "대전광역시"},
-    "세종": {"nx": 66, "ny": 103, "region": "세종특별자치시"},
-    "청주": {"nx": 69, "ny": 106, "region": "충청북도"},
-    "천안": {"nx": 63, "ny": 110, "region": "충청남도"},
-    "전주": {"nx": 63, "ny": 89, "region": "전북특별자치시"},
-    "광주": {"nx": 58, "ny": 74, "region": "광주광역시"},
-    "목포": {"nx": 50, "ny": 67, "region": "전라남도"},
-    "대구": {"nx": 89, "ny": 90, "region": "대구광역시"},
-    "안동": {"nx": 91, "ny": 106, "region": "경상북도"},
-    "부산": {"nx": 98, "ny": 76, "region": "부산광역시"},
-    "울산": {"nx": 102, "ny": 84, "region": "울산광역시"},
-    "창원": {"nx": 90, "ny": 77, "region": "경상남도"},
-    "제주": {"nx": 52, "ny": 38, "region": "제주특별자치도"},
+    "서울": {
+        "nx": 60,
+        "ny": 127,
+        "region": "서울특별시",
+        "mid_ta_id": "11B10101",
+        "mid_land_id": "11B00000",
+    },
+    "인천": {
+        "nx": 55,
+        "ny": 124,
+        "region": "인천광역시",
+        "mid_ta_id": "11B20201",
+        "mid_land_id": "11B00000",
+    },
+    "수원": {
+        "nx": 60,
+        "ny": 121,
+        "region": "경기도",
+        "mid_ta_id": "11B20601",
+        "mid_land_id": "11B00000",
+    },
+    "춘천": {
+        "nx": 73,
+        "ny": 134,
+        "region": "강원특별자치도",
+        "mid_ta_id": "11D10301",
+        "mid_land_id": "11D10000",
+    },
+    "강릉": {
+        "nx": 92,
+        "ny": 131,
+        "region": "강원특별자치도",
+        "mid_ta_id": "11D20501",
+        "mid_land_id": "11D20000",
+    },
+    "대전": {
+        "nx": 67,
+        "ny": 100,
+        "region": "대전광역시",
+        "mid_ta_id": "11C20401",
+        "mid_land_id": "11C20000",
+    },
+    "세종": {
+        "nx": 66,
+        "ny": 103,
+        "region": "세종특별자치시",
+        "mid_ta_id": "11C20404",
+        "mid_land_id": "11C20000",
+    },
+    "청주": {
+        "nx": 69,
+        "ny": 106,
+        "region": "충청북도",
+        "mid_ta_id": "11C10301",
+        "mid_land_id": "11C10000",
+    },
+    "천안": {
+        "nx": 63,
+        "ny": 110,
+        "region": "충청남도",
+        "mid_ta_id": "11C20301",
+        "mid_land_id": "11C20000",
+    },
+    "전주": {
+        "nx": 63,
+        "ny": 89,
+        "region": "전북특별자치시",
+        "mid_ta_id": "11F10201",
+        "mid_land_id": "11F10000",
+    },
+    "광주": {
+        "nx": 58,
+        "ny": 74,
+        "region": "광주광역시",
+        "mid_ta_id": "11F20501",
+        "mid_land_id": "11F20000",
+    },
+    "목포": {
+        "nx": 50,
+        "ny": 67,
+        "region": "전라남도",
+        "mid_ta_id": "21F20801",
+        "mid_land_id": "11F20000",
+    },
+    "대구": {
+        "nx": 89,
+        "ny": 90,
+        "region": "대구광역시",
+        "mid_ta_id": "11H10701",
+        "mid_land_id": "11H10000",
+    },
+    "안동": {
+        "nx": 91,
+        "ny": 106,
+        "region": "경상북도",
+        "mid_ta_id": "11H10501",
+        "mid_land_id": "11H10000",
+    },
+    "부산": {
+        "nx": 98,
+        "ny": 76,
+        "region": "부산광역시",
+        "mid_ta_id": "11H20201",
+        "mid_land_id": "11H20000",
+    },
+    "울산": {
+        "nx": 102,
+        "ny": 84,
+        "region": "울산광역시",
+        "mid_ta_id": "11H20101",
+        "mid_land_id": "11H20000",
+    },
+    "창원": {
+        "nx": 90,
+        "ny": 77,
+        "region": "경상남도",
+        "mid_ta_id": "11H20301",
+        "mid_land_id": "11H20000",
+    },
+    "제주": {
+        "nx": 52,
+        "ny": 38,
+        "region": "제주특별자치도",
+        "mid_ta_id": "11G00201",
+        "mid_land_id": "11G00000",
+    },
 }
 
 BASE_TIMES = ["0200", "0500", "0800", "1100", "1400", "1700", "2000", "2300"]
@@ -80,6 +190,17 @@ def get_base_date_time(now: datetime):
     return yesterday.strftime("%Y%m%d"), "2300"
 
 
+def get_mid_base_time(now: datetime):
+    """중기예보 발표시각 (06시/18시)"""
+    if now.hour < 6:
+        yesterday = now - timedelta(days=1)
+        return yesterday.strftime("%Y%m%d") + "1800"
+    elif now.hour < 18:
+        return now.strftime("%Y%m%d") + "0600"
+    else:
+        return now.strftime("%Y%m%d") + "1800"
+
+
 def sky_label(val):
     return {"1": "맑음", "3": "구름많음", "4": "흐림"}.get(str(val), val)
 
@@ -101,6 +222,28 @@ def weather_icon(sky, pty):
     if pty == "4":
         return "⛈️"
     return {"1": "☀️", "3": "⛅", "4": "☁️"}.get(str(sky), "🌡️")
+
+
+def wf_icon(wf_text):
+    """중기예보 날씨 텍스트 → 이모지"""
+    if not wf_text:
+        return "🌡️"
+    wf = str(wf_text)
+    if "비/눈" in wf:
+        return "🌨️"
+    if "눈" in wf:
+        return "❄️"
+    if "소나기" in wf:
+        return "⛈️"
+    if "비" in wf:
+        return "🌧️"
+    if "흐" in wf:
+        return "☁️"
+    if "구름" in wf:
+        return "⛅"
+    if "맑" in wf:
+        return "☀️"
+    return "🌡️"
 
 
 def card_gradient(sky, pty, tmp):
@@ -176,6 +319,143 @@ def fetch_daily_forecast(nx: int, ny: int, base_date: str, base_time: str):
         return df, None
     except Exception as e:
         return None, str(e)
+
+
+@st.cache_data(ttl=3600)
+def fetch_mid_ta(reg_id: str, tm_fc: str):
+    """중기기온 조회 (3~10일 후 최저/최고기온)"""
+    params = {
+        "serviceKey": API_KEY,
+        "pageNo": "1",
+        "numOfRows": "10",
+        "dataType": "JSON",
+        "regId": reg_id,
+        "tmFc": tm_fc,
+    }
+    try:
+        res = requests.get(MID_TA_URL, params=params, timeout=10)
+        res.raise_for_status()
+        items = res.json()["response"]["body"]["items"]["item"]
+        return items[0], None
+    except Exception as e:
+        return None, str(e)
+
+
+@st.cache_data(ttl=3600)
+def fetch_mid_land_fcst(reg_id: str, tm_fc: str):
+    """중기육상예보 조회 (3~10일 후 날씨/강수확률)"""
+    params = {
+        "serviceKey": API_KEY,
+        "pageNo": "1",
+        "numOfRows": "10",
+        "dataType": "JSON",
+        "regId": reg_id,
+        "tmFc": tm_fc,
+    }
+    try:
+        res = requests.get(MID_LAND_URL, params=params, timeout=10)
+        res.raise_for_status()
+        items = res.json()["response"]["body"]["items"]["item"]
+        return items[0], None
+    except Exception as e:
+        return None, str(e)
+
+
+def extract_daily_summary(df):
+    """단기예보 DataFrame → 일별 요약 리스트"""
+    if df is None or df.empty:
+        return []
+    daily = []
+    for date_val, grp in df.groupby(df["datetime"].dt.date):
+        cat_data = {}
+        for cat in ["TMP", "TMN", "TMX", "POP", "SKY", "PTY"]:
+            vals = grp[grp["category"] == cat]["fcstValue"].dropna()
+            if not vals.empty:
+                cat_data[cat] = vals
+        tmn = cat_data["TMN"].min() if "TMN" in cat_data else None
+        tmx = cat_data["TMX"].max() if "TMX" in cat_data else None
+        if tmn is None and "TMP" in cat_data:
+            tmn = cat_data["TMP"].min()
+        if tmx is None and "TMP" in cat_data:
+            tmx = cat_data["TMP"].max()
+        pop = int(cat_data["POP"].max()) if "POP" in cat_data else 0
+        sky_s = cat_data["SKY"].mode()
+        sky = int(sky_s.iloc[0]) if "SKY" in cat_data and not sky_s.empty else 1
+        pty = int(cat_data["PTY"].max()) if "PTY" in cat_data else 0
+        daily.append(
+            {
+                "date": date_val,
+                "tmn": float(tmn) if pd.notna(tmn) else None,
+                "tmx": float(tmx) if pd.notna(tmx) else None,
+                "pop": pop,
+                "sky": str(sky),
+                "pty": str(pty) if pty > 0 else "0",
+            }
+        )
+    return sorted(daily, key=lambda x: x["date"])
+
+
+def build_weekly_forecast(short_daily, mid_ta, mid_land, mid_base):
+    """단기(1~3일) + 중기(4~7일) 합쳐서 7일 예보 생성"""
+    today = datetime.now().date()
+    mid_base_date = datetime.strptime(mid_base[:8], "%Y%m%d").date()
+    DAY_NAMES = ["월", "화", "수", "목", "금", "토", "일"]
+    short_map = {d["date"]: d for d in short_daily}
+    weekly = []
+    for i in range(7):
+        target = today + timedelta(days=i)
+        day_name = DAY_NAMES[target.weekday()]
+        if target in short_map:
+            d = short_map[target]
+            weekly.append(
+                {
+                    "date": target,
+                    "day_name": day_name,
+                    "tmn": d["tmn"],
+                    "tmx": d["tmx"],
+                    "pop": d["pop"],
+                    "icon": weather_icon(d["sky"], d["pty"]),
+                    "weather": (
+                        sky_label(d["sky"]) if d["pty"] == "0" else pty_label(d["pty"])
+                    ),
+                }
+            )
+        elif mid_ta and mid_land:
+            offset = (target - mid_base_date).days
+            if 3 <= offset <= 10:
+                tmn = mid_ta.get(f"taMin{offset}")
+                tmx = mid_ta.get(f"taMax{offset}")
+                if offset <= 7:
+                    wf = (
+                        mid_land.get(f"wf{offset}Pm")
+                        or mid_land.get(f"wf{offset}Am")
+                        or mid_land.get(f"wf{offset}", "맑음")
+                    )
+                    pa = (
+                        mid_land.get(f"rnSt{offset}Am")
+                        or mid_land.get(f"rnSt{offset}")
+                        or 0
+                    )
+                    pp = (
+                        mid_land.get(f"rnSt{offset}Pm")
+                        or mid_land.get(f"rnSt{offset}")
+                        or 0
+                    )
+                else:
+                    wf = mid_land.get(f"wf{offset}", "맑음")
+                    pa = pp = mid_land.get(f"rnSt{offset}") or 0
+                weekly.append(
+                    {
+                        "date": target,
+                        "day_name": day_name,
+                        "tmn": tmn,
+                        "tmx": tmx,
+                        "pop": max(int(pa), int(pp)),
+                        "icon": wf_icon(str(wf)),
+                        "weather": str(wf),
+                    }
+                )
+    return weekly
 
 
 def render_weather_card(city, data, region_label=None):
@@ -263,6 +543,73 @@ def render_card_grid(items, weather_data):
     ">
       {cards}
     </div>"""
+
+
+def render_weekly_forecast(weekly):
+    """7일 예보 가로 카드 UI"""
+    if not weekly:
+        return "<div class='no-result'>예보 데이터가 없습니다.</div>"
+    today = datetime.now().date()
+    cards = ""
+    for day in weekly:
+        tmn_s = f"{day['tmn']:.0f}°" if day["tmn"] is not None else "-"
+        tmx_s = f"{day['tmx']:.0f}°" if day["tmx"] is not None else "-"
+        date_s = day["date"].strftime("%m/%d")
+        is_today = day["date"] == today
+        label = (
+            "오늘"
+            if is_today
+            else (
+                "내일" if day["date"] == today + timedelta(days=1) else day["day_name"]
+            )
+        )
+        border = (
+            "3px solid rgba(255,255,255,0.6)"
+            if is_today
+            else "1px solid rgba(255,255,255,0.15)"
+        )
+        w = day["weather"]
+        if "비" in w and "눈" not in w and "소나기" not in w:
+            grad = "linear-gradient(160deg,#4e8de8 0%,#667eea 100%)"
+        elif "눈" in w:
+            grad = "linear-gradient(160deg,#a5d8f3 0%,#5baed4 100%)"
+        elif "소나기" in w:
+            grad = "linear-gradient(160deg,#5b7fb8 0%,#4568a0 100%)"
+        elif "흐" in w:
+            grad = "linear-gradient(160deg,#7c93b8 0%,#4e6a9a 100%)"
+        elif "구름" in w:
+            grad = "linear-gradient(160deg,#7986cb 0%,#5c6bc0 100%)"
+        else:
+            t = day["tmx"] or 15
+            if t >= 28:
+                grad = "linear-gradient(160deg,#ff7043 0%,#e53935 100%)"
+            elif t >= 20:
+                grad = "linear-gradient(160deg,#ffb300 0%,#f57c00 100%)"
+            else:
+                grad = "linear-gradient(160deg,#29b6f6 0%,#0288d1 100%)"
+        cards += f"""
+        <div style="
+            min-width:100px;flex:1;
+            background:{grad};border-radius:16px;
+            padding:14px 8px;text-align:center;color:white;
+            box-shadow:0 4px 16px rgba(0,0,0,0.12);
+            border:{border};
+        ">
+            <div style="font-size:0.82rem;font-weight:700;">{label}</div>
+            <div style="font-size:0.68rem;opacity:0.7;">{date_s}</div>
+            <div style="font-size:1.9rem;margin:6px 0;
+                filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2));">{day['icon']}</div>
+            <div style="font-size:0.7rem;opacity:0.85;margin-bottom:6px;
+                white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{w}</div>
+            <div style="font-size:0.9rem;font-weight:700;">{tmn_s} / {tmx_s}</div>
+            <div style="font-size:0.65rem;opacity:0.7;margin-top:3px;">🌂 {day['pop']}%</div>
+        </div>"""
+    return f"""
+    <div style="
+        display:flex;gap:8px;
+        overflow-x:auto;padding:8px 0 14px 0;
+        -webkit-overflow-scrolling:touch;
+    ">{cards}</div>"""
 
 
 # ── CSS 전역 스타일 ──────────────────────────────────────────────────
@@ -658,24 +1005,127 @@ with tab3:
 
 st.divider()
 
+# ── 상세 예보 데이터 로드 ─────────────────────────────────────────────
+with st.spinner(f"{detail_city} 예보 데이터 로드 중..."):
+    city_info = CITIES[detail_city]
+    df_detail, detail_err = fetch_daily_forecast(
+        city_info["nx"], city_info["ny"], base_date, base_time
+    )
+    mid_base = get_mid_base_time(now)
+    mid_ta, mid_ta_err = fetch_mid_ta(city_info["mid_ta_id"], mid_base)
+    mid_land, mid_land_err = fetch_mid_land_fcst(city_info["mid_land_id"], mid_base)
+
+# ── 7일 예보 ─────────────────────────────────────────────────────────
+short_daily = (
+    extract_daily_summary(df_detail) if not detail_err and df_detail is not None else []
+)
+weekly = build_weekly_forecast(short_daily, mid_ta, mid_land, mid_base)
+
+st.markdown(
+    f"<div class='section-title'>📅 {detail_city} 7일 예보</div>",
+    unsafe_allow_html=True,
+)
+
+if mid_ta_err or mid_land_err:
+    st.info(
+        "💡 중기예보 서비스를 활용 신청하면 7일 예보를 볼 수 있습니다. "
+        "[data.go.kr](https://www.data.go.kr)에서 **중기예보 조회서비스** 검색 → 활용 신청 (무료)"
+    )
+
+if weekly:
+    st.markdown(render_weekly_forecast(weekly), unsafe_allow_html=True)
+
+    if len(weekly) >= 3:
+        dates = [f"{d['date'].strftime('%m/%d')}({d['day_name']})" for d in weekly]
+        tmn_vals = [d["tmn"] for d in weekly]
+        tmx_vals = [d["tmx"] for d in weekly]
+        pop_vals = [d["pop"] for d in weekly]
+        fig_w = go.Figure()
+        fig_w.add_trace(
+            go.Scatter(
+                x=dates,
+                y=tmx_vals,
+                name="최고기온",
+                mode="lines+markers+text",
+                text=[f"{v:.0f}°" if v is not None else "" for v in tmx_vals],
+                textposition="top center",
+                line=dict(color="#ef4444", width=2.5),
+                marker_size=8,
+            )
+        )
+        fig_w.add_trace(
+            go.Scatter(
+                x=dates,
+                y=tmn_vals,
+                name="최저기온",
+                mode="lines+markers+text",
+                text=[f"{v:.0f}°" if v is not None else "" for v in tmn_vals],
+                textposition="bottom center",
+                line=dict(color="#3b82f6", width=2.5),
+                marker_size=8,
+                fill="tonexty",
+                fillcolor="rgba(59,130,246,0.08)",
+            )
+        )
+        fig_w.add_trace(
+            go.Bar(
+                x=dates,
+                y=pop_vals,
+                name="강수확률(%)",
+                marker_color="rgba(6,182,212,0.35)",
+                yaxis="y2",
+            )
+        )
+        fig_w.update_layout(
+            title=f"{detail_city} 주간 기온 추이",
+            yaxis=dict(title="기온(°C)"),
+            yaxis2=dict(
+                title="강수확률(%)", overlaying="y", side="right", range=[0, 100]
+            ),
+            height=400,
+            template="plotly_white",
+            legend=dict(orientation="h", y=1.1),
+            margin=dict(t=60, b=20),
+        )
+        st.plotly_chart(fig_w, use_container_width=True)
+
+st.divider()
+
 # ── 시간별 상세 예보 ─────────────────────────────────────────────────
 st.markdown(
     f"<div class='section-title'>🕐 {detail_city} 시간별 예보</div>",
     unsafe_allow_html=True,
 )
 
-with st.spinner(f"{detail_city} 시간별 데이터 로드 중..."):
-    city_info = CITIES[detail_city]
-    df_detail, detail_err = fetch_daily_forecast(
-        city_info["nx"], city_info["ny"], base_date, base_time
-    )
-
 if detail_err:
     st.error(f"상세 예보 오류: {detail_err}")
 else:
+    available_dates = sorted(df_detail["datetime"].dt.date.unique())
     today = datetime.now().date()
-    tomorrow = today + timedelta(days=1)
-    df_detail = df_detail[df_detail["datetime"].dt.date.isin([today, tomorrow])]
+    _day_kr = ["월", "화", "수", "목", "금", "토", "일"]
+
+    def _dlabel(d):
+        diff = (d - today).days
+        dn = _day_kr[d.weekday()]
+        if diff == 0:
+            return f"📌 오늘 ({d.strftime('%m/%d')} {dn})"
+        if diff == 1:
+            return f"내일 ({d.strftime('%m/%d')} {dn})"
+        if diff == 2:
+            return f"모레 ({d.strftime('%m/%d')} {dn})"
+        return f"{d.strftime('%m/%d')} ({dn})"
+
+    date_labels = [_dlabel(d) for d in available_dates]
+    all_opt = f"전체 ({len(available_dates)}일)"
+    sel_date = st.radio(
+        "날짜 선택",
+        [all_opt] + date_labels,
+        horizontal=True,
+        label_visibility="collapsed",
+    )
+    if sel_date != all_opt:
+        chosen = available_dates[date_labels.index(sel_date)]
+        df_detail = df_detail[df_detail["datetime"].dt.date == chosen]
 
     c1, c2 = st.columns(2)
     with c1:
