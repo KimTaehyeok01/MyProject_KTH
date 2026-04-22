@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>학생 관리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #eef2f7;
+      --bg-mesh:
+        radial-gradient(900px 480px at 12% -10%, rgba(99, 102, 241, 0.14), transparent 55%),
+        radial-gradient(700px 400px at 88% 0%, rgba(14, 165, 233, 0.12), transparent 50%),
+        radial-gradient(600px 360px at 50% 100%, rgba(244, 114, 182, 0.08), transparent 45%);
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --accent-soft: #eef2ff;
+      --accent-ring: rgba(79, 70, 229, 0.22);
+      --teal: #0d9488;
+      --teal-soft: #ecfdf9;
+      --danger: #dc2626;
+      --danger-soft: #fef2f2;
+      --danger-border: #fecaca;
+      --ok: #059669;
+      --ok-soft: #ecfdf5;
+      --ok-border: #a7f3d0;
+      --shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.07);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Plus Jakarta Sans", "Malgun Gothic", sans-serif;
+      background-color: var(--bg);
+      background-image: var(--bg-mesh);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2.25rem 1.35rem 3.5rem;
+    }
+    header { margin-bottom: 2rem; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(79, 70, 229, 0.18);
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.55rem, 4vw, 2rem);
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 38rem;
+      margin: 0;
+    }
+    .sub a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(79, 70, 229, 0.35);
+    }
+    .sub a:hover {
+      color: var(--accent-hover);
+      border-bottom-color: var(--accent-hover);
+    }
+    .banner {
+      display: none;
+      padding: 0.85rem 1.1rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+    }
+    .banner.show { display: block; }
+    .banner.err {
+      background: var(--danger-soft);
+      border: 1px solid var(--danger-border);
+      color: #991b1b;
+    }
+    .banner.ok {
+      background: var(--ok-soft);
+      border: 1px solid var(--ok-border);
+      color: #065f46;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 1.35rem;
+    }
+    .card:last-of-type { margin-bottom: 0; }
+    .card h2 {
+      margin: 0;
+      padding: 1rem 1.35rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+    }
+    .card-body { padding: 1.25rem 1.35rem 1.4rem; }
+
+    /* 추가 카드 */
+    .card-add { border: none; box-shadow: var(--shadow-md), 0 0 0 1px rgba(79, 70, 229, 0.08); }
+    .card-add-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    @media (min-width: 720px) {
+      .card-add-inner {
+        grid-template-columns: minmax(200px, 240px) 1fr;
+      }
+    }
+    .card-add-aside {
+      background: linear-gradient(165deg, var(--accent-soft) 0%, #e0e7ff 55%, var(--teal-soft) 100%);
+      padding: 1.5rem 1.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (min-width: 720px) {
+      .card-add-aside {
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+      }
+    }
+    .add-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 14px;
+      background: var(--surface);
+      font-size: 1.35rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+    .add-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 0.4rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .add-hint {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .card-add-main { padding: 1.35rem 1.35rem 1.45rem; }
+    .add-form-grid {
+      display: grid;
+      gap: 1rem 1.1rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 520px) {
+      .add-form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .add-form-grid .field-name { grid-column: 1 / -1; }
+      .add-form-grid .field-actions { grid-column: 1 / -1; }
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .field label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .field-actions {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding-top: 0.25rem;
+    }
+    .field-actions button.primary {
+      min-width: 7.5rem;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.92rem;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.6rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-family: inherit;
+      font-weight: 500;
+      width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    input:hover { border-color: var(--border-strong); }
+    input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px var(--accent-ring);
+    }
+    .search-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: flex-end;
+      margin-bottom: 1rem;
+    }
+    .search-toolbar .grow {
+      flex: 1 1 200px;
+      min-width: 0;
+    }
+    .search-toolbar label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      width: 100%;
+    }
+    .id-lookup-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: flex-end;
+      padding-top: 0.25rem;
+      margin-bottom: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    .id-lookup-row .narrow-field {
+      width: 8rem;
+      flex-shrink: 0;
+    }
+    .hint-line {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0 0 0.85rem;
+    }
+
+    #detail-panel {
+      display: none;
+      margin-bottom: 1.1rem;
+      padding: 1.1rem 1.2rem;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--teal-soft) 0%, var(--accent-soft) 100%);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+    }
+    #detail-panel.show { display: block; }
+    .detail-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .detail-head strong {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--teal);
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.65rem 1rem;
+    }
+    .detail-item span {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.15rem;
+    }
+    .detail-item em {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .btn-close-detail {
+      font-size: 0.78rem;
+      padding: 0.35rem 0.65rem;
+    }
+
+    tr:not(.editing) input.inp-cell {
+      border-color: transparent;
+      background: transparent;
+      pointer-events: none;
+      padding-left: 0.1rem;
+      font-weight: 500;
+    }
+    tr.editing { background: var(--accent-soft); }
+    tr.editing input.inp-cell {
+      pointer-events: auto;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      padding: 0.5rem 0.65rem;
+    }
+    tbody tr.student-row { transition: background 0.12s ease; }
+    tbody tr.student-row:not(.editing):hover { background: rgba(248, 250, 252, 0.85); }
+    tr.row-highlight {
+      background: rgba(13, 148, 136, 0.12) !important;
+      box-shadow: inset 3px 0 0 0 var(--teal);
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      padding: 0.52rem 0.95rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      transition: background 0.15s, border-color 0.15s, transform 0.08s;
+    }
+    button:active:not(:disabled) { transform: scale(0.98); }
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.28);
+    }
+    button.primary:hover:not(:disabled) {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+    button.ghost {
+      background: var(--surface);
+      color: var(--muted);
+    }
+    button.ghost:hover:not(:disabled) {
+      border-color: var(--border-strong);
+      color: var(--text);
+      background: var(--surface-2);
+    }
+    button.danger {
+      background: var(--danger-soft);
+      border-color: var(--danger-border);
+      color: var(--danger);
+    }
+    button.danger:hover:not(:disabled) {
+      background: #fee2e2;
+      border-color: #fca5a5;
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+    }
+    th, td {
+      padding: 0.85rem 1.25rem;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      background: var(--surface-2);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
+    td.id {
+      color: var(--accent);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      width: 3rem;
+    }
+    td.narrow { width: 5.5rem; }
+    .empty {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    #table-panel.hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="eyebrow">{{ db_badge }} · FastAPI</span>
+      <h1>학생 관리</h1>
+      <p class="sub">검색·단건(ID) 조회·추가·수정·삭제를 한 화면에서 처리합니다. API는 <a href="/docs">/docs</a>, DB 확인은 <a href="/health">/health</a>({{ health_hint }})입니다.</p>
+    </header>
+
+    <div id="banner" class="banner" role="status"></div>
+
+    <div class="card card-add">
+      <div class="card-add-inner">
+        <aside class="card-add-aside">
+          <div class="add-icon" aria-hidden="true">🎓</div>
+          <h2 class="add-title">새 학생 등록</h2>
+          <p class="add-hint">필수 항목만 입력하면 바로 목록에 반영됩니다.</p>
+        </aside>
+        <div class="card-add-main">
+          <form id="form-create" class="add-form-grid">
+            <div class="field field-name">
+              <label for="f-name">이름</label>
+              <input id="f-name" type="text" name="name" required maxlength="100" placeholder="예: 홍길동" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="f-grade">학년 (1–12)</label>
+              <input id="f-grade" type="number" name="grade" required min="1" max="12" value="1" />
+            </div>
+            <div class="field">
+              <label for="f-age">나이</label>
+              <input id="f-age" type="number" name="age" required min="1" max="120" value="17" />
+            </div>
+            <div class="field-actions">
+              <button type="submit" class="primary">등록하기</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="list-card">
+      <h2>학생 목록</h2>
+      <div class="card-body">
+        <p class="hint-line">이름 일부로 검색하거나, 숫자만 입력하면 <strong>ID</strong> 또는 이름에 그 숫자가 포함된 행을 찾습니다.</p>
+        <div class="search-toolbar">
+          <div class="grow">
+            <label for="search-q">검색</label>
+            <input type="text" id="search-q" placeholder="이름 또는 ID (예: 민수, 2)" autocomplete="off" />
+          </div>
+          <button type="button" class="primary" id="btn-search">검색</button>
+          <button type="button" class="ghost" id="btn-search-reset">전체보기</button>
+        </div>
+        <div class="id-lookup-row">
+          <div class="narrow-field">
+            <label for="lookup-id">ID로 단건 조회</label>
+            <input type="number" id="lookup-id" min="1" placeholder="ID" />
+          </div>
+          <button type="button" class="primary" id="btn-lookup-id">조회</button>
+        </div>
+
+        <div id="detail-panel" aria-live="polite">
+          <div class="detail-head">
+            <strong>단건 조회 결과</strong>
+            <button type="button" class="ghost btn-close-detail" id="btn-detail-close">닫기</button>
+          </div>
+          <div class="detail-grid" id="detail-grid"></div>
+        </div>
+
+        <div class="table-wrap{% if not students %} hidden{% endif %}" id="table-panel">
+          <table id="student-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>학년</th>
+                <th>나이</th>
+                <th>작업</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-students">
+              {% for s in students %}
+              <tr data-id="{{ s.id }}" class="student-row">
+                <td class="id">{{ s.id }}</td>
+                <td><input class="inp-cell" type="text" name="name" value="{{ s.name | e }}" maxlength="100" /></td>
+                <td class="narrow"><input class="inp-cell" type="number" name="grade" value="{{ s.grade }}" min="1" max="12" /></td>
+                <td class="narrow"><input class="inp-cell" type="number" name="age" value="{{ s.age }}" min="1" max="120" /></td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="ghost btn-edit">수정</button>
+                    <button type="button" class="primary btn-save" hidden>저장</button>
+                    <button type="button" class="ghost btn-cancel" hidden>취소</button>
+                    <button type="button" class="danger btn-del">삭제</button>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="empty" id="empty-list-msg" {% if students %}hidden{% endif %}>표시할 학생이 없습니다. 검색어를 바꾸거나 전체보기를 눌러 보세요.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const banner = document.getElementById("banner");
+    const searchInput = document.getElementById("search-q");
+    const emptyListMsg = document.getElementById("empty-list-msg");
+    const tablePanel = document.getElementById("table-panel");
+    const detailPanel = document.getElementById("detail-panel");
+    const detailGrid = document.getElementById("detail-grid");
+
+    function showBanner(text, ok) {
+      banner.textContent = text;
+      banner.className = "banner show " + (ok ? "ok" : "err");
+      if (ok) setTimeout(() => { banner.classList.remove("show"); }, 2500);
+    }
+
+    async function apiJson(url, options = {}) {
+      const headers = { "Content-Type": "application/json", ...(options.headers || {}) };
+      const res = await fetch(url, { ...options, headers });
+      if (res.status === 204) return null;
+      const ct = res.headers.get("content-type") || "";
+      let body = null;
+      if (ct.includes("application/json")) {
+        try { body = await res.json(); } catch { body = null; }
+      }
+      if (!res.ok) {
+        const detail = body && (body.detail ?? body.message);
+        const msg = typeof detail === "string" ? detail : Array.isArray(detail)
+          ? detail.map((d) => d.msg || JSON.stringify(d)).join(", ")
+          : res.statusText;
+        throw new Error(msg || "요청 실패");
+      }
+      return body;
+    }
+
+    function createStudentRow(s) {
+      const tr = document.createElement("tr");
+      tr.className = "student-row";
+      tr.dataset.id = String(s.id);
+
+      const tdId = document.createElement("td");
+      tdId.className = "id";
+      tdId.textContent = String(s.id);
+
+      const mkInp = (type, name, val, extra = {}) => {
+        const inp = document.createElement("input");
+        inp.className = "inp-cell";
+        inp.type = type;
+        inp.name = name;
+        inp.value = String(val);
+        Object.assign(inp, extra);
+        return inp;
+      };
+
+      const tdName = document.createElement("td");
+      tdName.appendChild(mkInp("text", "name", s.name, { maxLength: 100 }));
+
+      const tdGrade = document.createElement("td");
+      tdGrade.className = "narrow";
+      tdGrade.appendChild(mkInp("number", "grade", s.grade, { min: 1, max: 12 }));
+
+      const tdAge = document.createElement("td");
+      tdAge.className = "narrow";
+      tdAge.appendChild(mkInp("number", "age", s.age, { min: 1, max: 120 }));
+
+      const tdAct = document.createElement("td");
+      const grp = document.createElement("div");
+      grp.className = "btn-group";
+      const labels = [
+        ["ghost", "btn-edit", "수정", false],
+        ["primary", "btn-save", "저장", true],
+        ["ghost", "btn-cancel", "취소", true],
+        ["danger", "btn-del", "삭제", false],
+      ];
+      labels.forEach(([cls, bcls, text, hid]) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = cls + " " + bcls;
+        b.textContent = text;
+        b.hidden = hid;
+        grp.appendChild(b);
+      });
+      tdAct.appendChild(grp);
+
+      tr.appendChild(tdId);
+      tr.appendChild(tdName);
+      tr.appendChild(tdGrade);
+      tr.appendChild(tdAge);
+      tr.appendChild(tdAct);
+      return tr;
+    }
+
+    function renderStudentRows(students) {
+      const tb = document.getElementById("tbody-students");
+      tb.innerHTML = "";
+      students.forEach((s) => tb.appendChild(createStudentRow(s)));
+
+      const has = students.length > 0;
+      emptyListMsg.hidden = has;
+      tablePanel.classList.toggle("hidden", !has);
+
+      tb.querySelectorAll("tr.student-row").forEach((r) => r.classList.remove("row-highlight"));
+      if (students.length === 1) {
+        tb.querySelector("tr.student-row")?.classList.add("row-highlight");
+      }
+    }
+
+    async function loadStudents(q) {
+      const url = q ? "/students?q=" + encodeURIComponent(q) : "/students";
+      const data = await apiJson(url);
+      renderStudentRows(Array.isArray(data) ? data : []);
+    }
+
+    function hideDetail() {
+      detailPanel.classList.remove("show");
+      detailGrid.innerHTML = "";
+    }
+
+    function showDetail(s) {
+      detailGrid.innerHTML = "";
+      const fields = [
+        ["ID", String(s.id)],
+        ["이름", s.name],
+        ["학년", String(s.grade)],
+        ["나이", String(s.age)],
+      ];
+      fields.forEach(([label, val]) => {
+        const div = document.createElement("div");
+        div.className = "detail-item";
+        const sp = document.createElement("span");
+        sp.textContent = label;
+        const em = document.createElement("em");
+        em.textContent = val;
+        div.appendChild(sp);
+        div.appendChild(em);
+        detailGrid.appendChild(div);
+      });
+      detailPanel.classList.add("show");
+      detailPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    document.getElementById("btn-search").addEventListener("click", async () => {
+      const q = (searchInput.value || "").trim();
+      try {
+        await loadStudents(q);
+        hideDetail();
+        if (q) showBanner("검색 결과 " + document.querySelectorAll("#tbody-students tr").length + "건", true);
+      } catch (e) {
+        showBanner(e.message, false);
+      }
+    });
+
+    document.getElementById("btn-search-reset").addEventListener("click", async () => {
+      searchInput.value = "";
+      hideDetail();
+      try {
+        await loadStudents("");
+      } catch (e) {
+        showBanner(e.message, false);
+      }
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        document.getElementById("btn-search").click();
+      }
+    });
+
+    document.getElementById("btn-lookup-id").addEventListener("click", async () => {
+      const raw = document.getElementById("lookup-id").value;
+      const id = parseInt(String(raw), 10);
+      if (!id || id < 1) {
+        showBanner("유효한 ID를 입력하세요.", false);
+        return;
+      }
+      try {
+        const s = await apiJson("/students/" + id);
+        showDetail(s);
+        showBanner("ID " + id + " 학생 정보를 불러왔습니다.", true);
+      } catch (e) {
+        hideDetail();
+        showBanner(e.message, false);
+      }
+    });
+
+    document.getElementById("btn-detail-close").addEventListener("click", hideDetail);
+
+    function rowInputs(tr) {
+      const name = tr.querySelector('input[name="name"]');
+      const grade = tr.querySelector('input[name="grade"]');
+      const age = tr.querySelector('input[name="age"]');
+      return { name, grade, age };
+    }
+
+    function snapshotRow(tr) {
+      const { name, grade, age } = rowInputs(tr);
+      return { name: name.value, grade: grade.value, age: age.value };
+    }
+
+    document.getElementById("form-create")?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = String(fd.get("name") || "").trim();
+      const grade = parseInt(String(fd.get("grade")), 10);
+      const age = parseInt(String(fd.get("age")), 10);
+      if (!name) {
+        showBanner("이름을 입력하세요.", false);
+        return;
+      }
+      try {
+        await apiJson("/students", {
+          method: "POST",
+          body: JSON.stringify({ name, grade, age }),
+        });
+        location.reload();
+      } catch (err) {
+        showBanner(err.message, false);
+      }
+    });
+
+    document.getElementById("tbody-students")?.addEventListener("click", async (e) => {
+      const tr = e.target.closest("tr.student-row");
+      if (!tr) return;
+      const id = tr.dataset.id;
+      const btn = e.target.closest("button");
+      if (!btn) return;
+
+      if (btn.classList.contains("btn-edit")) {
+        tr.dataset.snap = JSON.stringify(snapshotRow(tr));
+        tr.classList.add("editing");
+        btn.hidden = true;
+        tr.querySelector(".btn-save").hidden = false;
+        tr.querySelector(".btn-cancel").hidden = false;
+        tr.querySelector(".btn-del").disabled = true;
+        return;
+      }
+
+      if (btn.classList.contains("btn-cancel")) {
+        try {
+          const snap = JSON.parse(tr.dataset.snap || "{}");
+          const { name, grade, age } = rowInputs(tr);
+          name.value = snap.name ?? "";
+          grade.value = snap.grade ?? "";
+          age.value = snap.age ?? "";
+        } catch (_) {}
+        tr.classList.remove("editing");
+        tr.querySelector(".btn-edit").hidden = false;
+        tr.querySelector(".btn-save").hidden = true;
+        tr.querySelector(".btn-cancel").hidden = true;
+        tr.querySelector(".btn-del").disabled = false;
+        return;
+      }
+
+      if (btn.classList.contains("btn-save")) {
+        const { name, grade, age } = rowInputs(tr);
+        const payload = {
+          name: name.value.trim(),
+          grade: parseInt(grade.value, 10),
+          age: parseInt(age.value, 10),
+        };
+        if (!payload.name) {
+          showBanner("이름을 입력하세요.", false);
+          return;
+        }
+        try {
+          await apiJson("/students/" + id, {
+            method: "PUT",
+            body: JSON.stringify(payload),
+          });
+          location.reload();
+        } catch (err) {
+          showBanner(err.message, false);
+        }
+        return;
+      }
+
+      if (btn.classList.contains("btn-del")) {
+        if (!confirm("이 학생을 삭제할까요?")) return;
+        try {
+          await apiJson("/students/" + id, { method: "DELETE" });
+          location.reload();
+        } catch (err) {
+          showBanner(err.message, false);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
