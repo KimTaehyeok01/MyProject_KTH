@@ -1,8 +1,3 @@
-"""
-DB 연동:
-- Supabase(PostgreSQL): 환경 변수 DATABASE_URL (같은 폴더의 .env 에 두면 자동 로드)
-- 로컬 SQLite: DATABASE_URL 이 없으면 aiosqlite + student.db (기존과 동일)
-"""
 import html
 import os
 from contextlib import asynccontextmanager
@@ -72,7 +67,9 @@ def _use_postgres() -> bool:
     return bool(url and url.startswith(("postgresql://", "postgres://")))
 
 
-async def _query_students_sqlite(db: aiosqlite.Connection, q: str | None) -> list[StudentResponse]:
+async def _query_students_sqlite(
+    db: aiosqlite.Connection, q: str | None
+) -> list[StudentResponse]:
     term = (q or "").strip()
     if not term:
         sql = "SELECT id, name, grade, age FROM student ORDER BY id"
@@ -97,7 +94,9 @@ async def _query_students_sqlite(db: aiosqlite.Connection, q: str | None) -> lis
     return [_row_to_student(row) for row in rows]
 
 
-async def _query_students_pg(conn: asyncpg.Connection, q: str | None) -> list[StudentResponse]:
+async def _query_students_pg(
+    conn: asyncpg.Connection, q: str | None
+) -> list[StudentResponse]:
     term = (q or "").strip()
     if not term:
         rows = await conn.fetch("SELECT id, name, grade, age FROM student ORDER BY id")
@@ -156,7 +155,9 @@ async def lifespan(app: FastAPI):
             await conn.execute(_CREATE_POSTGRES)
             await _seed_sample_if_empty_pg(conn)
     else:
-        db_path = os.getenv("SQLITE_DB_PATH", str(Path(__file__).resolve().parent / "student.db"))
+        db_path = os.getenv(
+            "SQLITE_DB_PATH", str(Path(__file__).resolve().parent / "student.db")
+        )
         app.state.sqlite_path = str(Path(db_path).resolve())
         db = await aiosqlite.connect(db_path)
         app.state.db = db
@@ -177,18 +178,28 @@ app = FastAPI(title="Student REST API", version="1.0.0", lifespan=lifespan)
 
 
 def _db_badge(request: Request) -> str:
-    return "PostgreSQL · Supabase" if getattr(request.app.state, "db_kind", "") == "pg" else "SQLite · 로컬"
+    return (
+        "PostgreSQL · Supabase"
+        if getattr(request.app.state, "db_kind", "") == "pg"
+        else "SQLite · 로컬"
+    )
 
 
 def _health_hint(request: Request) -> str:
-    return "PostgreSQL 버전" if getattr(request.app.state, "db_kind", "") == "pg" else "SQLite 경로·버전"
+    return (
+        "PostgreSQL 버전"
+        if getattr(request.app.state, "db_kind", "") == "pg"
+        else "SQLite 경로·버전"
+    )
 
 
 @app.get("/", response_class=HTMLResponse)
 async def app_page(request: Request) -> HTMLResponse:
     if getattr(request.app.state, "db_kind", "") == "pg":
         async with request.app.state.pool.acquire() as conn:
-            rows = await conn.fetch("SELECT id, name, grade, age FROM student ORDER BY id")
+            rows = await conn.fetch(
+                "SELECT id, name, grade, age FROM student ORDER BY id"
+            )
         students = [_row_to_student(tuple(r)) for r in rows]
     else:
         db: aiosqlite.Connection = request.app.state.db
@@ -399,4 +410,7 @@ async def delete_student(student_id: int, request: Request) -> None:
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    # reload=True 는 자식 프로세스가 "main" 을 다시 import — cwd 가 프로젝트 루트면 잘못된 모듈이 잡혀 / 가 404 될 수 있음.
+    # 스크립트로 실행할 때는 app 객체를 직접 넘기고 reload 끔. 자동 리로드는: cd 이 폴더 후 `uvicorn main:app --reload`
+    os.chdir(Path(__file__).resolve().parent)
+    uvicorn.run(app, host="127.0.0.1", port=8000, reload=False)
